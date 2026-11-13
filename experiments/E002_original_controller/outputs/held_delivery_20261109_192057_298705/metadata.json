@@ -1,0 +1,13 @@
+{
+  "command": "python3 inline AST/source hash/formal XML/upstream state/links/README delivery checks",
+  "cwd": "/home/cofallen/Code/毕业设计",
+  "document_sha256": {
+    "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/README.md": "d433e01f53f080f3c3c68b479be02914a6c57a342df7c66fce5dc8f73158a65e",
+    "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/REPORT.md": "26800b32e8c2c0b6c8f3f756b3b77f5e1e1f52380ac7feb3a35140695a19f3d8",
+    "/home/cofallen/Code/毕业设计/docs/03_learning/M02_04_按住释放与参数接口.md": "0f8d8b1f7505c1e61a1ea9faa923d28a65b589af1f4042a09ce704375176e866",
+    "/home/cofallen/Code/毕业设计/docs/01_project/overview.md": "2b09c276d0014dffd13bd369fb2a355f57f3276d24bc0745173788f2b4f5e833",
+    "/home/cofallen/Code/毕业设计/docs/04_tasks/T003_parallel_standing.md": "4cfe3834bda888eb397c63ae9157f2406e684b4c7ed6c367bc56dc73387adace",
+    "/home/cofallen/Code/毕业设计/docs/01_project/KEY_OPERATIONS.md": "ae641e6705fbc86c50692baae02959595cb2eb7a78ca1c033d7d1672ec3c439e",
+    "/home/cofallen/Code/毕业设计/docs/03_learning/README.md": "3cc688b25fdd162279844cae5a633c4328b384075cb441124811a36d1c15fcec"
+  }
+}

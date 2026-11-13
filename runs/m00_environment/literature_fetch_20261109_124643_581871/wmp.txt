@@ -1,0 +1,547 @@
+                                                   World Model-based Perception for Visual Legged Locomotion
+
+                                         Hang Lai1† , Jiahang Cao1 , Jiafeng Xu2∗ , Hongtao Wu2 , Yunfeng Lin1† , Tao Kong2 , Yong Yu1 , Weinan Zhang1∗
+
+
+                                            Abstract— Legged locomotion over various terrains is chal-
+                                         lenging and requires precise perception of the robot and its
+                                         surroundings from both proprioception and vision. However,
+                                         learning directly from high-dimensional visual input is often
+
+
+
+
+                                                                                                                      Tilt
+                                         data-inefficient and intricate. To address this issue, traditional
+arXiv:2409.16784v1 [cs.RO] 25 Sep 2024
+
+
+
+
+                                         methods attempt to learn a teacher policy with access to
+                                         privileged information first and then learn a student policy to
+                                         imitate the teacher’s behavior with visual input. Despite some
+                                         progress, this imitation framework prevents the student policy
+                                         from achieving optimal performance due to the information gap
+                                         between inputs. Furthermore, the learning process is unnatural
+                                         since animals intuitively learn to traverse different terrains
+
+
+
+                                                                                                                      Crawl
+                                         based on their understanding of the world without privileged
+                                         knowledge. Inspired by this natural ability, we propose a simple
+                                         yet effective method, World Model-based Perception (WMP),
+                                         which builds a world model of the environment and learns a
+                                         policy based on the world model. We illustrate that though
+                                         completely trained in simulation, the world model can make                   Fig. 1: Scandots (Left) and the corresponding depth images (Right).
+                                         accurate predictions of real-world trajectories, thus providing              Top: Sparse scandots1 can not distinguish the precise distance to the
+                                         informative signals for the policy controller. Extensive simulated           boundaries (indicated in green), leading to a collision with the left
+                                         and real-world experiments demonstrate that WMP outper-                      barrier. Bottom: Scandots can not represent off-ground obstacles.
+                                         forms state-of-the-art baselines in traversability and robustness.           In contrast, depth images can represent these terrains well.
+                                         Videos and Code are available at: https://wmp-loco.github.io/.
+
+                                                                 I. I NTRODUCTION                                     inaccessible in the real world. Afterward, a student policy
+                                                                                                                      is trained to mimic the teacher’s actions based on the seen
+                                            Reinforcement Learning (RL) has recently achieved re-
+                                                                                                                      images via ConvNet-RNN architecture [10]–[12].
+                                         markable success in legged locomotion across diverse ter-
+                                                                                                                         Privileged learning has been widely exploited and exhibits
+                                         rains by training a policy in physical simulation and then
+                                                                                                                      traversability over multiple terrains in quadrupedal locomo-
+                                         transferring it to the real world (i.e., sim-to-real transfer) [1],
+                                                                                                                      tion [5], [10], [11], [13], but it still has some limitations.
+                                         [2]. Typically, such RL policy takes the proprioception (e.g.,
+                                                                                                                      Firstly, since the student cannot recover the teacher’s behav-
+                                         positions and velocities of joints) or visual image as input and
+                                                                                                                      ior perfectly due to generalization error [17], the performance
+                                         outputs the desired position or effort control for each actuated
+                                                                                                                      of student policy tends to lag behind the teacher’s. The
+                                         joint [3], [4]. Previous literature has shown that a blind
+                                                                                                                      performance discrepancy is further magnified when an infor-
+                                         policy with only proprioceptive input can traverse terrains
+                                                                                                                      mation gap exists between privileged information and images
+                                         like slopes and stairs [5]–[9], but fails in more challenging
+                                                                                                                      [18]. Secondly, the teacher policy needs to access different
+                                         ones like gaps or pits [10]–[12], where a robot must perceive
+                                                                                                                      types of extra information, which is labor-intensive to design.
+                                         such terrain in advance; therefore, visual image perception
+                                                                                                                      For example, Cheng et al. [11] choose the terrain scandots
+                                         is indispensable [13], [14].
+                                                                                                                      as the privileged information, which can not be generalized
+                                            However, directly learning a policy with dense pixel
+                                                                                                                      to terrains that require precise boundary distinction, like Tilt,
+                                         input using reward signals is extremely data-inefficient [15].
+                                                                                                                      or ones with off-ground obstacles, like Crawl, as illustrated
+                                         Moreover, with a forward-facing camera, a policy needs to
+                                                                                                                      in Figure 1. Besides, Zhuang et al. [12] use the geometry of
+                                         remember past perceptions to anticipate the terrain under the
+                                                                                                                      obstacles as privileged information, which is terrain-relevant.
+                                         robot’s feet [10], which poses an additional challenge for
+                                                                                                                      Therefore, they train different teachers separately for each
+                                         policy learning. To facilitate policy training, the privileged
+                                                                                                                      terrain. These limitations may hinder its broader applications
+                                         learning framework [16] is proposed, which decomposes the
+                                                                                                                      in more complex scenarios.
+                                         training process into two phases. First, a teacher policy is
+                                                                                                                         In contrast, animals naturally learn to traverse unstructured
+                                         trained with access to low-dimensional privileged informa-
+                                                                                                                      fields and can make good decisions in unfamiliar situations
+                                         tion like the scandots around the robot, which is usually
+                                                                                                                      with limited perception. One hypothesis is that animals,
+                                           † Work done during internship at Bytedance Research.                       especially humans, build a mental model that holds their
+                                           ∗ Corresponding author.
+                                           1 Dept. of Computer Sci. and Eng., Shanghai Jiao Tong University, China.     1 The scandots are no denser than the terrain mesh vertices, which have
+                                           2 ByteDance Research, China.                                               a horizontal resolution of 10cm in our simulation setting.
+understanding of the real world [19], [20]. When performing       scandots using past observations [34], which also suffers
+actions, it helps perceive past information and predict future    from the limitation of scandots inevitably. In contrast, Our
+sensory data [21]–[24]. Inspired by these findings, model-        method presents a more general and effective framework to
+based RL (MBRL) strives to learn a world model from               incorporate visual images without these limitations.
+collected data and derives a policy from it [25]. With the        Model-based RL. Model-based reinforcement learning
+help of such models, MBRL has made immense progress in            (MBRL) approaches have shown promise for learning com-
+a variety of tasks with limited data, ranging from simulated      plex robot control policies by learning a dynamics model
+robot control [26], [27] to playing video games [20], [28],       of the environment to help decision-making [25], [27], [35],
+[29]. However, the application of world models in vision-         [36]. In MBRL, much effort has been devoted to learning
+based legged locomotion is still lacking.                         an accurate model in partially observable and pixel-input
+   This paper investigates whether visual legged locomotion       environments [20], [26], [28], [37]. As a prominent example,
+can benefit from world model learning. To this end, we            Dreamer-V3 [29] achieves impressive performance across
+present World Model-based Perception (WMP), a novel end-          diverse domains by learning a world model in a com-
+to-end framework combining advanced MBRL with sim-to-             pact latent space, namely the Recurrent State-Space Model
+real transfer. Specifically, WMP trains a world model in          (RSSM). Inspired by the success of Dreamer, RSSM has
+simulations to predict future perceptions using past ones and     also been widely exploited in robot control tasks, ranging
+learns a policy given the abstract description extracted from     from robotic manipulation [38]–[40] to blind quadrupedal
+the world model. Though trained entirely using simulated          locomotion [41]. Our work also builds upon the RSSM world
+data, the world model can still predict real-world perception     model architecture, which can seamlessly take advantage of
+well. By leveraging the learned model, WMP circumvents the        innovations in MBRL literature and push the boundaries of
+limitations of privileged learning and naturally compresses       its application in legged locomotion with visual input.
+a series of high-dimensional perceptions into a meaningful
+representation, contributing to decision-making.
+   We compare WMP to state-of-the-art baselines over multi-                             III. P RELIMINARIES
+ple terrains, including terrains like Slope and Stair and more
+                                                                     We formulate legged locomotion as a Partially Observable
+difficult ones like Gap and Crawl. In simulation compari-
+                                                                  Markov Decision Process (POMDP) defined by the tuple
+son, WMP obtains near-optimal rewards compared with the
+                                                                  (S, O, A, T, r, γ), where S, O, and A are the state, observa-
+teacher policy, surpassing the student policy by a pronounced
+                                                                  tion, and action spaces, respectively. T (st+1 | st , at ) is the
+margin. Subsequently, we evaluate WMP and baselines on a
+                                                                  transition density of state st given action at , and the reward
+real Unitree A1 robot, where WMP successfully traverses
+                                                                  function is denoted as r(st , at ). γ ∈ (0, 1) is a discount
+the tested terrains with increased difficulty, verifying the
+                                                                  factor. At each timestep t, only the partial observation ot ∈ O
+advantage of world model learning in robot control. For
+                                                                  can be observed instead of st due to the limitation of sensors.
+example, WMP can traverse Gap with 85cm (about 2.1x
+                                                                  The goal of reinforcement learning (RL) is to find the optimal
+robot length), Climb with 55cm (about 2.2x robot height),
+                                                                  policy π ∗ : O → A that maximizes the expected return (sum
+and Crawl with 22cm (about 0.8x robot height), achieving the
+                                                                  of discounted rewards):
+best traversal performance on the A1 robot. To the best of our
+knowledge, this is the first work that deals with challenging                                                         ∞
+                                                                                                                     hX                   i
+vision-based legged locomotion via world modeling, which           π ∗:= arg max Est+1 ∼T (·|st ,at ),at ∼π(·|ot )         γ t r(st , at ) .
+could become a new paradigm for robot control tasks.                         π
+                                                                                                                     t=0
+                                                                                                                           (1)
+                    II. R ELATED W ORK                            Specifically, in the vision-based legged locomotion, ot con-
+RL for Legged Locomotion. Reinforcement learning (RL)             sists of the proprioception opt and the depth image dt . In
+has emerged as a promising method for legged locomo-              addition to ot , the underlying state st also contains the
+tion [1]–[4], [30]. Previous literature has shown that policies   privileged information spri
+                                                                                            t , which can only be accessed in
+with only proprioception as input can go through multiple         the simulator:
+terrains in the real world by leveraging biologically inspired
+rewards design [4], [5], [16], domain randomization [3], [7],                               ot : = (opt , dt ),                          (2)
+[31], and curriculum learning [8], [32]. However, without                                   st : = (ot , spri
+                                                                                                          t ).                           (3)
+visual perception, it can be extremely difficult for these
+”blind” robots to tackle more complex terrains [12], [13].                                  IV. M ETHOD
+To incorporate visual information, the privileged learning
+framework is developed [10]–[12], where a teacher policy             This section introduces World Model-based Perception
+trained with access to privileged information is used to guide    (WMP), an end-to-end framework that utilizes world models
+a vision-based student policy. However, the design of privi-      to extract information from high-dimensional sensor input.
+leged information and the performance gap between teacher         Unlike the two-stage training process used in privileged
+and student remain critical limitations of these methods [6],     learning, WMP only adopts one stage to learn the world
+[33]. Besides, one concurrent work proposes to estimate the       model and policy simultaneously.
+Fig. 2: Illustration of the WMP framework. The world model runs at a lower frequency than policy, with an update interval of k timesteps.
+
+A. World Model Learning                                               where n is a non-negative integer, and β is a hyperparameter.
+   Following previous works [29], [37], we adopt a Recurrent          The first term in Eq. (5) is the reconstruction loss, which
+State-Space Model (RSSM) variant as our world model                   encourages the posterior zt to contain sufficient information
+architecture. Considering the computational cost of acquiring         about ot , while the second KL term regularizes the prior
+depth images in the simulator and the time cost of running            and posterior to approximate each other, allowing open-loop
+RSSM on board, we modify the original RSSM by running                 prediction of future observations based on current ht and
+the world model with a lower frequency than the policy. As            future actions. Please refer to the original Dreamer literature
+Figure 2 shows, the world model updates the recurrent state           [26], [28], [29] for more details about RSSM training.
+ht every k timesteps. Formally, the RSSM in our method                B. Policy Learning
+consists of four components parameterized by ϕ:                          Policy learning for vision-based locomotion is non-trivial
+ Recurrent model:         ht = fϕ (ht−k , zt−k , at−k:t−1 )           due to the partial observability, as described in Section III.
+                                                                      However, the recurrent state ht in a well-trained world model
+ Encoder:                 zt ∼ qϕ (· | ht , ot )
+                                                               (4)    encapsulates sufficient information for future prediction, akin
+ Dynamic predictor:       ẑt ∼ pϕ (· | ht )                          to the underlying Markovian state st . Building on this
+ Decoder:                 ôt ∼ pϕ (· | ht , zt ).                    insight, we train a policy that incorporates ht as input:
+                                                                               at+i ∼ πθ · | opt+i , sg(ht ) , ∀i ∈ [0, k − 1],
+                                                                                                            
+To be more specific, the recurrent model fϕ operates in the                                                                       (6)
+low-dimensional latent space h and predicts the deterministic         where sg(·) represents the stop-gradient operator. We employ
+recurrent state ht based on the previous ht−k , sequence of           the asymmetric actor-critic framework [33], where the critic
+action at−k:t−1 , and the previous stochastic state zt−k . From       can access the privileged information spri  t :
+the recurrent state ht , the RSSM computes two distributions                                p               pri 
+over stochastic states zt . The posterior state zt incorporates          v(st+i ) ∼ Vθ · | ot+i , sg(ht ), st+i , ∀i ∈ [0, k − 1]. (7)
+information from observation ot through the encoder qϕ . The          We find that the recurrent state ht plays an essential role in
+prior state ẑt aims to predict the posterior without access          critic learning since the scandots in spri
+                                                                                                              t  can not represent
+to ot , enabling the model to anticipate future dynamics              some types of terrains like Tilt and Crawl, as discussed in
+without ground-truth observation. The decoder generates the           Section I.
+estimated observation ôt , making it possible to reconstruct            The actor and critic are trained using the data collected
+the high-dimensional observation. The recurrent model is              in the simulator via the PPO (Proximal Policy Optimization)
+implemented using the GRU (Gated Recurrent Unit) [42]                 algorithm [43]. Note that we do not utilize the world model
+network, and the encoder and decoder utilize the convo-               to generate rollout data for policy training as in previous
+lutional neural network (CNN) structure for depth image               MBRL methods [27], [41]. Because the world model is
+dt and multi-layer perceptions (MLP) for proprioception               trained using simulated data, which means it can not generate
+observations opt .                                                    more accurate data than the simulator, and sampling data
+   Similar to Hafner et al. [29], we optimize these four              in the simulator is efficient enough. Training world models
+ingredients jointly by minimizing the loss over trajectories          with real-world data is a possible way to make models more
+of length L:                                                          accurate, which we leave as future work.
+                   L
+         .
+               h X                                                    C. Training Details
+  L(ϕ) = Eqϕ           − ln pϕ (ot |zt , ht )
+                                                               (5)    Environment. We implement our method and baselines
+                 t=n·k
+                                                           i        based upon the legged gym codebase [32], which lever-
+                       + βKL qϕ (· | ht , ot )||pϕ (· | ht ) ,        ages the Isaac Gym simulator [44] to support simulation
+TABLE I: Comparison results on different terrains in simulation. Results are averaged over 100 trajectories with different difficulties.
+Bold numbers indicate the best scores among algorithms excluding Teacher. N/A means that the method is not applicable to the terrain.
+                                Slope (0-36◦ )    Stair (5-21cm)    Gap (0-90cm)    Climb (0-54cm) Tilt (32-28cm) Crawl (35-21cm)
+           WMP (ours)          36.55 ± 0.82      35.06 ± 3.54       32.37 ± 8.24    34.64 ± 2.99     34.73 ± 3.13      36.60 ± 0.33
+            Teacher            36.70 ± 1.79       35.07 ± 0.68       32.80 ± 7.06    35.32 ± 3.33         N/A               N/A
+ Return ↑   Student            36.31 ± 1.35       34.93 ± 1.32      27.07 ± 12.38   33.42 ± 5.66          N/A               N/A
+             Blind             33.96 ± 2.58      23.56 ± 12.98        9.80 ± 9.51   14.11 ± 13.27     3.94 ± 2.28       8.92 ± 7.65
+          WMP w/o Prop         36.07 ± 0.27       34.62 ± 3.51       30.73 ± 9.93   34.67 ± 1.95     30.78 ± 7.22      36.41 ± 1.76
+           WMP (ours)  0.008 ± 0.006 0.013 ± 0.010                  0.26 ± 0.13      0.13 ± 0.08      0.02 ± 0.01     0.006 ± 0.002
+            Teacher     0.007 ± 0.010 0.012 ± 0.005                 0.23 ± 0.21      0.09 ± 0.07          N/A               N/A
+ Tracking
+            Student    0.008 ± 0.004 0.015 ± 0.006                  0.35 ± 0.28      0.16 ± 0.07          N/A               N/A
+  Error ↓
+             Blind      0.019 ± 0.011 0.033 ± 0.021                 0.33 ± 0.19      0.26 ± 0.07      0.08 ± 0.06      0.051 ± 0.022
+          WMP w/o Prop 0.009 ± 0.003  0.017 ± 0.027                 0.28 ± 0.18      0.14 ± 0.09      0.08 ± 0.10      0.013 ± 0.006
+
+of thousands of robots in parallel. Specifically, We create           speeds when necessary, e.g., jumping over gaps. We add
+4096 Unitree A1 [45] instances on six types of terrains,              additional penalties to avoid getting stuck or turning around
+including Slope, Stair, Gap, Climb, Crawl, and Tilt, each             the obstacles. Besides, we employ an AMP (Adversarial
+with varying difficulty levels, as listed in Table I. We adopt        Motion Priors) [46] style reward to make the robot converge
+the same terrain curriculum as in Rudin et al. [32]. All robots       to a more natural behavior [8]:
+are initialized to different terrains with the lowest difficulty
+                                                                          rstyle (s, s′ ) = max[0, 1 − 0.25(Dψ (s, s′ ) − 1)2 ],   (10)
+in a certain proportion. The robot is moved to a higher
+level of difficulty once it passes the borders of its terrain or      where Dψ is the discriminator trained to distinguish whether
+assigned to a lower level if it moves by less than half of the        a state transition is from a reference dataset Dref or produced
+distance required by its target velocity. Robots take actions         by the agent:
+at a frequency of 50 Hz, i.e., 0.02s per timestep. Depth                    arg min E(s,s′ )∼Dref (Dψ (s, s′ ) − 1)2
+                                                                                                                       
+images are computed every k timesteps and sent to the policy                    ψ
+with 100ms latency to facilitate sim-to-real transfer. We also                       +E(s,s′ )∼πθ (s,a) (Dψ (s, s′ ) + 1)2
+                                                                                                                          
+                                                                                                                                 (11)
+randomize the physical parameters to further improve the                               wgp
+                                                                                            E(s,s′ )∼Dref ∥∇ψ Dψ (s, s′ )∥2 .
+                                                                                                                            
+policy’s robustness as in Cheng et al. [11].                                         +
+                                                                                        2
+State and Action Space. Precisely, the proprioception obser-
+vation opt ∈ R45 consists of base angular velocities, gravity                         V. E XPERIMENTAL R ESULTS
+projection, commands, positions and velocities of joints, and            Our experiments aim to answer the following questions:
+last action at−1 . The privileged information spri t   contains          • How does WMP perform compared with previous state-
+scandots, foot contact forces, and randomized physical pa-                 of-the-art methods in vision-based locomotion?
+rameters. dt ∈ R64×64 is the egocentric depth image with                 • Could a world model trained in a simulator predict real-
+58◦ × 58◦ field of view. The action at ∈ R12 specifies the                 world trajectory well?
+joints’ target positions: qd = qstand + at , where qstand is             • Could the achievement of WMP in simulation be well
+the default joint positions when standing. The torques τ are               transferred to real robots?
+calculated through a PD controller:                                      To ensure a fair comparison, all the methods are trained
+                                                                      using the same environment and reward functions described
+               τ = Kp (qd − q) + Kd (q̇d − q̇) ,              (8)
+                                                                      in Section IV-C.
+where q and q̇ are the joints’ current positions and velocities,      A. Simulation Comparison
+respectively. The target joint velocities q̇d are set to 0 and
+(Kp , Kd ) are the parameters of the PD controller.                      To answer these questions, we first evaluate our method
+                                                                      and baselines in terms of RL return and velocity tracking
+Reward Function. The robot is trained to track a 3-dim                error over different terrains in simulation, where the velocity
+command: (vxcmd , vycmd , ωzcmd ). To achieve this, we adopt a        tracking error is defined as the mean square error between
+suite of reward functions similar to Cheng et al. [11]. The             cmd
+                                                                      vxy    and vxy . The baselines we compare to include:
+main difference is that they manually select waypoints along
+                                                                         • Teacher. The teacher policy is trained with access
+a preset trajectory and compute the velocity-tracking reward
+                                                                            to privileged information like scandots, serving as an
+based on the direction to the next waypoint. on the contrary,
+                                                                            oracle baseline.
+we use a simpler form of velocity-tracking reward to reduce
+                                                                         • Student. We reproduce the student policy according to
+human efforts in waypoint selection:
+                                                                          Cheng et al. [11], which utilizes a ConvNet-RNN to
+                                 cmd            cmd 2                       mimic the teacher’s policy using depth images.
+                                                    
+  rtracking = exp min(vxy , vxy      + 0.1) − vxy     /σ , (9)
+                                                                         • Blind. We ablate the depth image in the world model,
+where the clipping operation encourages the robot to follow                 resulting in a blind policy that gives actions purely
+the command most of the time, but it can also reach higher                  based on proprioception.
+                                                              36
+                                                                                                                                              35.0
+
+                                                              35
+
+
+                                                              34
+
+
+
+
+                                             average ruturn
+
+
+
+
+                                                                                                                             average ruturn
+                                                                                                                                              34.5
+                                                              33
+
+
+                                                              32
+
+                                                                                                                                              34.0
+                                                              31
+
+
+                                                              30
+
+
+                                                              29                                                                              33.5
+
+
+
+                                                                   2 3 4 5 6 7 8 9 10       15       20            25   30                           2468 10 16   32          64            128
+                                                                                        model interval                                                            training length (×0.1s)
+Fig. 3: T-SNE result of recurrent state ht   Fig. 4: Average return over different world model interval k (Left) and different lengths of
+over six different terrains.                 training data (Right).
+
+  •   WMP w/o Prop. Similar to Blind, we remove the
+      proprioception in the world model.
+
+
+
+
+                                                                                                           Real
+   The comparison results are shown in Table I. Note that the
+
+
+
+
+                                                                                                           Model
+Teacher and Student baselines do not apply to Tilt and Crawl                                       Gap
+due to the limitation of scandots, as discussed in Section I.
+From the result, our method WMP achieves higher return
+
+
+
+
+                                                                                                           Real
+and smaller velocity tracking error than baselines in most
+tasks. The performance gap between WMP and Teacher is
+
+
+
+
+                                                                                                           Model
+                                                                                                   Climb
+much smaller than between Teacher and Student, revealing
+the superiority of WMP by leveraging the world model to
+
+                                                                                                           Real
+extract proper information from past perceptions. Moreover,
+removing the depth image in the world model causes a
+                                                                                                           Model
+severe performance dropping except for Slope, underscoring                                          Tilt
+
+the importance of visual information for locomotion over
+challenging terrains [10], [12]. Besides, ablating the propri-
+                                                                                                           Real
+
+
+
+
+oception also decreases the performance slightly, which we
+attribute to the fact that predicting the proprioception can
+                                                                                                           Model
+
+
+
+
+                                                                                                   Crawl
+help capture the physical properties of the environment.
+B. Empirical Study                                                                               Fig. 5: Real-world depth images and long-term predictions of depth
+                                                                                                 images using the world model.
+   This section provides empirical studies to understand the
+benefits of our method from the world model.                                                     Training Length. During world model training, we ran-
+Recurrent State Visualization. We first collect the recurrent                                    domly sample trajectory segments with fixed length L and
+state ht over six terrains and visualize them in Figure 3                                        train the model to predict current perception based on
+to investigate whether ht contains enough information for                                        previous ones in the segment. The length of the training
+versatile locomotion. As the t-SNE figure shows, the ht of                                       data determines how long the historical information model
+different terrains holds clear boundaries, with only a slight                                    can remember. In Figure 4, we conduct experiments with
+overlap between Slope and Climb, since these two terrains                                        different training lengths. According to the result, training
+have similar depth images and Climb can be considered as                                         world models with 1-second segments is sufficient to achieve
+a 90◦ Slope. From the visualization result, ht represents the                                    acceptable performance. This is consistent with our intuition:
+terrains well and can help the policy take action according                                      what the robot saw one second before is roughly under its
+to the specific task.                                                                            feet. Further extending the horizon can help perceive the
+Model Interval. The model interval parameter k affects                                           environment dynamics, but a segment that is too long may
+both world model training and real-world deployment. To                                          make it inefficient to back-propagate the gradient through
+investigate its influence, we vary k from 2 to 30. The results                                   RSSM. For this reason, we set the training length to 6.4
+are shown in Figure 4. In general, a world model with a                                          seconds in other experiments throughout the paper.
+smaller interval obtains higher rewards in simulation because                                    Real World Prediction. While the world model performs
+it enables the robot to respond to changes in its surroundings                                   well in simulation, whether the excellent performance can
+more quickly. However, unlike the ideal situation in the simu-                                   transfer to the real world remains to be justified. To verify
+lator, real-world applications have non-negligible latency for                                   this, we collect trajectories in the real world and use the
+depth image acquiring and world model computing, taking                                          model to predict the future, given the initial observation and
+around 40ms in total on A1 hardware. Therefore, we choose                                        action sequence without access to intermediate depth images.
+k = 5, i.e., world model intervals of 0.1s, a trade-off between                                  Results are shown in Figure 5. From the result, a world model
+ideal performance and computational cost.                                                        trained purely in the simulator can give accurate predictions
+             Stair                        Gap                        Climb                         Tilt                       Crawl
+
+
+
+
+       Fig. 6: Real-world evaluation over multiple terrains with different difficulties. Success rates are calculated over ten trials.
+
+for real-world trajectories, especially in the critical place it
+will pass. For example, in the Crawl task, the shape of the
+obstacle in the predicted depth image is different from the
+real ones since robots have never seen this shape of obstacles
+in the simulator. Nevertheless, the position and angle of the
+narrow crevice it can traverse are highly consistent in real and
+model images, highlighting the strength and generalization of
+latent space world modeling. This finding may help explain
+why our method exhibits smooth sim-to-real transfer.
+C. Real-world Evaluation
+    Subsequently, we apply WMP and other baselines to a
+real-world A1 robot. All methods are directly run on the
+onboard Jetson NX hardware without external computing
+devices. Depth images are read from the front Intel D435i                            Fig. 7: Snapshots of outdoor experiments.
+camera at 60 Hz with a resolution of 424 × 240. We pre-
+process the noisy depth images with spatial and temporal                   We also deploy our policy to outdoor environments in a
+filters to narrow the visual sim-to-real gap [12]. The pro-             park. Some snapshots are shown in Figure 7. Our policy
+cessed images are then cropped and down-sampled to 64×64                shows consistent behavior in outdoor and indoor environ-
+and sent to the world model with 100ms latency. We set                  ments and successfully goes up and down stairs, climbs
+Kp = 40, Kd = 1.0 to make it consistent with the simulation             platforms up to 45cm, and traverses grass and gravel, which
+setting. We select five terrains with different difficulties for        further validates the generalization of our method.
+a comprehensive evaluation, including Stair, Gap, Climb,
+                                                                                                VI. C ONCLUSION
+Tilt, and Crawl, but exclude Slope, which is too easy to
+distinguish between methods.                                               In this paper, we present World Model-based Perception
+    The success rates are listed in Figure 6. From the compar-          (WMP), a simple yet effective framework that combines
+ison, the Student policy can traverse through the first three           MBRL with vision-based legged locomotion, drawing inspi-
+terrains with low difficulty but fails in more difficult cases,         ration from the role of the mental model in animal cognition
+reflecting the performance gap between the Student policy               and decision-making. By leveraging the advanced world
+and the optimal Teacher policy. In contrast, our method                 model, WMP outperforms previous state-of-the-art baselines
+exhibits a more stable control behavior and successfully                in both simulation and real-world evaluation, achieving the
+traverses more challenging terrains, including Tilt and Crawl,          best traversal performance on Unitree A1 robots. Further
+which the Student policy cannot tackle. To name a few, WMP              empirical analyses reveal that the main superiority of WMP
+can traverse Gap of 85cm (about 2.1x robot length), Climb               lies in utilizing the world model to extract useful information
+of 55cm (about 2.2x robot height), and Crawl of 22cm (about             from historical high-dimensional perceptions. We hope our
+0.8x robot height), close to the hardest level in the simulator.        method could provide insight into the emergence of a better
+This means that our method achieves smaller sim-to-real gaps            natural learning paradigm for robots. For future work, it is
+through world modeling. Besides, ablating proprioception                tempting to train the world model with a mixture of simulated
+or images in the world model degrades performance to                    and real-world data, which holds the promise to construct a
+different degrees, demonstrating the advantage of physical              more realistic world model. Besides, it is also appealing to
+and visual world modeling for locomotion. Please refer to               incorporate other forms of perception, like the sense of touch,
+the supplemental video for detailed comparisons.                        into the world model to expand its applications.
+                             R EFERENCES                                        [25] F.-M. Luo, T. Xu, H. Lai, X.-H. Chen, W. Zhang, and Y. Yu, “A survey
+                                                                                     on model-based reinforcement learning,” Science China Information
+ [1] J. Tan, T. Zhang, E. Coumans, A. Iscen, Y. Bai, D. Hafner, S. Bo-               Sciences, vol. 67, no. 2, p. 121101, 2024.
+     hez, and V. Vanhoucke, “Sim-to-real: Learning agile locomotion for         [26] D. Hafner, T. Lillicrap, J. Ba, and M. Norouzi, “Dream to con-
+     quadruped robots,” arXiv preprint arXiv:1804.10332, 2018.                       trol: Learning behaviors by latent imagination,” arXiv preprint
+ [2] W. Yu, V. C. Kumar, G. Turk, and C. K. Liu, “Sim-to-real transfer               arXiv:1912.01603, 2019.
+     for biped locomotion,” in 2019 IEEE/RSJ International Conference on        [27] M. Janner, J. Fu, M. Zhang, and S. Levine, “When to trust your model:
+     Intelligent Robots and Systems (IROS). IEEE, 2019, pp. 3503–3510.               Model-based policy optimization,” Advances in neural information
+ [3] X. B. Peng, E. Coumans, T. Zhang, T.-W. Lee, J. Tan, and S. Levine,             processing systems, vol. 32, 2019.
+     “Learning agile robotic locomotion skills by imitating animals,” arXiv     [28] D. Hafner, T. Lillicrap, M. Norouzi, and J. Ba, “Mastering atari with
+     preprint arXiv:2004.00784, 2020.                                                discrete world models,” arXiv preprint arXiv:2010.02193, 2020.
+                                                                                [29] D. Hafner, J. Pasukonis, J. Ba, and T. Lillicrap, “Mastering diverse
+ [4] J. Hwangbo, J. Lee, A. Dosovitskiy, D. Bellicoso, V. Tsounis,
+                                                                                     domains through world models,” arXiv preprint arXiv:2301.04104,
+     V. Koltun, and M. Hutter, “Learning agile and dynamic motor skills
+                                                                                     2023.
+     for legged robots,” Science Robotics, vol. 4, no. 26, p. eaau5872, 2019.
+                                                                                [30] Z. Fu, A. Kumar, J. Malik, and D. Pathak, “Minimizing energy
+ [5] A. Kumar, Z. Fu, D. Pathak, and J. Malik, “Rma: Rapid motor
+                                                                                     consumption leads to the emergence of gaits in legged robots,” arXiv
+     adaptation for legged robots,” arXiv preprint arXiv:2107.04034, 2021.
+                                                                                     preprint arXiv:2111.01674, 2021.
+ [6] H. Lai, W. Zhang, X. He, C. Yu, Z. Tian, Y. Yu, and J. Wang, “Sim-         [31] Z. Xie, X. Da, M. van de Panne, B. Babich, and A. Garg, “Dynamics
+     to-real transfer for quadrupedal locomotion via terrain transformer,”           randomization revisited: A case study for quadrupedal locomotion,”
+     in 2023 IEEE International Conference on Robotics and Automation                in 2021 IEEE International Conference on Robotics and Automation
+     (ICRA). London, United Kingdom: IEEE, May 2023, p. 5141–5147.                   (ICRA). IEEE, 2021, pp. 4955–4961.
+     [Online]. Available: https://ieeexplore.ieee.org/document/10160497/        [32] N. Rudin, D. Hoeller, P. Reist, and M. Hutter, “Learning to walk
+ [7] I. M. A. Nahrendra, B. Yu, and H. Myung, “Dreamwaq: Learning                    in minutes using massively parallel deep reinforcement learning,” in
+     robust quadrupedal locomotion with implicit terrain imagination via             Conference on Robot Learning. PMLR, 2022, pp. 91–100.
+     deep reinforcement learning,” in 2023 IEEE International Conference        [33] L. Pinto, M. Andrychowicz, P. Welinder, W. Zaremba, and P. Abbeel,
+     on Robotics and Automation (ICRA). IEEE, 2023, pp. 5078–5084.                   “Asymmetric actor critic for image-based robot learning,” arXiv
+ [8] J. Wu, G. Xin, C. Qi, and Y. Xue, “Learning robust and agile                    preprint arXiv:1710.06542, 2017.
+     legged locomotion using adversarial motion priors,” IEEE Robotics          [34] S. Luo, S. Li, R. Yu, Z. Wang, J. Wu, and Q. Zhu, “Pie: Parkour with
+     and Automation Letters, 2023.                                                   implicit-explicit learning framework for legged robots,” arXiv preprint
+ [9] J. Long, Z. Wang, Q. Li, L. Cao, J. Gao, and J. Pang, “Hybrid                   arXiv:2408.13740, 2024.
+     internal model: Learning agile legged locomotion with simulated            [35] K. Chua, R. Calandra, R. McAllister, and S. Levine, “Deep rein-
+     robot response,” in The Twelfth International Conference on Learning            forcement learning in a handful of trials using probabilistic dynamics
+     Representations, 2024.                                                          models,” in Advances in Neural Information Processing Systems, 2018,
+[10] A. Agarwal, A. Kumar, J. Malik, and D. Pathak, “Legged locomotion               pp. 4754–4765.
+     in challenging terrains using egocentric vision,” in Conference on robot   [36] Y. Luo, H. Xu, Y. Li, Y. Tian, T. Darrell, and T. Ma, “Algorithmic
+     learning. PMLR, 2023, pp. 403–415.                                              framework for model-based deep reinforcement learning with theoret-
+[11] X. Cheng, K. Shi, A. Agarwal, and D. Pathak, “Extreme parkour with              ical guarantees,” arXiv preprint arXiv:1807.03858, 2018.
+     legged robots,” in 2024 IEEE International Conference on Robotics          [37] D. Hafner, T. Lillicrap, I. Fischer, R. Villegas, D. Ha, H. Lee, and
+     and Automation (ICRA). IEEE, 2024, pp. 11 443–11 450.                           J. Davidson, “Learning latent dynamics for planning from pixels,” in
+[12] Z. Zhuang, Z. Fu, J. Wang, C. Atkeson, S. Schwertfeger, C. Finn, and            International conference on machine learning. PMLR, 2019, pp.
+     H. Zhao, “Robot parkour learning,” arXiv preprint arXiv:2309.05665,             2555–2565.
+     2023.                                                                      [38] J. Yamada, M. Rigter, J. Collins, and I. Posner, “Twist: Teacher-
+[13] T. Miki, J. Lee, J. Hwangbo, L. Wellhausen, V. Koltun, and M. Hutter,           student world model distillation for efficient sim-to-real transfer,”
+     “Learning robust perceptive locomotion for quadrupedal robots in the            arXiv preprint arXiv:2311.03622, 2023.
+     wild,” Science Robotics, vol. 7, no. 62, p. eabk2822, 2022.                [39] S. Ferraro, P. Mazzaglia, T. Verbelen, and B. Dhoedt, “FOCUS:
+[14] H. Duan, B. Pandit, M. S. Gadde, B. Van Marum, J. Dao, C. Kim, and              Object-Centric World Models for Robotics Manipulation,” arXiv
+     A. Fern, “Learning vision-based bipedal locomotion for challenging              preprint arXiv:2307.02427, 2023.
+     terrain,” in 2024 IEEE International Conference on Robotics and            [40] R. Mendonca, S. Bahl, and D. Pathak, “Structured world
+     Automation (ICRA). IEEE, 2024, pp. 56–62.                                       models from human videos,” arXiv preprint arXiv:2308.10901,
+[15] A. Anand, E. Racah, S. Ozair, Y. Bengio, M.-A. Côté, and R. D.                no. arXiv:2308.10901, Aug. 2023, arXiv:2308.10901 [cs]. [Online].
+     Hjelm, “Unsupervised state representation learning in atari,” Advances          Available: http://arxiv.org/abs/2308.10901
+     in neural information processing systems, vol. 32, 2019.                   [41] P. Wu, A. Escontrela, D. Hafner, P. Abbeel, and K. Goldberg, “Day-
+[16] J. Lee, J. Hwangbo, L. Wellhausen, V. Koltun, and M. Hutter,                    dreamer: World models for physical robot learning,” in Conference on
+     “Learning quadrupedal locomotion over challenging terrain,” Science             robot learning. PMLR, 2023, pp. 2226–2240.
+     robotics, vol. 5, no. 47, p. eabc5986, 2020.                               [42] J. Chung, C. Gulcehre, K. Cho, and Y. Bengio, “Empirical evaluation
+[17] M. Mohri, “Foundations of machine learning,” 2018.                              of gated recurrent neural networks on sequence modeling,” arXiv
+[18] H. He, C. Bai, H. Lai, L. Wang, and W. Zhang, “Privileged knowl-                preprint arXiv:1412.3555, 2014.
+     edge distillation for sim-to-real policy generalization,” arXiv preprint   [43] J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov,
+     arXiv:2305.18464, 2023.                                                         “Proximal policy optimization algorithms,” arXiv preprint
+[19] J. W. Forrester, “Counterintuitive behavior of social systems,” Theory          arXiv:1707.06347, 2017.
+     and decision, vol. 2, no. 2, pp. 109–140, 1971.                            [44] V. Makoviychuk, L. Wawrzyniak, Y. Guo, M. Lu, K. Storey, M. Mack-
+[20] D. Ha and J. Schmidhuber, “World models,” arXiv preprint                        lin, D. Hoeller, N. Rudin, A. Allshire, A. Handa et al., “Isaac gym:
+     arXiv:1803.10122, 2018.                                                         High performance gpu-based physics simulation for robot learning,”
+                                                                                     arXiv preprint arXiv:2108.10470, 2021.
+[21] G. B. Keller, T. Bonhoeffer, and M. Hübener, “Sensorimotor mismatch
+                                                                                [45] Unitree, “Unitree robotics,” https://www.unitree.com/, 2022.
+     signals in primary visual cortex of the behaving mouse,” Neuron,
+                                                                                [46] A. Escontrela, X. B. Peng, W. Yu, T. Zhang, A. Iscen, K. Goldberg,
+     vol. 74, no. 5, pp. 809–815, 2012.
+                                                                                     and P. Abbeel, “Adversarial motion priors make good substitutes for
+[22] G. W. Maus, J. Fischer, and D. Whitney, “Motion-dependent repre-
+                                                                                     complex reward functions,” in 2022 IEEE/RSJ International Confer-
+     sentation of space in area mt+,” Neuron, vol. 78, no. 3, pp. 554–562,
+                                                                                     ence on Intelligent Robots and Systems (IROS). IEEE, 2022, pp.
+     2013.
+                                                                                     25–32.
+[23] N. Nortmann, S. Rekauzke, S. Onat, P. König, and D. Jancke, “Primary
+     visual cortex represents the difference between past and present,”
+     Cerebral Cortex, vol. 25, no. 6, pp. 1427–1440, 2015.
+[24] M. Leinweber, D. R. Ward, J. M. Sobczak, A. Attinger, and G. B.
+     Keller, “A sensorimotor circuit in mouse cortex for visual flow
+     predictions,” Neuron, vol. 95, no. 6, pp. 1420–1432, 2017.
+

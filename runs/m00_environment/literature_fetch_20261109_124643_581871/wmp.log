@@ -1,0 +1,34 @@
+["curl", "-fLsS", "--retry", "2", "--connect-timeout", "20", "--max-time", "90", "https://arxiv.org/abs/2409.16784", "-o", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124643_581871/wmp.html"]
+
+exit_code=0
+["curl", "-fLsS", "--retry", "2", "--connect-timeout", "20", "--max-time", "150", "https://arxiv.org/pdf/2409.16784v1", "-o", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124643_581871/wmp.pdf.part"]
+
+exit_code=0
+["pdfinfo", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124643_581871/wmp.pdf.part"]
+Title:           
+Subject:         
+Keywords:        
+Author:          
+Creator:         LaTeX with hyperref
+Producer:        pdfTeX-1.40.25
+CreationDate:    Thu Sep 26 08:39:28 2024 CST
+ModDate:         Thu Sep 26 08:39:28 2024 CST
+Custom Metadata: yes
+Metadata Stream: no
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           7
+Encrypted:       no
+Page size:       612 x 792 pts (letter)
+Page rot:        0
+File size:       5753504 bytes
+Optimized:       no
+PDF version:     1.4
+
+exit_code=0
+["pdftotext", "-layout", "/home/cofallen/Code/毕业设计/references/papers/research_20261109/wmp.pdf", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124643_581871/wmp.txt"]
+
+exit_code=0

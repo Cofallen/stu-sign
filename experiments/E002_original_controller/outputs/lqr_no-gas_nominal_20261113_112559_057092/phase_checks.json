@@ -1,0 +1,13 @@
+{
+  "recovery_passed": false,
+  "torque_limits_passed": true,
+  "phases": [
+    {
+      "phase": "settle",
+      "start_s": 0.0,
+      "end_s": 10.000000009999898,
+      "hip_peak_nm": 0.0,
+      "wheel_peak_nm": 0.0
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "unconstrained_gain_max_error": 3.2526065174565133e-19,
+  "constrained_solves": 1,
+  "solver_failures": 0,
+  "max_solver_iterations": 22,
+  "box_bound_violation": 0.0,
+  "projected_gradient_inf_norm": 1.2304719447797652e-06,
+  "constrained_first_torque_nm": [
+    11.02740834625879,
+    5.0,
+    -10.951682089044073,
+    -5.0,
+    -7.79716791184173,
+    7.700845277965488
+  ],
+  "formal_assets_match_manifest": {
+    "robot_no_gas_spring.xml": true,
+    "robot_gas_spring_damped.xml": true
+  },
+  "passed": true
+}

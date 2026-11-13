@@ -1,0 +1,7 @@
+action_index,joint,joint_id,qpos_address,dof_address,motor_id,axis_world_nominal,angle_limited,lower_rad,upper_rad,source_effort_nm,source_velocity_rad_s,continuous_in_mjcf
+0,lf0_Joint,4,10,9,0,"[0.0, 0.9999999999932537, -3.6732051031940216e-06]",True,-100.0,100.0,30,1000,False
+1,lf1_Joint,5,11,10,1,"[-1.3877787807814457e-17, 0.9999999999932537, -3.673205103416066e-06]",True,-0.65,0.9,30,1000,False
+2,l_wheel_Joint,6,12,11,2,"[0.0, 0.9999999999932536, -3.6732051031940216e-06]",False,0.0,0.0,50,1500,True
+3,rf0_Joint,1,7,6,3,"[0.0, -0.9999999999932537, -3.6732051031940216e-06]",True,-100.0,100.0,30,1000,False
+4,rf1_Joint,2,8,7,4,"[-1.3877787807814457e-17, -0.9999999999932537, -3.673205103416066e-06]",True,-0.9,0.65,30,1000,False
+5,r_wheel_Joint,3,9,8,5,"[0.0, -0.9999999999932536, -3.6732051031940216e-06]",False,0.0,0.0,50,1500,True

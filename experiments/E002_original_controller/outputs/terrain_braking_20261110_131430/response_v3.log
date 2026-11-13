@@ -1,0 +1,15 @@
+[keys t=1.00] w
+[keys t=3.00] released
+[keys t=5.00] s
+[keys t=7.00] released
+move None 4.197355865159366e-06
+[keys t=1.00] dshift
+[keys t=2.00] shift
+[keys t=12.00] released
+spin_right None 2.3265026106583966e-06
+[teleop t=2.00] jump requested
+jump None 2.945800225352802e-06
+[keys t=1.00] w
+[teleop t=3.00] jump requested
+[keys t=7.00] released
+move_jump None 1.7196985732915316e-05

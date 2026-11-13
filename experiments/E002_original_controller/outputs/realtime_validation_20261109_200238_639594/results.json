@@ -1,0 +1,63 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "/tmp/e002_realtime_validate.py"
+  ],
+  "seed": null,
+  "checks": {
+    "assets_unchanged": true,
+    "control_files_unchanged": true,
+    "syntax": true,
+    "headless_trace_exact_equal": true,
+    "actual_keys": true,
+    "hud_camera_panel": true,
+    "mouse_camera_rotated": true,
+    "driving_does_not_toggle_flags": true,
+    "jump_landed": true,
+    "panel_entry_stops": true,
+    "native_ui": true,
+    "native_display_changes_persist": true
+  },
+  "runs": {
+    "actual_keys": {
+      "driver": "realtime_gui_drive_20261109_195937_939707",
+      "run": "lqr_no-gas_nominal_20261109_195938_963885",
+      "rtf": 0.992466031841014,
+      "wall_s": 14.106276236001577,
+      "duration_s": 13.99999999999768
+    },
+    "hud_camera_panel": {
+      "driver": "realtime_gui_drive_20261109_200043_835391",
+      "run": "lqr_no-gas_nominal_20261109_200044_931606",
+      "rtf": 0.9998593645665649,
+      "wall_s": 14.001969173001271,
+      "duration_s": 13.99999999999768
+    },
+    "native_ui": {
+      "driver": "realtime_gui_drive_20261109_200133_254348",
+      "run": "lqr_no-gas_nominal_20261109_200134_283394",
+      "rtf": 0.9998407210739937,
+      "wall_s": 10.001593042998138,
+      "duration_s": 9.999999999999897
+    }
+  },
+  "source_sha256": {
+    "controller.py": "39ab0201738b9c3d630db90b8fa3b3246f499afb8c0c968e3dd50c5fdbbda240",
+    "LQR_six/mymath.py": "00ae3961d93a4ad46920dd46bee96d4d9a14e294c2beb7ab97334141be267426",
+    "LQR_six/teleop.py": "643dde34ede190138cb9b4940703ba7441c64c3949e9301f8a639771ceca6605",
+    "LQR_six/lqr_controller.py": "d4ef36033f420bb64a89c4c7016f330ac5e13c732870d159394a10c39bf33df6",
+    "LQR_six/simulation.py": "65c3f77b3f5ad396470db403d0be96330d79daa8b1b33389838b071d8bd8bb47",
+    "LQR_six/render_stand.py": "fdc14b6814b11adb489ed50d4636bc8f76778db5eeb2b755bb6a7510ccf6a233",
+    "LQR_six/keyboardInput.py": "abc649b980c3218ee019f8814e9ccac9872a9e030913a5d2db569eace087fbbf",
+    "LQR_six/vofa.py": "a0a289ae54b17c9b6cd8c10219d1fdb988bc2c491e8352a457dd211faa67a0b8",
+    "LQR_six/vmc.py": "d62dcbd1aba16507705810c4f4f425c71bb43d1beb19677a21b9c7ed4081fb8e",
+    "LQR_six/write_sensor.py": "f2aadcec19cd5106e24a825956057a770b676c39fedf55429b910879a5439362",
+    "LQR_six/mympc.py": "c6224a5c2c70acc49f6b20363972ce1f210f12fd26932f162fb0b18a3bec2de1",
+    "LQR_six/get_state.py": "a38da1c5b914e52cc77be4ad3ad35a3269119aab9aba3902dc392a69b85f9bef",
+    "LQR_six/lqr.py": "a4b660fc40cfc65a58e80c8a885c85f94bff23a2d48747c4674359c57b28f2ac",
+    "LQR_six/get_sensor.py": "c6b257a10d3288aeebb0a18db9f15aeebe67da5273f5169f5cbd7943e19fb223",
+    "LQR_six/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "LQR_six/leg_data.py": "2bb7abcc723b3d8bb23ea6047ae1c825be1f8c437b52907407a29782475f5893"
+  },
+  "passed": true
+}

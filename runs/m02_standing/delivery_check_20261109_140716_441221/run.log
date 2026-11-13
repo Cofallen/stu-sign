@@ -1,0 +1,29 @@
+{
+  "python_syntax_files": 6,
+  "local_markdown_links_checked": 163,
+  "broken_links": [],
+  "source_json_valid": true,
+  "formal_asset_sha256_unchanged": {
+    "robot_no_gas_spring.xml": true,
+    "robot_gas_spring_damped.xml": true
+  },
+  "upstream_clean": true,
+  "video_ffprobe": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 480,
+        "duration": "10.100000",
+        "nb_frames": "101"
+      }
+    ]
+  },
+  "reviewed_images": [
+    "runs/m02_standing/report_20261109_140332_146596/standing_evaluation.png",
+    "runs/m02_standing/lqr_no-gas_20261109_140329_963534/push_initial.png",
+    "runs/m02_standing/lqr_no-gas_20261109_140329_963534/push_final.png"
+  ],
+  "passed": true
+}

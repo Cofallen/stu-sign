@@ -1,0 +1,21 @@
+[keys t=1.00] a
+[keys t=12.00] released
+turn_left_0.278 None 4.263822275995339e-06 0.27792442075482965
+[keys t=1.00] d
+[keys t=12.00] released
+turn_right_0.278 None 7.094312877676854e-06 0.27792500615844695
+[keys t=1.00] ashift
+[keys t=2.00] shift
+[keys t=12.00] released
+spin_left_0.278 None 9.23163596411649e-06 0.277922882994163
+[keys t=1.00] dshift
+[keys t=2.00] shift
+[keys t=12.00] released
+spin_right_0.278 None 2.2895188634843497e-05 0.2779214313274683
+[keys t=1.00] w
+[teleop t=3.00] jump requested
+[keys t=7.00] released
+move_jump_0.278 None 9.975125182274335e-05 0.2779430746404774
+[teleop t=2.00] jump requested
+jump_0.278 None 3.138143473614833e-06 0.2779242882358909
+fall_0.278 fall 2.225683321276846 0.0893962147397898

@@ -1,0 +1,400 @@
+{
+  "timing": {
+    "sync_calls": 2235,
+    "sync_wall_s": 2.721199891035212,
+    "sync_max_s": 0.017462180003349204,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 8.777429315035988,
+    "late_steps": 21296,
+    "max_lag_s": 0.08662494401141885,
+    "initial_sync_wall_s": 0.037561467001069104,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.9988985878088501,
+    "loop_non_ui_non_sleep_s": 62.32868509793116
+  },
+  "viewer_options": {
+    "camera_type": 0,
+    "left_ui": true,
+    "right_ui": true,
+    "hud": false,
+    "initial": {
+      "azimuth": 135.0,
+      "elevation": -12.0,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "final": {
+      "azimuth": 98.50393700787403,
+      "elevation": -3.673228346456706,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 73.74599999998807,
+  "terminated": true,
+  "termination_reason": "fall",
+  "timeout": false,
+  "final_tilt_rad": 0.6021728872947039,
+  "max_tilt_rad": 0.6021728872947039,
+  "max_xy_drift_m": 1.3484983729985625,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 1.7348065509467026e-05,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.14117636988654886,
+  "max_torque_nm": [
+    30.0,
+    5.0,
+    30.0,
+    5.0,
+    30.0,
+    30.0
+  ],
+  "nonwheel_contacts": [
+    "base_Link_del_collision_0"
+  ],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": "iso",
+  "final_base_xy_m": [
+    0.5729387438916147,
+    0.08688949764686225
+  ],
+  "final_yaw_rad": 0.11033837499481358,
+  "mode": "drive",
+  "interactive": true,
+  "teleop": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 0.11033837499481358,
+    "message": "reset targets",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [
+      {
+        "start": 1.6709999999999268,
+        "start_height": 0.24924094558785992,
+        "max_height": 0.47061053684013754,
+        "airborne_s": 0.4210000000000003,
+        "max_upward_velocity": 1.9067925556290806
+      },
+      {
+        "start": 10.39099999999968,
+        "start_height": 0.24923806956207323,
+        "max_height": 0.46940494727905463,
+        "airborne_s": 0.4150000000000003,
+        "max_upward_velocity": 1.9048226874592782
+      },
+      {
+        "start": 29.7710000000134,
+        "start_height": 0.24924092822415847,
+        "max_height": 0.4686754798660413,
+        "airborne_s": 0.4180000000000003,
+        "max_upward_velocity": 1.906336185936045
+      },
+      {
+        "start": 34.041000000011366,
+        "start_height": 0.24922518150534698,
+        "max_height": 0.46941030620955415,
+        "airborne_s": 0.4130000000000003,
+        "max_upward_velocity": 1.9046350031972663
+      },
+      {
+        "start": 36.26100000000619,
+        "start_height": 0.24954446931778757,
+        "max_height": 0.4693941587495368,
+        "airborne_s": 0.4130000000000003,
+        "max_upward_velocity": 1.9044660065305523
+      },
+      {
+        "start": 38.851000000000155,
+        "start_height": 0.24913722221700965,
+        "max_height": 0.47043579948894565,
+        "airborne_s": 0.4190000000000003,
+        "max_upward_velocity": 1.9060236470062049
+      }
+    ],
+    "key_events": [
+      {
+        "time": 1.6699999999999269,
+        "key": "j"
+      },
+      {
+        "time": 10.38999999999968,
+        "key": "j"
+      },
+      {
+        "time": 29.7700000000134,
+        "key": "j"
+      },
+      {
+        "time": 34.04000000001137,
+        "key": "j"
+      },
+      {
+        "time": 36.260000000006194,
+        "key": "j"
+      },
+      {
+        "time": 38.85000000000016,
+        "key": "j"
+      },
+      {
+        "time": 42.92999999999065,
+        "pressed": "w"
+      },
+      {
+        "time": 43.149999999990136,
+        "pressed": ""
+      },
+      {
+        "time": 43.31999999998974,
+        "pressed": "q"
+      },
+      {
+        "time": 43.53999999998923,
+        "pressed": ""
+      },
+      {
+        "time": 44.00999999998813,
+        "pressed": "q"
+      },
+      {
+        "time": 45.10999999998557,
+        "pressed": ""
+      },
+      {
+        "time": 45.52999999998459,
+        "pressed": "e"
+      },
+      {
+        "time": 47.34999999998035,
+        "pressed": ""
+      },
+      {
+        "time": 47.869999999979136,
+        "pressed": "q"
+      },
+      {
+        "time": 48.13999999997851,
+        "pressed": ""
+      },
+      {
+        "time": 48.27999999997818,
+        "pressed": "q"
+      },
+      {
+        "time": 48.42999999997783,
+        "pressed": ""
+      },
+      {
+        "time": 48.809999999976945,
+        "pressed": "e"
+      },
+      {
+        "time": 50.199999999973706,
+        "pressed": ""
+      },
+      {
+        "time": 50.38999999997326,
+        "pressed": "e"
+      },
+      {
+        "time": 50.64999999997266,
+        "pressed": ""
+      },
+      {
+        "time": 52.59999999996811,
+        "pressed": "q"
+      },
+      {
+        "time": 53.93999999996499,
+        "pressed": ""
+      },
+      {
+        "time": 55.59999999996112,
+        "pressed": "w"
+      },
+      {
+        "time": 56.309999999959466,
+        "pressed": ""
+      },
+      {
+        "time": 56.96999999995793,
+        "pressed": "s"
+      },
+      {
+        "time": 57.87999999995581,
+        "pressed": ""
+      },
+      {
+        "time": 58.189999999955084,
+        "pressed": "w"
+      },
+      {
+        "time": 59.25999999995259,
+        "pressed": ""
+      },
+      {
+        "time": 59.68999999995159,
+        "pressed": "s"
+      },
+      {
+        "time": 60.34999999995005,
+        "pressed": ""
+      },
+      {
+        "time": 60.50999999994968,
+        "pressed": "q"
+      },
+      {
+        "time": 60.74999999994912,
+        "pressed": ""
+      },
+      {
+        "time": 60.849999999948885,
+        "pressed": "w"
+      },
+      {
+        "time": 61.50999999994735,
+        "pressed": ""
+      },
+      {
+        "time": 61.67999999994695,
+        "pressed": "e"
+      },
+      {
+        "time": 62.969999999943944,
+        "pressed": ""
+      },
+      {
+        "time": 69.21999999996646,
+        "key": "r"
+      },
+      {
+        "time": 70.87999999997439,
+        "key": "r"
+      },
+      {
+        "time": 71.72999999997845,
+        "pressed": "e"
+      },
+      {
+        "time": 72.64999999998284,
+        "pressed": ""
+      },
+      {
+        "time": 73.55999999998718,
+        "key": "r"
+      }
+    ],
+    "current_jump": null
+  },
+  "final_odometry_error_m": 35.217059648137294,
+  "wall_s": 73.82731430400236,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+  "passed": false
+}

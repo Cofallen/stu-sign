@@ -1,0 +1,24 @@
+{
+  "id": "mbrl_lib",
+  "kind": "code",
+  "title": "facebookresearch/mbrl-lib",
+  "url": "https://github.com/facebookresearch/mbrl-lib.git",
+  "local": "upstream/research_20261109/mbrl-lib",
+  "attribution": "研究库维护者实现；含 PETS/MBPO，不等同原论文代码",
+  "purpose": "概率模型、模型训练与回放",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_read_only_not_executed",
+  "commit": "3f93cccfc8d635f74e335a2f07aab6e9a48fc021",
+  "tree": "89d981f00870072303ab0c438b0ed89f73b90db4",
+  "tracked_status": "",
+  "license_files": [
+    {
+      "path": "upstream/research_20261109/mbrl-lib/LICENSE",
+      "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+    }
+  ],
+  "license": "pending text inspection",
+  "submodules_initialized": false,
+  "lfs_downloaded": false,
+  "exit_code": 0
+}

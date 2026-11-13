@@ -1,0 +1,24 @@
+{
+  "id": "dmo_code",
+  "kind": "code",
+  "title": "machines-in-motion/DMO_code",
+  "url": "https://github.com/machines-in-motion/DMO_code.git",
+  "local": "upstream/research_20261109/DMO_code",
+  "attribution": "作者项目页链接；页面标注 work in progress",
+  "purpose": "梯度路线对照；不默认完整可复现",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_read_only_not_executed",
+  "commit": "f60a9ddb8f0a840b2e00602cd51e627fba394b78",
+  "tree": "488bc9c8054eee97cb5a19e1e98a53188cd91275",
+  "tracked_status": "",
+  "license_files": [
+    {
+      "path": "upstream/research_20261109/DMO_code/LICENSE.md",
+      "sha256": "0979acf365a652e7b06537346fe4635494d7cc066e09202547d7333366a70d5f"
+    }
+  ],
+  "license": "pending text inspection",
+  "submodules_initialized": false,
+  "lfs_downloaded": false,
+  "exit_code": 0
+}

@@ -1,0 +1,34 @@
+["curl", "-fLsS", "--retry", "2", "--connect-timeout", "20", "--max-time", "90", "https://arxiv.org/abs/2301.10602", "-o", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/dreamwaq.html"]
+
+exit_code=0
+["curl", "-fLsS", "--retry", "2", "--connect-timeout", "20", "--max-time", "150", "https://arxiv.org/pdf/2301.10602v2", "-o", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/dreamwaq.pdf.part"]
+
+exit_code=0
+["pdfinfo", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/dreamwaq.pdf.part"]
+Title:           
+Subject:         
+Keywords:        
+Author:          
+Creator:         LaTeX with hyperref
+Producer:        pdfTeX-1.40.21
+CreationDate:    Mon Mar  6 11:37:00 2023 CST
+ModDate:         Mon Mar  6 11:37:00 2023 CST
+Custom Metadata: yes
+Metadata Stream: no
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           7
+Encrypted:       no
+Page size:       612 x 792 pts (letter)
+Page rot:        0
+File size:       2788181 bytes
+Optimized:       no
+PDF version:     1.5
+
+exit_code=0
+["pdftotext", "-layout", "/home/cofallen/Code/毕业设计/references/papers/research_20261109/dreamwaq.pdf", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/dreamwaq.txt"]
+
+exit_code=0

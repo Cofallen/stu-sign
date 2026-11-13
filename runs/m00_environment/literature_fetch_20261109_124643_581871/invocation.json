@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/bin/python",
+    "scripts/m00_environment/fetch_research_reading.py",
+    "references/reading_catalog_supplement.json"
+  ],
+  "cwd": "/home/cofallen/Code/毕业设计",
+  "interpreter": "/home/cofallen/miniconda3/bin/python",
+  "catalog_sha256": "ae055054a129c85c598d92e48cac0d2579405647178fa4a635f1e81de0c32e2c",
+  "seed": null,
+  "purpose": "read-only reference acquisition; no training",
+  "started": "2026-11-09T12:46:43.581871+08:00"
+}

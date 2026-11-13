@@ -1,0 +1,21 @@
+{
+  "repeated_motor_attempts_passed": true,
+  "standing_passed": false,
+  "attempts": [
+    {
+      "time": 1.6009999999999345,
+      "attempt": 1,
+      "peak_hip_nm": 40.0
+    },
+    {
+      "time": 5.703000000000239,
+      "attempt": 2,
+      "peak_hip_nm": 40.0
+    },
+    {
+      "time": 11.399999999999121,
+      "attempt": 3,
+      "peak_hip_nm": 40.0
+    }
+  ]
+}

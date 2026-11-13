@@ -1,0 +1,516 @@
+{
+  "timing": {
+    "sync_calls": 772,
+    "sync_wall_s": 0.2708578070096337,
+    "sync_max_s": 0.001634093999655306,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 3.446100446033597,
+    "late_steps": 3633,
+    "max_lag_s": 0.06641635999994833,
+    "initial_sync_wall_s": 0.05411322400004792,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.9999614906270082,
+    "loop_non_ui_non_sleep_s": 21.753022579956905
+  },
+  "viewer_options": {
+    "camera_type": 0,
+    "left_ui": true,
+    "right_ui": true,
+    "hud": false,
+    "initial": {
+      "azimuth": 135.0,
+      "elevation": -12.0,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "final": {
+      "azimuth": 89.95685522531156,
+      "elevation": -2.8533077660594417,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 25.469000000008144,
+  "terminated": true,
+  "termination_reason": "fall",
+  "timeout": false,
+  "final_tilt_rad": 0.6007379665672703,
+  "max_tilt_rad": 0.6007379665672703,
+  "max_xy_drift_m": 1.5131069493725455,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 2.4255279573156052e-05,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.13141166017187814,
+  "max_torque_nm": [
+    30.0,
+    5.0,
+    30.0,
+    5.0,
+    30.0,
+    30.0
+  ],
+  "nonwheel_contacts": [
+    "base_Link_del_collision_0"
+  ],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": "iso",
+  "final_base_xy_m": [
+    1.5035011764256114,
+    0.15454837354157624
+  ],
+  "final_yaw_rad": 0.14001373168470008,
+  "mode": "drive",
+  "interactive": true,
+  "teleop": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.2131232071446954,
+    "yaw": 0.14001373168470008,
+    "message": "jump complete",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [
+      {
+        "start": 4.840999999999951,
+        "start_height": 0.24924101342027474,
+        "max_height": 0.515501602658002,
+        "start_com_z": 0.32051496266338886,
+        "max_com_z": 0.5865408837380068,
+        "max_wheel_clearance_m": 0.3168698815221532,
+        "airborne_s": 0.47600000000000037,
+        "max_upward_velocity": 2.1751703101496487,
+        "phases": [
+          {
+            "time": 4.840999999999951,
+            "phase": "crouch"
+          },
+          {
+            "time": 5.241000000000085,
+            "phase": "thrust"
+          },
+          {
+            "time": 5.369000000000128,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 5.523000000000179,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 5.779000000000265,
+            "phase": "landing"
+          },
+          {
+            "time": 6.441000000000486,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 5.369000000000128
+      },
+      {
+        "start": 8.1910000000009,
+        "start_height": 0.24919220573890294,
+        "max_height": 0.5178233290294902,
+        "start_com_z": 0.320477264947772,
+        "max_com_z": 0.5888280448942079,
+        "max_wheel_clearance_m": 0.3188564596976357,
+        "airborne_s": 0.47800000000000037,
+        "max_upward_velocity": 2.1897255069736588,
+        "phases": [
+          {
+            "time": 8.1910000000009,
+            "phase": "crouch"
+          },
+          {
+            "time": 8.592000000000677,
+            "phase": "thrust"
+          },
+          {
+            "time": 8.721000000000606,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 8.87500000000052,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 9.133000000000377,
+            "phase": "landing"
+          },
+          {
+            "time": 9.792000000000012,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 8.721000000000606
+      },
+      {
+        "start": 11.460999999999087,
+        "start_height": 0.2491873454772531,
+        "max_height": 0.5177169880667315,
+        "start_com_z": 0.32048595133164304,
+        "max_com_z": 0.5887266479941998,
+        "max_wheel_clearance_m": 0.3187841231912295,
+        "airborne_s": 0.47800000000000037,
+        "max_upward_velocity": 2.1892034776055573,
+        "phases": [
+          {
+            "time": 11.460999999999087,
+            "phase": "crouch"
+          },
+          {
+            "time": 11.861999999998865,
+            "phase": "thrust"
+          },
+          {
+            "time": 11.990999999998794,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 12.144999999998708,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 12.402999999998565,
+            "phase": "landing"
+          },
+          {
+            "time": 13.0619999999982,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 11.990999999998794
+      },
+      {
+        "start": 14.220999999997558,
+        "start_height": 0.24915325738179567,
+        "max_height": 0.5177429840359697,
+        "start_com_z": 0.32048041350123335,
+        "max_com_z": 0.5887593736387916,
+        "max_wheel_clearance_m": 0.318956756753277,
+        "airborne_s": 0.47900000000000037,
+        "max_upward_velocity": 2.189314967376353,
+        "phases": [
+          {
+            "time": 14.220999999997558,
+            "phase": "crouch"
+          },
+          {
+            "time": 14.621999999997335,
+            "phase": "thrust"
+          },
+          {
+            "time": 14.750999999997264,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 14.904999999997179,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 15.162999999997036,
+            "phase": "landing"
+          },
+          {
+            "time": 15.82199999999667,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 14.750999999997264
+      },
+      {
+        "start": 17.630999999998565,
+        "start_height": 0.2491918261194561,
+        "max_height": 0.5152238755256336,
+        "start_com_z": 0.32048534697238434,
+        "max_com_z": 0.5862798410262581,
+        "max_wheel_clearance_m": 0.3166709293656164,
+        "airborne_s": 0.47600000000000037,
+        "max_upward_velocity": 2.174045347057689,
+        "phases": [
+          {
+            "time": 17.630999999998565,
+            "phase": "crouch"
+          },
+          {
+            "time": 18.030999999999054,
+            "phase": "thrust"
+          },
+          {
+            "time": 18.15899999999921,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 18.3129999999994,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 18.56899999999971,
+            "phase": "landing"
+          },
+          {
+            "time": 19.23100000000052,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 18.15899999999921
+      },
+      {
+        "start": 23.68100000000596,
+        "start_height": 0.18450664776683695,
+        "max_height": 0.5148255670979474,
+        "start_com_z": 0.26168644863692336,
+        "max_com_z": 0.5858141531072607,
+        "max_wheel_clearance_m": 0.316110813376738,
+        "airborne_s": 0.4150000000000003,
+        "max_upward_velocity": 2.1820065859200213,
+        "phases": [
+          {
+            "time": 23.68100000000596,
+            "phase": "crouch"
+          },
+          {
+            "time": 24.081000000006448,
+            "phase": "thrust"
+          },
+          {
+            "time": 24.218000000006615,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 24.371000000006802,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 24.628000000007116,
+            "phase": "landing"
+          },
+          {
+            "time": 25.281000000007914,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 24.218000000006615
+      }
+    ],
+    "key_events": [
+      {
+        "time": 4.839999999999951,
+        "key": "j"
+      },
+      {
+        "time": 8.1900000000009,
+        "key": "j"
+      },
+      {
+        "time": 11.459999999999088,
+        "key": "j"
+      },
+      {
+        "time": 14.219999999997558,
+        "key": "j"
+      },
+      {
+        "time": 17.629999999998564,
+        "key": "j"
+      },
+      {
+        "time": 21.020000000002707,
+        "pressed": "e"
+      },
+      {
+        "time": 21.240000000002976,
+        "pressed": ""
+      },
+      {
+        "time": 21.700000000003538,
+        "pressed": "q"
+      },
+      {
+        "time": 22.100000000004027,
+        "pressed": ""
+      },
+      {
+        "time": 22.30000000000427,
+        "pressed": "q"
+      },
+      {
+        "time": 22.66000000000471,
+        "pressed": ""
+      },
+      {
+        "time": 23.680000000005958,
+        "key": "j"
+      }
+    ],
+    "current_jump": null
+  },
+  "final_odometry_error_m": 34.94707058235141,
+  "wall_s": 25.469980833000136,
+  "gain_schedule": {
+    "lengths_m": {
+      "left": 0.34,
+      "right": 0.34
+    },
+    "K_left": [
+      [
+        -63.500768383598086,
+        -1.5163192394133498,
+        -22.053646773525287,
+        -17.77370056497382,
+        29.724581719072702,
+        3.827295836993862
+      ],
+      [
+        9.550875121248342,
+        0.12429293568386968,
+        3.6253939518156306,
+        2.5827976787012865,
+        171.49555576983377,
+        7.319447449766034
+      ]
+    ],
+    "K_right": [
+      [
+        -63.500768383598086,
+        -1.5163192394133498,
+        -22.053646773525287,
+        -17.77370056497382,
+        29.724581719072702,
+        3.827295836993862
+      ],
+      [
+        9.550875121248342,
+        0.12429293568386968,
+        3.6253939518156306,
+        2.5827976787012865,
+        171.49555576983377,
+        7.319447449766034
+      ]
+    ],
+    "masses": {
+      "body_total_kg": 16.877574,
+      "body_per_side_kg": 8.438787,
+      "leg_kg": {
+        "l": 1.597924,
+        "r": 1.5983269999999998
+      },
+      "wheel_kg": {
+        "l": 0.4904,
+        "r": 0.4904
+      },
+      "total_kg": 21.054624999999998,
+      "wheel_radius_m": 0.06
+    },
+    "range_m": [
+      0.18,
+      0.34
+    ]
+  },
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+  "passed": false
+}

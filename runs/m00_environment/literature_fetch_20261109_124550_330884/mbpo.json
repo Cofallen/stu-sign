@@ -1,0 +1,23 @@
+{
+  "id": "mbpo",
+  "kind": "paper",
+  "title": "When to Trust Your Model: Model-Based Policy Optimization",
+  "arxiv": "1906.08253",
+  "url": "https://arxiv.org/abs/1906.08253",
+  "local": "references/papers/research_20261109/mbpo.pdf",
+  "purpose": "基础：模型偏差与短展开",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_verified_pdf",
+  "authors": [
+    "Janner, Michael",
+    "Fu, Justin",
+    "Zhang, Marvin",
+    "Levine, Sergey"
+  ],
+  "date": "2019/06/19",
+  "version": "v3",
+  "pdf_url": "https://arxiv.org/pdf/1906.08253v3",
+  "sha256": "89d12b6142a285e541f6315a8911db469bea33514f3b80bdbe6e52439197b149",
+  "bytes": 3668344,
+  "exit_code": 0
+}

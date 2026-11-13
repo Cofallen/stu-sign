@@ -1,0 +1,23 @@
+{
+  "id": "dreamerv3",
+  "kind": "paper",
+  "title": "Mastering Diverse Domains through World Models",
+  "arxiv": "2301.04104",
+  "url": "https://arxiv.org/abs/2301.04104",
+  "local": "references/papers/research_20261109/dreamerv3.pdf",
+  "purpose": "核心：潜在动力学与想象策略学习",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_verified_pdf",
+  "authors": [
+    "Hafner, Danijar",
+    "Pasukonis, Jurgis",
+    "Ba, Jimmy",
+    "Lillicrap, Timothy"
+  ],
+  "date": "2023/01/10",
+  "version": "v2",
+  "pdf_url": "https://arxiv.org/pdf/2301.04104v2",
+  "sha256": "d0385798e8bada8e81b915c1743be81d9ce8776f12ed937e09351995e099ce37",
+  "bytes": 2874717,
+  "exit_code": 0
+}

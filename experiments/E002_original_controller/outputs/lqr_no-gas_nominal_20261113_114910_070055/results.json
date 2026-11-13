@@ -1,0 +1,276 @@
+{
+  "timing": {
+    "sync_calls": 0,
+    "sync_wall_s": 0.0,
+    "sync_max_s": 0.0,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 0.0,
+    "late_steps": 0,
+    "max_lag_s": 0.0,
+    "initial_sync_wall_s": 0.0,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.6318340669002914,
+    "loop_non_ui_non_sleep_s": 18.992328253000778
+  },
+  "viewer_options": null,
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 11.999999999998789,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 0.0031955770980103483,
+  "max_tilt_rad": 3.141592653589793,
+  "max_xy_drift_m": 0.5631852318001966,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 1.4287667759893205e-05,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.05344625939198816,
+  "max_torque_nm": [
+    14.18343474927161,
+    3.0,
+    14.171246691795629,
+    3.0,
+    15.809803629763296,
+    15.62975546316707
+  ],
+  "nonwheel_contacts": [
+    "base_Link_del_collision_0"
+  ],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": null,
+  "final_base_xy_m": [
+    -0.5371349108284798,
+    -0.05191278925907803
+  ],
+  "final_yaw_rad": 0.06509872262250041,
+  "mode": "recovery",
+  "interactive": false,
+  "teleop": null,
+  "final_odometry_error_m": -2.317064699181655,
+  "wall_s": 18.992328253000778,
+  "fall_events_s": [
+    0.0
+  ],
+  "recovery": {
+    "phase": "settle",
+    "events": [
+      {
+        "phase": "settle",
+        "time_s": 0.0,
+        "attempt": 0,
+        "trigger": "trial_reset"
+      },
+      {
+        "phase": "extend",
+        "time_s": 0.9900000000000008,
+        "attempt": 0,
+        "body_pitch_rad": 0.11172507791049567,
+        "theta_body_rad": [
+          -1.424009872254936,
+          -0.14614523777401275
+        ],
+        "theta_gravity_rad": [
+          -1.3122847943444402,
+          -0.034420159863517076
+        ],
+        "leg_lengths_m": [
+          0.34194461875354304,
+          0.09386357057186337
+        ]
+      },
+      {
+        "phase": "rotate",
+        "time_s": 1.9899999999998916,
+        "attempt": 0,
+        "body_pitch_rad": -0.0010541554271982542,
+        "theta_body_rad": [
+          -1.4575975593817037,
+          -0.20847272182176413
+        ],
+        "theta_gravity_rad": [
+          -1.458651714808902,
+          -0.20952687724896238
+        ],
+        "leg_lengths_m": [
+          0.32526842961618996,
+          0.2376933001705587
+        ]
+      },
+      {
+        "phase": "retract",
+        "time_s": 3.0899999999997707,
+        "attempt": 1,
+        "target_length_m": 0.24410538370303125,
+        "profile": "prepared",
+        "body_pitch_rad": -0.11197769279421724,
+        "theta_body_rad": [
+          -1.1753661104010384,
+          -1.174789176154761
+        ],
+        "theta_gravity_rad": [
+          -1.2873438031952558,
+          -1.2867668689489784
+        ],
+        "leg_lengths_m": [
+          0.3194050059099358,
+          0.31910538370303126
+        ]
+      },
+      {
+        "phase": "swing",
+        "time_s": 3.939999999999677,
+        "attempt": 1,
+        "body_pitch_rad": -0.002557653214021245,
+        "theta_body_rad": [
+          -1.2061839476087495,
+          -1.2035471554796984
+        ],
+        "theta_gravity_rad": [
+          -1.2087416008227707,
+          -1.2061048086937196
+        ],
+        "leg_lengths_m": [
+          0.24465296149668786,
+          0.24465861980014428
+        ]
+      },
+      {
+        "phase": "rising",
+        "time_s": 4.455999999999823,
+        "attempt": 1,
+        "body_pitch_rad": -0.43164067988818317,
+        "theta_body_rad": [
+          -0.4915770727590938,
+          -0.48895152733457536
+        ],
+        "theta_gravity_rad": [
+          -0.9232177526472769,
+          -0.9205922072227586
+        ],
+        "leg_lengths_m": [
+          0.26535586976339454,
+          0.26558842332815974
+        ]
+      },
+      {
+        "phase": "failed",
+        "time_s": 4.56699999999986,
+        "attempt": 1,
+        "reason": "fell_during_lqr_handoff",
+        "body_pitch_rad": -0.32020058752662867,
+        "theta_body_rad": [
+          -1.178238154778663,
+          -1.1790108033838755
+        ],
+        "theta_gravity_rad": [
+          -1.4984387423052916,
+          -1.4992113909105043
+        ],
+        "leg_lengths_m": [
+          0.3068622362164855,
+          0.30869699135179673
+        ]
+      },
+      {
+        "phase": "settle",
+        "time_s": 5.067000000000027,
+        "attempt": 1,
+        "retry": true,
+        "body_pitch_rad": -0.1228725426271407,
+        "theta_body_rad": [
+          -0.14180154898615288,
+          -0.15095459206480946
+        ],
+        "theta_gravity_rad": [
+          -0.2646740916132936,
+          -0.2738271346919502
+        ],
+        "leg_lengths_m": [
+          0.09533160568257422,
+          0.09521913321481888
+        ]
+      }
+    ],
+    "preparation_enabled": true,
+    "trial_pitch_rad": 2.0,
+    "trial_roll_rad": 0.0,
+    "expected_upright": false,
+    "final_speed_m_s": 0.00022556230144425674
+  },
+  "gain_schedule": {
+    "lengths_m": {
+      "left": 0.3071383371435178,
+      "right": 0.30896952145108497
+    },
+    "K_left": [
+      [
+        -63.06207487355761,
+        -1.4888842540351974,
+        -21.995398897966165,
+        -17.862937238226667,
+        32.32260963176308,
+        4.028002942919595
+      ],
+      [
+        10.291773683960747,
+        0.1356444656765714,
+        3.941795235214109,
+        2.851138621277046,
+        171.02118553893732,
+        7.253752725383314
+      ]
+    ],
+    "K_right": [
+      [
+        -63.08348321714632,
+        -1.4904018152794503,
+        -21.998694761782048,
+        -17.853305793586383,
+        32.174455131757504,
+        4.015796796061356
+      ],
+      [
+        10.246932189710634,
+        0.13481339446795976,
+        3.923945208263542,
+        2.8352676692168512,
+        171.04837079836454,
+        7.257645169774899
+      ]
+    ],
+    "masses": {
+      "body_total_kg": 16.877574,
+      "body_per_side_kg": 8.438787,
+      "leg_kg": {
+        "l": 1.597924,
+        "r": 1.5983269999999998
+      },
+      "wheel_kg": {
+        "l": 0.4904,
+        "r": 0.4904
+      },
+      "total_kg": 21.054624999999998,
+      "wheel_radius_m": 0.06
+    },
+    "range_m": [
+      0.18,
+      0.34
+    ]
+  },
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "self-right: completed hip swing and LQR handoff; stable final 5 s, full duration, no warning, no passive actuation",
+  "passed": false
+}

@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "physical_arrays_unchanged": {
+    "body_mass": true,
+    "body_inertia": true,
+    "body_ipos": true,
+    "body_iquat": true,
+    "jnt_axis": true,
+    "jnt_pos": true,
+    "dof_frictionloss": true,
+    "dof_damping": true,
+    "actuator_ctrlrange": true,
+    "eq_data": true
+  },
+  "collision_geoms_unchanged": [
+    "floor",
+    "base_Link_del_collision_0",
+    "rf0_Link_collision_0",
+    "rf1_Link_collision_0",
+    "r_wheel_Link_collision_0",
+    "lf0_Link_collision_0",
+    "lf1_Link_collision_0",
+    "l_wheel_Link_collision_0",
+    "r20_Link_collision_0",
+    "r21_Link_collision_0",
+    "r22_Link_collision_0",
+    "r23_Link_collision_0",
+    "l20_Link_collision_0",
+    "l21_Link_collision_0",
+    "l22_Link_collision_0",
+    "l23_Link_collision_0"
+  ],
+  "formal_xml_hashes_match": {
+    "robot_no_gas_spring.xml": true,
+    "robot_gas_spring_damped.xml": true
+  },
+  "source_wheel_mesh_display": true,
+  "render_flags_unit_check": true,
+  "render_flags_scope": "Actual API objects with simulated sync toggles; not a fresh end-to-end viewer test after final flag-lock patch",
+  "headless_standing_trace_equal_to_before": true,
+  "actual_default_window_metrics": {
+    "final_x_m": 1.323985808341484,
+    "duration_s": 14.727999999997277,
+    "wheel_angle_change_during_walk_rad": [
+      17.13291997590852,
+      -17.134694755167185
+    ],
+    "actual_left_length_after_QQ_m": 0.238175833531115,
+    "airborne_seconds": 0.24000000000000019,
+    "jump_rise_m": 0.12744932440639375
+  },
+  "mouse_drag_automation_passed": false
+}

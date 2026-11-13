@@ -1,0 +1,2141 @@
+                                                               Trust the Model Where It Trusts Itself
+                                                  Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+
+                                               Bernd Frauenknecht * 1 Artur Eisele * 1 Devdutt Subhasish 1 Friedrich Solowjow 1 Sebastian Trimpe 1
+
+
+                                                                  Abstract                                    ment model. Unfortunately, model errors can lead to faulty
+                                                                                                              conclusions that severely impact the agent’s performance. It
+                                               Dyna-style model-based reinforcement learning
+arXiv:2405.19014v3 [cs.LG] 21 Jun 2024
+
+
+
+
+                                                                                                              is therefore critical to ensure the accuracy of these models.
+                                               (MBRL) combines model-free agents with predic-
+                                               tive transition models through model-based roll-               Model-based policy optimization (MBPO) (Janner et al.,
+                                               outs. This combination raises a critical question:             2019) represents the current state-of-the-art in Dyna-style
+                                               “When to trust your model?”; i.e., which rollout               MBRL (Sutton, 1991), combining a Soft Actor-Critic (SAC)
+                                               length results in the model providing useful data?             agent (Haarnoja et al., 2018a;b) with a Probabilistic Ensem-
+                                               Janner et al. (2019) address this question by grad-            ble (PE) model (Lakshminarayanan et al., 2017). Janner
+                                               ually increasing rollout lengths throughout the                et al. (2019) address two distinct learning problems: using
+                                               training. While theoretically tempting, uniform                interaction between the agent and the environment to train
+                                               model accuracy is a fallacy that collapses at the              the model and, simultaneously, employing model-based roll-
+                                               latest when extrapolating. Instead, we propose                 outs to train the agent. The agent queries the model in short
+                                               asking the question “Where to trust your model?”.              rollouts branched off from states that were observed dur-
+                                               Using inherent model uncertainty to consider lo-               ing environment interaction. The length of these rollouts is
+                                               cal accuracy, we obtain the Model-Based Actor-                 gradually increased throughout training, balancing model
+                                               Critic with Uncertainty-Aware Rollout Adaption                 usage against the risk of model exploitation.
+                                               (MACURA) algorithm. We propose an easy-to-
+                                                                                                              Janner et al. (2019) answer the question “When to trust
+                                               tune rollout mechanism and demonstrate substan-
+                                                                                                              your model?” with time-based arguments. Essentially, uni-
+                                               tial improvements in data efficiency and perfor-
+                                                                                                              form model accuracy is postulated after sufficiently long
+                                               mance compared to state-of-the-art deep MBRL
+                                                                                                              training which motivates to use the model for rollouts of pre-
+                                               methods on the MuJoCo benchmark.
+                                                                                                              determined length. However, both the training time and the
+                                                                                                              rollout lengths are notoriously difficult to preschedule. Fur-
+                                                                                                              thermore, the assumption of uniform model improvement is
+                                         1. Introduction                                                      problematic for complex systems.
+                                         Deep reinforcement learning (RL) has shown unprecedented             Instead, we consider model accuracy as a local property,
+                                         results in challenging domains such as gameplay (Mnih                putting the question “Where to trust your model?” at the
+                                         et al., 2015; OpenAI et al., 2019b) and nonlinear control            heart of our approach. The inherent uncertainty of PE mod-
+                                         (OpenAI et al., 2019a; Wurman et al., 2022). For engineer-           els allows for adaptive rollout lengths: wherever the model
+                                         ing problems, however, the data inefficiency of model-free           is uncertain, rollouts are terminated quickly, while longer
+                                         state-of-the-art approaches (Schulman et al., 2017; Haarnoja         rollouts can be generated where it is certain.
+                                         et al., 2018a) remains a substantial challenge (Kostrikov
+                                         et al., 2023; Frauenknecht et al., 2023), prompting the need         In this paper, we analyze the learning process of Dyna-
+                                         for more efficient methods (Janner et al., 2019; Chen et al.,        style MBRL and present Model-Based Actor-Critic with
+                                         2021). One such method, model-based reinforcement learn-             Uncertainty-Aware Rollout Adaption (MACURA), an al-
+                                         ing (MBRL), reduces the necessary degree of environment              gorithm with an easy-to-tune mechanism for model-based
+                                         interaction by inferring information from a learned environ-         rollout length scheduling. In particular, we present the fol-
+                                                                                                              lowing technical contributions:
+                                           *
+                                             Equal contribution 1 Institute for Data Science in Mechan-
+                                         ical Engineering (DSME), RWTH Aachen University, 52068                  • We show monotonic improvement by restricting model-
+                                         Aachen, Germany. Correspondence to: Bernd Frauenknecht                    based rollouts to a subset E ⊆ S of the state space S;
+                                         <bernd.frauenknecht@dsme.rwth-aachen.de>.                               • We construct the subset E based on a novel and easy-
+                                                                                                                   to-compute model uncertainty measure; and
+                                         Accepted as a conference paper at ICML 2024.
+
+
+                                                                                                          1
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+   • We outperform state-of-the-art Dyna-style MBRL
+     methods with regard to data efficiency and asymptotic
+     performance on the MuJoCo benchmark.
+
+2. Background
+In the following, we introduce the fundamental concepts of
+MBRL, and Dyna-style architectures in particular.
+
+2.1. Reinforcement Learning
+We assume the environment to be represented by a dis-
+counted Markov decision process (MDP) defined by M =
+(S, A, r, p, γ, ρ0 ), with S the state and A the action space,
+while a dynamics function p(s′ | s, a) describes transitions           Figure 1: Dyna-style MBRL. An agent with policy π inter-
+between states s ∈ S and actions a ∈ A. Reward r ∈ R is                acts with the environment M. This data is stored in Denv
+generated from a reward function r(s, a) and is discounted             and used to train a dynamics model p̃ via supervised learn-
+by γ ∈ (0, 1). The MDP is initialized from an initial state            ing (SL). Model-based rollouts under π are performed from
+distribution ρ0 . The RL agent aims to find an optimal policy          start states s0 in Denv and stored in Dmod . The policy is
+π ∗ that maximizes the expected discounted sum of rewards,             trained on Dmod via reinforcement learning (RL).
+henceforth referred to as expected return η. Thus,
+                                         "∞                   #        the individual PNN predictions pθe and the Gaussian mix-
+                                          X                            ture distribution of the ensemble prediction p̃PE , given by
+   π ∗ = argmax η[π] = argmax Eπ              γ t r (st , at ) ,
+             π                π                                                       E
+                                          t=0                                         X
+                                                             (1)              uKL =         DKL (p̃θe (s′ | s, a)∥p̃PE (s′ | s, a)),   (4)
+with s0 ∼ ρ0 , at ∼ π(· | st ), and st+1 ∼ p(· | st , at ). The                       e=1
+Q-function represents η[π] conditioned on specific state-              with
+action pairs and is given by                                                                         1 X
+                                                                                                            E
+                                                                                        ′
+                                                                                  p̃PE (s | s, a) :=      p̃θ (s′ | s, a).             (5)
+                         "∞
+                          X
+                                                         #                                           E e=1 e
+      Qπ (st , at ) = Eπ       γ k−t r (sk , ak ) st , at . (2)
+                                                                       For the following analysis, we assume r(s, a) is known.
+                           k=t
+
+                                                                       2.3. Dyna-Style Model-Based Reinforcement Learning
+2.2. Probabilistic Ensemble Models
+                                                                       We focus on Dyna-style MBRL (Sutton, 1991) and MBPO
+In MBRL, we learn a dynamics model p̃(s′ | s, a) to ap-                (Janner et al., 2019) in particular as it represents the current
+proximate the unknown environment dynamics p(s′ | s, a).               state-of-the-art approach. A schematic of the architecture
+In the following, we consider the particularly effective PE            is depicted in Figure 1. In MBPO, a model-free SAC agent
+approach (Lakshminarayanan et al., 2017; Chua et al., 2018)            (Haarnoja et al., 2018a;b) with policy π interacts with the
+as the model class for dynamics learning. A PE consists of             environment. The corresponding agent-environment interac-
+E probabilistic neural networks (PNN) with parameters θe ,             tion data are stored in a replay buffer Denv and are used to
+e ∈ {1, . . . , E}, which are trained on bootstrapped datasets         train a dynamics model p̃. This model then generates expe-
+via a negative log-likelihood loss to approximate the distri-          rience data in branched model-based rollouts that are stored
+bution over the next state with a Gaussian distribution                in a replay buffer Dmod and used to train the model-free
+                                                                       agent. Branched model-based rollouts are thus essential to
+         p̃θe (s′ | s, a) = N (µθe (s, a), Σθe (s, a)).     (3)
+                                                                       Dyna-style MBRL as the accuracy of the generated expe-
+                                                                       rience data determines the performance of the agent. The
+The PE architecture allows a distinction between aleatoric
+                                                                       mechanism is illustrated in Algorithm 1.
+uncertainty due to the process noise of the environment
+and epistemic uncertainty due to the parametric uncertainty            Branched model-based rollouts start at random s0 ∼
+of the model. While aleatoric uncertainty corresponds to               U(Denv ), with U(·) the uniform distribution, and stop at
+high individual variance estimates Σθe (s, a), epistemic un-           a maximum rollout length Tmax ∈ N. During the rollout,
+certainty is measured via model disagreement. Lakshmi-                 the propagating PNN model within the PE is randomly sam-
+narayanan et al. (2017) define epistemic uncertainty as the            pled for each time step. Actions and states are sampled from
+pairwise Kullback-Leibler (KL) divergence DKL between                  the respective Gaussians of the policy and the PNN model.
+
+                                                                   2
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+Algorithm 1 “Vanilla” Branched Model-based Rollouts
+  Given Denv , Dmod , p̃θ1,...,E , π, and Tmax
+  s0 ∼ U(Denv )
+  for t = 0, . . . , Tmax − 1 do
+    et ∼ U(1, . . . , E)
+    at ∼ π(· | st )
+    st+1 ∼ p̃θet (· | st , at )
+    rt+1 = r(st , at )
+    Dmod ← Dmod ∪ {(st , at , rt+1 , st+1 )}
+  end for
+
+
+                                                                       Figure 2: Where to trust your Model? Denv induces a set
+The environment buffer Denv therefore serves two purposes              of sufficient model accuracy E ⊆ S. A notion of E allows to
+for model-based branched rollouts. It acts as the training             reason whether rollouts are in a region of sufficient model
+data set for p̃, determining where the model is accurate, and          accuracy. We use this resoning to schedule rollout length.
+it induces the set of start states for model-based rollouts,
+influencing the data distribution in Dmod .                            How can we construct the set E that ensures a desired accu-
+A key advantage of branched model-based rollouts is that               racy? In particular, we need to:
+they reduce the quantity of environment data necessary for               i) quantify the notion of sufficiently accurate;
+learning. This advantage stems from two learning mech-                  ii) estimate E from a given model p̃; and
+anisms. First, the number of update steps per observed                 iii) expand E quickly via informative data in Denv .
+transition is limited due to instabilities in value function
+learning (Chen et al., 2021). The model allows a multitude             Once we have a suitable E, we obtain a straightforward
+of transitions to be generated, mitigating this problem. Sec-          yet precise mechanism for branched model-based rollouts.
+ond, the data distribution in Dmod differs from that of Denv           As long as the rollout stays within E, the benefits of long
+and can be more informative to the agent. Generalization               rollouts discussed in Section 2.3 outweigh the risk of model
+capabilities of p̃ allow for a richer set of transitions to be         exploitation, while the opposite is the case once it leaves E.
+collected from the model. Further, model-based rollouts are            Such a distinction is vital as model-based rollouts are per-
+conducted under the current policy π of the agent. There-              formed from random start states of Denv , as depicted in
+fore, model-based rollouts shift the off-policy distribution in        Figure 2. Depending on the rollout policy, these start states
+Denv more towards an on-policy distribution. This generally            can either lead to rollouts staying in E for a long time with-
+puts a stronger emphasis on the effects of the current policy          out the necessity to terminate quickly, or leaving it early,
+and interesting areas of S, accelerating policy improvement.           where a careful rollout length adaption is crucial. A fixed
+The longer branched model-based rollouts are, the more the             rollout length based on training time (Janner et al., 2019)
+data distributions of Denv and Dmod may differ. Typically,             cannot account for local differences in model accuracy.
+Tmax is gradually increased throughout training.
+Algorithm 3 in Appendix A provides a detailed description              4. Monotonic Improvement under
+of MBPO. We build on the eminent MBPO method, modi-                    Dynamics Misalignment on E
+fying its core mechanism of branched model-based rollouts.
+We develop a method to estimate where to trust the model               Following the insights set out in Section 3, we provide a
+and build a new adaptive rollout scheme around it. This                formal justification of our approach. We analyze the effect
+scheme may likewise benefit a multitude of derivatives of              of dynamics mismatch on the expected return, which will
+MBPO such as (Zhang et al., 2020; Shen et al., 2020; Lai               be instrumental for formally defining E ⊆ S in Section 5
+et al., 2020; 2021; Morgan et al., 2021; Fröhlich et al., 2022;       that will be used to schedule rollout length.
+Luis et al., 2023b;a; Wang et al., 2022).
+                                                                       4.1. Formulation of Monotonic Improvement
+3. Where to Trust your Model?                                          In the context of branched model-based rollouts, we define
+                                                                       two MDPs, M̂ and M̃, on the same S, A, r(s, a), γ and
+Our key idea is to define a subset Ep̃,k ⊆ S on which the
+                                                                       start state distribution ρBR . Here, M̂ represents the MDP
+model p̃ is sufficiently accurate at time k. We refer to this
+                                                                       for branched rollouts under the environment dynamics p(s′ |
+subset as E for brevity and put it at the heart of our approach.
+                                                                       s, a), whereas M̃ is the MDP for branched model-based
+The main technical problem formulation then becomes:                   rollouts following model dynamics p̃(s′ | s, a). Both, M̂
+
+                                                                   3
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+and M̃, have identical start states sM̂   M̃
+                                     0 = s0 ∈ E.                                Rollouts under M̃ represent the data generated in the prac-
+                                                                                tical MBRL algorithm, while M̂ captures the true envi-
+The MDPs are coupled through the following stopping times
+                                                                                ronment behavior. Both share ρBR = U(Denv ), the start
+(which are random variables and thus measurable functions
+                                                                                state distribution of model-based rollouts introduced in Al-
+T : Ω → N as indicated by the argument T (ω)):
+                                                                                gorithm 1, where we assume all states in Denv to be within
+                                                                                E as depicted in Figure 2. Theorem 4.1 thus bounds the
+              T (ω) := min{T M̂ , T M̃ } − 1,                         (6)
+                                                                                difference in expected return between using the model MDP
+                                                                                M̃ for generating branched model rollouts as compared to
+            T M̂ (ω) = min{t ∈ N | sM̂   C
+                                    t ∈ E },                          (7)
+                                                                                performing these rollouts under the environment MDP M̂.
+            T M̃ (ω) = min{t ∈ N | sM̃   C
+                                    t ∈ E },                          (8)       Thus, Theorem 4.1 specifically considers model exploitation
+                                                                                in branched model-based rollouts that are the predominant
+with E C the complement of E. The stopping times (7) and                        data-generating process for training the agent.
+(8) denote the first time a rollout under M̂ and M̃ leaves
+E, respectively. Thus, restricting the rollout length to T (ω)                  By construction, both processes start from identical start
+enforces that branched rollouts remain in E.                                    states and deviate from each other based on dynamic mis-
+                                                                                alignment upper bounded by ∆pE [π] until T (ω) is reached.
+We show a monotonic improvement similar to (Luo et al.,                         Unfortunately, the result of Theorem 4.1 is not directly
+2018; Janner et al., 2019; Pan et al., 2020)                                    amenable for algorithmic use, as the process M̂ is unknown
+                       η[π] ≥ η̃[π] − C,                              (9)       in practice. Specifically, we are unable to detect when M̂
+                                                                                leaves E as indicated by T M̂ (ω) in (7) and need an approxi-
+where η[π] corresponds to the expected return of the policy                     mation to obtain a practical algorithm. Assuming trajecto-
+π in M̂, while η̃[π] denotes the expected return of π under                     ries under M̂ and M̃ stay sufficiently close to each other
+M̃. As long as the agent improves by more than C in M̃,                         and replacing T (ω) with T M̃ (ω) − 1, we obtain an effective
+we can guarantee improvement in M̂.                                             approximation that works well in practice.
+Theorem 4.1. Suppose the expected return following pol-
+icy π under M̂ is denoted by η[π] and η̃[π] describes the                       5. Constructing E from Model Uncertainty
+expected return following π under M̃, then we can define a
+lower bound for η[π] on E ⊆ S of the form                                       In the following, we define E such that it represents parts
+                                                                                of the state space with high model accuracy. There, we can
+                                   T (ω)
+                                   X               t
+                                                   X                            trust our model and learn efficiently.
+                                               t
+         η[π] ≥ η̃[π] − 2rmax              γ              ∆pE [π],   (10)
+                                   t=0             τ =0                         5.1. Defining E in Practice
+with                                                                            Following Theorem 4.1, ideally we would define
+                                   ′
+ ∆pE [π] := sup DTV (p (s | s, a) ∥p̃ (s | s, a)) . (11)   ′                     E ∗ := {s ∈ S |DTV (p (s′ | s, a) ∥p̃ (s′ | s, a)) ≤ κ,
+             s∈E,a∼π                                                                                                                       (13)
+                                                                                                 a ∼ π(· | s)}
+Proof. See Appendix B, Theorem B.4.                                             such that dynamics misalignment is upper-bounded by a
+                                                                                threshold κ. This definition of E yields ∆pE [π] ≤ κ in
+We define                                                                       (11) and thus allows C in (12) to be influenced by choosing
+                                                                                κ. Estimating the ideal set E ∗ is intractable. Instead, we
+                           T (ω)        t
+                            X           X                                       leverage these insights and consider a slightly different refor-
+             C := 2rmax            γt              ∆pE [π],          (12)       mulation that yields a computationally efficient, numerically
+                            t=0         τ =0                                    well-behaved, and meaningful definition of E.
+which intuitively represents the accumulated worst-case                         Assuming that the individual PNNs of the PE model have
+dynamics misalignment. The choice of E thus influences                          sufficient representational capacity to model p(s′ |s, a) ac-
+the bound C since the supremum in (11) is taken over E and                      curately makes epistemic uncertainty uPE an expressive
+T (ω) directly depends on E.                                                    quantity for dynamics misalignment. One option to deter-
+                                                                                mine epistemic uncertainty would be using the formulation
+4.2. Interpretation of the Result                                               in (4) and setting uPE = uKL . If all ensemble members
+                                                                                agree sufficiently well on a subset of S × A, the PE model
+In contrast to improvement bounds in previous work (Luo
+                                                                                approximates the environment dynamics to a sufficient de-
+et al., 2018; Janner et al., 2019; Pan et al., 2020), Theorem
+                                                                                gree of accuracy. Following this reasoning, we construct
+4.1 closely resembles branched model-based rollouts and
+allows a practical mechanism to be inferred directly.                               EPE := {s ∈ S | uPE (s, a) < κ, a ∼ π(· | s)}          (14)
+
+                                                                            4
+        Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+
+
+
+          (a) Denv               (b) DTV (p(s′ |s, a)∥p̃(s′ |s, a))                (c) uGJS                   (d) E with uGJS < κ
+
+Figure 3: Constructing E on a toy example. (a) Data to train the PE model. (b) Dynamics misalignment. (c) Proposed
+measure for model uncertainty (15). (d) Set of sufficient model accuracy to perform branched model-based rollouts (20) .
+such that some uncertainty uPE under the rollout policy π                 form replacing the comparison to the Gaussian mixture
+is upper bounded by a threshold κ.                                        distribution in (4) with a pairwise comparison between PNN
+                                                                          predictions. Exploiting the symmetry of the GJS divergence
+5.2. Efficient Measure for Model Uncertainty                              allows to reduce the number of pairwise comparisons.
+In an algorithmic implementation, efficient computation                   Thus, uGJS yields an efficient-to-compute uncertainty mea-
+of uPE is vital as uncertainty is queried for every model-                sure, leading to a practical definition of
+based transition. The original formulation in (4) has no
+                                                                               E := {s ∈ S | uGJS (s, a) < κ, a ∼ π(· | s)}         (20)
+closed-form solution, rendering it unsuitable for this pur-
+pose. Instead, we propose an estimate based on the geomet-                that is directly applicable to algorithmic use.
+ric Jensen-Shannon (GJS) divergence (Nielsen, 2019)
+                          E Xe−1
+                                                                          5.3. Illustrative Example
+                   2     X
+  uGJS (s, a) =                  DGJS (Ne ∥Nf ) , (15)                    As an illustrative example, we use a pendulum with known
+                E(E − 1) e=1
+                                 f =1                                     dynamics and a two-dimensional state. Figure 3 visualizes
+                                                                          the construction of E according to (20) for this system. An
+with
+                                                                          in-depth description is provided in Appendix C.
+               Ni =: N (µθi (s, a), Σθi (s, a)).             (16)
+                                                                          We create a Denv with a characteristic spiral form by per-
+The Jensen-Shannon divergence is a symmetrized version                    forming rollouts with a feedback controller πFL as depicted
+of the KL divergence but has no closed-form solution for                  in Figure 3a, and use the data to train a PE dynamics model.
+Gaussian distributions. While losing some of the properties               In the following, dynamic misalignment and uncertainty of
+of the Jensen-Shannon divergence, the GJS divergence                      this model under πFL are analyzed over S using heat maps.
+                     1                 1                                  Dynamics misalignment as used in (13) is depicted in Figure
+DGJS (Ne ∥Nf ) =       DKL (Ne ∥Nef ) + DKL (Nf ∥Nef )
+                     2                 2                                  3b, where a clear trend can be observed: dynamic misalign-
+                                                  (17)                    ment is low, indicated in yellow, close to data in Denv but
+with                                                                      grows further away, where blue corresponds to high mis-
+                                                   −1                   alignment. For approximations of the total variation distance
+              1             −1 1            −1
+  Σef =         (Σθe (s, a)) +   Σθf (s, a)                  (18)         we use the common upper bound (31) in Appendix C.4.
+              2                2
+                                                                          Figure 3c shows the proposed model uncertainty uGJS used
+and                                                                       in (20). We observe a smooth behavior of the uncertainty
+                     
+                      1                                                   estimate and rediscover the data distribution in Denv for the
+                                    −1
+        µef = Σef       (Σθe (s, a)) µθe (s, a)                           lowest uncertainty values indicated in bright yellow. Most
+                      2
+                                                            (19)         importantly, areas of low uncertainty coincide with areas of
+                      1             −1
+                                                                          low dynamics misalignment in Figure 3b.
+                     + Σθf (s, a)       µθf (s, a)
+                      2
+                                                                          As depicted in Figure 3d, choosing a suitable threshold κ
+recovers a closed-form solution for Gaussian distributions.               allows E to be defined such that a considerable portion of
+This allows us to compute model uncertainty in a closed                   S can be explored in model-based rollouts while avoiding
+
+                                                                      5
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+areas of high dynamics misalignment. Here E is visualized             Algorithm 2 Uncertainty-Aware Adapted Branched Model-
+in yellow, while blue regions indicate E C .                          Based Rollouts
+                                                                        Given Denv , Dmod , p̃θ1,...,E , π, ζ, ξ, and Tmax
+6. MACURA: Model-Based Actor-Critic with                                s0 ∼ U(Denv )
+                                                                        for t = 0, . . . , Tmax − 1 do
+   Uncertainty-Aware Rollout Adaption
+                                                                          et ∼ U(1, . . . , E)
+Combining the insights into how to choose a set E to enforce              at ∼ π(· | st )
+monotonic improvement, discussed in Section 4, with those                 st+1 ∼ p̃θet (· | st , at )
+into how to construct E using model uncertainty, detailed in              rt+1 = r(st , at )
+Section 5, we present an uncertainty-aware adaption scheme                uGJS (st , at ) according to (15)
+for model-based rollouts. We further discuss expanding E by               if t = 0 then
+efficiently exploring the environment. These building blocks                 update κ according to (21)
+lead to the Model-Based Actor-Critic with Uncertainty-                    end if
+Aware Rollout Adaption (MACURA) algorithm.                                if uGJS (st , at ) < κ then
+                                                                             Dmod ← Dmod ∪ {(st , at , rt+1 , st+1 )}
+6.1. Uncertainty-Based Rollout Adaption                                   else
+                                                                             break
+The set E depends on the uncertainty threshold κ (20). Thus,              end if
+an appropriate choice of κ is critical in algorithmic design.           end for
+We propose an adaptive mechanism for determining κ that
+transfers to different applications and stages of training.
+                                                                      Due to its variable rollout length, the proposed model-based
+In the algorithm, M branched model-based rollouts are                 rollout scheme produces varying amounts of data to train
+performed in parallel. As these start from states in Denv , we        the model-free agent. As the update-to-data ratio plays a
+evaluate the model uncertainty after the first prediction step        crucial role in the stability of model-free RL (Chen et al.,
+to update κ proportionally to the current model uncertainty.          2021), we adapt the number of update steps
+We therefore define the base uncertainty ûGJS,k to be the ζ                                  j         |Dmod | m
+quantile of the M uncertainty measures after the first predic-                          G = Gmax                              (22)
+                                                                                                      |Dmod |max
+tion step at the k th round of model-based rollouts. We use
+this heuristic as an upper bound on what can be considered            to the SAC agent according to the amount of data in the
+certain. Further, we introduce ξ ∈ R+ as a tunable scaling            model buffer |Dmod | compared to its capacity |Dmod |max .
+factor, which allows E to be increased or shrunk by scaling           We use this ratio to scale the maximum number of update
+ûGJS up or down. To stabilize κ over iterations, we define           steps Gmax and round the result to the nearest integer. An
+it to be the average scaled base uncertainty:                         empirical analysis of how the update-to-data ratio interacts
+                                                                      with varying rollout lengths is provided in Appendix D.5.
+                              K
+                          ξ X
+                    κ=        ûGJS,k ,                   (21)        6.2. Expanding E through Environment Exploration
+                          K
+                             k=1
+                                                                      Through the notion of E, MACURA has a reliable estimate
+with K the rounds of rollouts performed thus far.                     of where to trust the model p̃ that is trained on Denv . In line
+                                                                      with common understanding in system identification (Ljung,
+Theorem 4.1 indicates that the difference in expected return
+                                                                      1998), more informative data yields a better model. Thus,
+accumulates over the rollout length, even with bounded
+                                                                      employing effective exploration mechanisms to generate a
+dynamics misalignment. Since we only provide a pointwise
+                                                                      meaningful Denv will improve the model and thus expand
+bound for each transition step, we still need to enforce a
+                                                                      E, increasing the effectiveness of model-based rollouts.
+maximum rollout length Tmax , larger than the typical length
+of adapted rollouts, to avoid extensive error accumulation.           Although we do not place a strong focus on different ex-
+                                                                      ploration mechanisms for Dyna-style MBRL in this work,
+During the experimental evaluation in Section 7, we see
+                                                                      we tested different approaches. As we discuss in Section
+that predefined values of Tmax = 10 and ζ = 95% perform
+                                                                      7, we see MACURA perform particularly well with pink
+well across different applications, requiring no environment-
+                                                                      exploration noise (Eberhard et al., 2023), which introduces a
+specific tuning. Thus, ξ is a single, interpretable hyper-
+                                                                      certain degree of temporal correlation between consecutive
+parameter defining the rollout scheme. This makes the
+                                                                      actions blending white noise and Brownian motion.
+proposed uncertainty-aware rollout adaption mechanism for-
+mulated in Algorithm 2 considerably easier to tune than               We combine the mechanisms discussed above in MACURA.
+those in existing work (Janner et al., 2019; Pan et al., 2020).       Pseudocode is provided in Algorithm 4 of Appendix A.
+
+                                                                  6
+                 Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+                1e3           Halfcheetah                         1e3              Walker                                     4 1e3
+                                                                                                                                                    Hopper
+           15                                                 6
+
+
+           10                                                 4
+  Return
+
+
+                                                                                                                              2
+
+            5                                                 2
+
+
+
+                       100          200          300    400             50             100                 150          200             25          50       75    100      120
+           10 1e3
+                               Humanoid                1e3
+                                                                  1e3               Ant                                1e3                                                 1e3
+
+
+            8                                                 6                                                                              MACURA
+                                                                                                                                             MBPO
+            6
+  Return
+
+
+
+
+                                                              4                                                                              M2AC
+            4
+                                                                                                                                             SAC
+                                                              2
+            2                                                                                                                                SAC(asymptotic performance)
+
+                             100           200          300                  100                     200                300
+                                   Steps               1e3                         Steps                               1e3
+
+
+Figure 4: Performance on the MuJoCo Benchmark. MACURA shows substantial improvements in data efficiency and
+asymptotic performance over state-of-the-art Dyna-style MBRL approaches (MBPO, M2AC) in most tasks. Most noticeably,
+MACURA is on par with or outperforms the asymptotic performance of the model-free SAC baseline.
+7. Experiments and Discussion                                                                10 1e3
+                                                                                                                 MACURA(D)
+                                                                                                 8               MACURA(WN)
+Next, we evaluate MACURA on the MuJoCo (Todorov                                                                  MACURA(PN)
+                                                                                                                 MBPO(D)
+et al., 2012) benchmark. A direct comparison to state-of-                                        6
+                                                                                        Return
+
+
+
+
+                                                                                                                 MBPO(WN)
+the-art Dyna-style methods reveals a substantial improve-                                                        MBPO(PN)
+                                                                                                 4
+ment in data efficiency and asymptotic performance. In
+an ablation study, we investigate the influence of different                                     2
+exploration schemes on Dyna-style approaches and show
+that MACURA with pink noise exploration yields the best                                                                           100                        200
+                                                                                                                                         Steps                                    1e3
+overall results. We further discuss how to tune the scaling
+parameter ξ of MACURA and show its robustness to a wide                                  Figure 5: Exploration Schemes on MACURA and MBPO.
+range of values, substantially reducing the tuning effort as                             Impact of deterministic (D), white noise (WN), and pink
+compared to prior work in Dyna-style MBRL.                                               noise (PN) exploration on algorithmic performance.
+
+7.1. Experimental Setup
+                                                                                         shows considerably stronger asymptotic performance than
+We compare MACURA to model-based MBPO (Janner                                            other model-based approaches . Remarkably, MACURA fre-
+et al., 2019) and M2AC (Pan et al., 2020) approaches as                                  quently even outperforms SAC. All model-based methods
+well as the SAC (Haarnoja et al., 2018b) algorithm, which                                learn substantially faster than SAC. MBPO with fine-tuned
+represents the model-free learner in all of the methods above.                           rollout schedules can compete with M2AC.
+All implementations1 are based on the recent mbrl-lib li-
+brary (Pineda et al., 2021). A detailed description of the                               7.3. The Importance of Environment Exploration
+experimental setup is provided in Appendix D.1.
+                                                                                         Following the state-of-the-art implementation (Pineda et al.,
+                                                                                         2021), the agent interacts deterministically with the envi-
+7.2. Performance Evaluation
+                                                                                         ronment in MBPO and M2AC, while we choose pink noise
+The results on the MuJoCo benchmark are depicted in Fig-                                 exploration for MACURA in Figure 4. The impact of ex-
+ure 4. We see that MACURA learns substantially faster                                    ploration on MACURA and MBPO is illustrated in Figure
+than MBPO and M2AC, especially in high-dimensional en-                                   5 for the Humanoid task. We observe a general trend that
+vironments such as Humanoid and Ant. MACURA further                                      is discussed in more detail in Appendix D.3. For both al-
+  1                                                                                      gorithms, deterministic interaction yields limited yet stable
+    The code is available online: https://github.com/
+Data-Science-in-Mechanical-Engineering/                                                  performance. Classic white noise exploration, where actions
+macura                                                                                   are sampled independently, has the potential of strong per-
+                                                                                         formance, as can be seen in MACURA, while introducing
+
+                                                                                   7
+              Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+     10 1e3                                                                      10 1e3
+                                                                                          MACURA
+              MACURA(ξ=1)                                                                 MACURA rank-based
+                                                                                          MACURA OvR
+         8    MACURA(ξ=3)                                                         8       MACURA κ = 300
+              MACURA(ξ=5)                                                                 MACURA κ = 150
+                                                                                          MACURA G = 20
+              MACURA(ξ=10)
+         6                                                                        6
+Return
+
+
+
+
+              MACURA(ξ=20)
+
+
+
+
+                                                                        Return
+         4                                                                        4
+
+
+         2                                                                        2
+
+
+
+                             100               200                                                            100
+                                                                                                                    Steps
+                                                                                                                            200      300
+                                                                                                                                    1e3
+                                   Steps                      1e3
+
+ Figure 6: Tuning scaling parameter ξ. MACURA performs                  Figure 7: Ablation on MACURA building blocks. The rank-
+ well for intermediate ξ. Too large values of ξ lead to model           based rollout mechanism with a stable uncertainty estimate
+ exploitation, too small values lead to overfitting of the agent.       (15) and adaptive threshold (21) yields strong performance.
+                                                                                 400
+
+ the risk of destabilizing learning, as in the case of MBPO.
+ Pink noise exploration, instead, shows an intermediate, over-                   300
+
+ all best behavior, combining high performance with stable
+                                                                                 200
+ learning. The strongest gains from environment interaction
+ can be observed for MACURA, underscoring the effective-
+                                                                                 100
+ ness of the notion of E for model usage.
+                                                                                                              100           200      300
+ 7.4. Tuning the Uncertainty-Aware Adaption Scheme                                                                  Steps           1e3
+
+
+ The uncertainty-aware rollout adaption scheme comprises                 Figure 8: Uncertainty threshold κ. MACURA initially keeps
+ three hyperparameters. We set Tmax = 10 and ζ = 95% for                 κ comparatively high and reduces κ over time as more
+ all tasks and never tune them any further 2 . However, the              precise information is required to refine the policy.
+ scaling factor ξ requires application-specific tuning.
+ Figure 6 shows the influence of different choices of ξ on the           threshold-based mechanism, however, requires a reliable
+ performance on Humanoid. While we see that MACURA                       uncertainty estimate as in (15) and an adaptive threshold κ
+ performs well for intermediate values for ξ, learning destabi-          as presented in (21) for stable learning.
+ lizes for both high and low choices. This is expected for high         Replacing the GJS uncertainty estimate with One-vs-Rest
+ values of ξ as they enforce model exploitation. However,               (OvR) uncertainty (Pan et al., 2020) leads to divergence.
+ that low values of ξ also destabilize training is more sur-            We assume this is attributed to the brittleness of the OvR
+ prising. We assume that the on-policy nature of Dyna-style             uncertainty estimate as illustrated in Appendix C.4. Thus,
+ MBRL, discussed in Section 2.3, in combination with the                faulty predictions are frequently used for training.
+ effective rollout adaption mechanism of MACURA leads to
+ narrow data distributions in Dmod when restricting model               Figure 8 depicts the adaption of κ according to (21) for
+ uncertainty too harshly. Consequently, the Q-functions of              the standard MACURA runs in Figure 7. Following our
+ the model-free agent overfit, which destabilizes learning. A           intuition, κ is comparatively high in the early stages of train-
+ practical guide on tuning ξ is provided in Appendix D.2.               ing, as uncertain data is sufficient to learn an initial policy.
+                                                                        Throughout training, κ decreases as more precise informa-
+                                                                        tion is required to further improve the policy. Keeping κ
+ 7.5. Ablation and Further Results
+                                                                        fixed at 300 and 150, respectively, destabilizes learning at
+ Finally, we provide an ablation study on the building blocks           different stages of training due to model exploitation.
+ of MACURA on the Humanoid task in Figure 7. The analy-
+                                                                         Replacing the gradient step adaption in (22) with a fixed
+ sis reveals that the performance gain of MACURA mostly
+                                                                         number of gradient steps G = 20 yields moderate perfor-
+ stems from the combination of a threshold-based rollout
+                                                                         mance reduction on Humanoid, while deterministic envi-
+ length adaption mechanism, the self-tuning threshold κ, and
+                                                                         ronment interaction hinders an effective expansion of E and
+ the reliable GJS uncertainty estimate.
+                                                                         thus substantially reduces performance.
+ Replacing the threshold-based rollout adaption of
+                                                                        We provide further experimental results in Appendix D. Per-
+ MACURA with the rank-based heuristic proposed in
+                                                                        formance in tasks with process noise is presented inD.4, D.5
+ (Pan et al., 2020) substantially reduces performance. The
+                                                                        provides detailed results for rollout length and update step
+    2
+      While potential performance gains are possible tuning Tmax        adaption, D.6 discusses the impact of different uncertainty
+ and ζ, our focus is to underscore the ease of tuning MACURA.           estimates, and D.7 provides results for long experiments.
+
+                                                                    8
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+8. Related Work                                                     (Kalweit & Boedecker, 2017; Nguyen et al., 2018). Model-
+                                                                    based offline RL methods (Yu et al., 2020; Zhai et al., 2024;
+The selection of the model class for dynamics approximation         Jeong et al., 2023) often construct a pessimistic MDP that pe-
+is an important design decision in MBRL. Early works focus          nalizes model uncertainty in the value function. Zhang et al.
+on local linear models (Levine & Koltun, 2013; Gu et al.,           (2021) adapt rollout length in a multi-agent setting based on
+2016) and Gaussian processes (Deisenroth & Rasmussen,               the error in the policy model of opponent agents. In value
+2011). Transferring MBRL to more complex problems,                  expansion methods, rollout steps are frequently reweighted
+however, requires models with higher capacity, such as neu-         based on model uncertainty (Buckman et al., 2018; Jeong
+ral networks (NN) (Nagabandi et al., 2018; Williams et al.,         et al., 2023; Vuong & Tran, 2019). Further, Abbas et al.
+2017). As deterministic NNs bear the risk of overfitting,           (2020) address uncertainty due to model inadequacy.
+probabilistic NN architectures (Gal et al., 2016; Buckman
+et al., 2018; Kurutach et al., 2018; Depeweg et al., 2017)          Despite the importance of reliable model-based rollouts in
+have proven a suitable model class for MBRL. The PE                 Dyna-style MBRL, the idea of adapting rollouts based on
+model (Lakshminarayanan et al., 2017) is a particularly             model accuracy has received little attention. An exception
+successful architecture in this domain and has led to sev-          is the M2AC algorithm (Pan et al., 2020), which is closest
+eral breakthroughs in MBRL (Chua et al., 2018; Janner               to this work. M2AC schedules rollout lengths using a rank-
+et al., 2019; Yu et al., 2020). While world models (Ha &            based filtering heuristic depending on model uncertainty.
+Schmidhuber, 2018; Hafner et al., 2019) represent the cur-          They introduce a reward penalty for model uncertainty simi-
+rent state-of-the-art in vision-based MBRL, the PE model is         lar to offline MBRL approaches, which can, however, hinder
+considered state-of-the-art when learning from the physics          the expansion of the known subset of S in an online setting.
+state of a system. As we are concerned with the latter, we          Further, the uncertainty estimate of M2AC is comparatively
+focus on uncertainty quantification of the PE model.                brittle as presented in Appendix C.5. The proposed rollout
+                                                                    scheme of MACURA, instead, takes a strictly spatial per-
+Different approaches have been adopted to combine the RL            spective on rollout length which is conceptually different
+objective (1) with information from a model. Analytic gra-          from M2AC and generally new in Dyna-style MBRL.
+dient methods (Deisenroth & Rasmussen, 2011; Levine &
+Koltun, 2013; Hafner et al., 2020) optimize a policy propa-
+gating through model-based experience, while model-based            9. Conclusion
+planning algorithms (Williams et al., 2017; Nagabandi et al.,       Learning predictive dynamics models to tame data require-
+2018; Chua et al., 2018) use the model for receding horizon         ments of RL is an established concept, leading to state-of-
+control. Other methods combine model-free RL approaches             the-art MBRL approaches like MBPO that achieve high data
+with a model. In value expansion approaches (Feinberg               efficiency and asymptotic performance. This work builds
+et al., 2018; Buckman et al., 2018) the model is used to            on the successful MBPO architecture, addressing the criti-
+stabilize update targets of the Q-function, whereas in Dyna-        cal question of adapting the length of model-based rollouts.
+style approaches (Sutton, 1991; Kalweit & Boedecker, 2017;          While it is common knowledge that models are only helpful
+Janner et al., 2019) the model generates data to train the          where they are accurate, and they are accurate only where
+model-free agent. In vision-based MBRL, analytic gradient           they have seen data, only few works in MBRL address
+methods (Hafner et al., 2020; 2021; 2023) represent the             model accuracy in general, and its spatial nature in particu-
+state-of-the-art, while Dyna-style approaches yield state-of-       lar. We make the consideration of model accuracy as a local
+the-art results in terms of data efficiency and asymptotic          property a fundamental building block of our theoretical
+performance for MBRL with compact state representations.            analysis of Dyna-style MBRL, which provides us with an
+A variety of improvements to the general idea of deep Dyna-         effective mechanism for model usage. Combining this mech-
+style MBRL (Janner et al., 2019) have been proposed. These          anism with an easy-to-compute and expressive estimate for
+comprise online parameter tuning (Lai et al., 2021), reduc-         model accuracy, we propose the Model-Based Actor-Critic
+tion of model error during model-based rollouts (Fröhlich          with Uncertainty-Aware Rollout Adpation (MACURA) algo-
+et al., 2022; Lai et al., 2020; Shen et al., 2020), improved        rithm. Benchmarking on MuJoCo, we show that MACURA
+exploration in the model (Morgan et al., 2021; Zhang et al.,        outperforms the current state-of-the-art substantially con-
+2020), model learning (Ji et al., 2022; Wang et al., 2023;          cerning data efficiency and asymptotic performance. Finally,
+Wu et al., 2022), and consideration of model uncertainty in         the rollout mechanism of MACURA solely introduces one
+the model-free Q-function (Luis et al., 2023b;a; Wang et al.,       essential hyperparameter, making it considerably easier to
+2022). All the above are orthogonal to our method.                  tune than competitor approaches.
+Using uncertainty in the model or the RL agent to control
+model usage is a common technique in MBRL. One ap-
+proach is to use model data where the agent is uncertain
+
+                                                                9
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+Acknowledgements                                                       deep reinforcement learning. In Int. Conf. on Learning
+                                                                       Representations, 2023.
+ZF Friedrichshafen AG partially funded this research. Fur-
+thermore, the research was in part supported by the Ger-             Feinberg, V., Wan, A., Stoica, I., Jordan, M. I., Gonzalez,
+man Federal Ministry for Economic Affairs and Climate                  J. E., and Levine, S. Model-Based Value Estimation for
+Action (BMWK) through the project EEMotion. Computa-                   Efficient Model-Free Reinforcement Learning. Int. Conf.
+tions were performed with computing resources granted                  on Machine Learning, 2018.
+by RWTH Aachen University under projects rwth1428,
+rwth1472, and rwth1552.                                              Frauenknecht, B., Ehlgen, T., and Trimpe, S. Data-efficient
+                                                                       deep reinforcement learning for vehicle trajectory control.
+                                                                       IEEE Int. Conf. on Intelligent Transportation Systems,
+Impact Statement                                                       2023.
+We present the MACURA algorithm that substantially im-               Fröhlich, L. P., Lefarov, M., Zeilinger, M. N., and
+proves data efficiency and asymptotic performance of Dyna-             Berkenkamp, F. On-Policy Model Errors in Reinforce-
+style MBRL, while considerably reducing tuning effort.                 ment Learning. Int. Conf. on Learning Representations,
+Thus, it addresses two major issues of RL applications in the          2022.
+real world; data inefficiency and laborious hyperparameter
+tuning. Therefore, MACURA contributes to the general                 Gal, Y., McAllister, R., and Rasmussen, C. E. Improving
+applicability of RL approaches.                                        PILCO with Bayesian neural network dynamics models.
+                                                                       In Int. Conf. on Machine Learning, 2016.
+There are many potential societal consequences of our work,
+none which we feel must be specifically highlighted here.            Gu, S., Lillicrap, T., Sutskever, I., and Levine, S. Continuous
+                                                                       Deep Q-Learning with Model-based Acceleration. In Int.
+References                                                             Conf. on Machine Learning. PMLR, 2016.
+
+Abbas, Z., Sokota, S., Talvitie, E. J., and White, M. Selec-         Ha, D. and Schmidhuber, J. World Models. Int. Conf. on
+  tive Dyna-style Planning Under Limited Model Capacity.               Neural Processing Systems, March 2018. doi: 10.5281/
+  arXiv, July 2020. doi: 10.48550/arXiv.2007.02418.                    zenodo.1207631.
+
+Adamy, J. Nonlinear Systems and Controls. Springer, Berlin,          Haarnoja, T., Zhou, A., Abbeel, P., and Levine, S. Soft
+  Germany, 2022. ISBN 978-3-662-65633-4.                               Actor-Critic: Off-Policy Maximum Entropy Deep Rein-
+                                                                       forcement Learning with a Stochastic Actor. In Int. Conf.
+Buckman, J., Hafner, D., Tucker, G., Brevdo, E., and Lee,              on Machine Learning. 2018a.
+  H. Sample-efficient reinforcement learning with stochas-
+  tic ensemble value expansion. In Int. Conf. on Neural              Haarnoja, T., Zhou, A., Hartikainen, K., Tucker, G., Ha, S.,
+  Information Processing Systems. 2018.                                Tan, J., Kumar, V., Zhu, H., Gupta, A., Abbeel, P., and
+                                                                       Levine, S. Soft Actor-Critic Algorithms and Applications.
+Chen, X., Wang, C., Zhou, Z., and Ross, K. Randomized                  arXiv, 2018b.
+  Ensembled Double Q-Learning: Learning Fast Without a
+  Model. Int. Conf. on Learning Representations, 2021.               Hafner, D., Lillicrap, T., Fischer, I., Villegas, R., Ha, D.,
+                                                                       Lee, H., and Davidson, J. Learning Latent Dynamics for
+Chua, K., Calandra, R., McAllister, R., and Levine, S. Deep            Planning from Pixels. In International Conference on
+  Reinforcement Learning in a Handful of Trials using                 Machine Learning, pp. 2555–2565. PMLR, May 2019.
+  Probabilistic Dynamics Models. Adv. in Neural Informa-               URL https://proceedings.mlr.press/v97/
+  tion Processing Systems, 2018.                                       hafner19a.
+
+Deisenroth, M. P. and Rasmussen, C. E. PILCO: a model-               Hafner, D., Lillicrap, T., Ba, J., and Norouzi, M. Dream
+  based and data-efficient approach to policy search. In Int.          to Control: Learning Behaviors by Latent Imagina-
+  Conf. on Machine Learning. 2011.                                     tion. In Int. Conf. on Learning Representations, April
+                                                                       2020. URL https://iclr.cc/virtual_2020/
+Depeweg, S., Hernández-Lobato, J. M., Doshi-Velez, F.,                poster_S1lOTC4tDS.html. [Online; accessed 12.
+  and Udluft, S. Learning and Policy Search in Stochastic              May 2024].
+  Dynamical Systems with Bayesian Neural Networks. Int.
+  Conf. on Learning Representations, 2017.                           Hafner, D., Lillicrap, T., Norouzi, M., and Ba, J. Mastering
+                                                                       Atari with Discrete World Models. Int. Conf. on Learning
+Eberhard, O., Hollenstein, J., Pinneri, C., and Martius, G.            Representations, October 2021. doi: 10.48550/arXiv.
+  Pink noise is all you need: Colored noise exploration in             2010.02193.
+
+                                                                10
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+Hafner, D., Pasukonis, J., Ba, J., and Lillicrap, T. Mastering        Luis, C. E., Bottero, A. G., Vinogradska, J., Berkenkamp, F.,
+  Diverse Domains through World Models. Int. Conf. on                   and Peters, J. Model-Based Epistemic Variance of Values
+  Learning Representations, January 2023. doi: 10.48550/                for Risk-Aware Policy Optimization. arXiv, 2023a.
+  arXiv.2301.04104.
+                                                                      Luis, C. E., Bottero, A. G., Vinogradska, J., Berkenkamp, F.,
+Janner, M., Fu, J., Zhang, M., and Levine, S. When to trust             and Peters, J. Model-Based Uncertainty in Value Func-
+  your model: model-based policy optimization. In Int.                  tions. Int. Conf. on Artificial Intelligence and Statistics,
+  Conf. on Neural Information Processing Systems. Curran                2023b.
+  Associates Inc., 2019.
+                                                                      Luo, Y., Xu, H., Li, Y., Tian, Y., Darrell, T., and Ma, T. Algo-
+Jeong, J., Wang, X., Gimelfarb, M., Kim, H., Abdulhai,
+                                                                        rithmic Framework for Model-based Deep Reinforcement
+  B., and Sanner, S. Conservative Bayesian Model-Based
+                                                                        Learning with Theoretical Guarantees. arXiv, 2018.
+  Value Expansion for Offline Policy Optimization. Int.
+  Conf. on Learning Representations, October 2023. doi:               Mnih, V., Kavukcuoglu, K., Silver, D., Rusu, A. A., Veness,
+  10.48550/arXiv.2210.03802.                                           J., Bellemare, M. G., Graves, A., Riedmiller, M., Fidje-
+Ji, T., Luo, Y., Sun, F., Jing, M., He, F., and Huang, W.              land, A. K., Ostrovski, G., Petersen, S., Beattie, C., Sadik,
+   When to update your model: constrained model-based re-              A., Antonoglou, I., King, H., Kumaran, D., Wierstra, D.,
+   inforcement learning. In Int. Conf. on Neural Information           Legg, S., and Hassabis, D. Human-level control through
+   Processing Systems, pp. 23150–23163. Curran Associates              deep reinforcement learning. Nature, 2015.
+   Inc., Red Hook, NY, USA, November 2022. ISBN 978-
+                                                                      Morgan, A. S., Nandha, D., Chalvatzaki, G., D’Eramo, C.,
+   1-71387108-8. doi: 10.5555/3600270.3601952.
+                                                                       Dollar, A. M., and Peters, J. Model Predictive Actor-
+Kalweit, G. and Boedecker, J. Uncertainty-driven Imagina-              Critic: Accelerating Robot Skill Acquisition with Deep
+  tion for Continuous Deep Reinforcement Learning. In                  Reinforcement Learning. In IEEE Int. Conf. on Robotics
+  Conf. on Robot Learning. 2017.                                       and Automation. IEEE Press, 2021.
+
+Kostrikov, I., Smith, L. M., and Levine, S. Demonstrating A           Nagabandi, A., Kahn, G., Fearing, R. S., and Levine, S.
+  Walk in the Park: Learning to Walk in 20 Minutes With                 Neural Network Dynamics for Model-Based Deep Re-
+  Model-Free Reinforcement Learning, 2023.                              inforcement Learning with Model-Free Fine-Tuning. In
+                                                                        IEEE Int. Conf. on Robotics and Automation. 2018.
+Kurutach, T., Clavera, I., Duan, Y., Tamar, A., and Abbeel,
+  P. Model-Ensemble Trust-Region Policy Optimization.                 Nguyen, N. M., Singh, A., and Tran, K. Improving model-
+  Int. Conf. on Learning Representations, 2018.                         based rl with adaptive rollout using uncertainty estimation.
+Lai, H., Shen, J., Zhang, W., and Yu, Y. Bidirectional Model-           2018.
+  based Policy Optimization. In Int. Conf. on Machine
+                                                                      Nielsen, F. On the Jensen–Shannon Symmetrization of
+  Learning. PMLR, 2020.
+                                                                        Distances Relying on Abstract Means. Entropy, 2019.
+Lai, H., Shen, J., Zhang, W., Huang, Y., Zhang, X., Tang,
+  R., Yu, Y., and Li, Z. On Effective Scheduling of Model-            OpenAI, Akkaya, I., Andrychowicz, M., Chociej, M.,
+  based Reinforcement Learning. Int. Conf. on Neural                    Litwin, M., McGrew, B., Petron, A., Paino, A., Plap-
+  Information Processing Systems, 2021.                                 pert, M., Powell, G., Ribas, R., Schneider, J., Tezak, N.,
+                                                                       Tworek, J., Welinder, P., Weng, L., Yuan, Q., Zaremba,
+Lakshminarayanan, B., Pritzel, A., and Blundell, C. Sim-               W., and Zhang, L. Solving rubik’s cube with a robot hand.
+  ple and scalable predictive uncertainty estimation using              arXiv preprint, 2019a.
+  deep ensembles. In Int. Conf. on Neural Information
+  Processing Systems. 2017.                                           OpenAI, Berner, C., Brockman, G., Chan, B., Cheung, V.,
+                                                                        Debiak, P., Dennison, C., Farhi, D., Fischer, Q., Hashme,
+Levine, S. and Koltun, V. Guided Policy Search. In Int.                 S., Hesse, C., Józefowicz, R., Gray, S., Olsson, C., Pa-
+  Conf. on Machine Learning. 2013.                                      chocki, J., Petrov, M., de Oliveira Pinto, H. P., Raiman,
+Ljung, L. System Identification. In Signal Analysis and                J., Salimans, T., Schlatter, J., Schneider, J., Sidor, S.,
+  Prediction. Birkhäuser, Boston, MA, 1998.                            Sutskever, I., Tang, J., Wolski, F., and Zhang, S. Dota 2
+                                                                       with large scale deep reinforcement learning. 2019b.
+Lu, C., Ball, P. J., Parker-Holder, J., Osborne, M. A., and
+  Roberts, S. J. Revisiting Design Choices in Offline Model-          Pan, F., He, J., Tu, D., and He, Q. Trust the model when
+  Based Reinforcement Learning. arXiv, October 2021. doi:               it is confident: masked model-based actor-critic. In Int.
+  10.48550/arXiv.2110.04135.                                            Conf. on Neural Information Processing Systems. 2020.
+
+                                                                 11
+        Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+Pineda, L., Amos, B., Zhang, A., Lambert, N. O., and Calan-         Yu, T., Thomas, G., Yu, L., Ermon, S., Zou, J. Y., Levine, S.,
+  dra, R. MBRL-Lib: A Modular Library for Model-based                 Finn, C., and Ma, T. Mopo: Model-based offline policy
+  Reinforcement Learning. arXiv, 2021.                                optimization. In Adv. in Neural Information Processing
+                                                                      Systems, 2020.
+Schulman, J., Wolski, F., Dhariwal, P., Radford, A., and
+  Klimov, O. Proximal Policy Optimization Algorithms.               Zhai, Y., Li, Y., Gao, Z., Gong, X., Xu, K., Feng, D., Bo, D.,
+  ArXiv, 2017.                                                        and Wang, H. Optimistic Model Rollouts for Pessimistic
+                                                                      Offline Policy Optimization. arXiv, 2024.
+Shen, J., Zhao, H., Zhang, W., and Yu, Y. Model-based
+  policy optimization with unsupervised model adaptation.           Zhang, C., Kuppannagari, S. R., and Prasanna, V. K. Maxi-
+  In Int. Conf. on Neural Information Processing Systems.             mum Entropy Model Rollouts: Fast Model Based Policy
+  2020.                                                               Optimization without Compounding Errors. arXiv, 2020.
+
+Sutton, R. S. Dyna, an integrated architecture for learning,        Zhang, W., Wang, X., Shen, J., and Zhou, M. Model-
+  planning, and reacting. SIGART Bull., 1991.                         based Multi-agent Policy Optimization with Adaptive
+                                                                      Opponent-wise Rollouts. ResearchGate, pp. 3384–3391,
+Todorov, E., Erez, T., and Tassa, Y. MuJoCo: A physics en-            August 2021. doi: 10.24963/ijcai.2021/466.
+  gine for model-based control. In Int. Conf. on Intelligent
+  Robots and Systems. IEEE, 2012.
+
+Vuong, T.-L. and Tran, K. Uncertainty-aware Model-based
+  Policy Optimization. arXiv, June 2019. doi: 10.48550/
+  arXiv.1906.10717.
+
+Wang, X., Wongkamjan, W., Jia, R., and Huang, F. Live
+ in the Moment: Learning Dynamics Model Adapted to
+ Evolving Policy. In Int. Conf. on Machine Learning,
+ pp. 36470–36493. PMLR, July 2023. URL https://
+ proceedings.mlr.press/v202/wang23an.
+
+Wang, Z., Wang, J., Zhou, Q., Li, B., and Li, H.
+ Sample-Efficient Reinforcement Learning via Conserva-
+ tive Model-Based Actor-Critic. AAAI Conf. on Artificial
+ Intelligence, 2022.
+
+Williams, G., Wagener, N., Goldfain, B., Drews, P., Rehg,
+ J. M., Boots, B., and Theodorou, E. A. Information
+ theoretic MPC for model-based reinforcement learning.
+ In IEEE Int. Conf. on Robotics and Automation. IEEE,
+ 2017.
+
+Wu, Z., Yu, C., Chen, C., Hao, J., and Zhuo, H. H. Plan
+ to predict: learning an uncertainty-foreseeing model for
+ model-based reinforcement learning. In Int. Conf. on Neu-
+ ral Information Processing Systems, pp. 15849–15861.
+ Curran Associates Inc., Red Hook, NY, USA, November
+ 2022. ISBN 978-1-71387108-8. doi: 10.5555/3600270.
+ 3601423.
+
+Wurman, P., Barrett, S., Kawamoto, K., MacGlashan, J.,
+ Subramanian, K., T. J., W., Capobianco, R., Devlic, A.,
+ Eckert, F., Fuchs, F., Gilpin, L., Khandelwal, P., Kom-
+ pella, V., Lin, H., MacAlpine, P., Oller, D., Seno, T.,
+ Sherstan, C., M. D., T., Aghabozorgi, H., Barrett, L.,
+ Douglas, R., Whitehead, D., Dürr, P., Stone, P., Spranger,
+ M., and Kitano, H. Outracing champion Gran Turismo
+ drivers with deep reinforcement learning. Nature, 2022.
+
+                                                               12
+       Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+A. Pseudocode Algorithms
+
+Algorithm 3 “Vanilla” Dyna-style Deep Model-based Reinforcement Learning
+  Initialize: dynamics model p̃θ , RL policy π, environment replay buffer Denv ← ∅, model replay buffer Dmod ← ∅ ,
+  rollout length schedule for Tmax , steps before retraining R, number of model-based rollouts M , RL update steps G.
+  for each iteration do
+     s0 ∼ ρ0 (s)
+     for each environment step do
+        at ∼ π(· | st )
+        st+1 ∼ p(· | st , at )
+        rt+1 = r(st , at )
+        Denv ← Denv ∪ {(st , at , rt+1 , st+1 )}
+        if mod (environment step, R) = 0 then
+           for each epoch do
+             Train p̃θ on Denv
+           end for
+           Evict old data from Dmod
+           for m ∈ M model rollouts do
+             sm0 ∼ U(Denv )
+             for t = 0, . . . , Tmax − 1 do
+                em
+                 t ∼ U(1, . . . , E)
+                am
+                 t ∼ π(· | st )
+                                m
+
+                st+1 ∼ p̃θem (· | sm
+                 m                        m
+                                     t , at ),
+                             t
+                 m            m m
+                rt+1 = r(st , at )
+                Dmod ← Dmod ∪ {(sm             m m         m
+                                          t , at , rt+1 , st+1 )}
+             end for
+           end for
+        end if
+        for G gradient steps do
+           Train π on Dmod ∪ Denv
+        end for
+     end for
+  end for
+
+
+
+
+                                                          13
+        Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+Algorithm 4 Model-based Actor-Critic with Uncertainty-aware Rollout Adaption (MACURA)
+  Initialize: dynamics model p̃θ , RL policy π, environment replay buffer Denv ← ∅, model replay buffer Dmod ← ∅ , steps
+  before retraining R, number of model-based rollouts M , maximum RL update steps Gmax .
+  Initialize p̃θ , π, Denv ← ∅, Dmod ← ∅, fixed Tmax , ζ
+  for each iteration do
+     s0 ∼ ρ0 (s)
+     for each environment step do
+        at ∼ π(· | st ) with correlated exploration noise (Eberhard et al., 2023)
+        st+1 ∼ p(· | st , at )
+        rt+1 = r(st , at )
+        Denv ← Denv ∪ {(st , at , rt+1 , st+1 )}
+        if mod (environment step, R) = 0 then
+           K ←K +1
+           k←K
+           for each epoch do
+              Train p̃θ on Denv
+           end for
+           Evict old data from Dmod
+           for m ∈ M model rollouts do
+              sm0 ∼ U(Denv )
+              em0 ∼ U(1, . . . , E)
+              am0 ∼ π(· | s0 )
+                                m
+
+              sm1   ∼  p̃θem  (· | sm    m
+                                    0 , a0 )
+                           0
+                m           m m
+              r1 = r(s0 , a0 )
+              uGJS (sm        m
+                         0 , a0 ) according to (15)
+                           m m
+              if uGJS (s0 , a0 ) < κ then
+                  Dmod ← Dmod ∪ {(sm               m m m
+                                              0 , a0 , r1 , s1 )}
+              else
+                  stop rollout m and discard data
+              end if
+           end for                                
+           ûGJS,k = inf uGJS (s0 , a0 ) ∈ uGJS (s10 , a10 ), . . . , uGJS (sM    M
+                                                                             0 , a0 ) : ζ ≤ CDFk (uGJS (s0 , a0 ))
+                                                                                                                   3
+                   ξ PK
+           κ ← K k=1 ûGJS,k
+           for t = 1, . . . , Tmax − 1 do
+              for m ∈ M model rollouts do
+                  emt ∼ U(1, . . . , E)
+                  amt ∼ π(· | st )
+                                   m
+
+                  st+1 ∼ p̃θem (· | sm
+                    m                         m
+                                         t , at ),
+                                 t
+                    m
+                  rt+1    = r(sm      m
+                                 t , at )
+                            m m
+                  uGJS (st , at ) according to (15)
+                  if uGJS (sm       m
+                               t , at ) < κ then
+                     Dmod ← Dmod ∪ {(sm               m m         m
+                                                 t , at , rt+1 , st+1 )}
+                  else
+                     stop rollout m and discard data
+                  end if
+              end for
+           end for
+        end if j                          m
+        for G = Gmax |D|D          mod |
+                                 mod |max
+                                            gradient steps do
+           Update π on Dmod ∪ Denv
+        end for
+     end for
+  end for
+
+                                                           14
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+B. Proofs
+Lemma B.1 (Return mismatch with respect to state distribution shift). Be the expected return following policy π in M̂
+                                                                    
+                                                      T (ω)
+                                                       X
+                                                                 M̂ 
+                                       Es∼M̂,a∼π           γ t rt+1   := η[π]
+                                                                             t=0
+
+
+and the expected return following the same policy in M
+                                                     f
+                                                                                           
+                                                                            T (ω)
+                                                                            X
+                                                                                         M 
+                                                                                    γ t rt+1 := η̃[π],
+                                                                                        f
+                                                      Es∼M,a∼π
+                                                         f
+                                                               
+                                                                            t=0
+
+
+then
+
+                                                                              T (ω)
+                                                                              X
+                                                                                      γ t DTV pt (s)∥p̃t (s) 5 .
+                                                                                                            
+                                       |η[π] − η̃[π]| ≤ 2rmax 4
+                                                                               t=0
+
+
+Proof.
+                                  |η[π] − η̃[π]|
+                                                                                                                   
+                                                               T (ω)                                 T (ω)
+                                                                  X                                     X
+                                                                             M̂                                   M
+                                   = Es∼M̂,a∼π                         γ t rt+1  − Es∼M,a∼π                  γ t rt+1
+                                                                                                                    f
+                                                                                       f
+                                                                                                                      
+                                                                  t=0                                   t=0
+                                                                                               
+                                       Z Z            T (ω)
+                                                      X
+                                                                  γ t pt (s, a) − p̃t (s, a)  r(s, a) da ds
+                                                                                            
+                                   =              
+                                         E    A          t=0
+
+                                       T (ω) Z       Z
+                                        X
+                                                          γ t pt (s, a) − p̃t (s, a) r(s, a) da ds
+                                                                                    
+                                   =
+                                        t=0      E    A
+
+                                       T (ω) Z    Z
+                                       X
+                                   ≤                      γ t pt (s, a) − p̃t (s, a) r(s, a) da ds
+                                       t=0    E      A
+                                              T (ω) Z         Z
+                                              X
+                                   ≤ rmax                             γ t pt (s, a) − p̃t (s, a) da ds
+                                              t=0         E       A
+                                              T (ω) Z         Z
+                                              X
+                                                                      γt   pt (s) − p̃t (s) π(a | s) da ds
+                                                                                           
+                                   = rmax
+                                              t=0         E       A
+                                              T (ω)           Z
+                                              X
+                                   = rmax             γt              pt (s) − p̃t (s) ds
+                                              t=0              E
+                                                 T (ω)
+                                                 X
+                                                          γ t DTV pt (s)∥p̃t (s)
+                                                                                        
+                                   = 2rmax
+                                                  t=0
+
+
+
+
+   3
+     CDFk (uGJS (s0 , a0 )) denotes the cumulative distribution function of GJS uncertainty estimates at time step 0 at the kth round of
+model-based rollouts.
+   4
+     Dynamics mismatch is especially an issue in high-rewarding areas of the state-action space. In this work, however, we will neglect the
+dynamics-reward coupling and instead, only focus on the dynamics mismatch. Thus, we consider the conservative upper bound of rmax .
+   5
+     We follow the common abuse of notation introduced in (Janner et al., 2019), formulating the TV distance with respect to the
+probability densities rather than the stochastic process as would be formally correct.
+
+                                                                               15
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+Lemma B.2 (Recursive Formulation). Be DT V (pt (ι)∥p̃t (ι)) := ϵt for an arbitrary ι and by construction ϵ0 = 0. Further
+be Es∼p̃t−1 [DT V (p (s′ | s) ∥p̃ (s′ | s))] := δt and δ0 = ϵ0 = 0. Then we can bound ϵt by
+                                                                         t
+                                                                         X
+                                                                  ϵt ≤          δτ
+                                                                         τ =0
+
+
+Proof.
+
+            ϵt = DTV pt (s′ )∥p̃t (s′ )
+                                         
+                  Z
+                1
+             =       pt (s′ ) − p̃t (s′ ) ds′
+                2 E
+                  Z Z
+                1
+             =           p(s′ | s)pt−1 (s) − p̃(s′ | s)p̃t−1 (s) ds ds′
+                2 E E
+                  Z Z
+                1
+             ≤           p(s′ | s)pt−1 (s) − p̃(s′ | s)p̃t−1 (s) ds ds′
+                2 E E
+                  Z Z
+                1
+             =           p(s′ | s)pt−1 (s) − p(s′ | s)p̃t−1 (s) + p(s′ | s)p̃t−1 (s) − p̃(s′ | s)p̃t−1 (s) ds ds′
+                2 E E
+                  Z Z                                                   Z Z
+                1                                                     1
+             ≤          p̃t−1 (s) |p(s′ | s) − p̃(s′ | s)| ds ds′ +           p(s′ | s) pt−1 (s) − p̃t−1 (s) ds ds′
+                2 E E                                                 2 S E
+                         Z                                        Z
+                           1          ′           ′         ′     1
+             = Es∼p̃t−1         |p(s | s) − p̃(s | s)| ds +             pt−1 (s) − p̃t−1 (s) ds
+                           2 E                                    2 E
+             = Es∼p̃t−1 [DTV (p(s′ | s)∥p̃(s′ | s))] + DTV pt−1 (s)∥p̃t−1 (s)
+                                                                                  
+
+            = δt + ϵt−1 = δt + δt−1 + ϵt−2 = . . . =
+                     t
+                     X                  t
+                                        X             t
+                                                      X
+            = ϵ0 +          δτ = δ0 +          δτ =          δτ
+                     τ =1               τ =1          τ =0
+
+
+
+
+Lemma B.3 (Dependency on dynamics mismatch). Be
+
+                                      ∆pE [π] :=        sup {DT V (p (s′ | s, a) ∥p̃ (s′ | s, a))}
+                                                      s∈E,a∼π
+
+then
+                                         Es∼p̃t−1 [DT V (p (s′ | s) ∥p̃ (s′ | s))] ≤ ∆pE [π]
+
+Proof.
+                            Es∼p̃t−1 [DT V (p (s′ | s) ∥p̃ (s′ | s))]
+                                  Z Z
+                               1
+                            =           p̃t−1 (s) |p (s′ | s) − p̃ (s′ | s)| ds ds′
+                               2 E E
+                                  Z Z              Z
+                               1
+                            =           p̃t−1
+                                              (s)      (p (s′ | s, a) − p̃ (s′ | s, a)) π(a | s) da ds ds′
+                               2 E E                 A
+                                  Z Z Z
+                               1
+                            ≤               p̃t−1 (s) π (a | s) |p (s′ | s, a) − p̃ (s′ | s, a)| da ds ds′
+                               2 E E A
+                                               Z                                         
+                                               1
+                            = Es∼p̃t−1 ,a∼π          |p (s′ | s, a) − p̃ (s′ | s, a)| ds′
+                                               2 E
+                            = Es∼p̃t−1 ,a∼π [DTV (p (s′ | s, a) ∥p (s′ | s, a))]
+                            ≤ ∆pE [π]
+
+
+
+                                                                     16
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+Theorem B.4 (Monotonic Improvement under Dynamics Misalignment on E ⊆ S ). We define two MDPs M̂ and M    f with a
+                                                                          + 6                  ′
+common state space S, action space A and reward function r : S × A → R . M̂ has dynamics p(s | s, a) : S × A → S,
+      f has dynamics p̃(s′ | s, a) : S × A → S. For both MDPs, we define probability densities
+while M
+                                                             Z
+                                             P[sM̂
+                                                 t  ∈ B] =      pt (s) ds
+                                                                       B
+                                                                      Z Z
+                                        P[sM̂      M̂
+                                           t ∈ B, at ∈ C] =                         pt (s, a) da ds
+                                                                          B    C
+
+as well as a dynamics function                             Z
+                                            p(s′ | s) =        p(s′ | s, a)π(a | s) da
+                                                           A
+
+
+and equivalently,                                                     Z
+                                                  P[sM
+                                                     t ∈ B] =                 p̃t (s) ds
+                                                      f
+
+                                                                       B
+                                                                      Z Z
+                                        P[sM̃      M̃
+                                           t ∈ B, at ∈ C] =                         p̃t (s, a) da ds
+                                                                          B    C
+                                                           Z
+                                            p̃(s′ | s) =       p̃(s′ | s, a)π(a | s) da
+                                                           A
+
+for all Borel-measuarble sets B ⊆ S, C ⊆ A and conditional probability densities π(a | s) : S → A.
+Further, we define a coupling between M̂ and M
+                                             f via a random stopping time
+
+    T M̂ (ω) := min{t ∈ N | sM̂       C
+                             t (ω) ∈ E }, T
+                                            M̃
+                                               (ω) := min{t ∈ N | sM̃       C
+                                                                   t (ω) ∈ E }, T (ω) := min{T
+                                                                                               M̂
+                                                                                                  , T M̃ } − 1,
+
+where st is a trajectory with respect to the MDPs M̂ or M
+                                                        f respectively and regarded as a random variable, E ⊆ S, and
+ C
+E the compliment of E.
+as well as identical start states sM    M̂
+                                   0 = s0 ∈ E.
+                                   f
+
+
+Suppose the expected return following policy π in M̂ is denoted by
+                                                                       
+                                                         T (ω)
+                                                         X
+                                                                    M̂ 
+                                           Es∼M̂,a∼π          γ t rt+1   := η[π]
+                                                               t=0
+
+
+and η̃[π] describes the expected return following the same policy in M  f
+                                                                       
+                                                         T (ω)
+                                                          X
+                                                                    M 
+                                                               γ t rt+1   := η̃[π],
+                                                                     f
+                                             Es∼M,a∼π
+                                                f
+                                                        
+                                                               t=0
+
+
+then we can define a lower bound for η[π] of the form
+
+                                                                     T (ω)          t
+                                                                      X             X
+                                          η[π] ≥ η̃[π] − 2rmax                 γt          ∆pE [π].
+                                                                      t=0           τ =0
+
+
+Proof.
+                                                  η[π] ≥ η̃[π] − |η[π] − η̃[π]|
+   6
+     We assume rewards to be strictly positive. An equivalent reward function can be trivially constructed from any bounded reward
+function r(s, a) ∈ [rmin , rmax ]∀s ∈ S, a ∈ A
+
+                                                                 17
+       Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+Using Lemma B.1
+                                                               T (ω)
+                                                                   X
+                                                                          γ t DT V pt (s)∥p̃t (s)
+                                                                                                       
+                                   η[π] ≥ η̃[π] − 2rmax
+                                                                   t=0
+
+Using Lemma B.2
+                                               T (ω)        t
+                                               X            X
+                        η[π] ≥ η̃[π] − 2rmax           γt          Es∼p̃τ −1 [DT V (p (s′ | s) ∥p̃ (s′ | s))]
+                                               t=0          τ =0
+
+Using Lemma B.3
+                                                                         T (ω)        t
+                                                                         X            X
+                                       η[π] ≥ η̃[π] − 2rmax                      γt          ∆pE [π]
+                                                                         t=0          τ =0
+
+
+
+
+                                                                   18
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+C. Toy Example
+In order to test the proposed uncertainty measure uGJS (15), we use a two-dimensional toy example of a pendulum. We
+discuss the dynamics of the pendulum in Section C.1, the feedback controller used as policy in Section C.2, and the
+experimental setup leading to Figure 3 in Section C.3. We further compare our uncertainty estimate to the one proposed in
+(Pan et al., 2020) and show a substantially more reliable behavior of the uGJS measure in Section C.5.
+
+C.1. Pendulum Dynamics
+Figure 9 shows a free-body diagram of the pendulum near the upper fixed point. We can write the equation of motion for
+such a pendulum as
+                                            ml2 ϕ̈ − mgl sin ϕ + bϕ = υ,                                          (23)
+where m is the mass of the pendulum, l is its length, g is the acceleration due to gravity, and b is the coefficient of viscous
+friction. Further, υ is the torque applied at the base of the pendulum that is used to control the pendulum. We define the
+                                      T
+continuous-time state as x = ϕ ϕ̇ with ϕ ∈ [−3, 3][rad] the pendulum angle and ϕ̇ ∈ [−16, 16][ rad
+                                
+                                                                                                           s ] the pendulum’s
+angular velocity. The nonlinear state-space equation for this system in continuous time are
+                                            "                             #
+                                                            ϕ̇
+                                        ẋ = 1                            = f (x, υ).                                     (24)
+                                               ml2 υ + mgl sin ϕ − bϕ̇
+
+
+When considering the system in discrete time, we sample observations and apply actions a = υ at discrete time points
+separated by a fixed time interval ∆t. We simulate the pendulum by integrating the state equation (24) between the sampling
+time steps, keeping the applied action fixed throughout the integration. We additionally consider homoscedastic Gaussian
+process noise with covariance matrix Σ. Hence we obtain the discrete-time MDP dynamics as
+                                                 p(·|s, a) = N (µ(s, a), Σ) ,                                              (25)
+with,                                                       Z ∆t
+                                                µ(s, a) =             f (x(t), a)dt,                                       (26)
+                                                             0
+where x(0) = s. The values for the different parameters can be seen in Table 1.
+
+                                            Table 1: Parameters of the Pendulum.
+
+                                                Parameter                              Value
+                                                  mass m                                 0.1
+                                                  length l                                1
+                                       acceleration due to gravity g                    9.81
+                                      coefficient of viscous friction b                  0.1
+                                        sampling time interval ∆t                       0.01
+                                                                                 −6             
+                                                                                 10         0
+                                    process noise covariance matrix Σ
+                                                                                   0      10−3
+
+
+
+C.2. Controller
+The pendulum is controlled via the applied torque υ. We can use feedback linearization (Adamy, 2022) to obtain a controller
+of the form                                                                      
+                  πFL (s) = υFL (x) = ml2 ϕ̈d + KD (ϕ̇d − ϕ̇) + KP (ϕd − ϕ) − mgl sin ϕ + bϕ̇,                        (27)
+
+where ϕd , ϕ̇d , and ϕ̈d denote the desired pendulum angle, angular velocity, and angular acceleration, respectively. The
+positive constants KP and KD denote the proportional and derivative gains respectively. We choose them to give under-
+damped feedback dynamics. The values can be seen in Table 2. For our purpose, we use the upper fixed point as the desired
+position, that is, ϕd = 0, ϕ̇d = 0 and ϕ̈d = 0.
+
+                                                                 19
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+
+
+
+                                       Figure 9: Free body diagram of the pendulum.
+
+                                           Table 2: Parameters of the Controller.
+
+                                                    Parameter               Value
+                                               proportional gain KP          25
+                                                derivative gain KD            1
+
+
+C.3. Data Generation
+We create interaction data that is stored Denv to train a PE model. For this, we let the feedback linearization controller (27)
+                                                                                          T
+interact with the pendulum (24). Each trajectory starts from a fixed start state ϕ0 ϕ̇0 . The trajectories are terminated
+upon reaching Tmax steps. Ten such trajectories are generated. This results in a data distribution with a characteristic spiral
+shape as depicted in Figure 3a and 10a. The parameters used for generating the trajectories can be found in Table 3.
+
+                                    Table 3: Trajectory parameters for data generation.
+
+                                                      Parameter              Value
+                                                   initial angle ϕ0            3
+                                             initial angular velocity ϕ̇0      0
+                                               number of steps Tmax           170
+
+
+C.4. Illustrating the uGJS Uncertainty Measure
+To illustrate the effectiveness of the proposed uncertainty measure uGJS , we investigate the connection between dynamics
+misalignment DTV (p (s′ | s, a) ∥p̃ (s′ | s, a)) and model uncertainty on the toy example.
+We train a PE dynamics model on data created according to Section C.3 and evaluate both quantities over S. To do this, we
+discretize the state space into a uniform grid {sij } where i is used to index over ϕ and j is used to index over ϕ̇. For each
+sij the corresponding action is obtained as
+                                                       aij = πFL (sij ).                                                   (28)
+First, we evaluate dynamics misalignment DTV (p (s′ | s, a) ∥p̃ (s′ | s, a)) over the predefined grid. We obtain the true and
+
+                                                              20
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+
+
+
+            (a) Denv                       (b) uGJS (Ours)                   (c) E with uGJS < κ   (d) E with uGJS over DTV (p∥p̃)
+
+
+
+
+(e) DTV (p(s′ |s, a)∥p̃(s′ |s, a))   (f) uOvR ((Pan et al., 2020))           (g) E with uOvR < κ   (h) E with uOvR over DTV (p∥p̃)
+
+                                     Figure 10: Effectiveness of the GJS uncertainty measure
+
+
+predicted next state distribution as
+                                                          pij = p(·|sij , aij ),                                              (29)
+querying the dynamics of the toy example (25), and
+
+                                                        p̃ij,e = p̃θe (·|sij , aij )                                          (30)
+
+for each PNN prediction with e ∈ (1 . . . E).
+As there is no closed-form solution for computing DTV (pij ∥p̃ij ) we use the common upper bound of the total variation
+distance with respect to the Hellinger distance DH :
+                                                              √
+                                            DTV (pij ∥p̃ij ) ≤ 2DH (pij ∥p̃ij ) .                                  (31)
+
+Figures 3b and 10e show a heatmap over S of the discretized dynamics misalignment measurements
+                                                              E
+                                                          1 X√
+                                                  dij =         2DH (pij ||p̃ij,e ).                                          (32)
+                                                          E e=1
+
+
+Similarly, we evaluate model uncertainty in Figures 3c and 10b over S plotting
+
+                                                      uGJS,ij = uGJS (sij , aij ).                                            (33)
+
+As discussed in Section 5.3, both align well. Choosing a suitable κ allows to construct a meaningful set E as depicted in
+Figures 3d and 10c that aligns with areas of low dynamics misalignment as illustrated in Figure 10d.
+
+                                                                     21
+        Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+C.5. Illustrating the uOvR Uncertainty Measure of the M2AC Algorithm (Pan et al., 2020)
+Similar to MACURA, Pan et al. (2020) propose to adapt the length of branched model-based rollouts in Dyna-style MBRL
+using model uncertainty. Therefore, they present the One-versus-Rest uOvR uncertainty estimate for PE models:
+                                                                                               
+                      uOvR (s, a) = DKL N (µθe (s, a), Σθe (s, a))∥N (µθ−e (s, a), Σθ−e (s, a)) .                (34)
+
+This uncertainty estimate is defined as the Kullback-Leibler divergence between a randomly chosen PNN prediction
+e ∼ U(1, . . . , E) and a Gaussian distribution defined by merging the remaining PNNs of the PE model, such that
+                                                                      E
+                                                                1 X
+                                               µθ−e (s, a) =        µθf (s, a)                                        (35)
+                                                               E−1
+                                                                     f ̸=e
+
+and
+                                        E
+                                  1 X
+                                      Σθf (s, a) + µθf (s, a)µθf (s, a)⊤ − µθ−e (s, a)µθ−e (s, a)⊤ .
+                                                                        
+                 Σθ−e (s, a) =                                                                                        (36)
+                                 E−1
+                                       f ̸=e
+
+
+We evaluate the connection between dynamics misalignment and the uncertainty estimate uOvR on the pendulum toy
+example. Here we use the exact same setup as the one discussed in Section C.4, including the identical PE model. The only
+difference is that we compute the model uncertainty according to
+
+                                                  uOvR,ij = uOvR (sij , aij ).                                        (37)
+
+The evaluation over S is depicted in Figure 10f. We see a substantially more noisy uncertainty estimate of uOvR as compared
+to the uGJS uncertainty estimate proposed in MACURA and depicted in Figure 10b. Most importantly, we see uOvR to be
+overconfident in areas around ϕ = 0 and ϕ̇ = 0 where the uOvR model uncertainty is low, while dynamics misalignment is
+high as can be seen from Figure 10e.
+Trying to construct a subset
+                                  EOvR := {s ∈ S | uOvR (s, a) < κOvR , a ∼ π(· | s)}.                                (38)
+choosing a suitable κOvR does not yield a reasonable result as shown in Figure 10g. The set has no clear boundary, due
+to the noisiness of the uOvR uncertainty estimate. More importantly, the set does not align with areas of low dynamics
+misalignment, as depicted in Figure 10h, due to the overconfidence of uOvR .
+
+
+
+
+                                                                22
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+D. Experiments
+In the following, we discuss the details of the experimental setup in Section D.1 and different approaches to exploring the
+environment in Dyna-style MBRL in Section D.3.
+
+D.1. Experimental Setup
+Instead of the original implementation of MBPO7 , all implementations of this work are based on the more recent mbrl-lib
+library (Pineda et al., 2021). For MBPO and SAC, we use the implementations provided by the library, while M2AC is
+reimplemented as an extension to MBPO, as no open-source version of the M2AC code is available. We further implement
+the MACURA algorithm based on the mbrl-lib version of MBPO. The code is available online8 .
+We run five random seeds for each experiment. Plots show the mean over the corresponding runs as a solid line and the 95%
+confidence interval as a shaded region.
+In all experiments, the training data for the SAC agent comprises 95% Dmod and 5% Denv for MBPO, M2AC, and
+MACURA.
+To achieve results comparable to the ones published in (Janner et al., 2019), we tune the MBPO hyperparameters according
+to Table 4.
+
+                                               Table 4: Hyperparameters MBPO
+
+                     Environment               Humanoid         Ant        Halfcheetah Walker     Hopper
+                        Epochs                   300            300            400      200         125
+                   Steps per Epoch                                          1000
+                     PNNs per PE                                              7
+                      PNN Layers                                              4
+                 PNN Nodes per Layer              400                               200
+                     Critic Layers                                            3
+                Critic Nodes per Layer           2048                              1024
+                     Actor Layers                                             3
+                Actor Nodes per Layer            2048                              1024
+                   SAC Target Ent.                -10            -1             -4       -1          0
+                    SAC Updates G                         20                    10             30
+                Rollouts per Round M                     406                   203            406
+                 Rollouts length Tmax           1 → 25        1 → 25                 1            1 → 15
+                Episodes Schedule Tmax         20 → 300      20 → 100                           20 → 100
+
+
+For MACURA, we choose the hyperparameters very close to MBPO for a fair comparison. In the MBPO implementation,
+the number of model-based rollouts per iteration M needs to be a multiple of the number of ensemble members. We
+remove this requirement for the MACURA rollout scheme, allowing us to choose M to plain hundreds. Also, we observe
+that the actual number of update steps G according to (22) in MACURA is roughly one-half of Gmax . Thus we choose
+Gmax for MACURA to be twice as much as G in MBPO. We further introduce the hyperparameters Tmax , ζ, and ξ of the
+uncertainty-aware rollout adaption scheme of MACURA. Here, we keep Tmax and ζ constant among all environments and
+solely tune ξ for the specific task. A comprehensive overview of the MACURA hyperparameters is provided in Table 5.
+In the case of M2AC, we have issues producing stable results. This forces us to deviate from the hyperparameter setup of
+MBPO. Similar to MACURA, we remove the requirement for M to be a multiple of the number of ensemble members,
+thus choosing M to plain hundreds. In some environments, we observe M2AC yield better results with a fixed temperature
+parameter of the SAC agent, thus we disable automatic entropy tuning in these cases9 . For the study of different exploration
+schemes in Section D.3, we find that hyperparameter settings of M2AC that are stable for deterministic environment
+   7
+     https://github.com/jannerm/mbpo
+   8
+     https://github.com/Data-Science-in-Mechanical-Engineering/macura
+   9
+     If the SAC Target Ent. hyperparameter is shown as N/A in the hyperparameter tables, this means that automatic entropy tuning
+(Haarnoja et al., 2018b) is not used for this case, instead a fixed temperature parameter (Haarnoja et al., 2018a) of 0.2 is used.
+
+                                                               23
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+                                            Table 5: Hyperparameters MACURA
+
+                          Environment              Humanoid       Ant      Halfcheetah Walker Hopper
+                             Epochs                  300          300          400        200     125
+                        Steps per Epoch                                       1000
+                          PNNs per PE                                            7
+                           PNN Layers                                            4
+                     PNN Nodes per Layer              400                             200
+                          Critic Layers                                          3
+                     Critic Nodes per Layer           2048                           1024
+                          Actor Layers                                           3
+                     Actor Nodes per Layer            2048                           1024
+                        SAC Target Ent.                -10            -1        -4         -1       0
+                      SAC Updates Gmax                     40                  20              60
+                     Rollouts per Round M                 400                  200            400
+                      Rollouts length Tmax                                      10
+                       Quantile Factor ζ                                      0.95
+                        Scaling Factor ξ                     5                   2        0.3      30
+
+                           Table 6: Hyperparameters M2AC (Deterministic Environment Policy)
+
+                          Environment             Humanoid        Ant      Halfcheetah   Walker    Hopper
+                             Epochs                 300           300          400        200       125
+                        Steps per Epoch                                       1000
+                          PNNs per PE                                           7
+                           PNN Layers                                           4
+                     PNN Nodes per Layer                                       200
+                          Critic Layers                                         3
+                     Critic Nodes per Layer              1024                  512              1024
+                          Actor Layers                                          3
+                     Actor Nodes per Layer               1024                  512              1024
+                        SAC Target Ent.               -17     N/A               -6         -1          0
+                        SAC Updates G                      20                   10               30
+                     Rollouts per Round M                 400                  200              400
+                      Rollouts length Tmax                                      10
+
+
+interaction, destabilize when exploring and vice versa. Therefore, we provide two sets of hyperparameters. Table 6
+represents the hyperparameter setting for deterministic interaction, and Table 7 shows the hyperparameters used when
+exploring with white or pink noise.
+Finally, we choose the hyperparameters of the SAC baseline, according to Table 8. Similar to M2AC, SAC yields better
+results with a fixed temperature hyperparameter10 .
+
+D.2. Discussion ξ
+The parameter ξ allows us to tune what sufficiently certain is. The general idea is that in the first rollout step, the model is
+evaluated in states that are in Denv and have been seen before. Thus, the uncertainty values we get for this first step are
+values of the GJS that correspond to being certain. So we choose the base uncertainty ûGJS to be the ζ = 0.95 quantile of
+uncertainties after this first rollout step. Taking this base uncertainty as the uncertainty threshold, which corresponds to
+ξ = 1, yields reasonable results in all environments. In this case, whenever a prediction step overshoots the 0.95 quantile of
+uncertainty within the data support, we consider it to have left E and terminate the model-based rollout.
+  10
+     If the SAC Target Ent. hyperparameter is shown as N/A in the hyperparameter table, this means that automatic entropy tuning
+(Haarnoja et al., 2018b) is not used for this case, instead a fixed temperature parameter (Haarnoja et al., 2018a) of 0.2 is used.
+
+                                                                 24
+         Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+                             Table 7: Hyperparameters M2AC (Stochastic Environment Policy)
+
+                          Environment             Humanoid         Ant      Halfcheetah   Walker   Hopper
+                             Epochs                 300            300          400        200      125
+                        Steps per Epoch                                        1000
+                          PNNs per PE                                             7
+                           PNN Layers                                             4
+                     PNN Nodes per Layer                                        200
+                          Critic Layers                                           3
+                     Critic Nodes per Layer                                    1024
+                          Actor Layers                                            3
+                     Actor Nodes per Layer                                     1024
+                        SAC Target Ent.               -17              -1        -4              N/A
+                        SAC Updates G                        20                      10                30
+                     Rollouts per Round M                   400                 200              400
+                      Rollouts length Tmax                                       10
+
+                                               Table 8: Hyperparameters SAC
+
+                          Environment             Humanoid         Ant      Halfcheetah   Walker   Hopper
+                          Critic Layers                                          3
+                     Critic Nodes per Layer                                     256
+                          Actor Layers                                           3
+                     Actor Nodes per Layer                                      256
+                        SAC Target Ent.               -17          N/A           -6         -6         -3
+                        SAC Updates G                                            1
+
+
+However, the model is often very certain within the data support towards the end of the training, leading to a low uncertainty
+threshold κ resulting from ξ = 1. This leads to a narrow data distribution in Dmod . Repeatedly training the critics on this
+narrow distribution causes overfitting. This introduces instability towards the end of training as discussed in Section 7.4 and
+shown in Figure 6. Thus, we typically choose ξ > 1. This is true for all MuJoCo environments but Walker. The Walker
+dynamics seem hard to learn for the PE model. This can e.g. be seen from the learning behavior of MBPO in Figure 4. Even
+though MBPO solely performs model-based rollouts of length 1 throughout training, learning appears rather brittle. Thus, in
+the Walker task, the 0.95 quantile of uncertainties after the first rollout step is too uncertain for stable learning. Therefore,
+we chose ξ < 1 to stabilize learning in this case.
+From our experience, ξ can be tuned in the following way:
+   • Perform a run with ξ = 1. This should result in stable learning as long as the agent is in the early stages of training and
+     improves sufficiently fast. As soon as the algorithm is close to its asymptotic performance, the uncertainty threshold
+     might get too low such that instabilities in learning occur.
+   • If this is the case, increase ξ. As indicated in Figure 6, there is a relatively broad range of ξ values that yields stable
+     performance. If ξ is chosen too large, however, instabilities due to model exploitation occur.
+   • If instabilities occur early in training, when running MACURA with ξ = 1 the model probably approximates the true
+     dynamics poorly. This can be checked e.g. by reproducing trajectories in Denv through model-based rollouts and
+     considering the deviation. In this case, ξ can be reduced until the learning behavior is stable.
+The fact that the entire rollout mechanism can be tuned by choosing ξ, from our experience, makes tuning considerably
+easier than determining all the required hyperparameters of the M2AC mechanism or designing a suitable rollout schedule
+for MBPO.
+
+D.3. Exploration in the Environment
+The implementation used in this work, based on the mbrl-lib library (Pineda et al., 2021), uses deterministic environment
+exploration for MBPO yielding similar results to the original implementation (Janner et al., 2019). As far as we can recon-
+
+                                                                  25
+                Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+              1e3
+         15         MACURA(D)
+                    MACURA(WN)
+                    MACURA(PN)
+                    MBPO(D)
+                    MBPO(WN)
+
+         10         MBPO(PN)
+                    M2AC(D)
+Return
+
+
+
+
+                    M2AC(WN)
+                    M2AC(PN)
+
+
+          5
+
+
+
+
+                                        100                         200                          300                         400
+                                                                   Steps                                                    1e3
+
+ Figure 11: Exploration Schemes on MACURA, MBPO, and M2AC on Halfcheetah. Impact of deterministic (D), white
+ noise (WN), and pink noise (PN) exploration on algorithmic performance.
+
+
+
+
+ struct, the original implementation (Janner et al., 2019) uses white noise exploration in the agent environment interaction,
+ however, when implementing white noise exploration in the mbrl-lib code, we observe substantially different results from
+ those reported in (Janner et al., 2019). These range from better performance to divergence. For our reimplementation of
+ M2AC based on the mbrl-lib code, deterministic environment interaction also yields the most stable results. Thus, we
+ present the performance of deterministic environment interaction for MBPO and M2AC in Figure 4.
+ In Figures 11 - 15 we present the performance of MACURA, MBPO, and M2AC with the considered exploration schemes:
+ deterministic interaction, white exploration noise and pink noise exploration (Eberhard et al., 2023), on the MuJoCo
+ benchmark.
+ We have issues producing stable results for M2AC, despite putting the most tuning effort among the compared approaches.
+ We find that hyperparameter settings that are stable for deterministic interaction destabilize in the case of exploration noise
+ and vice versa. Thus we provide a set of hyperparameters for deterministic environment interaction and one that we use for
+ white and pink noise exploration. For MACURA and MBPO we run the same sets of hyperparameters for all exploration
+ schemes. Generally, we see the performance of M2AC fall short as compared to MACURA and MBPO.
+ For MBPO, we use the fine-tuned rollout schemes reported in (Janner et al., 2019). White noise exploration in most cases
+ positively impacts asymptotic performance but increases the variance among runs. In some instances, we observe that
+ white noise exploration destabilizes learning in MBPO, leading to divergence. For pink noise exploration, we can report a
+ generally positive impact on the performance of MBPO, increasing data efficiency and asymptotic performance without
+ destabilizing learning. In some environments, MBPO with a fine-tuned rollout schedule and pink noise exploration can even
+ compete with MACURA.
+ MACURA with deterministic environment interaction shows the strongest performance among deterministic interaction
+ methods in most environments. White noise exploration in some cases yields better results than pink noise exploration,
+ while considerably increasing variance among trained agents. Different from MBPO, however, white noise exploration does
+ not destabilize MACURA up to the point of divergence. Overall, we observe that MACURA with pink noise exploration
+ yields the best data efficiency, asymptotic performance, and stability among all approaches on the benchmark. Combined
+ with a considerably easier-to-tune rollout length scheduling mechanism than MBPO and M2AC we consider this the most
+ promising approach for Dyna-style MBRL.
+
+                                                                   26
+                   Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+
+
+
+             1e3
+                      MACURA(D)
+         6
+                      MACURA(WN)
+                      MACURA(PN)
+                      MBPO(D)
+                      MBPO(WN)
+                      MBPO(PN)
+         4            M2AC(D)
+Return
+
+
+
+
+                      M2AC(WN)
+                      M2AC(PN)
+
+
+
+         2
+
+
+
+
+                                          50                           100                          150                         200
+                                                                      Steps                                                    1e3
+
+Figure 12: Exploration Schemes on MACURA, MBPO, and M2AC on Walker. Impact of deterministic (D), white noise
+(WN), and pink noise (PN) exploration on algorithmic performance.
+
+
+
+
+         4 1e3
+                      MACURA(D)
+                      MACURA(WN)
+                      MACURA(PN)
+                      MBPO(D)
+                      MBPO(WN)
+                      MBPO(PN)
+                      M2AC(D)
+Return
+
+
+
+
+                      M2AC(WN)
+         2
+                      M2AC(PN)
+
+
+
+
+                                     25                     50                     75                     100                   125
+                                                                      Steps                                                    1e3
+
+Figure 13: Exploration Schemes on MACURA, MBPO, and M2AC on Hopper. Impact of deterministic (D), white noise
+(WN), and pink noise (PN) exploration on algorithmic performance.
+
+
+
+
+                                                                      27
+                   Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+
+
+
+         10 1e3
+                       MACURA(D)
+                       MACURA(WN)
+                       MACURA(PN)
+          8
+                       MBPO(D)
+                       MBPO(WN)
+                       MBPO(PN)
+          6            M2AC(D)
+Return
+
+
+
+
+                       M2AC(WN)
+                       M2AC(PN)
+          4
+
+
+          2
+
+
+                                                    100                                   200                                   300
+                                                                      Steps                                                    1e3
+
+Figure 14: Exploration Schemes on MACURA, MBPO, and M2AC on Humanoid. Impact of deterministic (D), white noise
+(WN), and pink noise (PN) exploration on algorithmic performance.
+
+
+
+
+             1e3
+                      MACURA(D)
+                      MACURA(WN)
+                      MACURA(PN)
+         6
+                      MBPO(D)
+                      MBPO(WN)
+                      MBPO(PN)
+                      M2AC(D)
+         4
+Return
+
+
+
+
+                      M2AC(WN)
+                      M2AC(PN)
+
+
+
+
+         2
+
+
+
+
+                                                   100                                    200                                   300
+                                                                      Steps                                                    1e3
+
+ Figure 15: Exploration Schemes on MACURA, MBPO, and M2AC on Ant. Impact of deterministic (D), white noise (WN),
+ and pink noise (PN) exploration on algorithmic performance.
+
+
+
+
+                                                                      28
+                    Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+ D.4. Noisy Environment
+ We evaluate MBPO, M2AC, and MACURA on a noisy version of the Halfcheetah environment. To introduce noise, we
+ take the approach proposed in (Pan et al., 2020) and add noise to the actions applied to the environment. Therefore, the
+ action applied to the environment is ãt = at + ϵ with ϵ ∼ N (0, Σ). The covariance matrix Σ is a diagonal matrix with
+ diagonal elements σ 2 . The additive noise is not observable to the agent and therefore introduces process noise. Following the
+ experimental setup in (Pan et al., 2020), we conduct three experiments with σ = 0.05, σ = 0.1 , and σ = 0.2 respectively.
+ The corresponding results are depicted in Figure 16. MACURA consistently outperforms MBPO and M2AC.
+
+              1e3                       = 0.05                                      1e3                 = 0.1
+         15                                                                    15
+
+
+         10                                                                    10
+Return
+
+
+
+
+          5                                                                     5
+
+
+
+                            100          200          300           400                    100          200          300         400
+              1e3                        = 0.2                     1e3                                                          1e3
+         15
+                                                                                                          MACURA
+
+         10                                                                                               MBPO
+Return
+
+
+
+
+                                                                                                          M2AC
+
+          5
+
+
+
+                            100          200          300           400
+                                        Steps                      1e3
+
+
+                             Figure 16: Returns obtained by MACURA, MBPO, and M2AC on noisy Halfcheetah.
+
+
+ D.5. Rollout Horizon, Data Uncertainty, Gradient Steps
+ We evaluate the rollout - and gradient step adaption mechanism of MACURA on the Walker environment. We compare
+ MACURA to M2AC and MBPO.
+ First, we consider the average rollout length of the respective approaches throughout training as depicted in Figure 17.
+ Therefore, we record the rollout lengths of all M model-based rollouts performed in parallel during one round of model-
+ based rollouts and compute their average. As proposed in (Janner et al., 2019), MBPO performs one-step rollouts throughout
+ training leading to an average rollout length of one. The rank-based filtering heuristic of M2AC terminates a fixed quantile
+ of model-based rollouts after each rollout step. Effectively, this yields a predefined distribution over rollout lengths,
+ which does not change throughout training. As a side effect, this leads to a constant average rollout length as depicted in
+ Figure 17. MACURA, instead, has a threshold-based rollout length adaption mechanism, thus the average rollout length
+ varies throughout training. MACURA performs short rollouts in the early stages of training, where the model has limited
+ capabilities and increases the rollout length as the model improves. Different from MBPO and M2AC, MACURA can even
+ discard the first rollout step enabling an average rollout length lower than one.
+ Next, we investigate the uncertainty of the corresponding data created in model-based rollouts. We measure uncertainty with
+ the variance of the mean predictions of the individual PNNs within the PE. To recover a scalar uncertainty, we take the
+ Frobenius norm of the resulting matrix:
+                                                      E
+                                                  1 X
+                                   uMV (s, a) =        (µθ (s, a) − µPE (s, a))(µθe (s, a) − µPE (s, a))⊤                       (39)
+                                                  E e=1 e
+                                                                                                              F
+                     PE
+ with µPE (s, a) = E1 e=1 µθe (s, a). By doing this, we aim to avoid artifacts introduced by comparing uncertainty in the
+ metrics used in M2AC or MACURA and instead provide an impartial analysis of how uncertainty evolves in model-based
+
+                                                                          29
+                                 Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+                            10
+
+                                          MACURA
+                                          MBPO
+                             8            M2AC
+  average rollout length
+
+
+
+
+                             6
+
+
+
+
+                             4
+
+
+
+
+                             2
+
+
+
+
+                                                           50                         100                        150                          200
+                                                                                    Steps                                                    1e3
+
+
+                                            Figure 17: Average rollout lengths for MACURA, MBPO, and M2AC on Walker.
+
+
+rollouts.
+The average uncertainty corresponding to the respective Dyna-style approaches is depicted in Figure 18. MBPO has the
+highest average uncertainty that reduces throughout training. M2AC shows lower average uncertainty than MBPO. We
+assume this is the case, as low-uncertainty rollouts are propagated for several rollout steps reducing the mean uncertainty.
+MACURA shows an average uncertainty comparable to M2AC. However, the initial average uncertainty in MACURA is
+substantially lower than in M2AC and MBPO due to the threshold-based rollout adaption mechanism. Different from the
+rank-based heuristic of M2AC that always takes a particular most certain percentage into account (which can include very
+uncertain data when initially most data is bad), MACURA can discard all the data that is above the uncertainty threshold.
+It should be noted that the average uncertainty gives a rough impression of data quality but is not a suitable metric for
+detecting low-quality outliers that occur with low probability. These outliers, however, have a strong influence on the
+learning process from our experience.
+
+                            4
+
+                                         MACURA
+                                         MBPO
+                                         M2AC
+                            3
+  mean epistemic variance
+
+
+
+
+                            2
+
+
+
+
+                            1
+
+
+
+
+                                                          50                         100                         150                          200
+                                                                                    Steps                                                    1e3
+
+
+                                    Figure 18: Mean epistemic uncertainty of rollouts for MACURA, MBPO, and M2AC on Walker.
+
+The varying amounts of data created in model-based rollouts require adapting the amount of SAC updates in MACURA.
+
+                                                                                    30
+                                            Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+Figure 19 shows the average gradient steps G of the respective approaches. Both MBPO and M2AC have a G = 30 fixed
+
+
+                                       40            MACURA
+                                                     MBPO/M2AC
+  agent updates per environment step
+
+
+
+
+                                       30
+
+
+
+
+                                       20
+
+
+
+
+                                       10
+
+
+
+
+                                                                      50                         100                        150                          200
+                                                                                               Steps                                                    1e3
+
+
+                                                                                 Figure 19: SAC Update Steps
+
+throughout training, while MACURA adapts G depending on the occupancy of Dmod (22) that depends on the average
+rollout length depicted in Figure 17. Therefore, MACURA performs fewer SAC updates in the early stages of training but
+catches up as the model improves. Towards the end of training, MACURA performs a bit over 40 SAC updates per timestep.
+Simply increasing G to 40 in MBPO and M2AC, however, does not yield stable results, as depicted in Figure 20 (in the
+figure G is referred to as update-to-data (UTD) ratio).
+
+                                       6 1e3
+
+                                                    MACURA
+                                                    MBPO UTD 40
+                                                    M2AC UTD 40
+                                                    MBPO UTD 30
+                                       4            M2AC UTD 30
+  Return
+
+
+
+
+                                       2
+
+
+
+
+                                                                     50                         100                         150                          200
+                                                                                               Steps                                                    1e3
+
+
+                                                                     Figure 20: Comparison of returns obtained on Walker.
+
+
+D.6. Uncertainty Estimates
+In the following, we investigate the performance of MACURA and M2AC with different uncertainty estimates. Results on
+the Humanoid environment are depicted in Figure 21.
+M2AC with the GJS uncertainty estimate learns slightly faster and shows slightly stronger performance with less variance.
+We assume this to be the case, as the GJS estimate is more reliable in detecting low-quality data, thus stabilizing learning.
+
+                                                                                               31
+               Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+           10 1e3
+
+                        MACURA
+                        MACURA OvR
+           8            MACURA ensemble variance
+                        MACURA epistemic variance
+                        M2AC
+                        M2AC GJS
+           6
+  Return
+
+
+
+
+           4
+
+
+
+
+           2
+
+
+
+
+                                50                  100             150               200               250                 300
+                                                                  Steps                                                    1e3
+
+
+                          Figure 21: MACURA and M2AC with different uncertainty metrics on Humanoid.
+
+
+MACURA with OvR uncertainty estimate (Pan et al., 2020) performs well up to a return of about 7000 and subsequently
+diverges presumably due to the brittleness of the OvR uncertainty estimate.
+Additionally, we conduct experiments with MACURA using the ensemble variance estimate proposed in (Lu et al., 2021)
+and mean variance (39).
+While MACURA works with both these uncertainty metrics, they yield weaker results than the GJS estimate. This aligns
+with our intuition, as ensemble variance is a combined estimate for epistemic and aleatoric uncertainty, while we are
+solely interested in epistemic uncertainty. The variance of ensemble means solely addresses epistemic variance but has no
+information about the aleatoric uncertainty at all, which can be problematic. Epistemic uncertainty, however, is defined
+by the disagreement of individual PNN predictions, which rather corresponds to the overlap in the probability mass of the
+individual predictions. The GJS uncertainty estimate measures this overlap in probability mass, thus providing a better
+metric for epistemic uncertainty and works better in practice.
+
+D.7. Prolonged Experiments
+In the following, we discuss the behavior of MBPO and MACURA, when trained beyond the typically reported length of
+experiments (Janner et al., 2019; Pan et al., 2020). Figure 22 depicts results on Halfcheetah for 1,000,000 environment
+interactions as opposed to the 400,000 environment interactions presented in Figure 4. We do not consider M2AC in these
+experiments as stabilizing M2AC even for the first 400,000 environment interactions is a substantial challenge. Both MBPO
+and MACURA destabilize after an extended amount of training. From our experience, this is due to overfitting of either
+the model or the critic after training on similar data distributions over and over again. The training heuristics for model
+and critic of MBPO that are largely inherited by MACURA are not well suited for continuing training. Extending these
+algorithms to a continuing training setting requires further research addressing when to train your model and agent that is
+beyond the scope of this work.
+
+
+
+
+                                                                  32
+            Trust the Model Where It Trusts Itself - Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption
+
+
+
+
+         15000                                                                                                 MACURA
+                                                                                                               MBPO
+
+
+         12000
+
+
+          9000
+Return
+
+
+
+
+          6000
+
+
+          3000
+
+
+                                  200                  400                  600                  800                     1000
+                                                                 Steps                                                  1e3
+
+                     Figure 22: MACURA and MBPO with prolonged experiment length on Halfcheetah.
+
+
+
+
+                                                               33
+

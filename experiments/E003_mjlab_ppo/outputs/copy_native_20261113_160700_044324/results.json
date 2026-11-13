@@ -1,0 +1,37 @@
+{
+  "xml": "/tmp/e003-presets-bPFgdN/assets/robot_no_gas_spring.xml",
+  "motor_mapping": {
+    "lf0_Joint": [
+      "act_lf0",
+      -30.0,
+      30.0
+    ],
+    "l_wheel_Joint": [
+      "act_lw",
+      -5.0,
+      5.0
+    ],
+    "rf0_Joint": [
+      "act_rf0",
+      -30.0,
+      30.0
+    ],
+    "r_wheel_Joint": [
+      "act_rw",
+      -5.0,
+      5.0
+    ],
+    "l20_Joint": [
+      "act_lf20",
+      -30.0,
+      30.0
+    ],
+    "r20_Joint": [
+      "act_rf20",
+      -30.0,
+      30.0
+    ]
+  },
+  "steps": 100,
+  "max_closure_error_m": 2.5052560535495792e-06
+}

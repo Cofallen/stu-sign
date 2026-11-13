@@ -1,0 +1,7 @@
+{
+  "original_run": "outputs/lqr_no-gas_nominal_20261112_234309_478979",
+  "wrapper": "replay.py",
+  "environment": "mjlab",
+  "source_code_snapshot": "code/controller.py",
+  "method": "Replay recorded pressed keys using injected headless Teleop path."
+}

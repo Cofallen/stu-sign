@@ -1,0 +1,77 @@
+[
+  {
+    "physics_dt": 0.002,
+    "solref_time_constant_s": 0.02,
+    "damping_ratio": 1,
+    "min_contact_distance_m": -0.008225670681034525,
+    "last_second_min_distance_m": -0.0003164953107160848,
+    "final_base_xyz": [
+      -0.012563568710054552,
+      0.0002836131643512859,
+      0.05882767973888965
+    ],
+    "final_speed_norm": 0.01573069173191017,
+    "finite": true,
+    "warning_counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "wall_seconds": 0.2824758930000826,
+    "transient_3mm_gate": false
+  },
+  {
+    "physics_dt": 0.002,
+    "solref_time_constant_s": 0.005,
+    "damping_ratio": 1,
+    "min_contact_distance_m": -0.00083511030720608,
+    "last_second_min_distance_m": -8.497915056690508e-05,
+    "final_base_xyz": [
+      -0.010851678925295505,
+      0.00038224356361135723,
+      0.059193597579866114
+    ],
+    "final_speed_norm": 1.3547760845299057,
+    "finite": true,
+    "warning_counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "wall_seconds": 0.27595986699452624,
+    "transient_3mm_gate": true
+  },
+  {
+    "physics_dt": 0.001,
+    "solref_time_constant_s": 0.005,
+    "damping_ratio": 1,
+    "min_contact_distance_m": -0.0010844429008612655,
+    "last_second_min_distance_m": -7.464940614104743e-05,
+    "final_base_xyz": [
+      -0.011527427426542754,
+      0.0006992038960874061,
+      0.059305598735280164
+    ],
+    "final_speed_norm": 1.0017404762381543,
+    "finite": true,
+    "warning_counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "wall_seconds": 0.5609801809987403,
+    "transient_3mm_gate": true
+  }
+]

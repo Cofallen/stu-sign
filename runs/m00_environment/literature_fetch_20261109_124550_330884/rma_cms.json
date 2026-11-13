@@ -1,0 +1,24 @@
+{
+  "id": "rma_cms",
+  "kind": "code",
+  "title": "antonilo/rl_locomotion",
+  "url": "https://github.com/antonilo/rl_locomotion.git",
+  "local": "upstream/research_20261109/rl_locomotion",
+  "attribution": "RMA 作者项目页链接的后续 CMS/RMA 派生实现",
+  "purpose": "适应网络与特权信息边界；Raisim 代码仅阅读",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_read_only_not_executed",
+  "commit": "f71db8195bfb49b6d964bf53be3c5adadb0c11b1",
+  "tree": "19b4e4a52317a32c6a3b7f0e6e99d99fa8c7d939",
+  "tracked_status": "",
+  "license_files": [
+    {
+      "path": "upstream/research_20261109/rl_locomotion/LICENSE.md",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    }
+  ],
+  "license": "pending text inspection",
+  "submodules_initialized": false,
+  "lfs_downloaded": false,
+  "exit_code": 0
+}

@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/tmp/e002_terrain_i5vu3o3_/controller.py",
+    "--headless",
+    "--terrain",
+    "training",
+    "--duration",
+    "10"
+  ],
+  "copy_path": "/tmp/e002_terrain_i5vu3o3_",
+  "checks": {
+    "exit_ok": true,
+    "local_modules": true,
+    "local_outputs": true,
+    "original_outputs_unchanged": true,
+    "scene_recorded": true
+  },
+  "passed": true
+}

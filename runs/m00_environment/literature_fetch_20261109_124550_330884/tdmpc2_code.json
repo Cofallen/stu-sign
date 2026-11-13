@@ -1,0 +1,24 @@
+{
+  "id": "tdmpc2_code",
+  "kind": "code",
+  "title": "nicklashansen/tdmpc2",
+  "url": "https://github.com/nicklashansen/tdmpc2.git",
+  "local": "upstream/research_20261109/tdmpc2",
+  "attribution": "作者官方实现",
+  "purpose": "潜在转移、价值学习与规划",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_read_only_not_executed",
+  "commit": "332f19e4aba4bffe2dc736f45ea7f7bdc585903a",
+  "tree": "5e88b03f946951d008e89fbdca79abf54f12f33f",
+  "tracked_status": "",
+  "license_files": [
+    {
+      "path": "upstream/research_20261109/tdmpc2/LICENSE",
+      "sha256": "440d4088a83d19c522dff58918bd92ccb9701c278a35295b92db2456373c4759"
+    }
+  ],
+  "license": "pending text inspection",
+  "submodules_initialized": false,
+  "lfs_downloaded": false,
+  "exit_code": 0
+}

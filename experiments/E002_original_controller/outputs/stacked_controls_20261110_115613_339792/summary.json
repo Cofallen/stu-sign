@@ -1,0 +1,267 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "experiments/E002_original_controller/outputs/stacked_controls_20261110_115613_339792/summarize.py"
+  ],
+  "seed": null,
+  "versions": {
+    "mujoco": "3.11.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "checks": {
+    "turn_left_0.278": true,
+    "turn_left_0.278_stopped": true,
+    "turn_right_0.278": true,
+    "turn_right_0.278_stopped": true,
+    "spin_left_0.278": true,
+    "spin_left_0.278_stopped": true,
+    "spin_right_0.278": true,
+    "spin_right_0.278_stopped": true,
+    "move_jump_0.278": true,
+    "jump_0.278": true,
+    "fall_0.278": true,
+    "jump_longer_tuck": true,
+    "move_jump_longer_tuck": true,
+    "assets_unchanged": true,
+    "syntax": true,
+    "gain_readability_equivalent": true,
+    "vmc_cache_equivalent": true,
+    "yaw_invariant": true,
+    "id_cache_trace_exact": true,
+    "main_fall_continues": true,
+    "real_shift_detected": true,
+    "real_moving_J": true,
+    "latest_gui_realtime": true,
+    "actual_force_fall_continues": true,
+    "independent_copy": true,
+    "repeated_moving_jump": true
+  },
+  "passed": true,
+  "cases": {
+    "turn_left_0.278": {
+      "passed": true,
+      "duration_s": 20.00000000000146,
+      "first_fall_s": null,
+      "max_tilt_rad": 0.000888356030586108,
+      "final_2s_tilt_rad": 4.263822275995339e-06,
+      "max_actual_yaw_rate": 0.7017052887689321,
+      "final_actual_yaw_rate": 0.00021695012238789584,
+      "yaw_rotation_rad": 7.665487610347652,
+      "base_x_travel_m": -0.003320879474878073
+    },
+    "turn_right_0.278": {
+      "passed": true,
+      "duration_s": 20.00000000000146,
+      "first_fall_s": null,
+      "max_tilt_rad": 0.001030549237752287,
+      "final_2s_tilt_rad": 7.094312877676854e-06,
+      "max_actual_yaw_rate": 0.7018096665934211,
+      "final_actual_yaw_rate": 0.00021086783673428575,
+      "yaw_rotation_rad": -7.671828375590147,
+      "base_x_travel_m": -0.04188863552654918
+    },
+    "spin_left_0.278": {
+      "passed": true,
+      "duration_s": 20.00000000000146,
+      "first_fall_s": null,
+      "max_tilt_rad": 0.0017849627875072655,
+      "final_2s_tilt_rad": 9.23163596411649e-06,
+      "max_actual_yaw_rate": 1.5264181463420916,
+      "final_actual_yaw_rate": 0.00019879359142584003,
+      "yaw_rotation_rad": 16.363528836961954,
+      "base_x_travel_m": 0.027823162815926825
+    },
+    "spin_right_0.278": {
+      "passed": true,
+      "duration_s": 20.00000000000146,
+      "first_fall_s": null,
+      "max_tilt_rad": 0.002130132950231815,
+      "final_2s_tilt_rad": 2.2895188634843497e-05,
+      "max_actual_yaw_rate": 1.526115116940342,
+      "final_actual_yaw_rate": 0.00027044987356681114,
+      "yaw_rotation_rad": -16.370232263680737,
+      "base_x_travel_m": 0.0850672386877721
+    },
+    "move_jump_0.278": {
+      "passed": true,
+      "duration_s": 11.999999999998789,
+      "first_fall_s": null,
+      "max_tilt_rad": 0.023026278778391574,
+      "final_2s_tilt_rad": 9.975125182274335e-05,
+      "max_actual_yaw_rate": 0.13475193263488291,
+      "final_actual_yaw_rate": 0.00034207327256077736,
+      "yaw_rotation_rad": 0.018913767890493458,
+      "base_x_travel_m": -7.282451170662227
+    },
+    "jump_0.278": {
+      "passed": true,
+      "duration_s": 11.999999999998789,
+      "first_fall_s": null,
+      "max_tilt_rad": 0.029404813461841324,
+      "final_2s_tilt_rad": 3.138143473614833e-06,
+      "max_actual_yaw_rate": 0.12544189059676544,
+      "final_actual_yaw_rate": 0.00019684493406074526,
+      "yaw_rotation_rad": 0.020591898584595567,
+      "base_x_travel_m": 0.26054871628674997
+    },
+    "fall_0.278": {
+      "passed": true,
+      "duration_s": 11.999999999998789,
+      "first_fall_s": 1.0010000000000006,
+      "max_tilt_rad": 2.3004609595989054,
+      "final_2s_tilt_rad": 2.225683321276846,
+      "max_actual_yaw_rate": 1.5198020619658672,
+      "final_actual_yaw_rate": 0.3337768472459627,
+      "yaw_rotation_rad": -1.572765043273468,
+      "base_x_travel_m": -0.15642629839479477
+    }
+  },
+  "jumps": {
+    "jump": {
+      "tuck_hold_s": 0.24099999999997346,
+      "record": {
+        "start": 2.0009999999998906,
+        "start_height": 0.24924095062266896,
+        "max_height": 0.4636199393614029,
+        "start_com_z": 0.32051493316662666,
+        "max_com_z": 0.5394122851555478,
+        "max_wheel_clearance_m": 0.2527132337767401,
+        "airborne_s": 0.3900000000000003,
+        "max_upward_velocity": 1.9264211382553633,
+        "phases": [
+          {
+            "time": 2.0009999999998906,
+            "phase": "crouch"
+          },
+          {
+            "time": 2.4019999999998465,
+            "phase": "thrust"
+          },
+          {
+            "time": 2.5279999999998326,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 2.768999999999806,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 2.8839999999997934,
+            "phase": "landing"
+          },
+          {
+            "time": 4.6019999999998715,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 2.5279999999998326,
+        "no_liftoff": false
+      }
+    },
+    "move_jump": {
+      "tuck_hold_s": 0.24099999999997346,
+      "record": {
+        "start": 3.0009999999997805,
+        "start_height": 0.2490835065427917,
+        "max_height": 0.46476347192850165,
+        "start_com_z": 0.3204296732059412,
+        "max_com_z": 0.5405610702256142,
+        "max_wheel_clearance_m": 0.25798585719952005,
+        "airborne_s": 0.3950000000000003,
+        "max_upward_velocity": 1.9266122624041566,
+        "phases": [
+          {
+            "time": 3.0009999999997805,
+            "phase": "crouch"
+          },
+          {
+            "time": 3.4019999999997363,
+            "phase": "thrust"
+          },
+          {
+            "time": 3.5289999999997224,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 3.769999999999696,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 3.8889999999996827,
+            "phase": "landing"
+          },
+          {
+            "time": 5.601000000000205,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 3.5289999999997224,
+        "no_liftoff": false
+      }
+    }
+  },
+  "main_fall_run": "lqr_no-gas_nominal_20261110_121513_606754",
+  "real_key_driver": "realtime_gui_drive_20261110_121541_861149",
+  "first_gui_rtf": 0.8792295622332031,
+  "latest_gui": {
+    "run": "lqr_no-gas_nominal_20261110_121956_532504",
+    "rtf": 0.9989934920375655,
+    "wall_s": 24.02418052899975,
+    "external_force_n": 258.8936203466382,
+    "note": "Driver X11 tree enumeration failed BadWindow; viewer continued with additional manual input/force. Not counted as a controlled key sequence."
+  },
+  "fit_unchanged": true,
+  "fit_holdout_limit": "Previous .33m 2.35% relative K fit error retained; no refit this task",
+  "source_sha256": {
+    "controller.py": "c753d47ed56197a764410e389ea6c5da3f4905552d1532425b5c1a739382062c",
+    "gain_schedule.json": "bd71b73c78cc18ac05c94f2a25266abd905a86c56b65301431354e2e4541931c",
+    "LQR_six/mymath.py": "b8efbc0daa798017dd6cd8ca2f30b3072a2d427466d9102cc8e31c401ec036eb",
+    "LQR_six/teleop.py": "28330863ead32b32deda0bdb182fd784b41913890042c0048c6cf3467e86ba27",
+    "LQR_six/lqr_controller.py": "b9dfad0d8335f53dbcfcdd97c3b9149c8d70cc10ae18800fd8c78de727c64007",
+    "LQR_six/simulation.py": "8ec2f54710bf1884602c48a4d1d4ea5b438bfd571a055bec081a6065801b6de2",
+    "LQR_six/render_stand.py": "fdc14b6814b11adb489ed50d4636bc8f76778db5eeb2b755bb6a7510ccf6a233",
+    "LQR_six/keyboardInput.py": "3150624e3e04b9145bcdfc2b091cc5643215e501559b88113459eee8d19d7e3e",
+    "LQR_six/lqr_model.py": "35d894f16a77b2b1a4eb387cc8f44db5355a7e0ad2b5c276265df1b3c7c09c0b",
+    "LQR_six/parameters.py": "5dd949a27a03c7ec617bc05941beda1797abcd60c6d83b0a26725a6cacc6a831",
+    "LQR_six/vofa.py": "a0a289ae54b17c9b6cd8c10219d1fdb988bc2c491e8352a457dd211faa67a0b8",
+    "LQR_six/vmc.py": "7afb2e130f9e969ab3607bf4dd24aa795a72f3d54bb6caa86fe70c79f364b6c9",
+    "LQR_six/write_sensor.py": "f2aadcec19cd5106e24a825956057a770b676c39fedf55429b910879a5439362",
+    "LQR_six/mympc.py": "c6224a5c2c70acc49f6b20363972ce1f210f12fd26932f162fb0b18a3bec2de1",
+    "LQR_six/get_state.py": "a38da1c5b914e52cc77be4ad3ad35a3269119aab9aba3902dc392a69b85f9bef",
+    "LQR_six/lqr.py": "ff73450b37837efd04ba92a456299b367f4b35f334ab88715e866d4391bff546",
+    "LQR_six/get_sensor.py": "e60aaa16656b57bce3f31bba6c5a319e917816454353ac6c97101d0d39cca657",
+    "LQR_six/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "LQR_six/jump.py": "d6e45efe36563ab27537247ad7188c2de231a890f2fc57735c85fac9afcd777f",
+    "LQR_six/leg_data.py": "ebdab486d5fc7babdabb0cb41126963090d3b05ba2eea524322aac67217a0ebd"
+  },
+  "repeat_jump": {
+    "duration_s": 11.999999999998789,
+    "jumps_completed": 2,
+    "max_tilt_rad": 0.023232260897273815,
+    "final_tilt_rad": 0.00036775368359949896
+  },
+  "source_sha256_before_repeat_reset": {
+    "controller.py": "c753d47ed56197a764410e389ea6c5da3f4905552d1532425b5c1a739382062c",
+    "gain_schedule.json": "bd71b73c78cc18ac05c94f2a25266abd905a86c56b65301431354e2e4541931c",
+    "LQR_six/mymath.py": "b8efbc0daa798017dd6cd8ca2f30b3072a2d427466d9102cc8e31c401ec036eb",
+    "LQR_six/teleop.py": "5278575d577b106e7ee5de1aac999de2852084ef80e746ff1a18bce4840b42c6",
+    "LQR_six/lqr_controller.py": "b9dfad0d8335f53dbcfcdd97c3b9149c8d70cc10ae18800fd8c78de727c64007",
+    "LQR_six/simulation.py": "8ec2f54710bf1884602c48a4d1d4ea5b438bfd571a055bec081a6065801b6de2",
+    "LQR_six/render_stand.py": "fdc14b6814b11adb489ed50d4636bc8f76778db5eeb2b755bb6a7510ccf6a233",
+    "LQR_six/keyboardInput.py": "3150624e3e04b9145bcdfc2b091cc5643215e501559b88113459eee8d19d7e3e",
+    "LQR_six/lqr_model.py": "35d894f16a77b2b1a4eb387cc8f44db5355a7e0ad2b5c276265df1b3c7c09c0b",
+    "LQR_six/parameters.py": "5dd949a27a03c7ec617bc05941beda1797abcd60c6d83b0a26725a6cacc6a831",
+    "LQR_six/vofa.py": "a0a289ae54b17c9b6cd8c10219d1fdb988bc2c491e8352a457dd211faa67a0b8",
+    "LQR_six/vmc.py": "7afb2e130f9e969ab3607bf4dd24aa795a72f3d54bb6caa86fe70c79f364b6c9",
+    "LQR_six/write_sensor.py": "f2aadcec19cd5106e24a825956057a770b676c39fedf55429b910879a5439362",
+    "LQR_six/mympc.py": "c6224a5c2c70acc49f6b20363972ce1f210f12fd26932f162fb0b18a3bec2de1",
+    "LQR_six/get_state.py": "a38da1c5b914e52cc77be4ad3ad35a3269119aab9aba3902dc392a69b85f9bef",
+    "LQR_six/lqr.py": "ff73450b37837efd04ba92a456299b367f4b35f334ab88715e866d4391bff546",
+    "LQR_six/get_sensor.py": "e60aaa16656b57bce3f31bba6c5a319e917816454353ac6c97101d0d39cca657",
+    "LQR_six/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "LQR_six/jump.py": "f80aa0a90a76d4c9c8bf71564a702870cc75ba9c21a99b3a5f1a64be6c15749d",
+    "LQR_six/leg_data.py": "ebdab486d5fc7babdabb0cb41126963090d3b05ba2eea524322aac67217a0ebd"
+  },
+  "current_source_snapshot": "final_code_v2"
+}

@@ -1,0 +1,67 @@
+{"command": ["/home/cofallen/miniconda3/envs/mjlab/bin/python", "-B", "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/controller.py", "--viewer", "--duration", "16"], "cwd": "/home/cofallen/Code/毕业设计", "python": "/home/cofallen/miniconda3/envs/mjlab/bin/python", "runtime_paths": {"project": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller", "output": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261109_184047_370259", "modules": {"LQR_six": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/__init__.py", "LQR_six.get_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_sensor.py", "LQR_six.write_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/write_sensor.py", "LQR_six.mymath": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mymath.py", "LQR_six.leg_data": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/leg_data.py", "LQR_six.vmc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/vmc.py", "LQR_six.get_state": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_state.py", "LQR_six.mympc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mympc.py", "LQR_six.lqr_controller": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr_controller.py", "LQR_six.render_stand": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/render_stand.py", "LQR_six.teleop": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/teleop.py", "LQR_six.simulation": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/simulation.py"}}, "args": {"control": "lqr", "variant": "no-gas", "case": "nominal", "duration": 16.0, "headless": false, "viewer": true, "camera": "iso", "video": null, "video_size": "960x540", "video_fps": 30, "no_hud": false, "follow": false, "hold": false, "drive": true}, "versions": {"mujoco": "3.11.0", "numpy": "2.5.4", "scipy": "1.18.1"}, "mass_kg": 21.054624999999998, "physics_dt_s": 0.001, "control_dt_s": 0.01, "feedback": "Author six-state LQR/VMC; IMU + wheel odometry; VMC uses full-model linkage Jacobian/qvel", "file_sha256": {"controller.py": "163576b747d944e7e4166304eb72d1685d2885886ea2ee4f55f15654e5fe55b2", "standing_pose.json": "e94e06734096270711e2134e226a1d2b05beb893c886cc7e1ea1ca3a73fa1d70", "LQR_six/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "LQR_six/get_sensor.py": "c6b257a10d3288aeebb0a18db9f15aeebe67da5273f5169f5cbd7943e19fb223", "LQR_six/get_state.py": "a38da1c5b914e52cc77be4ad3ad35a3269119aab9aba3902dc392a69b85f9bef", "LQR_six/keyboardInput.py": "d00b177254c15c7fe460dfd99ccafd3eb7b4354178812975a45c396ba31bda3e", "LQR_six/leg_data.py": "2bb7abcc723b3d8bb23ea6047ae1c825be1f8c437b52907407a29782475f5893", "LQR_six/lqr.py": "a4b660fc40cfc65a58e80c8a885c85f94bff23a2d48747c4674359c57b28f2ac", "LQR_six/lqr_controller.py": "d4ef36033f420bb64a89c4c7016f330ac5e13c732870d159394a10c39bf33df6", "LQR_six/mymath.py": "00ae3961d93a4ad46920dd46bee96d4d9a14e294c2beb7ab97334141be267426", "LQR_six/mympc.py": "c6224a5c2c70acc49f6b20363972ce1f210f12fd26932f162fb0b18a3bec2de1", "LQR_six/render_stand.py": "554d88f773be02140bf0154d33337a9c39881b6adecc669230d2fe7792fe3bc3", "LQR_six/simulation.py": "65c3f77b3f5ad396470db403d0be96330d79daa8b1b33389838b071d8bd8bb47", "LQR_six/teleop.py": "6b219d33eb56ea7b9b130dbc68e370b6b6b7988c2f7c0afa400ca9b2b2d26e27", "LQR_six/vmc.py": "d62dcbd1aba16507705810c4f4f425c71bb43d1beb19677a21b9c7ed4081fb8e", "LQR_six/vofa.py": "a0a289ae54b17c9b6cd8c10219d1fdb988bc2c491e8352a457dd211faa67a0b8", "LQR_six/write_sensor.py": "f2aadcec19cd5106e24a825956057a770b676c39fedf55429b910879a5439362", "assets/robot_gas_spring_damped.xml": "9b77973e72253511f798866e709021349af8386b2b80855ae9b90ce66319009f", "assets/robot_no_gas_spring.xml": "263185e1f4a2a61d9e54803610d3e6b978c5ede259223552f278b3d623430088"}, "thresholds": {"duration_s": 16.0, "max_xy_drift_m": 0.1, "final_tilt_rad": 0.05, "max_closure_m": 0.0001, "min_height_m": 0.12, "fall_tilt_rad": 0.6}, "seed": null}
+{
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 15.999999999996572,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 0.00605017750065489,
+  "max_tilt_rad": 0.008004319419967683,
+  "max_xy_drift_m": 0.8234653286311213,
+  "max_closure_m": 9.660320025714908e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.19689462839599312,
+  "max_torque_nm": [
+    30.0,
+    5.0,
+    30.0,
+    5.0,
+    30.0,
+    30.0
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": "iso",
+  "final_base_xy_m": [
+    0.8234559321709296,
+    0.0039338568944456715
+  ],
+  "final_yaw_rad": 0.056385006104020516,
+  "mode": "drive",
+  "interactive": false,
+  "teleop": {
+    "speed": 0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 0.056385006104020516,
+    "message": "jump complete",
+    "jump_phase": "idle",
+    "jumps": [
+      {
+        "start": 9.934999999999933,
+        "start_height": 0.24920864098620665,
+        "max_height": 0.376628066391146,
+        "airborne_s": 0.24000000000000019,
+        "max_upward_velocity": 1.2912168000249107
+      }
+    ],
+    "current_jump": null
+  },
+  "final_odometry_error_m": 3.261863432789613,
+  "wall_s": 26.61707365300026,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+  "passed": true
+}

@@ -1,0 +1,48 @@
+{
+  "recovery_passed": true,
+  "torque_limits_passed": true,
+  "phases": [
+    {
+      "phase": "settle",
+      "start_s": 0.0,
+      "end_s": 1.0589999999999942,
+      "hip_peak_nm": 0.0,
+      "wheel_peak_nm": 0.0
+    },
+    {
+      "phase": "retract",
+      "start_s": 1.0589999999999942,
+      "end_s": 1.9089999999999006,
+      "hip_peak_nm": 2.112203017832224,
+      "wheel_peak_nm": 0.0
+    },
+    {
+      "phase": "swing",
+      "start_s": 1.9089999999999006,
+      "end_s": 2.8449999999997977,
+      "hip_peak_nm": 23.53659323127366,
+      "wheel_peak_nm": 0.0
+    },
+    {
+      "phase": "rising",
+      "start_s": 2.8449999999997977,
+      "end_s": 3.595999999999715,
+      "hip_peak_nm": 18.936090978248604,
+      "wheel_peak_nm": 3.0
+    },
+    {
+      "phase": "transition",
+      "start_s": 3.595999999999715,
+      "end_s": 5.026000000000013,
+      "hip_peak_nm": 12.55077493017397,
+      "wheel_peak_nm": 0.17612247953563753
+    },
+    {
+      "phase": "idle",
+      "start_s": 5.026000000000013,
+      "end_s": 10.000000009999898,
+      "hip_peak_nm": 10.760176362461733,
+      "wheel_peak_nm": 0.3873246116055148
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+<mujoco>
+  <worldbody>
+    <!-- Forward is -X. pos is the box center and size is half extents, in meters. -->
+    <!-- First 10 cm tread is 2 m long for the automatic landing and stop. -->
+    <geom name="step10_single" type="box" pos="-2.6 0 .05" size="1 .7 .05"
+          contype="2" conaffinity="1" rgba=".5 .6 .7 1"/>
+    <geom name="step10_2" type="box" pos="-4 0 .10" size=".4 .7 .10"
+          contype="2" conaffinity="1" rgba=".4 .5 .6 1"/>
+    <!-- 20 cm per rise, along the lane at Y=+2. -->
+    <geom name="step20_1" type="box" pos="-2 2 .10" size=".4 .7 .10"
+          contype="2" conaffinity="1" rgba=".7 .6 .4 1"/>
+    <geom name="step20_2" type="box" pos="-2.8 2 .20" size=".4 .7 .20"
+          contype="2" conaffinity="1" rgba=".6 .5 .3 1"/>
+    <!-- 17 degrees in radians. -->
+    <geom name="ramp17" type="box" pos="-3 -2 .244556" size="1 .7 .05"
+          euler="0 .296705972839036 0" contype="2" conaffinity="1" rgba=".4 .65 .45 1"/>
+  </worldbody>
+</mujoco>

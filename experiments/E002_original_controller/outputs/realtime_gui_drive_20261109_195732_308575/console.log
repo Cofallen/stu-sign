@@ -1,0 +1,98 @@
+窗口已打开：左键旋转、右键平移、滚轮缩放、H 帮助；关闭窗口即结束。
+HOLD W/S move, A/D turn, Q/E length; RELEASE brakes/holds; J jump, X stop, R reset；鼠标移入三维区启用驾驶，移入侧面板或失焦停止。
+[keys t=0.60] w
+[keys t=1.91] released
+[teleop] Release movement keys and wait for stop before J
+/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261109_195733_361168
+{
+  "timing": {
+    "sync_calls": 425,
+    "sync_wall_s": 0.3166980840251199,
+    "sync_max_s": 0.00400243399781175,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 0.00023033899924485013,
+    "late_steps": 13996,
+    "max_lag_s": 17.106019865004782,
+    "initial_sync_wall_s": 0.037158164002903504,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.4499266817668398,
+    "loop_non_ui_non_sleep_s": 30.799252428976615
+  },
+  "viewer_options": {
+    "camera_type": 0,
+    "left_ui": true,
+    "right_ui": true,
+    "hud": false
+  },
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 13.99999999999768,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 4.915113434900647e-06,
+  "max_tilt_rad": 0.0007361213465634069,
+  "max_xy_drift_m": 1.3160517087365133,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 2.6974591998888606e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.24296889872427177,
+  "max_torque_nm": [
+    11.170040653119331,
+    1.6729838603528977,
+    11.086157775401858,
+    1.6694651538457732,
+    11.36980597362204,
+    11.27274027057784
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": "iso",
+  "final_base_xy_m": [
+    -1.3084096518635724,
+    0.0012640936576732353
+  ],
+  "final_yaw_rad": 1.8715773910259936e-05,
+  "mode": "drive",
+  "interactive": false,
+  "teleop": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 1.8715773910259936e-05,
+    "message": "Release movement keys and wait for stop before J",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [],
+    "key_events": [
+      {
+        "time": 0.6000000000000004,
+        "pressed": "w"
+      },
+      {
+        "time": 1.9099999999999004,
+        "pressed": ""
+      }
+    ],
+    "current_jump": null
+  },
+  "final_odometry_error_m": -0.010292148842160342,
+  "wall_s": 31.11618085200098,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+  "passed": true
+}
+

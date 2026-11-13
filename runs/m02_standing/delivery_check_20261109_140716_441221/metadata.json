@@ -1,0 +1,31 @@
+{
+  "command": "python3 inline AST/link/hash/source/video delivery checks",
+  "cwd": "/home/cofallen/Code/毕业设计",
+  "python": "/usr/bin/python3",
+  "versions": {
+    "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]"
+  },
+  "seed": null,
+  "files_sha256": {
+    "src/wheel_leg/__init__.py": "65631d4d72437f31604796f4fd570beec00907767abcf99c813b2a2fce3cdcf1",
+    "src/wheel_leg/control/standing.py": "0ce4e93b002bac34156143ef4f4de218ef58940673462c3f16b4a9822140df0f",
+    "src/wheel_leg/control/__init__.py": "f759d96a18c145dbff41ddff3502ea67d3dc050e4065e8d567efa7ce043ff820",
+    "scripts/m02_standing/check_design.py": "35a816c2de85a3611e7ea2cf1d59954da45efb82552debcf0b44786228a637c3",
+    "scripts/m02_standing/run_standing.py": "075f59f1f1e0766e3afd5f8ab41965f58bc2193d62bf5bf67fd39b67533ed90d",
+    "scripts/m02_standing/summarize_standing.py": "f30087eb46d148cedca039d7599f97e212e2396033299146dbfb1a5d0276de83",
+    "README.md": "3be3101ec5afaafc4cd392084930b566d76f63b7a19c6ddcabf4d3632cf97710",
+    "scripts/README.md": "95e5f3a8d3ffb757ff61697da83c30b2fa96d52fca5a27e592cdd8ef14afa001",
+    "upstream/README.md": "4c513e642a08ed9c051f295acdf839faaf147189c81020304862f3d11f5cb955",
+    "runs/INDEX.md": "536db34155b0b2e722ae0b995e0cc02c24a7520347205ace4eefa8d5960987b3",
+    "docs/01_project/overview.md": "9fd63feda8bca3e5e8c2a12dea66cd5fa1f98fc1542ee2d35dc4f2a01ceb11b3",
+    "docs/01_project/WORKSPACE_GUIDE.md": "d6b9fd08bb266a052816fecc5ec9762476885daa11def93c8a4d231c733a0b29",
+    "docs/01_project/KEY_OPERATIONS.md": "d0b53e2b852c6a230d42a1aea3b294ad88a8f86ced56ce86b1f8d70c558f1d46",
+    "docs/02_milestones/README.md": "03b3279e291486df62deb763c95b3f48d038b204045ee9ab73bdcb60142ef019",
+    "docs/02_milestones/M02_parallel_standing.md": "879b12beda0486aec9d14356d55cfe0fcbe9e1d0cce0a2265e9cb1690cc31fa7",
+    "docs/03_learning/README.md": "3747b193746369ccb1b2c6da0cca5c2ff2126cced91157665ff7af44ab0da525",
+    "docs/03_learning/M02_01_完整闭链站立与LQR_MPC.md": "515f79d1e1e5a668c98ab094e7af1b55f8206d627b6abb7e59f6bd3762f7b711",
+    "docs/04_tasks/README.md": "bb9693f069dd4ec35e9f850aea9398c8e680e36b995b43e41979c43e66cc6ac0",
+    "docs/04_tasks/T003_parallel_standing.md": "6b74e5bf056f6423b786a31631e9692464b2a840d91e817b196350c9293b3172",
+    "THIRD_PARTY.md": "c61c84f3f18356d36d180099a6e5f3aa43b82af4f4559541b85eeb8dfc034b37"
+  }
+}

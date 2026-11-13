@@ -1,0 +1,78 @@
+{
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 11.999999999998789,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 0.00015626660025556206,
+  "max_tilt_rad": 0.00039396177434195803,
+  "max_xy_drift_m": 0.20776693229163587,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 3.607591165038281e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.14693017637903322,
+  "max_torque_nm": [
+    12.167963536747832,
+    0.16491538832313402,
+    12.080344127433758,
+    0.16463358466641972,
+    12.575125921783028,
+    12.435427175600443
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": "iso",
+  "final_base_xy_m": [
+    0.17167106050533196,
+    1.9599547897018133e-05
+  ],
+  "final_yaw_rad": -5.842524568257262e-05,
+  "mode": "drive",
+  "interactive": false,
+  "teleop": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.34,
+    "yaw": -5.842524568257262e-05,
+    "message": "ready",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [],
+    "key_events": [
+      {
+        "time": 1.0000000000000007,
+        "pressed": "q"
+      },
+      {
+        "time": 3.0099999999997795,
+        "pressed": ""
+      },
+      {
+        "time": 4.009999999999674,
+        "pressed": "e"
+      },
+      {
+        "time": 6.000000000000338,
+        "pressed": ""
+      }
+    ],
+    "current_jump": null
+  },
+  "final_odometry_error_m": 0.0019493999745343604,
+  "wall_s": 9.014721606999956,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+  "passed": true
+}

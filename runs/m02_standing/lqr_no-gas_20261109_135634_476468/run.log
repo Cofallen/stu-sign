@@ -1,0 +1,11 @@
+Solving reset-only assembled/contact equilibrium...
+Traceback (most recent call last):
+  File "/home/cofallen/Code/毕业设计/scripts/m02_standing/run_standing.py", line 243, in main
+    try: code = evaluate(args, out)
+                ^^^^^^^^^^^^^^^^^^^
+  File "/home/cofallen/Code/毕业设计/scripts/m02_standing/run_standing.py", line 81, in evaluate
+    qref, uref, equilibrium = solve_equilibrium(model)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cofallen/Code/毕业设计/src/wheel_leg/control/standing.py", line 82, in solve_equilibrium
+    raise RuntimeError(f'Equilibrium rejected: {info}')
+RuntimeError: Equilibrium rejected: {'geometry_cost': 9.998505620927414e-07, 'balance_cost': 0.004811643119502544, 'geometry_success': True, 'balance_success': False, 'max_acceleration': 9.809576443922651, 'contacts': 0, 'closure_m': [6.347516799849226e-09, 1.5522236101614093e-08, 7.686019386872827e-09, 1.6804611829877336e-08], 'height_m': 0.8709575560875297, 'torque_nm': [0.010085312982962951, -1.0563792719924847e-05, -0.010663952512852971, 8.761343791534086e-06, -0.004164927959132321, 0.0040495945726762165]}

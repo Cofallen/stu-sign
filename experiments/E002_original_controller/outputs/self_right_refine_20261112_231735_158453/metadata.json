@@ -1,0 +1,1 @@
+{"command": ["/home/cofallen/miniconda3/envs/mjlab/bin/python", "/tmp/e002_recover_refine.py", "-1.45", "72"], "cwd": "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller", "mujoco": "3.11.0", "seed": 72, "initial_pitch": -1.45}

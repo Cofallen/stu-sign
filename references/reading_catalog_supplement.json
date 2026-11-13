@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-09",
+  "items": [
+    {
+      "id": "wmp",
+      "kind": "paper",
+      "title": "World Model-based Perception for Visual Legged Locomotion",
+      "arxiv": "2409.16784",
+      "url": "https://arxiv.org/abs/2409.16784",
+      "local": "references/papers/research_20261109/wmp.pdf",
+      "purpose": "核心：世界模型表征辅助感知与策略；视觉拓展参考"
+    },
+    {
+      "id": "latent_adaptation",
+      "kind": "paper",
+      "title": "Online Adaptation to Latent Physical Properties for Learning from Demonstration",
+      "arxiv": "2611.06118",
+      "url": "https://arxiv.org/abs/2611.06118",
+      "local": "references/papers/research_20261109/latent_adaptation.pdf",
+      "purpose": "近期查重：预测误差更新物理隐变量已有先例；不是本项目原创"
+    },
+    {
+      "id": "wmp_code",
+      "kind": "code",
+      "title": "bytedance/WMP",
+      "url": "https://github.com/bytedance/WMP.git",
+      "local": "upstream/research_20261109/WMP",
+      "attribution": "论文作者项目对应公开代码；保留依赖的其他项目许可",
+      "purpose": "世界模型与策略接口阅读；原配置约23GB显存，非本机直接训练方案"
+    }
+  ]
+}

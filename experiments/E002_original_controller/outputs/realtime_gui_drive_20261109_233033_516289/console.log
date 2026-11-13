@@ -1,0 +1,320 @@
+窗口已打开：左键旋转、右键平移、滚轮缩放、H 帮助；关闭窗口即结束。
+HOLD W/S move, A/D turn, Q/E length; RELEASE brakes/holds; J jump, X stop, R reset；鼠标移入三维区启用驾驶，移入侧面板或失焦停止。
+[keys t=1.10] w
+[keys t=2.40] released
+[teleop t=5.34] jump requested
+[teleop t=13.97] jump requested
+/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261109_233034_634057
+{
+  "timing": {
+    "sync_calls": 425,
+    "sync_wall_s": 0.7444912239443511,
+    "sync_max_s": 0.01648327500151936,
+    "hud_calls": 132,
+    "hud_wall_s": 0.0037043749980512075,
+    "sleep_wall_s": 0.0,
+    "late_steps": 14000,
+    "max_lag_s": 2.142562431996339,
+    "initial_sync_wall_s": 0.04595441599667538,
+    "initial_hud_wall_s": 3.205700340913609e-05,
+    "initial_hud_calls": 1,
+    "real_time_factor": 0.8732455192017248,
+    "loop_non_ui_non_sleep_s": 15.283950793054828
+  },
+  "viewer_options": {
+    "camera_type": 0,
+    "left_ui": true,
+    "right_ui": true,
+    "hud": true,
+    "initial": {
+      "azimuth": 135.0,
+      "elevation": -12.0,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "final": {
+      "azimuth": 100.45275590551189,
+      "elevation": 0.22440944881890015,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 13.99999999999768,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 0.001037941997026114,
+  "max_tilt_rad": 0.023541004034460293,
+  "max_xy_drift_m": 1.3046383336606502,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 1.71858044405906e-05,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.1412443243403671,
+  "max_torque_nm": [
+    30.0,
+    5.0,
+    30.0,
+    5.0,
+    30.0,
+    30.0
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": "iso",
+  "final_base_xy_m": [
+    -1.1555011856449564,
+    0.011237645478169286
+  ],
+  "final_yaw_rad": 0.021145982769162172,
+  "mode": "drive",
+  "interactive": false,
+  "teleop": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 0.021145982769162172,
+    "message": "jump requested",
+    "pressed": "",
+    "jump_phase": "crouch",
+    "jumps": [
+      {
+        "start": 5.341000000000118,
+        "start_height": 0.24927802424322665,
+        "max_height": 0.46592404526542275,
+        "start_com_z": 0.32056261285290866,
+        "max_com_z": 0.5361766860923545,
+        "max_wheel_clearance_m": 0.24498312391407662,
+        "airborne_s": 0.4190000000000003,
+        "max_upward_velocity": 1.9072833873633654,
+        "phases": [
+          {
+            "time": 5.341000000000118,
+            "phase": "crouch"
+          },
+          {
+            "time": 5.741000000000252,
+            "phase": "thrust"
+          },
+          {
+            "time": 5.868000000000294,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 5.995000000000337,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 6.220000000000412,
+            "phase": "landing"
+          },
+          {
+            "time": 6.941000000000653,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 5.868000000000294
+      }
+    ],
+    "key_events": [
+      {
+        "time": 1.0999999999999897,
+        "pressed": "w"
+      },
+      {
+        "time": 2.3999999999998467,
+        "pressed": ""
+      },
+      {
+        "time": 5.340000000000118,
+        "key": "j"
+      },
+      {
+        "time": 13.969999999997697,
+        "key": "j"
+      }
+    ],
+    "current_jump": {
+      "start": 13.970999999997696,
+      "start_height": 0.2492395568514424,
+      "max_height": 0.2492395568514424,
+      "start_com_z": 0.3205214647980004,
+      "max_com_z": 0.3205214647980004,
+      "max_wheel_clearance_m": 0.006481546586538406,
+      "airborne_s": 0.025000000000000015,
+      "max_upward_velocity": 0.0,
+      "phases": [
+        {
+          "time": 13.970999999997696,
+          "phase": "crouch"
+        }
+      ]
+    }
+  },
+  "final_odometry_error_m": 4.648423054404635,
+  "wall_s": 16.03214639199723,
+  "gain_schedule": {
+    "lengths_m": {
+      "left": 0.2648482879441632,
+      "right": 0.26475926195491356
+    },
+    "K_left": [
+      [
+        -62.58685306162167,
+        -1.4562082699122814,
+        -21.907798362341058,
+        -18.184202884286005,
+        36.088887050697146,
+        4.350955830125631
+      ],
+      [
+        11.484620344683949,
+        0.1615467022549995,
+        4.391199522083086,
+        3.2699079540351197,
+        170.28603383951727,
+        7.147939425676328
+      ]
+    ],
+    "K_right": [
+      [
+        -62.58579564704418,
+        -1.4561466591878542,
+        -21.90757902415209,
+        -18.185014621429957,
+        36.09779059593364,
+        4.351727634016659
+      ],
+      [
+        11.48749760123363,
+        0.16161502225682453,
+        4.392256395895014,
+        3.2709214320124254,
+        170.28417092555068,
+        7.1476745976307425
+      ]
+    ],
+    "masses": {
+      "body_total_kg": 16.877574,
+      "body_per_side_kg": 8.438787,
+      "leg_kg": {
+        "l": 1.597924,
+        "r": 1.5983269999999998
+      },
+      "wheel_kg": {
+        "l": 0.4904,
+        "r": 0.4904
+      },
+      "total_kg": 21.054624999999998,
+      "wheel_radius_m": 0.06
+    },
+    "range_m": [
+      0.18,
+      0.34
+    ]
+  },
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+  "passed": true
+}
+

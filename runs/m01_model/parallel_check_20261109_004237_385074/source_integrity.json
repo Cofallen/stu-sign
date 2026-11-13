@@ -1,0 +1,34 @@
+{
+  "joints_preserved": [
+    "rf0_Joint",
+    "rf1_Joint",
+    "r_wheel_Joint",
+    "lf0_Joint",
+    "lf1_Joint",
+    "l_wheel_Joint",
+    "r20_Joint",
+    "r21_Link",
+    "r22_Joint",
+    "r23_Joint",
+    "l20_Joint",
+    "l21_Joint",
+    "l22_Joint",
+    "l23_Joint"
+  ],
+  "original_hinge_count": 14,
+  "new_hinge_count": 14,
+  "connect_count": 4,
+  "max_body_pose_error_20_random_source_coordinates": 7.771561172376096e-16,
+  "max_mass_error": 0.0,
+  "max_inertia_error": 0.0,
+  "equality_jacobian_rank": 8,
+  "internal_independent_dofs": 6,
+  "closure_pin_relative_rotation_range_rad": {
+    "Left_loop1": 0.4097242886181823,
+    "Left_loop2": 0.40969491332032537,
+    "Right_loop1": 0.40972418305571795,
+    "Right_loop2": 0.4096948077565209
+  },
+  "meaning": "14 explicit hinges plus 4 revolute closure interfaces represented by connect; coupled rotation, no weld",
+  "passed": true
+}

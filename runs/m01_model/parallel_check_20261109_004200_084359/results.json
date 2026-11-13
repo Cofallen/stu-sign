@@ -1,0 +1,154 @@
+{
+  "results": [
+    {
+      "file": "robot_no_gas_spring.xml",
+      "startup_closure_m": {
+        "Left_loop1": 3.1031676915590914e-17,
+        "Left_loop2": 1.1325499295668598e-15,
+        "Right_loop1": 3.925231146709438e-17,
+        "Right_loop2": 2.0206364052201326e-16
+      },
+      "max_closure_error_m": 3.4484958728565206e-08,
+      "max_passive_actuator_torque_nm": 0.0,
+      "max_motor_torque_nm": 0.07772910276445888,
+      "initial_wheel_z": 0.4793559419807702,
+      "min_tendon_length_m": [],
+      "max_tendon_length_m": [],
+      "wheel_z_retraction_m": 0.04479727493407509,
+      "retracted_motor_angles_rad": {
+        "lf0_Joint": -0.2498707479594719,
+        "l20_Joint": 0.2499691273525836,
+        "rf0_Joint": 0.24987067992226214,
+        "r20_Joint": -0.2499690724383945
+      },
+      "joint_rotation_range_rad": {
+        "rf0_Joint": 0.24987513506013026,
+        "rf1_Joint": 0.4096990153217405,
+        "r_wheel_Joint": 0.5908877787477811,
+        "lf0_Joint": 0.24987520410084268,
+        "lf1_Joint": 0.4096991173000897,
+        "l_wheel_Joint": 0.5908897048646934,
+        "r20_Joint": 0.2499789707122301,
+        "r21_Link": 0.4097421522501506,
+        "r22_Joint": 0.3196192552990011,
+        "r23_Joint": 0.4097246317230455,
+        "l20_Joint": 0.24997903074065778,
+        "l21_Joint": 0.409742254277238,
+        "l22_Joint": 0.319619329358525,
+        "l23_Joint": 0.40972473375397883
+      },
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finite": true,
+      "passed": true,
+      "joint_count": 14,
+      "connect_count": 4,
+      "free_root_smoke": {
+        "finite": true,
+        "warnings": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "nq": 21,
+        "nv": 20,
+        "nu": 6,
+        "mass_kg": 21.054624999999998
+      }
+    },
+    {
+      "file": "robot_gas_spring_damped.xml",
+      "startup_closure_m": {
+        "Left_loop1": 3.1031676915590914e-17,
+        "Left_loop2": 1.1325499295668598e-15,
+        "Right_loop1": 3.925231146709438e-17,
+        "Right_loop2": 2.0206364052201326e-16
+      },
+      "max_closure_error_m": 4.4247156904227646e-07,
+      "max_passive_actuator_torque_nm": 0.0,
+      "max_motor_torque_nm": 1.8510039026053682,
+      "initial_wheel_z": 0.4793559419807702,
+      "min_tendon_length_m": [
+        0.14853416394601346,
+        0.14853416824742385
+      ],
+      "max_tendon_length_m": [
+        0.16697101425671176,
+        0.1669710130167144
+      ],
+      "wheel_z_retraction_m": 0.04059702967753437,
+      "retracted_motor_angles_rad": {
+        "lf0_Joint": -0.22705006624221308,
+        "l20_Joint": 0.22714802653660576,
+        "rf0_Joint": 0.2270500033961511,
+        "r20_Joint": -0.22714797310669593
+      },
+      "joint_rotation_range_rad": {
+        "rf0_Joint": 0.24307419442232886,
+        "rf1_Joint": 0.4013702600347338,
+        "r_wheel_Joint": 0.5908519801884066,
+        "lf0_Joint": 0.2430742775276307,
+        "lf1_Joint": 0.4013703842741729,
+        "l_wheel_Joint": 0.5908538425924403,
+        "r20_Joint": 0.24322931944659382,
+        "r21_Link": 0.40141587271865464,
+        "r22_Joint": 0.3165146643365163,
+        "r23_Joint": 0.40139973627757974,
+        "l20_Joint": 0.24322938977600328,
+        "l21_Joint": 0.4014159956116859,
+        "l22_Joint": 0.3165147587582028,
+        "l23_Joint": 0.4013998580916699
+      },
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "finite": true,
+      "passed": true,
+      "joint_count": 14,
+      "connect_count": 4,
+      "free_root_smoke": {
+        "finite": true,
+        "warnings": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "nq": 21,
+        "nv": 20,
+        "nu": 6,
+        "mass_kg": 21.054624999999998
+      }
+    }
+  ],
+  "passed": true,
+  "mujoco": "3.11.0",
+  "python": "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+  "xml_sha256": {
+    "robot_no_gas_spring.xml": "263185e1f4a2a61d9e54803610d3e6b978c5ede259223552f278b3d623430088",
+    "robot_gas_spring_damped.xml": "9b77973e72253511f798866e709021349af8386b2b80855ae9b90ce66319009f"
+  },
+  "script_sha256": "fbfffde9ca7fa0b05616621880768df053cb6b7e07dd19805b185fef18b96569",
+  "fixture": "Root fixed, zero gravity, only six physical motor axes commanded; all eight passive hinges unactuated",
+  "notes": "Each hinge rotates within linkage coupling; hinges are not independently free due to four closed pin joints"
+}

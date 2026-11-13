@@ -1,0 +1,120 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/controller.py",
+    "--viewer",
+    "--duration",
+    "10",
+    "--duration",
+    "14"
+  ],
+  "mode": "drive",
+  "process_exit_code": 0,
+  "run": "lqr_no-gas_nominal_20261109_195938_963885",
+  "process_wall_including_startup_s": 16.389853717002552,
+  "result": {
+    "timing": {
+      "sync_calls": 425,
+      "sync_wall_s": 0.32998185295946314,
+      "sync_max_s": 0.002387689000897808,
+      "hud_calls": 0,
+      "hud_wall_s": 0.0,
+      "sleep_wall_s": 0.9546325018964126,
+      "late_steps": 8247,
+      "max_lag_s": 0.20166962599978433,
+      "initial_sync_wall_s": 0.036235633997421246,
+      "initial_hud_wall_s": 0.0,
+      "initial_hud_calls": 0,
+      "real_time_factor": 0.992466031841014,
+      "loop_non_ui_non_sleep_s": 12.821661881145701
+    },
+    "viewer_options": {
+      "camera_type": 0,
+      "left_ui": true,
+      "right_ui": true,
+      "hud": false
+    },
+    "case": "nominal",
+    "control": "lqr",
+    "variant": "no-gas",
+    "duration_s": 13.99999999999768,
+    "terminated": false,
+    "termination_reason": null,
+    "timeout": true,
+    "final_tilt_rad": 0.0006625520389444356,
+    "max_tilt_rad": 0.023564280598871987,
+    "max_xy_drift_m": 3.318538782637735,
+    "max_external_force_n": 0.0,
+    "max_closure_m": 1.7197527547736196e-05,
+    "passive_actuator_torque_nm": 0.0,
+    "min_height_m": 0.14124167035556945,
+    "max_torque_nm": [
+      30.0,
+      5.0,
+      30.0,
+      5.0,
+      30.0,
+      30.0
+    ],
+    "nonwheel_contacts": [],
+    "mpc_solves": 0,
+    "video": null,
+    "camera": "iso",
+    "final_base_xy_m": [
+      -3.1656989003290086,
+      0.013966328190076958
+    ],
+    "final_yaw_rad": 0.01917351201136658,
+    "mode": "drive",
+    "interactive": false,
+    "teleop": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.27792320714470026,
+      "yaw": 0.01917351201136658,
+      "message": "jump complete",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [
+        {
+          "start": 7.641000000000886,
+          "start_height": 0.2492784029305369,
+          "max_height": 0.46893985175998193,
+          "airborne_s": 0.4200000000000003,
+          "max_upward_velocity": 1.9073002107081602
+        }
+      ],
+      "key_events": [
+        {
+          "time": 1.6199999999999324,
+          "pressed": "w"
+        },
+        {
+          "time": 4.609999999999874,
+          "pressed": ""
+        },
+        {
+          "time": 7.640000000000886,
+          "key": "j"
+        }
+      ],
+      "current_jump": null
+    },
+    "final_odometry_error_m": 4.802768270372594,
+    "wall_s": 14.106276236001577,
+    "warnings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+    "passed": true
+  },
+  "near_realtime": true
+}

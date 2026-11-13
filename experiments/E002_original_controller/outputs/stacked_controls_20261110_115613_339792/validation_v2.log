@@ -1,0 +1,23 @@
+[keys t=1.00] a
+[keys t=12.00] released
+turn_left_0.278 None 3.7307550099307847e-06 0.2779239816904485
+[keys t=1.00] d
+[keys t=12.00] released
+turn_right_0.278 None 2.8471069737306676e-06 0.2779254507363455
+[keys t=1.00] ashift
+[keys t=2.00] shift
+[keys t=12.00] released
+spin_left_0.278 None 4.088944980512292e-06 0.27792447449172347
+[keys t=1.00] dshift
+[keys t=2.00] shift
+[keys t=12.00] released
+spin_right_0.278 None 3.8113322584166565e-06 0.277925693048922
+[keys t=1.00] w
+[teleop t=3.00] jump requested
+WARNING: Nan, Inf or huge value in QACC at DOF 12. The simulation is unstable. Time = 4.0440.
+
+[keys t=4.04] released
+move_jump_0.278 numerical_warning 3.123202412551051 0.37716882600751384
+[teleop t=2.00] jump requested
+jump_0.278 fall 0.19665669281845266 0.3028668640417131
+fall_0.278 fall 0.21407207648630636 0.1843885599527159

@@ -1,0 +1,38 @@
+/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr-mpc_no-gas_push_20261109_145827_811380
+{
+  "case": "push",
+  "control": "lqr-mpc",
+  "variant": "no-gas",
+  "duration_s": 9.999999999999897,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 0.001508626308042274,
+  "max_xy_drift_m": 0.028821841629983486,
+  "max_closure_m": 2.53546486106747e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.24878506897334302,
+  "max_torque_nm": [
+    10.51541425091721,
+    0.2384248606335678,
+    10.437377431029086,
+    0.23775182741609313,
+    10.812718712027653,
+    10.704357212202822
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 1001,
+  "final_odometry_error_m": -0.0004610350840846077,
+  "wall_s": 7.925786847000381,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "passed": true
+}
+

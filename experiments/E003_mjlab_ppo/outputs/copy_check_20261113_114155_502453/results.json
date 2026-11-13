@@ -1,0 +1,16 @@
+{
+  "device": "cuda:0",
+  "action_order": [
+    "rf0_Joint",
+    "r_wheel_Joint",
+    "lf0_Joint",
+    "l_wheel_Joint",
+    "r20_Joint",
+    "l20_Joint"
+  ],
+  "observation_size": 27,
+  "supported_steps": 10,
+  "max_closure_error_m": 2.5456574803683907e-06,
+  "signed_torque_clipping": true,
+  "terminated_and_timeout_separate": true
+}

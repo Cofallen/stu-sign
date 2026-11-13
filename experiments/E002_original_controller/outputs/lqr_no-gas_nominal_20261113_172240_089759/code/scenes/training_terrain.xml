@@ -1,0 +1,9 @@
+<mujoco><worldbody>
+<!-- 独立增量场景：沿前进-X；每层10cm，共20cm；另一组每层20cm，共40cm。 -->
+<geom name="step10_1" type="box" pos="-2 0 .05" size=".4 .7 .05" rgba=".5 .6 .7 1"/>
+<geom name="step10_2" type="box" pos="-2.8 0 .10" size=".4 .7 .10" rgba=".4 .5 .6 1"/>
+<geom name="step20_1" type="box" pos="-2 2 .10" size=".4 .7 .10" rgba=".7 .6 .4 1"/>
+<geom name="step20_2" type="box" pos="-2.8 2 .20" size=".4 .7 .20" rgba=".6 .5 .3 1"/>
+<!-- 长2m斜坡，17度；顶面低端接近地面，独立于起始平地。 -->
+<geom name="ramp17" type="box" pos="-3 -2 .244556" size="1 .7 .05" euler="0 .296705972839036 0" rgba=".4 .65 .45 1"/>
+</worldbody></mujoco>

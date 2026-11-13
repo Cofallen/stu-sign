@@ -1,0 +1,39 @@
+{
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 9.999999999999897,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 9.585939242335969e-07,
+  "max_tilt_rad": 1.9135931586763937e-06,
+  "max_xy_drift_m": 3.625080343199905e-05,
+  "max_closure_m": 2.50528748632998e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.24923797895906727,
+  "max_torque_nm": [
+    10.404785825438717,
+    0.0009244686806456968,
+    10.328120605528117,
+    0.000895817635879908,
+    10.756569165779393,
+    10.648127234972673
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261109_153245_863198/standing_nominal.mp4",
+  "camera": "iso",
+  "final_odometry_error_m": 2.0655534458586354e-07,
+  "wall_s": 14.33399782700144,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "passed": true
+}

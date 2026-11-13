@@ -1,0 +1,3 @@
+Observed first fit attempt before projection tolerance audit:
+ValueError: 切空间残差过大：0.0022645019994723056
+Initial rejection threshold 1e-3; see REPORT for planar projection rationale and separately retained nonlinear checks.

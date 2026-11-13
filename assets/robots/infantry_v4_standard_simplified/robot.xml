@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="fudan_infantry_v4_standard_simplified">
+  <compiler angle="radian" inertiafromgeom="false" autolimits="true" />
+  <option timestep="0.002" gravity="0 0 -9.81" integrator="implicitfast" />
+  <default>
+    <geom solref="0.005 1" />
+  </default>
+  <asset>
+    <mesh name="base_link_0" file="base_link_0_hull.stl" />
+    <mesh name="base_link_0_visual_0" file="base_link_0_visual_00.stl" />
+    <mesh name="base_link_0_visual_1" file="base_link_0_visual_01.stl" />
+    <mesh name="base_link_0_visual_2" file="base_link_0_visual_02.stl" />
+    <mesh name="base_link_0_visual_3" file="base_link_0_visual_03.stl" />
+    <mesh name="base_link_0_visual_4" file="base_link_0_visual_04.stl" />
+    <mesh name="base_link_0_visual_5" file="base_link_0_visual_05.stl" />
+    <mesh name="base_link_0_visual_6" file="base_link_0_visual_06.stl" />
+    <mesh name="base_link_0_visual_7" file="base_link_0_visual_07.stl" />
+    <mesh name="base_link_0_visual_8" file="base_link_0_visual_08.stl" />
+    <mesh name="rf0_Link_0" file="rf0_Link_0_hull.stl" />
+    <mesh name="rf0_Link_0_visual_0" file="rf0_Link_0_visual_00.stl" />
+    <mesh name="rf1_Link_0" file="rf1_Link_0_hull.stl" />
+    <mesh name="rf1_Link_0_visual_0" file="rf1_Link_0_visual_00.stl" />
+    <mesh name="r_wheel_Link_0" file="r_wheel_Link_0_hull.stl" />
+    <mesh name="r_wheel_Link_0_visual_0" file="r_wheel_Link_0_visual_00.stl" />
+    <mesh name="lf0_Link_0" file="lf0_Link_0_hull.stl" />
+    <mesh name="lf0_Link_0_visual_0" file="lf0_Link_0_visual_00.stl" />
+    <mesh name="lf1_Link_0" file="lf1_Link_0_hull.stl" />
+    <mesh name="lf1_Link_0_visual_0" file="lf1_Link_0_visual_00.stl" />
+    <mesh name="l_wheel_Link_0" file="l_wheel_Link_0_hull.stl" />
+    <mesh name="l_wheel_Link_0_visual_0" file="l_wheel_Link_0_visual_00.stl" />
+  </asset>
+  <worldbody>
+    <light name="visual_key_light" pos="1 -1 2" dir="-0.4 0.3 -1" directional="true" diffuse="0.8 0.8 0.8" ambient="0.2 0.2 0.2" />
+    <geom name="floor" type="plane" size="5 5 0.1" contype="2" conaffinity="1" friction="1 0.005 0.0001" rgba="0.7 0.7 0.7 1" />
+    <body name="base_link" pos="0 0 0.4">
+      <inertial pos="0.00822124 0.00099127 0.0982217" mass="14.528116" fullinertia="0.28353 0.35249 0.3701 -0.00174358 -0.00825907 -0.00214156" />
+      <freejoint name="root" />
+      <geom name="base_link_collision_0" type="mesh" mesh="base_link_0" contype="1" conaffinity="2" group="3" friction="1 0.005 0.0001" rgba="0.25 0.45 0.65 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+      <geom name="base_link_0_visual_0" type="mesh" mesh="base_link_0_visual_0" group="2" contype="0" conaffinity="0" mass="0" rgba="1 1 1 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+      <geom name="base_link_0_visual_1" type="mesh" mesh="base_link_0_visual_1" group="2" contype="0" conaffinity="0" mass="0" rgba="1 1 1 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+      <geom name="base_link_0_visual_2" type="mesh" mesh="base_link_0_visual_2" group="2" contype="0" conaffinity="0" mass="0" rgba="1 1 1 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+      <geom name="base_link_0_visual_3" type="mesh" mesh="base_link_0_visual_3" group="2" contype="0" conaffinity="0" mass="0" rgba="1 1 1 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+      <geom name="base_link_0_visual_4" type="mesh" mesh="base_link_0_visual_4" group="2" contype="0" conaffinity="0" mass="0" rgba="1 1 1 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+      <geom name="base_link_0_visual_5" type="mesh" mesh="base_link_0_visual_5" group="2" contype="0" conaffinity="0" mass="0" rgba="1 1 1 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+      <geom name="base_link_0_visual_6" type="mesh" mesh="base_link_0_visual_6" group="2" contype="0" conaffinity="0" mass="0" rgba="1 1 1 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+      <geom name="base_link_0_visual_7" type="mesh" mesh="base_link_0_visual_7" group="2" contype="0" conaffinity="0" mass="0" rgba="1 1 1 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+      <geom name="base_link_0_visual_8" type="mesh" mesh="base_link_0_visual_8" group="2" contype="0" conaffinity="0" mass="0" rgba="1 1 1 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+      <body name="rf0_Link" pos="0 -0.1877 0.08725" quat="0.7071054825112363 0.7071080798594735 0.0 0.0">
+        <inertial pos="0.05527628 -0.01655437 -0.00927161" mass="1.1132" fullinertia="0.00207047 0.00467389 0.00640479 -0.00022911 -0.00015432 0.00011008" />
+        <joint name="rf0_Joint" type="hinge" axis="0 0 1" actuatorfrcrange="-30 30" limited="true" range="-100 100" />
+        <geom name="rf0_Link_collision_0" type="mesh" mesh="rf0_Link_0" contype="1" conaffinity="2" group="3" friction="1 0.005 0.0001" rgba="0.25 0.45 0.65 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+        <geom name="rf0_Link_0_visual_0" type="mesh" mesh="rf0_Link_0_visual_0" group="2" contype="0" conaffinity="0" mass="0" rgba="1 1 1 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+        <body name="rf1_Link" pos="0.17472 0 0" quat="1.0 0.0 0.0 0.0">
+          <inertial pos="-0.00283459 -0.07106759 0.0068255" mass="0.3068726" fullinertia="0.00247367 9.262e-05 0.00253997 0.0001249 -3.42e-06 3.434e-05" />
+          <joint name="rf1_Joint" type="hinge" axis="0 0 1" actuatorfrcrange="-30 30" limited="true" range="-0.9 0.65" />
+          <geom name="rf1_Link_collision_0" type="mesh" mesh="rf1_Link_0" contype="1" conaffinity="2" group="3" friction="1 0.005 0.0001" rgba="0.25 0.45 0.65 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+          <geom name="rf1_Link_0_visual_0" type="mesh" mesh="rf1_Link_0_visual_0" group="2" contype="0" conaffinity="0" mass="0" rgba="1 1 1 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+          <body name="r_wheel_Link" pos="0 -0.208 0.016" quat="1.0 0.0 0.0 0.0">
+            <inertial pos="4.3469E-06 -0.00019294 0.019568" mass="0.49069" fullinertia="0.00033972 0.00034147 0.00058188 0.0 3e-08 -1.52e-06" />
+            <joint name="r_wheel_Joint" type="hinge" axis="0 0 1" actuatorfrcrange="-50 50" limited="false" />
+            <geom name="r_wheel_Link_collision_0" type="mesh" mesh="r_wheel_Link_0" contype="1" conaffinity="2" group="3" friction="1 0.005 0.0001" rgba="0.25 0.45 0.65 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+            <geom name="r_wheel_Link_0_visual_0" type="mesh" mesh="r_wheel_Link_0_visual_0" group="2" contype="0" conaffinity="0" mass="0" rgba="0.18 0.18 0.18 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+          </body>
+        </body>
+      </body>
+      <body name="lf0_Link" pos="0 0.1877 0.08725" quat="0.7071054825112363 -0.7071080798594735 0.0 0.0">
+        <inertial pos="0.055403 0.016584 -0.0092702" mass="1.1128" fullinertia="0.00207221 0.00466506 0.00639795 0.00022396 -0.00015529 -0.00011027" />
+        <joint name="lf0_Joint" type="hinge" axis="0 0 1" actuatorfrcrange="-30 30" limited="true" range="-100 100" />
+        <geom name="lf0_Link_collision_0" type="mesh" mesh="lf0_Link_0" contype="1" conaffinity="2" group="3" friction="1 0.005 0.0001" rgba="0.25 0.45 0.65 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+        <geom name="lf0_Link_0_visual_0" type="mesh" mesh="lf0_Link_0_visual_0" group="2" contype="0" conaffinity="0" mass="0" rgba="1 1 1 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+        <body name="lf1_Link" pos="0.17472 0 0" quat="1.0 0.0 0.0 0.0">
+          <inertial pos="-0.0028358 0.071068 0.0068255" mass="0.30687" fullinertia="0.00247367 9.262e-05 0.00253997 -0.0001249 -3.42e-06 -3.434e-05" />
+          <joint name="lf1_Joint" type="hinge" axis="0 0 1" actuatorfrcrange="-30 30" limited="true" range="-0.65 0.9" />
+          <geom name="lf1_Link_collision_0" type="mesh" mesh="lf1_Link_0" contype="1" conaffinity="2" group="3" friction="1 0.005 0.0001" rgba="0.25 0.45 0.65 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+          <geom name="lf1_Link_0_visual_0" type="mesh" mesh="lf1_Link_0_visual_0" group="2" contype="0" conaffinity="0" mass="0" rgba="1 1 1 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+          <body name="l_wheel_Link" pos="0 0.208 0.016" quat="1.0 0.0 0.0 0.0">
+            <inertial pos="-4.3477E-06 0.00019294 0.019568" mass="0.49069" fullinertia="0.00033972 0.00034147 0.00058188 0.0 -3e-08 1.52e-06" />
+            <joint name="l_wheel_Joint" type="hinge" axis="0 0 1" actuatorfrcrange="-50 50" limited="false" />
+            <geom name="l_wheel_Link_collision_0" type="mesh" mesh="l_wheel_Link_0" contype="1" conaffinity="2" group="3" friction="1 0.005 0.0001" rgba="0.25 0.45 0.65 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+            <geom name="l_wheel_Link_0_visual_0" type="mesh" mesh="l_wheel_Link_0_visual_0" group="2" contype="0" conaffinity="0" mass="0" rgba="0.18 0.18 0.18 1" pos="0 0 0" quat="1.0 0.0 0.0 0.0" />
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <motor name="motor_lf0_Joint" joint="lf0_Joint" gear="1" ctrllimited="true" ctrlrange="-30 30" />
+    <motor name="motor_lf1_Joint" joint="lf1_Joint" gear="1" ctrllimited="true" ctrlrange="-30 30" />
+    <motor name="motor_l_wheel_Joint" joint="l_wheel_Joint" gear="1" ctrllimited="true" ctrlrange="-50 50" />
+    <motor name="motor_rf0_Joint" joint="rf0_Joint" gear="1" ctrllimited="true" ctrlrange="-30 30" />
+    <motor name="motor_rf1_Joint" joint="rf1_Joint" gear="1" ctrllimited="true" ctrlrange="-30 30" />
+    <motor name="motor_r_wheel_Joint" joint="r_wheel_Joint" gear="1" ctrllimited="true" ctrlrange="-50 50" />
+  </actuator>
+</mujoco>

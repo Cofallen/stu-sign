@@ -1,0 +1,65 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "experiments/E002_original_controller/outputs/length_gain_20261109_231153_464420/audit_fit.py"
+  ],
+  "holdout": [
+    {
+      "length": 0.19,
+      "max_closed_loop_real": -1.1960759807597094,
+      "relative_K_error": 8.847973734218039e-05,
+      "max_K_entry_error": 0.010784096131679632,
+      "tangent_error": 2.340021481641328e-08
+    },
+    {
+      "length": 0.21,
+      "max_closed_loop_real": -1.2148955982552443,
+      "relative_K_error": 0.0006211644472536356,
+      "max_K_entry_error": 0.09410030708456674,
+      "tangent_error": 2.133336565607009e-08
+    },
+    {
+      "length": 0.22999999999999998,
+      "max_closed_loop_real": -1.228684126097591,
+      "relative_K_error": 0.0004845555000011719,
+      "max_K_entry_error": 0.07568398336496074,
+      "tangent_error": 1.901509863409553e-08
+    },
+    {
+      "length": 0.24999999999999997,
+      "max_closed_loop_real": -1.239205770483574,
+      "relative_K_error": 0.00011895647456579411,
+      "max_K_entry_error": 0.014668541926226908,
+      "tangent_error": 1.6421913291495528e-08
+    },
+    {
+      "length": 0.26999999999999996,
+      "max_closed_loop_real": -1.2484533736012362,
+      "relative_K_error": 0.0008514944719470116,
+      "max_K_entry_error": 0.13060891415948817,
+      "tangent_error": 1.3513335187077774e-08
+    },
+    {
+      "length": 0.2899999999999999,
+      "max_closed_loop_real": -1.2594957834868292,
+      "relative_K_error": 0.0012541213851591,
+      "max_K_entry_error": 0.19678108937193173,
+      "tangent_error": 1.0225307192114697e-08
+    },
+    {
+      "length": 0.30999999999999994,
+      "max_closed_loop_real": -1.2820491163491905,
+      "relative_K_error": 9.009107815953469e-05,
+      "max_K_entry_error": 0.01124960539113573,
+      "tangent_error": 6.454759303239806e-09
+    },
+    {
+      "length": 0.32999999999999996,
+      "max_closed_loop_real": -1.4862688611132349,
+      "relative_K_error": 0.023488557527250573,
+      "max_K_entry_error": 3.8409429714978494,
+      "tangent_error": 2.649422234373826e-08
+    }
+  ],
+  "passed": false
+}

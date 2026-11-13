@@ -1,0 +1,92 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "scripts/m02_standing/run_standing.py",
+    "--controller",
+    "mpc",
+    "--variant",
+    "gas",
+    "--duration",
+    "30",
+    "--cases",
+    "nominal,push"
+  ],
+  "cwd": "/home/cofallen/Code/毕业设计",
+  "python": "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+  "versions": {
+    "mujoco": "3.11.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "args": {
+    "controller": "mpc",
+    "variant": "gas",
+    "duration": 30.0,
+    "cases": "nominal,push",
+    "horizon": 15,
+    "video": false,
+    "viewer": false
+  },
+  "model": "assets/robots/infantry_parallel/robot_gas_spring_damped.xml",
+  "model_sha256": "9b77973e72253511f798866e709021349af8386b2b80855ae9b90ce66319009f",
+  "source_main_commit": "b0f14e8ee9331d572738885691389742028cb796",
+  "source_lqr_mpc_commit": "f8039cde95b8c2a9150c6016621ea928c9215c36",
+  "code_sha256": {
+    "scripts/m02_standing/run_standing.py": "075f59f1f1e0766e3afd5f8ab41965f58bc2193d62bf5bf67fd39b67533ed90d",
+    "src/wheel_leg/control/standing.py": "0ce4e93b002bac34156143ef4f4de218ef58940673462c3f16b4a9822140df0f"
+  },
+  "mesh_sha256": {
+    "base_link_0_visual_07.stl": "49fd218ca245867e31220d437bd86af0f6976e46c8ad62a96f0525887d67a6d9",
+    "l_wheel_Link.stl": "2cc0ae53618f02656d66c5c6bdb2a31254b0745ef2a513f0a208300b40e658bc",
+    "rf0_Link.stl": "4a1a0e3193ed0d9b0d17bdb79285b77266b670708f352b738c5b7a1b7687b607",
+    "base_link_0_visual_02.stl": "f24df5091dd2b8841e448b30325a10425211df364636057f4a67534c5a44e7ab",
+    "r23_Link.stl": "7c01b907f34156535724855532d80f9c91bed50c83556628cb8394eb3f91372f",
+    "base_link_0_visual_00.stl": "08c9b035aefbaad4f1c5690195c3c3a3299e5cfad72b197a17d9c9bfeb7a47c4",
+    "rf1_Link.stl": "af3d14e8cb078e4776d9cb907e9cfb748fc23a0d0e899d81b5e3c3661555b749",
+    "base_Link_del.stl": "ef72281480a5ec99fca642cc2d36c0cb52671ff958143c4bdd9102d7eb50dff7",
+    "l22_Link.stl": "5ad150acdabe033810438986a97da84d21537f0c7d57c484375842e2eab661cc",
+    "base_link_0_visual_08.stl": "53dc01df8f035991552096950ad6e1d086e6af97ef71656acab8d885746fd566",
+    "base_link_0_visual_03.stl": "3503dae7aa1148a0cba3c12d99aed18d6b3182efab410de0592e862393e747da",
+    "l23_Link.stl": "fc3102fb399bd43657e4ef1ba5f7138c19a3c9ed6d87042acd09ecec8a11f6e9",
+    "r22_Link.stl": "319f69a0ef1e8b54c3bee9665f186a57fcd3664e84d16e81875573c79bbfd4ac",
+    "r20_Link.stl": "bacf6a4dc5e1554e9027cb8a85b09b2a12dc4e5c30414783ead7cc687f16505d",
+    "r21_Link.stl": "aaa638b3d098df9253c0efa7da9f267905b56d03bf05d65ac5e41175da406997",
+    "base_link_0_visual_04.stl": "362c2a0cd861543ae29e5e0eda7c7ded5c58b21fc7aa2fa653c062fae7caa625",
+    "lf1_Link.stl": "014bcffd4924ef919835dd5f26e6750d60ff81cad4c50b5956a4763bcc4f6fd8",
+    "r_wheel_Link.stl": "46fa1cdb60943a9e9b69762f2e5677efb04291faf2037219694915f61262ba06",
+    "base_link_0_visual_05.stl": "3eba0d1143fe32d63f6210e1480e3acf3ad8ca600501e8a99af6343826b6a0d8",
+    "base_link_0_visual_01.stl": "6094d8c2c3f23f20941468babdbe3993949e5df69defcc17efd289003e3a8c9a",
+    "l21_Link.stl": "fafa4e4e447fba4d6ad562d315fa4f29319182ee1e0a1951ccdade63eecc4137",
+    "l20_Link.stl": "c9347b408050e4b4078ac1c6032c5890d530d5cbd6ff07bd45009abf6f22ce55",
+    "base_link_0_visual_06.stl": "d938bc45664621e1331072951ad5f7fd07cc8a4aec7ce531e82a0efdeb27dd0c",
+    "lf0_Link.stl": "c79806cb1a934e4f730e272d59b31db1a3921bba621573791f77bf33c27ea98a"
+  },
+  "seed": null,
+  "randomness": "Deterministic cases, no randomized initialization or training",
+  "physics_dt_s": 0.001,
+  "control_decimation": 10,
+  "gravity": [
+    0.0,
+    0.0,
+    -9.81
+  ],
+  "nq": 21,
+  "nv": 20,
+  "nu": 6,
+  "neq": 4,
+  "mass_kg": 21.054624999999998,
+  "state_access": "privileged MuJoCo qpos/qvel; no deployable estimator",
+  "thresholds": {
+    "duration_s": 30.0,
+    "final_window_s": 5.0,
+    "final_roll_pitch_peak_rad": 0.05,
+    "max_xy_drift_m": 0.1,
+    "max_closure_m": 0.0001,
+    "fall_height_m": 0.12,
+    "fall_roll_pitch_rad": 0.6,
+    "solver_failures": 0,
+    "numerical_warnings": 0,
+    "passive_actuator_torque_nm": 0
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "case": "roll",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 9.999999999999897,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 1.741837072683424e-06,
+  "max_xy_drift_m": 0.008491949818598755,
+  "max_closure_m": 3.783225137889252e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.24769435495781403,
+  "max_torque_nm": [
+    11.882557494612822,
+    2.4553001929690788,
+    13.675681931104194,
+    2.4951225591812647,
+    12.210720404231473,
+    14.67953452424149
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "final_odometry_error_m": -0.0031890449457943524,
+  "wall_s": 7.247304658999383,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "passed": true
+}

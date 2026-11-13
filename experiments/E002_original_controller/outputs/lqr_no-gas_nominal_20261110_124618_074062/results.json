@@ -1,0 +1,317 @@
+{
+  "timing": {
+    "sync_calls": 272,
+    "sync_wall_s": 0.09383238000009442,
+    "sync_max_s": 0.000986660000307893,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 1.300231029978022,
+    "late_steps": 1769,
+    "max_lag_s": 0.04327780699986761,
+    "initial_sync_wall_s": 0.05441229000007297,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.9981615817724914,
+    "loop_non_ui_non_sleep_s": 7.597466783022355
+  },
+  "viewer_options": {
+    "camera_type": 0,
+    "left_ui": true,
+    "right_ui": true,
+    "hud": false,
+    "initial": {
+      "azimuth": 135.0,
+      "elevation": -12.0,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "final": {
+      "azimuth": 94.09875359539772,
+      "elevation": -14.243528283796735,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 8.975000000000465,
+  "terminated": true,
+  "termination_reason": "viewer_closed",
+  "timeout": false,
+  "final_tilt_rad": 0.41218028200944956,
+  "max_tilt_rad": 0.41218028200944956,
+  "max_xy_drift_m": 0.11160053329319147,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 2.4216149510833696e-05,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.07503836711712164,
+  "max_torque_nm": [
+    30.0,
+    5.0,
+    30.0,
+    5.0,
+    30.0,
+    30.0
+  ],
+  "nonwheel_contacts": [
+    "base_Link_del_collision_0",
+    "rf0_Link_collision_0",
+    "rf1_Link_collision_0"
+  ],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": "iso",
+  "final_base_xy_m": [
+    0.0936706103795975,
+    0.02807893460732806
+  ],
+  "final_yaw_rad": -0.011451437155249974,
+  "mode": "drive",
+  "interactive": true,
+  "teleop": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.2119232071446953,
+    "yaw": -0.011451437155249974,
+    "message": "jump complete",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [
+      {
+        "start": 4.900999999999971,
+        "start_height": 0.18319372561274117,
+        "max_height": 0.5020190387540884,
+        "start_com_z": 0.2605096560189152,
+        "max_com_z": 0.5810346783280597,
+        "max_wheel_clearance_m": 0.3371457151152669,
+        "airborne_s": 0.43500000000000033,
+        "max_upward_velocity": 2.154386299602762,
+        "phases": [
+          {
+            "time": 4.900999999999971,
+            "phase": "crouch"
+          },
+          {
+            "time": 5.301000000000105,
+            "phase": "thrust"
+          },
+          {
+            "time": 5.43700000000015,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 5.637000000000217,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 5.857000000000291,
+            "phase": "landing"
+          },
+          {
+            "time": 7.50100000000084,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 5.43700000000015,
+        "no_liftoff": false
+      }
+    ],
+    "key_events": [
+      {
+        "time": 1.1999999999999786,
+        "pressed": "q"
+      },
+      {
+        "time": 1.6199999999999324,
+        "pressed": ""
+      },
+      {
+        "time": 1.959999999999895,
+        "pressed": "e"
+      },
+      {
+        "time": 2.779999999999805,
+        "pressed": ""
+      },
+      {
+        "time": 3.3099999999997465,
+        "pressed": "q"
+      },
+      {
+        "time": 4.259999999999757,
+        "pressed": ""
+      },
+      {
+        "time": 4.899999999999971,
+        "key": "j"
+      }
+    ],
+    "current_jump": null
+  },
+  "final_odometry_error_m": 5.378093846845345,
+  "wall_s": 8.991530193000472,
+  "fall_events_s": [
+    5.943000000000319
+  ],
+  "gain_schedule": {
+    "lengths_m": {
+      "left": 0.34,
+      "right": 0.22931494034268002
+    },
+    "K_left": [
+      [
+        -63.500768383598086,
+        -1.5163192394133498,
+        -22.053646773525287,
+        -17.77370056497382,
+        29.724581719072702,
+        3.827295836993862
+      ],
+      [
+        9.550875121248342,
+        0.12429293568386968,
+        3.6253939518156306,
+        2.5827976787012865,
+        171.49555576983377,
+        7.319447449766034
+      ]
+    ],
+    "K_right": [
+      [
+        -62.08946738151617,
+        -1.4354126545113732,
+        -21.801714614849953,
+        -18.515556047536094,
+        40.13143742950843,
+        4.694947027640409
+      ],
+      [
+        12.783576682870995,
+        0.19355288544270927,
+        4.870985489880653,
+        3.733904223699361,
+        169.3794468822999,
+        7.022380805867446
+      ]
+    ],
+    "masses": {
+      "body_total_kg": 16.877574,
+      "body_per_side_kg": 8.438787,
+      "leg_kg": {
+        "l": 1.597924,
+        "r": 1.5983269999999998
+      },
+      "wheel_kg": {
+        "l": 0.4904,
+        "r": 0.4904
+      },
+      "total_kg": 21.054624999999998,
+      "wheel_radius_m": 0.06
+    },
+    "range_m": [
+      0.18,
+      0.34
+    ]
+  },
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+  "passed": false
+}

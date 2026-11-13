@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "source_hashes_current": true,
+  "python_syntax": true,
+  "local_links_checked": 66,
+  "broken_links": [],
+  "real_default_gui": "outputs/lqr_no-gas_nominal_20261109_184411_704809/results.json",
+  "physical_check": "outputs/interaction_check_20261109_185134_877827/results.json",
+  "limitations": [
+    "mouse focus automation did not complete",
+    "final display flag lock checked with API objects; real GUI sequence predates it",
+    "existing running windows require restart",
+    "jump only validated for default no-gas flat ground; no hardware/real-time/training"
+  ]
+}

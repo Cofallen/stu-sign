@@ -1,0 +1,150 @@
+我已读完 `experiments/E002_original_controller/` 的启动、显示、VMC 与控制代码，并用该目录的 mjlab 环境做了无窗口计时、真实窗口计时（短时开窗，已关闭）以及历史 `outputs/` 记录的对比。结论先说。
+
+## 一、窗口现状：不是默认控制窗口
+
+你的感觉是对的，但原因是相机设置和 UI 面板设置，并非 `launch_passive` 本身：
+
+| 当前配置 | 位置 | 效果 |
+|---|---|---|
+| `show_left_ui=False, show_right_ui=False` | [controller.py:126-128](experiments/E002_original_controller/controller.py#L126-L128) | 左侧 Simulation/Option/Rendering/Visualization 面板、右侧 Joint/Control/Equality 面板全部隐藏 |
+| `cam.type = mjCAMERA_TRACKING`，`trackbodyid = base_Link_del` | [render_stand.py:71-76](experiments/E002_original_controller/LQR_sim/render_stand.py#L71-L76) | 相机锁定机身跟随；实测 `cam.type=1`，是跟随相机 |
+| `sitegroup[:] = 0`（`geomgroup[3]=0` 本来就是默认值） | [render_stand.py:69-70](experiments/E002_original_controller/LQR_six/render_stand.py#L69-L70) | 隐藏所有 site（IMU/弹簧标记），不是默认显示 |
+| `viewer.set_texts(...)` 自绘两行 HUD | [controller.py:136-145](experiments/E002_original_controller/controller.py#L136-L145) | 用自绘文字代替默认 UI 信息 |
+| `sync_driving_viewer` 每 50 步把 `opt.flags` 写回启动值 | [render_stand.py:81-89](experiments/E002_original_controller/LQR_ssix/render_stand.py#L81-L89) | 在面板里改任何显示选项都会被周期性撤销 |
+
+所以它仍是 MuJoCo 的同一个 Simulate 窗口（passive viewer），只是被配置成了“跟随相机 + 无面板 + 自绘 HUD”的驾驶视图，不是你想要的默认控制窗口。真正的默认窗口是 `launch_passive` 的缺省值：两侧面板可见、相机为 free。
+
+## 二、为什么慢：主因在窗口调用，不在物理或控制器
+
+（以下为我在本机 `mjlab` 环境、MuJoCo 3.11.0 的实测；检查时使用的是该目录自带的模型和姿态。）
+
+**单步计算预算（无窗口，单位 µs/步）**
+
+| 项目 | 耗时 | 说明 |
+|---|---:|---|
+| `mj_step` | 96 | `niter=1`，求解器早已收敛；`mj_fwdPosition` 占 ~81（39 个 geom、mesh 碰撞、18 个接触） |
+| 循环顶部重复的 `mj_forward` | 91 | [controller.py:172](experiments/E002_original_controller/controller.py#L172)，和 `mj_step` 内部的前向重复 |
+| `read_state()` | 200 | `get_state` + 两条腿 VMC（各 ~87–93，其中 equality 掩码 18、`pinv` 20.5、`pinv@J` 21.6）+ 状态估计 |
+| LQR/VMC 输出 + 6 电机写入 | 23 |  |
+| 每步日志（closure、外力范数、接触名） | 88 | [controller.py:202-210](experiments/E002_original_controller/controller.py#L202-L210) |
+
+无窗口整圈实测：10 s 仿真 / 7.0 s 墙钟 = **1.43× 实时（约 0.70 ms/步）**，即无窗口本身并不慢。
+
+**窗口调用（真实窗口实测，单位 ms/次）**
+
+| 调用 | 实测 | 当前频率 | 每 1 s 仿真额外墙钟 |
+|---|---:|---|---:|
+| `viewer.sync()`（缺省 `state_only=False`） | **25–50** | 每 50 步 = 20 Hz | **0.5–1.0 s** |
+| `viewer.set_texts()` | **12** | 静止时 20 Hz；按住 W/S 时约 100 Hz | 0.24 s（静止）～**1.2 s**（驾驶） |
+| `viewer.sync(state_only=True)` | **0.4–1.5** | 同上 20 Hz | 0.01–0.03 s |
+
+`sync()` 慢的根本原因：passive 模式下 `state_only=False` 每次都要 `mjv_copyModel`（把整个模型、包括 16 个 STL mesh 重新复制到 viewer 私有副本）+ `mjv_copyData`；而 `state_only=True` 只搬积分状态（qpos/qvel/ctrl 等）并 `mj_forward` 一次。
+
+把这些加起来就能复现历史记录：静止约 0.7 + 0.5～1.0 + 0.24 ≈ 1.4–1.9 s/仿真秒（0.5–0.7× 实时）；驾驶时再加约 1.2 s（0.33–0.47× 实时）。和 `outputs/` 里的 0.33–0.64× 完全对得上。**所以“慢”主要是窗口线程的两次 Python 调用造成的，并不是物理或 LQR 算得慢。**
+
+## 三、修改建议（按收益排序）
+
+### P0-1　`viewer.sync(state_only=True)`（收益最大，改动一行）
+
+模型在运行中不变，只是 qpos/qvel/ctrl 在动，本来就该用 `state_only`：
+
+```python
+# controller.py 主循环里，替代 sync_driving_viewer(viewer, display_flags)
+if step % 50 == 0:
+    viewer.sync(state_only=True)   # 25–50 ms/次 → 0.4–1.5 ms/次
+```
+
+注意：如果以后在运行中重建/替换模型（本工程没有）或往 `user_scn` 加几何，需要先做一次全量 `viewer.sync()`；拖动推机器人的外力由 Simulate 直接写在 `data.xfrc_applied` 上，不受影响。
+
+### P0-2　把 `set_texts` 节流到 5–10 Hz，并按最终字符串去重
+
+现在的去重比较的是 `hint=(speed, yaw_rate, l0, message)` 里的浮点值，按住 W 时每 10 步速度都变，所以实际是 100 Hz 在调用 12 ms 的接口。改成按墙钟限频 + 比较最终文本：
+
+```python
+_text_state = ['', 0.0]
+def update_viewer_text(force=False):
+    if viewer is None or teleop is None:
+        return
+    text = (f"t={data.time:.1f}s x={data.qpos[0]:+.2f}m v={teleop.speed:+.2f}m/s "
+            f"l0={teleop.l0:.3f}m {teleop.jump_phase}")
+    now = time.perf_counter()
+    if not force and (text == _text_state[0] or now - _text_state[1] < 0.1):
+        return
+    _text_state[:] = [text, now]
+    viewer.set_texts([...])
+```
+
+同时 [controller.py:230-231](experiments/E002_original_controller/controller.py#L230-L231) 的 20 Hz 无条件调用也删掉，改为只在 `force=True`（启动/退出）时刷。若同时恢复默认面板，其实可以直接不用自绘 HUD，改用面板里的 Watch/Control 显示。
+
+### P0-3　恢复默认控制窗口
+
+```python
+viewer = mjviewer.launch_passive(
+    model, data,
+    key_callback=keyboard.on_key if keyboard else None,
+    show_left_ui=True, show_right_ui=True)      # 默认值就是 True
+```
+
+`setup_viewer` 改成默认 free 相机，跟随做成可选项：
+
+```python
+def setup_viewer(viewer, model, preset='iso', follow=False, hide_sites=False):
+    p = CAMERA_PRESETS.get(preset, CAMERA_PRESETS['iso'])
+    mujoco.mjv_defaultFreeCamera(model, viewer.cam)   # 默认 free
+    viewer.cam.azimuth, viewer.cam.elevation = p['azimuth'], p['elevation']
+    viewer.cam.distance = p['distance']
+    viewer.cam.lookat[:] = [0., 0., p['lookat_z']]
+    if follow:
+        viewer.cam.type = mujoco.mjtCamera.mjCAMERA_TRACKING
+        viewer.cam.trackbodyid = int(model.body('base_Link_del').id)
+    if hide_sites:
+        viewer.opt.sitegroup[:] = 0
+```
+
+三点配套：
+
+1. **删掉 `sync_driving_viewer` 的 flags 回写**。面板一显示，用户每改一次 Rendering/Group 选项，就会在 0.05 s 仿真时间内被还原——默认窗口会变得不可用。另外我核对了 3.11 的 `simulate.cc` 键盘表：只有 Space、方向键、PageUp、Tab、`[`/`]`、Esc、F1–F7，**没有 W/J/X**，所以这段防御性恢复本来就没有必要。
+2. **Simulation 面板的 Pause/Step 不会暂停你的 Python 循环**（passive 模式下 `run` 只影响 UI 自己）。如果想让 Pause 生效，需要在循环里读 `viewer._sim().run` 并跳过 `mj_step`（`sim.run` 在绑定里是公开的）。Reset/Reload 同理，别期待它们重置你的控制器状态。
+3. **面板里的文本框会抢键盘**：`KeyboardInput` 只判断顶层窗口焦点，点进 Watch/Field 输入框后按 W 仍会驱动机器人。操作时点一下 3D 视口即可；这是当前输入后端的已知限制，需要在 README 里写清。
+
+想两者兼得，可以加 `--ui/--no-ui` 和 `--camera-follow` 两个开关：日常调参用默认窗口，录演示/驾驶用精简跟随视图。
+
+### P1　控制循环优化（对无窗口和 `--video` 也有效）
+
+1. **去掉循环顶部的 `mj_forward`**（−91 µs/步）。在扰动之后、循环之前做一次即可。注意语义：去掉后读到的传感器/运动学是上一物理步的（`mj_step` 的前向在积分前），1 kHz 下滞后 1 ms——这正是原作者 `mj_step → 读状态 → 控制` 的时序，但和现在 E002 的时序不同，需要重跑站立/跳跃验收并记录。
+2. **VMC 的 equality 耦合每步只算一次**（−约 40 µs/步）。现在左右腿各做一遍 `efc_J` 掩码 + `pinv(12×14)` + 矩阵乘（[vmc.py:28-32](experiments/E002_original_controller/LQR_six/vmc.py#L28-L32)）。把 `coupling` 缓存成每步一次，两腿共用列切片；顺带缓存 equality 行索引，避免每步布尔掩码。
+3. **日志降频**（−约 80 µs/步）：`closure_error` 里 4 次按名字查 site、`xfrc_applied` 范数、接触名扫描都挪到 `step % 10 == 0`。但验收用的 `max_closure/max_tilt/min_height/passive_torque` 建议保留逐步统计，或只在 `mode == 'drive'` 时降频，避免验收数字变成 10 Hz 采样。
+4. 缓存 `model.joint/body/site` 的 id（[get_sensor.py:31-53](experiments/E002_original_controller/LQR_six/get_sensor.py#L31-L53) 每步 10 次字符串查找），约 −20 µs/步。
+5. 这些加起来预计 0.70 → **0.45–0.50 ms/步**（无窗口约 2.0–2.2× 实时），需要重新确认站立/跳跃没有因为时序变化而变差。
+
+### P2　物理（可选，不建议现在动）
+
+`mj_step` 的 96 µs 里约 81 µs 在 `mj_fwdPosition`（碰撞检测），求解器只迭代 1 次，改 `tolerance/iterations` 没有意义。真要再快只能简化碰撞网格或换碰撞几何，那会改变接触和闭链行为，必须重做站立、跳跃、闭链残差验收——和这次“提速”不是同一风险等级，先不做。
+
+## 四、预期效果
+
+| 场景 | 现在 | 改完（预期） |
+|---|---|---|
+| 无窗口 10 s | 7.0 s 墙钟（1.43×） | ~4.5–5 s（2.0–2.2×） |
+| 窗口静止 | 0.5–0.7× 实时 | ≈1.0× |
+| 窗口驾驶 | 0.33–0.64× 实时 | ≈1.0× |
+
+作为支撑：我把 `sync(state_only=True)`（30 Hz）+ 文本 10 Hz 接到完整控制循环里实测，整圈 **0.72 ms/步**，与无窗口的 0.70 ms/步基本相同（窗口可见刷新仍有 30 Hz）。也就是说，只做 P0-1 + P0-2 就能把窗口模式从 1.2–3.0 ms/步 拉回无窗口水平，不需要动物理。
+
+## 五、改完怎么验
+
+```bash
+# 无窗口基准（对比 wall_s / data.time）
+time PYTHONNOUSERSITE=1 /home/cofallen/miniconda3/envs/mjlab/bin/python -B controller.py --headless --duration 10
+
+# 窗口：小车跑 10 s，退出后看 results.json 的 duration_s / wall_s
+PYTHONNOUSERSITE=1 /home/cofallen/miniconda3/envs/mjlab/bin/python -B controller.py --viewer
+```
+
+判据用 `wall_s` 与 `duration_s` 的比值，而不是“看起来快”，并确认 `passed` 与站立/跳跃指标没有退化。另外建议在退出时打印累计的 `sync`/`set_texts` 墙钟，作为后续回归的固定指标。
+
+两个环境注意点：README 让用 `envs/mjlab`（MuJoCo 3.11.0），但 `outputs/*/metadata.json` 里最近的驾驶记录是用 `/home/cofallen/miniconda3/bin/python`（MuJoCo 3.9.0）跑的；`sync(state_only=True)` 两个版本都支持，但测速和验收最好固定一个解释器，否则数字不可比。
+
+---
+
+我没有改任何文件（当前会话是只读策略）。如果需要，我可以按 P0-1/P0-2/P0-3 直接出补丁（`controller.py` 与 `render_stand.py` 两组小改动），并保留 `--no-ui`/`--camera-follow` 两个开关，改完用上面的命令复核墙钟比。

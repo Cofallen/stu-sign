@@ -1,0 +1,82 @@
+{
+  "kind": "move_jump",
+  "length": 0.278,
+  "duration": 11.999999999998789,
+  "wall_s": 7.872612150999885,
+  "failed": null,
+  "first_fall": null,
+  "max_tilt": 0.023026278778391574,
+  "final_tilt": 9.975125182274335e-05,
+  "actual_length": 0.2779430746404774,
+  "jump": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 0.01891684671315064,
+    "message": "jump complete",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [
+      {
+        "start": 3.0009999999997805,
+        "start_height": 0.2490835065427917,
+        "max_height": 0.46476347192850165,
+        "start_com_z": 0.3204296732059412,
+        "max_com_z": 0.5405610702256142,
+        "max_wheel_clearance_m": 0.25798585719952005,
+        "airborne_s": 0.3950000000000003,
+        "max_upward_velocity": 1.9266122624041566,
+        "phases": [
+          {
+            "time": 3.0009999999997805,
+            "phase": "crouch"
+          },
+          {
+            "time": 3.4019999999997363,
+            "phase": "thrust"
+          },
+          {
+            "time": 3.5289999999997224,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 3.769999999999696,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 3.8889999999996827,
+            "phase": "landing"
+          },
+          {
+            "time": 5.601000000000205,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 3.5289999999997224,
+        "no_liftoff": false
+      }
+    ],
+    "key_events": [
+      {
+        "time": 1.0000000000000007,
+        "pressed": "w"
+      },
+      {
+        "time": 2.9999999999997806,
+        "key": "j"
+      },
+      {
+        "time": 7.000000000000672,
+        "pressed": ""
+      }
+    ],
+    "current_jump": null
+  },
+  "max_com_z": 0.5405393261382462,
+  "max_base_z": 0.46476347192850165,
+  "max_wheel_clearance": 0.25798413690872257,
+  "max_actual_yaw_rate": 0.13475193263488291,
+  "final_actual_yaw_rate": 0.00034207327256077736,
+  "K_changed": true
+}

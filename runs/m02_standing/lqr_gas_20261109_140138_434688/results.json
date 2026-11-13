@@ -1,0 +1,265 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "case": "nominal",
+      "duration_s": 30.00000000001368,
+      "terminated": false,
+      "termination_reason": null,
+      "timeout": true,
+      "finite": true,
+      "final_roll_pitch_peak_rad": 1.2904295952317743e-06,
+      "maximum_tilt_rad": 1.3107404730315208e-06,
+      "max_xy_drift_m": 3.8190299200610044e-07,
+      "final_xy_drift_m": 3.676856822973054e-07,
+      "min_base_height_m": 0.24923898485262272,
+      "max_closure_m": 2.1994126275173273e-06,
+      "max_passive_actuator_torque_nm": 0.0,
+      "max_motor_torque_nm": [
+        9.088416660980776,
+        0.0005976455894473704,
+        9.01158411015448,
+        0.0005665519351620037,
+        9.440424412003578,
+        9.33189309725563
+      ],
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "min_contacts": 4,
+      "nonwheel_contacts": [],
+      "wall_seconds": 12.041596731999562,
+      "controller_solves": 3000,
+      "constrained_mpc_solves": 0,
+      "solver_failures": 0,
+      "max_solver_iterations": 0,
+      "saturation_ticks": 0,
+      "command_wall_ms_p50_p99_max": [
+        0.028486000701377634,
+        0.08783984978435881,
+        0.30738700024812715
+      ],
+      "disturbance": null,
+      "initialization_perturbation_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "case": "pitch-plus",
+      "duration_s": 30.00000000001368,
+      "terminated": false,
+      "termination_reason": null,
+      "timeout": true,
+      "finite": true,
+      "final_roll_pitch_peak_rad": 1.906950560659083e-07,
+      "maximum_tilt_rad": 0.02999874813068668,
+      "max_xy_drift_m": 0.004960758908081266,
+      "final_xy_drift_m": 4.036004364027886e-06,
+      "min_base_height_m": 0.24916855332848967,
+      "max_closure_m": 2.4731372865210024e-06,
+      "max_passive_actuator_torque_nm": 0.0,
+      "max_motor_torque_nm": [
+        11.946667805244237,
+        3.5768481473332923,
+        11.861824738980177,
+        3.565223047737369,
+        10.851228789452295,
+        10.733951283179724
+      ],
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "min_contacts": 4,
+      "nonwheel_contacts": [],
+      "wall_seconds": 12.281618582000192,
+      "controller_solves": 3000,
+      "constrained_mpc_solves": 0,
+      "solver_failures": 0,
+      "max_solver_iterations": 0,
+      "saturation_ticks": 0,
+      "command_wall_ms_p50_p99_max": [
+        0.03323500004626112,
+        0.09615587005100651,
+        0.25045300026249606
+      ],
+      "disturbance": null,
+      "initialization_perturbation_rad": [
+        0.0,
+        0.03,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "case": "pitch-minus",
+      "duration_s": 30.00000000001368,
+      "terminated": false,
+      "termination_reason": null,
+      "timeout": true,
+      "finite": true,
+      "final_roll_pitch_peak_rad": 2.5224214223776524e-06,
+      "maximum_tilt_rad": 0.030001251869313326,
+      "max_xy_drift_m": 0.00474032345081153,
+      "final_xy_drift_m": 5.301521427239324e-06,
+      "min_base_height_m": 0.24841259593718926,
+      "max_closure_m": 3.2587440368575975e-06,
+      "max_passive_actuator_torque_nm": 0.0,
+      "max_motor_torque_nm": [
+        10.561564957841012,
+        3.575662924841774,
+        10.476786278321615,
+        3.5640999432213487,
+        12.26379890502658,
+        12.15212152824907
+      ],
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "min_contacts": 4,
+      "nonwheel_contacts": [],
+      "wall_seconds": 12.251297767999858,
+      "controller_solves": 3000,
+      "constrained_mpc_solves": 0,
+      "solver_failures": 0,
+      "max_solver_iterations": 0,
+      "saturation_ticks": 0,
+      "command_wall_ms_p50_p99_max": [
+        0.03561199991963804,
+        0.09976934054065938,
+        0.3798499992626603
+      ],
+      "disturbance": null,
+      "initialization_perturbation_rad": [
+        0.0,
+        -0.03,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "case": "push",
+      "duration_s": 30.00000000001368,
+      "terminated": false,
+      "termination_reason": null,
+      "timeout": true,
+      "finite": true,
+      "final_roll_pitch_peak_rad": 1.3635379447833282e-06,
+      "maximum_tilt_rad": 0.011241018825990634,
+      "max_xy_drift_m": 0.019613713191594873,
+      "final_xy_drift_m": 1.7563715119097673e-06,
+      "min_base_height_m": 0.24923898485262272,
+      "max_closure_m": 2.246257591936753e-06,
+      "max_passive_actuator_torque_nm": 0.0,
+      "max_motor_torque_nm": [
+        9.355504709078199,
+        0.3913125464605042,
+        9.275806439094028,
+        0.3897138107719827,
+        9.556975568631392,
+        9.447922195608058
+      ],
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "min_contacts": 4,
+      "nonwheel_contacts": [],
+      "wall_seconds": 12.21944117000021,
+      "controller_solves": 3000,
+      "constrained_mpc_solves": 0,
+      "solver_failures": 0,
+      "max_solver_iterations": 0,
+      "saturation_ticks": 0,
+      "command_wall_ms_p50_p99_max": [
+        0.0308640001094318,
+        0.10208600996520545,
+        0.27777899958891794
+      ],
+      "disturbance": "world +X 10 N at base COM, t=[5,5.2)s",
+      "initialization_perturbation_rad": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true
+    },
+    {
+      "case": "roll",
+      "duration_s": 30.00000000001368,
+      "terminated": false,
+      "termination_reason": null,
+      "timeout": true,
+      "finite": true,
+      "final_roll_pitch_peak_rad": 2.0571393215111717e-06,
+      "maximum_tilt_rad": 0.030000000000000002,
+      "max_xy_drift_m": 0.009811753323637207,
+      "final_xy_drift_m": 0.007638339453363294,
+      "min_base_height_m": 0.2470724610900737,
+      "max_closure_m": 3.7570837132728747e-06,
+      "max_passive_actuator_torque_nm": 0.0,
+      "max_motor_torque_nm": [
+        10.258341074599716,
+        3.4008851285588038,
+        12.823572077906416,
+        0.8744645725622103,
+        9.996376456149306,
+        10.630109567818696
+      ],
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "min_contacts": 2,
+      "nonwheel_contacts": [],
+      "wall_seconds": 11.996142140999837,
+      "controller_solves": 3000,
+      "constrained_mpc_solves": 0,
+      "solver_failures": 0,
+      "max_solver_iterations": 0,
+      "saturation_ticks": 0,
+      "command_wall_ms_p50_p99_max": [
+        0.02849100019375328,
+        0.08547099969291594,
+        0.23504999990109354
+      ],
+      "disturbance": null,
+      "initialization_perturbation_rad": [
+        0.03,
+        0.0,
+        0.0
+      ],
+      "passed": true
+    }
+  ]
+}

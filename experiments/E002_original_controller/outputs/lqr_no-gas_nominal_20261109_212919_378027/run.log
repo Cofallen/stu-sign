@@ -1,0 +1,468 @@
+{"command": ["/home/cofallen/miniconda3/bin/python", "-B", "controller.py"], "cwd": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller", "python": "/home/cofallen/miniconda3/bin/python", "runtime_paths": {"project": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller", "output": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261109_212919_378027", "modules": {"LQR_six": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/__init__.py", "LQR_six.get_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_sensor.py", "LQR_six.write_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/write_sensor.py", "LQR_six.mymath": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mymath.py", "LQR_six.leg_data": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/leg_data.py", "LQR_six.vmc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/vmc.py", "LQR_six.get_state": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_state.py", "LQR_six.mympc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mympc.py", "LQR_six.lqr_controller": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr_controller.py", "LQR_six.render_stand": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/render_stand.py", "LQR_six.teleop": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/teleop.py", "LQR_six.keyboardInput": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/keyboardInput.py", "LQR_six.simulation": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/simulation.py"}}, "args": {"control": "lqr", "variant": "no-gas", "case": "nominal", "duration": null, "headless": false, "viewer": true, "no_drive": false, "no_ui": false, "camera_follow": false, "hud": false, "camera": "iso", "video": null, "video_size": "960x540", "video_fps": 30, "no_hud": false, "follow": false, "hold": false, "drive": true}, "versions": {"mujoco": "3.9.0", "numpy": "2.4.6", "scipy": "1.18.1"}, "mass_kg": 21.054624999999998, "physics_dt_s": 0.001, "control_dt_s": 0.01, "feedback": "Author six-state LQR/VMC; IMU + wheel odometry; VMC uses full-model linkage Jacobian/qvel", "file_sha256": {"controller.py": "39ab0201738b9c3d630db90b8fa3b3246f499afb8c0c968e3dd50c5fdbbda240", "standing_pose.json": "e94e06734096270711e2134e226a1d2b05beb893c886cc7e1ea1ca3a73fa1d70", "LQR_six/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "LQR_six/get_sensor.py": "c6b257a10d3288aeebb0a18db9f15aeebe67da5273f5169f5cbd7943e19fb223", "LQR_six/get_state.py": "a38da1c5b914e52cc77be4ad3ad35a3269119aab9aba3902dc392a69b85f9bef", "LQR_six/keyboardInput.py": "abc649b980c3218ee019f8814e9ccac9872a9e030913a5d2db569eace087fbbf", "LQR_six/leg_data.py": "2bb7abcc723b3d8bb23ea6047ae1c825be1f8c437b52907407a29782475f5893", "LQR_six/lqr.py": "a4b660fc40cfc65a58e80c8a885c85f94bff23a2d48747c4674359c57b28f2ac", "LQR_six/lqr_controller.py": "d4ef36033f420bb64a89c4c7016f330ac5e13c732870d159394a10c39bf33df6", "LQR_six/mymath.py": "00ae3961d93a4ad46920dd46bee96d4d9a14e294c2beb7ab97334141be267426", "LQR_six/mympc.py": "c6224a5c2c70acc49f6b20363972ce1f210f12fd26932f162fb0b18a3bec2de1", "LQR_six/render_stand.py": "fdc14b6814b11adb489ed50d4636bc8f76778db5eeb2b755bb6a7510ccf6a233", "LQR_six/simulation.py": "65c3f77b3f5ad396470db403d0be96330d79daa8b1b33389838b071d8bd8bb47", "LQR_six/teleop.py": "643dde34ede190138cb9b4940703ba7441c64c3949e9301f8a639771ceca6605", "LQR_six/vmc.py": "d62dcbd1aba16507705810c4f4f425c71bb43d1beb19677a21b9c7ed4081fb8e", "LQR_six/vofa.py": "a0a289ae54b17c9b6cd8c10219d1fdb988bc2c491e8352a457dd211faa67a0b8", "LQR_six/write_sensor.py": "f2aadcec19cd5106e24a825956057a770b676c39fedf55429b910879a5439362", "assets/robot_gas_spring_damped.xml": "9b77973e72253511f798866e709021349af8386b2b80855ae9b90ce66319009f", "assets/robot_no_gas_spring.xml": "263185e1f4a2a61d9e54803610d3e6b978c5ede259223552f278b3d623430088"}, "thresholds": {"duration_s": null, "max_xy_drift_m": 0.1, "final_tilt_rad": 0.05, "max_closure_m": 0.0001, "min_height_m": 0.12, "fall_tilt_rad": 0.6}, "seed": null}
+{
+  "timing": {
+    "sync_calls": 3955,
+    "sync_wall_s": 5.485975607069122,
+    "sync_max_s": 0.01723070299703977,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 13.543820625636727,
+    "late_steps": 42382,
+    "max_lag_s": 0.11784619094032678,
+    "initial_sync_wall_s": 0.03692286600198713,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.9999799660630291,
+    "loop_non_ui_non_sleep_s": 111.46081800829415
+  },
+  "viewer_options": {
+    "camera_type": 0,
+    "left_ui": true,
+    "right_ui": true,
+    "hud": false,
+    "initial": {
+      "azimuth": 135.0,
+      "elevation": -12.0,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "final": {
+      "azimuth": 168.12992125984272,
+      "elevation": -21.38976377952756,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 130.488000000259,
+  "terminated": true,
+  "termination_reason": "fall",
+  "timeout": false,
+  "final_tilt_rad": 0.6021656286751689,
+  "max_tilt_rad": 0.6021656286751689,
+  "max_xy_drift_m": 7.0054211508743895,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 1.7374424033199954e-05,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.13938196800194105,
+  "max_torque_nm": [
+    30.0,
+    5.0,
+    30.0,
+    5.0,
+    30.0,
+    30.0
+  ],
+  "nonwheel_contacts": [
+    "base_Link_del_collision_0"
+  ],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": "iso",
+  "final_base_xy_m": [
+    -4.068210946601634,
+    1.9055646045757106
+  ],
+  "final_yaw_rad": -0.6311690983489397,
+  "mode": "drive",
+  "interactive": true,
+  "teleop": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.23040000000000377,
+    "yaw": -0.6311690983489397,
+    "message": "jump complete",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [
+      {
+        "start": 24.061000000006423,
+        "start_height": 0.24916962438185933,
+        "max_height": 0.46872982235902355,
+        "airborne_s": 0.4180000000000003,
+        "max_upward_velocity": 1.9067138610898973
+      },
+      {
+        "start": 27.881000000011092,
+        "start_height": 0.24920985325463288,
+        "max_height": 0.4686920875261265,
+        "airborne_s": 0.4180000000000003,
+        "max_upward_velocity": 1.9064632093779157
+      },
+      {
+        "start": 31.30100000001527,
+        "start_height": 0.24920071526663048,
+        "max_height": 0.4686697751584393,
+        "airborne_s": 0.4170000000000003,
+        "max_upward_velocity": 1.9062926885829605
+      },
+      {
+        "start": 66.12099999995166,
+        "start_height": 0.20184921225155114,
+        "max_height": 0.4735779985383848,
+        "airborne_s": 0.36000000000000026,
+        "max_upward_velocity": 1.9270414792742763
+      },
+      {
+        "start": 69.05099999996565,
+        "start_height": 0.20167748936438049,
+        "max_height": 0.47360719924529265,
+        "airborne_s": 0.36000000000000026,
+        "max_upward_velocity": 1.9272344443976366
+      },
+      {
+        "start": 72.59099999998256,
+        "start_height": 0.20172148947845794,
+        "max_height": 0.47358937086075187,
+        "airborne_s": 0.36000000000000026,
+        "max_upward_velocity": 1.927115826469327
+      },
+      {
+        "start": 128.71100000025052,
+        "start_height": 0.2017562615854098,
+        "max_height": 0.47439151178933264,
+        "airborne_s": 0.36600000000000027,
+        "max_upward_velocity": 1.9368480520988196
+      }
+    ],
+    "key_events": [
+      {
+        "time": 5.610000000000208,
+        "pressed": "w"
+      },
+      {
+        "time": 5.790000000000268,
+        "pressed": ""
+      },
+      {
+        "time": 5.950000000000322,
+        "pressed": "w"
+      },
+      {
+        "time": 6.800000000000606,
+        "pressed": ""
+      },
+      {
+        "time": 8.520000000000717,
+        "pressed": "w"
+      },
+      {
+        "time": 10.359999999999697,
+        "pressed": ""
+      },
+      {
+        "time": 10.519999999999609,
+        "pressed": "w"
+      },
+      {
+        "time": 10.759999999999476,
+        "pressed": ""
+      },
+      {
+        "time": 13.829999999997774,
+        "pressed": "w"
+      },
+      {
+        "time": 15.979999999996583,
+        "pressed": ""
+      },
+      {
+        "time": 16.35999999999701,
+        "pressed": "w"
+      },
+      {
+        "time": 17.87999999999887,
+        "pressed": ""
+      },
+      {
+        "time": 18.32999999999942,
+        "pressed": "w"
+      },
+      {
+        "time": 18.50999999999964,
+        "pressed": ""
+      },
+      {
+        "time": 18.96000000000019,
+        "pressed": "s"
+      },
+      {
+        "time": 21.680000000003513,
+        "pressed": ""
+      },
+      {
+        "time": 24.060000000006422,
+        "key": "j"
+      },
+      {
+        "time": 27.88000000001109,
+        "key": "j"
+      },
+      {
+        "time": 31.30000000001527,
+        "key": "j"
+      },
+      {
+        "time": 35.22000000000862,
+        "key": "r"
+      },
+      {
+        "time": 36.3000000000061,
+        "pressed": "e"
+      },
+      {
+        "time": 36.410000000005844,
+        "pressed": ""
+      },
+      {
+        "time": 36.830000000004866,
+        "pressed": "e"
+      },
+      {
+        "time": 37.800000000002605,
+        "pressed": ""
+      },
+      {
+        "time": 37.890000000002395,
+        "pressed": "q"
+      },
+      {
+        "time": 39.78999999999797,
+        "pressed": ""
+      },
+      {
+        "time": 39.96999999999755,
+        "pressed": "q"
+      },
+      {
+        "time": 40.38999999999657,
+        "pressed": ""
+      },
+      {
+        "time": 41.49999999999398,
+        "pressed": "d"
+      },
+      {
+        "time": 42.0499999999927,
+        "pressed": ""
+      },
+      {
+        "time": 49.569999999975174,
+        "pressed": "e"
+      },
+      {
+        "time": 50.1599999999738,
+        "pressed": ""
+      },
+      {
+        "time": 53.469999999966085,
+        "pressed": "e"
+      },
+      {
+        "time": 54.41999999996387,
+        "pressed": ""
+      },
+      {
+        "time": 61.699999999946904,
+        "pressed": "e"
+      },
+      {
+        "time": 62.19999999994574,
+        "pressed": ""
+      },
+      {
+        "time": 62.22999999994567,
+        "pressed": "q"
+      },
+      {
+        "time": 64.20999999994254,
+        "pressed": ""
+      },
+      {
+        "time": 64.97999999994622,
+        "pressed": "e"
+      },
+      {
+        "time": 65.39999999994822,
+        "pressed": ""
+      },
+      {
+        "time": 66.11999999995166,
+        "key": "j"
+      },
+      {
+        "time": 69.04999999996565,
+        "key": "j"
+      },
+      {
+        "time": 72.58999999998255,
+        "key": "j"
+      },
+      {
+        "time": 77.59000000000643,
+        "pressed": "d"
+      },
+      {
+        "time": 77.75000000000719,
+        "pressed": ""
+      },
+      {
+        "time": 78.07000000000872,
+        "pressed": "d"
+      },
+      {
+        "time": 80.75000000002152,
+        "pressed": ""
+      },
+      {
+        "time": 83.0500000000325,
+        "pressed": "d"
+      },
+      {
+        "time": 85.84000000004582,
+        "pressed": ""
+      },
+      {
+        "time": 86.16000000004735,
+        "pressed": "w"
+      },
+      {
+        "time": 88.65000000005924,
+        "pressed": ""
+      },
+      {
+        "time": 93.08000000008039,
+        "pressed": "w"
+      },
+      {
+        "time": 93.4600000000822,
+        "pressed": ""
+      },
+      {
+        "time": 93.64000000008306,
+        "pressed": "w"
+      },
+      {
+        "time": 94.8000000000886,
+        "pressed": ""
+      },
+      {
+        "time": 109.40000000015831,
+        "pressed": "w"
+      },
+      {
+        "time": 109.55000000015903,
+        "pressed": ""
+      },
+      {
+        "time": 128.71000000025052,
+        "key": "j"
+      }
+    ],
+    "current_jump": null
+  },
+  "final_odometry_error_m": 37.216390296560654,
+  "wall_s": 130.490614241,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+  "passed": false
+}

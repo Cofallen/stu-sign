@@ -1,0 +1,128 @@
+/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261110_133346_383811
+{
+  "timing": {
+    "sync_calls": 0,
+    "sync_wall_s": 0.0,
+    "sync_max_s": 0.0,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 0.0,
+    "late_steps": 0,
+    "max_lag_s": 0.0,
+    "initial_sync_wall_s": 0.0,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 1.4868224457318389,
+    "loop_non_ui_non_sleep_s": 6.725752646999979
+  },
+  "viewer_options": null,
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 9.999999999999897,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 9.593760612135607e-07,
+  "max_tilt_rad": 1.908936121482713e-06,
+  "max_xy_drift_m": 3.645843669245798e-05,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 2.5052873398966626e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.24923797860349392,
+  "max_torque_nm": [
+    10.404786237556284,
+    0.0009213931482202628,
+    10.328118956072696,
+    0.0009027474878407208,
+    10.756571937990682,
+    10.648123964731104
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": null,
+  "final_base_xy_m": [
+    2.5858699616066874e-05,
+    -8.277012768270125e-08
+  ],
+  "final_yaw_rad": 2.8875697657820868e-05,
+  "mode": "stand",
+  "interactive": false,
+  "teleop": null,
+  "final_odometry_error_m": 2.0617886249067307e-07,
+  "wall_s": 6.725752646999979,
+  "fall_events_s": [],
+  "gain_schedule": {
+    "lengths_m": {
+      "left": 0.27792320282365585,
+      "right": 0.27791789423867524
+    },
+    "K_left": [
+      [
+        -62.736662212045054,
+        -1.4656560051449894,
+        -21.938065440433714,
+        -18.06922272510563,
+        34.834118442880815,
+        4.242067509410009
+      ],
+      [
+        11.080205171579795,
+        0.1521488402222178,
+        4.242111181649442,
+        3.1278726222978195,
+        170.54228407021276,
+        7.184616073600742
+      ]
+    ],
+    "K_right": [
+      [
+        -62.73660307594019,
+        -1.4656520213614581,
+        -21.938053872098042,
+        -18.069267348188543,
+        34.83460810789366,
+        4.242109969016563
+      ],
+      [
+        11.080362314037556,
+        0.15215240072510286,
+        4.24216943731697,
+        3.12792768906332,
+        170.54218648462484,
+        7.184602022232686
+      ]
+    ],
+    "masses": {
+      "body_total_kg": 16.877574,
+      "body_per_side_kg": 8.438787,
+      "leg_kg": {
+        "l": 1.597924,
+        "r": 1.5983269999999998
+      },
+      "wheel_kg": {
+        "l": 0.4904,
+        "r": 0.4904
+      },
+      "total_kg": 21.054624999999998,
+      "wheel_radius_m": 0.06
+    },
+    "range_m": [
+      0.18,
+      0.34
+    ]
+  },
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "standing: full duration, final 5 s tilt <0.05 rad, xy drift <0.1 m, closure <1e-4 m, no warning, no passive actuation, wheel-only contact",
+  "passed": true
+}
+

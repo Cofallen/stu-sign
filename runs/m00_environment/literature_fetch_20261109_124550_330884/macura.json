@@ -1,0 +1,24 @@
+{
+  "id": "macura",
+  "kind": "paper",
+  "title": "Trust the Model Where It Trusts Itself -- Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption",
+  "arxiv": "2405.19014",
+  "url": "https://arxiv.org/abs/2405.19014",
+  "local": "references/papers/research_20261109/macura.pdf",
+  "purpose": "查重：不确定性与自适应展开已有工作",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_verified_pdf",
+  "authors": [
+    "Frauenknecht, Bernd",
+    "Eisele, Artur",
+    "Subhasish, Devdutt",
+    "Solowjow, Friedrich",
+    "Trimpe, Sebastian"
+  ],
+  "date": "2024/05/29",
+  "version": "v3",
+  "pdf_url": "https://arxiv.org/pdf/2405.19014v3",
+  "sha256": "ad600c2b10edfeb44ae90a813cf18ae701697e5c03de76129b3747520236d860",
+  "bytes": 3101624,
+  "exit_code": 0
+}

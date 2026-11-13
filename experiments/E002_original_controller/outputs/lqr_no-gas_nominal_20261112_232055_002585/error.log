@@ -1,0 +1,4 @@
+/home/cofallen/miniconda3/envs/mjlab/lib/python3.12/site-packages/glfw/__init__.py:917: GLFWError: (65550) b'X11: Failed to open display :1'
+  warnings.warn(message, GLFWError)
+ERROR: could not initialize GLFW
+

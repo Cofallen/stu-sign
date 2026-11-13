@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "deploy.py",
+    "--headless",
+    "--scenario",
+    "demo",
+    "--video"
+  ],
+  "mujoco": "3.11.0",
+  "torch": "2.15.0+cu132",
+  "checkpoint": "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E004_supermimic/outputs/train_20261113_164401_385717/actor.pt",
+  "scenario": "demo",
+  "checkpoint_sha256": "86fbf8e178c2202d8ee536eac11da76274024847e3716b50d9f47a5bf26af885",
+  "xml_sha256": "18dd109dcef9a5939199b0b12747e9531e432db9bfdcde054bed5df416dc13dd",
+  "exit_code": 0,
+  "seconds": 30.0
+}

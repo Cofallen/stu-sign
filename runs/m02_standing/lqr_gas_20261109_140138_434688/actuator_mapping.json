@@ -1,0 +1,68 @@
+[
+  {
+    "actuator": "act_lf0",
+    "joint": "lf0_Joint",
+    "qpos_address": 10,
+    "dof_address": 9,
+    "gear": 1.0,
+    "torque_range_nm": [
+      -30.0,
+      30.0
+    ]
+  },
+  {
+    "actuator": "act_lw",
+    "joint": "l_wheel_Joint",
+    "qpos_address": 12,
+    "dof_address": 11,
+    "gear": 1.0,
+    "torque_range_nm": [
+      -5.0,
+      5.0
+    ]
+  },
+  {
+    "actuator": "act_rf0",
+    "joint": "rf0_Joint",
+    "qpos_address": 7,
+    "dof_address": 6,
+    "gear": 1.0,
+    "torque_range_nm": [
+      -30.0,
+      30.0
+    ]
+  },
+  {
+    "actuator": "act_rw",
+    "joint": "r_wheel_Joint",
+    "qpos_address": 9,
+    "dof_address": 8,
+    "gear": 1.0,
+    "torque_range_nm": [
+      -5.0,
+      5.0
+    ]
+  },
+  {
+    "actuator": "act_lf20",
+    "joint": "l20_Joint",
+    "qpos_address": 17,
+    "dof_address": 16,
+    "gear": 1.0,
+    "torque_range_nm": [
+      -30.0,
+      30.0
+    ]
+  },
+  {
+    "actuator": "act_rf20",
+    "joint": "r20_Joint",
+    "qpos_address": 13,
+    "dof_address": 12,
+    "gear": 1.0,
+    "torque_range_nm": [
+      -30.0,
+      30.0
+    ]
+  }
+]

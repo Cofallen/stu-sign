@@ -1,0 +1,1 @@
+{"command": ["/home/cofallen/miniconda3/envs/mjlab/bin/python", "/tmp/e002_side_search.py", "outputs/lqr_no-gas_nominal_20261112_234603_967490/fallen_state.npz"], "cwd": "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller", "mujoco": "3.11.0", "seed": 731, "fallen_state": "outputs/lqr_no-gas_nominal_20261112_234603_967490/fallen_state.npz"}

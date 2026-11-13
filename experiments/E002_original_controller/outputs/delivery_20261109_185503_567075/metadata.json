@@ -1,0 +1,13 @@
+{
+  "command": "python3 inline source hashes, syntax and Markdown links",
+  "cwd": "/home/cofallen/Code/毕业设计",
+  "files_sha256": {
+    "experiments/E002_original_controller/README.md": "72ad369a8831d1572bbf945912df77a6464a0db7aa71e39843e829c36d943f99",
+    "experiments/E002_original_controller/REPORT.md": "bd4fbe04e96266c406a182d9b8fa3c64c0a99a9a347f3ecf444795be5f4b759b",
+    "docs/01_project/overview.md": "64ef38c38e735062a5369707fb8c6155e76f0bead138b35266ff376263668bbf",
+    "docs/01_project/KEY_OPERATIONS.md": "a4ecbaef9f4515f23b22cdd819c5b06dafed0aadf62c265b6b1a090524810fc7",
+    "docs/03_learning/M02_03_键盘交互与轮子显示.md": "12f244314dcdc6d9089c82119729b10dc29de848581a88a90415861859942c34",
+    "docs/03_learning/README.md": "9a0a5f3ced7a1074f3118a32ef9e2149f652086cda625f9b718dcb5e3ec64bae",
+    "docs/04_tasks/T003_parallel_standing.md": "40d7560511605de4864253362ef3abc20935837916e7ae5fe4dd857534915ae3"
+  }
+}

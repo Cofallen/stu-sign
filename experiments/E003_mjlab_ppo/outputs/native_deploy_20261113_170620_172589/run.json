@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "deploy.py",
+    "--headless",
+    "--scenario",
+    "demo",
+    "--video"
+  ],
+  "mujoco": "3.11.0",
+  "torch": "2.15.0+cu132",
+  "checkpoint": "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E003_mjlab_ppo/outputs/train_20261113_163126_398557/model_1478.pt",
+  "scenario": "demo",
+  "checkpoint_sha256": "c73955d7ce31475c118b4c173503479b2b5e0bcbc625ac95252f3b76f68879b7",
+  "xml_sha256": "18dd109dcef9a5939199b0b12747e9531e432db9bfdcde054bed5df416dc13dd",
+  "exit_code": 0,
+  "seconds": 30.0
+}

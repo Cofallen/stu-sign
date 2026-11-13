@@ -1,0 +1,25 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "scripts/m02_standing/run_standing.py",
+    "--duration",
+    "10",
+    "--controller",
+    "lqr",
+    "--variant",
+    "gas",
+    "--cases",
+    "nominal"
+  ],
+  "cwd": "/home/cofallen/Code/毕业设计",
+  "args": {
+    "controller": "lqr",
+    "variant": "gas",
+    "duration": 10.0,
+    "cases": "nominal",
+    "horizon": 15,
+    "video": false,
+    "viewer": false
+  }
+}

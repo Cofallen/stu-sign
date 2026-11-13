@@ -1,0 +1,6 @@
+{
+  "interpreter": "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+  "seed": null,
+  "config": "fit_final.json",
+  "scope": "No-gas fitted K + motor-only jump; no training; stage logs retain failures"
+}

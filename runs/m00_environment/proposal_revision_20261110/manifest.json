@@ -1,0 +1,32 @@
+{
+  "source": "/home/cofallen/Code/毕业设计/轮腿机器人动力学自适应和可微世界模型研究课题申报表.docx",
+  "output": "/home/cofallen/Code/毕业设计/基于动力学自适应的可微世界模型与轮腿机器人控制研究_课题申报表_修订版.docx",
+  "source_sha256": "ae3cf6375afd00b264c81a7c05c1efe53df3febd4cb1fb96a5b5d94ef275839d",
+  "output_sha256": "9a455275a08b631bbfcf52ec3ee783ff0e3fb9c609bfa1cb3c86429e0c4c08ec",
+  "python": "/home/cofallen/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "changed_rows": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "approval_fields": "preserved exactly from source; not verified",
+  "status": "content and OOXML checks passed; visual pagination unverified",
+  "checks": {
+    "source_unchanged": true,
+    "zip_integrity": true,
+    "approval_rows_unchanged": true,
+    "personnel_fields_unchanged": true,
+    "floating_textboxes_removed": true,
+    "research_cells_nonempty": true
+  },
+  "render": {
+    "exit_code": 1,
+    "error": "Bundled LibreOffice requires GLIBC_2.38 and GLIBCXX_3.4.31 unavailable on host",
+    "log": "render.log",
+    "images_generated": 0
+  }
+}

@@ -1,0 +1,7 @@
+<mujoco>
+  <worldbody>
+    <!-- Approach along -X. The top spans x=-3.6 to -1.6 m. -->
+    <geom name="step10_single" type="box" pos="-2.6 0 .05"
+          size="1 .7 .05" rgba=".5 .6 .7 1"/>
+  </worldbody>
+</mujoco>

@@ -1,0 +1,213 @@
+{
+  "timing": {
+    "sync_calls": 157,
+    "sync_wall_s": 0.18336496996198548,
+    "sync_max_s": 0.0178301019986975,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 0.6942970939744555,
+    "late_steps": 1300,
+    "max_lag_s": 0.020122094996622764,
+    "initial_sync_wall_s": 0.03672523800196359,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.9998343182093727,
+    "loop_non_ui_non_sleep_s": 4.282192830061831
+  },
+  "viewer_options": {
+    "camera_type": 1,
+    "left_ui": true,
+    "right_ui": true,
+    "hud": false,
+    "initial": {
+      "azimuth": 135.0,
+      "elevation": -12.0,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "final": {
+      "azimuth": 99.38976377952757,
+      "elevation": -4.381889763779529,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 5.1590000000000575,
+  "terminated": true,
+  "termination_reason": "fall",
+  "timeout": false,
+  "final_tilt_rad": 0.023620481933385,
+  "max_tilt_rad": 0.023620481933385,
+  "max_xy_drift_m": 0.1391435669030327,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 1.7348062468557993e-05,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.11982001066965153,
+  "max_torque_nm": [
+    30.0,
+    4.217982647532385,
+    30.0,
+    4.584071591751587,
+    30.0,
+    30.0
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": "iso",
+  "final_base_xy_m": [
+    0.10387217655151905,
+    0.008977999775454997
+  ],
+  "final_yaw_rad": 0.018284703748975367,
+  "mode": "drive",
+  "interactive": true,
+  "teleop": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.34,
+    "yaw": 0.018284703748975367,
+    "message": "jump requested",
+    "pressed": "",
+    "jump_phase": "crouch",
+    "jumps": [
+      {
+        "start": 1.4809999999999477,
+        "start_height": 0.2492409276676995,
+        "max_height": 0.47061053809145353,
+        "airborne_s": 0.4210000000000003,
+        "max_upward_velocity": 1.9067925967664408
+      }
+    ],
+    "key_events": [
+      {
+        "time": 1.4799999999999478,
+        "key": "j"
+      },
+      {
+        "time": 3.5799999999997167,
+        "pressed": "e"
+      },
+      {
+        "time": 4.179999999999731,
+        "pressed": ""
+      },
+      {
+        "time": 4.919999999999978,
+        "key": "j"
+      }
+    ],
+    "current_jump": {
+      "start": 4.920999999999978,
+      "start_height": 0.31114968857212655,
+      "max_height": 0.31114968857212655,
+      "airborne_s": 0.12700000000000009,
+      "max_upward_velocity": 0.0
+    }
+  },
+  "final_odometry_error_m": 5.837750697943676,
+  "wall_s": 5.159854893998272,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+  "passed": false
+}

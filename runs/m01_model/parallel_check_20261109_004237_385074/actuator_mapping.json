@@ -1,0 +1,50 @@
+[
+  {
+    "action_index": 0,
+    "name": "act_lf0",
+    "joint": "lf0_Joint",
+    "gear": "1",
+    "ctrllimited": "true",
+    "ctrlrange": "-30 30"
+  },
+  {
+    "action_index": 1,
+    "name": "act_lw",
+    "joint": "l_wheel_Joint",
+    "gear": "1",
+    "ctrllimited": "true",
+    "ctrlrange": "-5 5"
+  },
+  {
+    "action_index": 2,
+    "name": "act_rf0",
+    "joint": "rf0_Joint",
+    "gear": "1",
+    "ctrllimited": "true",
+    "ctrlrange": "-30 30"
+  },
+  {
+    "action_index": 3,
+    "name": "act_rw",
+    "joint": "r_wheel_Joint",
+    "gear": "1",
+    "ctrllimited": "true",
+    "ctrlrange": "-5 5"
+  },
+  {
+    "action_index": 4,
+    "name": "act_lf20",
+    "joint": "l20_Joint",
+    "gear": "1",
+    "ctrllimited": "true",
+    "ctrlrange": "-30 30"
+  },
+  {
+    "action_index": 5,
+    "name": "act_rf20",
+    "joint": "r20_Joint",
+    "gear": "1",
+    "ctrllimited": "true",
+    "ctrlrange": "-30 30"
+  }
+]

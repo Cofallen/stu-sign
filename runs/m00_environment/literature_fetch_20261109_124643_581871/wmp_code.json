@@ -1,0 +1,24 @@
+{
+  "id": "wmp_code",
+  "kind": "code",
+  "title": "bytedance/WMP",
+  "url": "https://github.com/bytedance/WMP.git",
+  "local": "upstream/research_20261109/WMP",
+  "attribution": "论文作者项目对应公开代码；保留依赖的其他项目许可",
+  "purpose": "世界模型与策略接口阅读；原配置约23GB显存，非本机直接训练方案",
+  "accessed": "2026-11-09T12:46:43.581871+08:00",
+  "status": "downloaded_read_only_not_executed",
+  "commit": "c232c115ada4517453ebded5019078ba055456de",
+  "tree": "f72507f28dba74a64817d036d904391611c4fc87",
+  "tracked_status": "",
+  "license_files": [
+    {
+      "path": "upstream/research_20261109/WMP/LICENSE.txt",
+      "sha256": "51a0c476af7f9b871310ee72a575334cf8f9bbbe0ff2952c4b712c2f21cff079"
+    }
+  ],
+  "license": "pending text inspection",
+  "submodules_initialized": false,
+  "lfs_downloaded": false,
+  "exit_code": 0
+}

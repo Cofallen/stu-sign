@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/home/cofallen/.codex/plugins/cache/openai-primary-runtime/documents/26.1105.12137/skills/documents/render_docx.py", line 546, in <module>
+    main()
+  File "/home/cofallen/.codex/plugins/cache/openai-primary-runtime/documents/26.1105.12137/skills/documents/render_docx.py", line 538, in main
+    rasterize(render_input_path, out_dir, dpi, verbose=args.verbose, emit_pdf=args.emit_pdf)
+  File "/home/cofallen/.codex/plugins/cache/openai-primary-runtime/documents/26.1105.12137/skills/documents/render_docx.py", line 423, in rasterize
+    raise RuntimeError(
+RuntimeError: Failed to produce PDF for rasterization (direct and ODT fallback).
+--- DOCX->PDF ---
+CMD: /home/cofallen/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override/soffice -env:UserInstallation=file:///tmp/soffice_profile_vwj4cwjs --invisible --headless --norestore --convert-to pdf --outdir /tmp/soffice_convert_q87qogx3 /home/cofallen/Code/毕业设计/基于动力学自适应的可微世界模型与轮腿机器人控制研究_课题申报表_修订版.docx
+EXIT: 1
+STDERR:
+/home/cofallen/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/program/oosplash: /lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.31' not found (required by /home/cofallen/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/program/libuno_sal.so.3)
+/home/cofallen/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/program/oosplash: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found (required by /home/cofallen/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/program/libuno_sal.so.3)
+--- DOCX->ODT ---
+CMD: /home/cofallen/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override/soffice -env:UserInstallation=file:///tmp/soffice_profile_vwj4cwjs --invisible --headless --norestore --convert-to odt --outdir /tmp/soffice_convert_q87qogx3 /home/cofallen/Code/毕业设计/基于动力学自适应的可微世界模型与轮腿机器人控制研究_课题申报表_修订版.docx
+EXIT: 1
+STDERR:
+/home/cofallen/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/program/oosplash: /lib/x86_64-linux-gnu/libstdc++.so.6: version `GLIBCXX_3.4.31' not found (required by /home/cofallen/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/program/libuno_sal.so.3)
+/home/cofallen/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/program/oosplash: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found (required by /home/cofallen/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/program/libuno_sal.so.3)

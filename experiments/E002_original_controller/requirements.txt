@@ -1,0 +1,9 @@
+# Use the already tested mjlab interpreter; no installation is performed.
+mujoco==3.11.0
+numpy==2.5.4
+scipy==1.18.1
+# Optional visualization/driving only (already present in the tested interpreter):
+#   pillow==13.0.0  for --video HUD (falls back to plain frames if missing)
+#   system ffmpeg 4.4.2  for --video mp4 encoding (not a pip package)
+# GUI press/release uses existing system libX11 via ctypes; no pynput required.
+# Optional original symbolic learning reference only: sympy (lqr.py).

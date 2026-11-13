@@ -1,0 +1,31 @@
+["curl", "-fLsS", "--retry", "2", "--connect-timeout", "20", "--max-time", "90", "https://arxiv.org/abs/2611.06118", "-o", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124643_581871/latent_adaptation.html"]
+
+exit_code=0
+["curl", "-fLsS", "--retry", "2", "--connect-timeout", "20", "--max-time", "150", "https://arxiv.org/pdf/2611.06118v1", "-o", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124643_581871/latent_adaptation.pdf.part"]
+
+exit_code=0
+["pdfinfo", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124643_581871/latent_adaptation.pdf.part"]
+Title:           Online Adaptation to Latent Physical Properties for Learning from Demonstration
+Author:          Kotaro Kajitsuka; Masaki Murooka; Fumio Kanehiro
+Creator:         arXiv GenPDF (tex2pdf:07e334b)
+Producer:        pikepdf 8.15.1
+Custom Metadata: yes
+Metadata Stream: yes
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           8
+Encrypted:       no
+Page size:       595.276 x 841.89 pts (A4)
+Page rot:        0
+File size:       6020040 bytes
+Optimized:       no
+PDF version:     1.7
+
+exit_code=0
+["pdftotext", "-layout", "/home/cofallen/Code/毕业设计/references/papers/research_20261109/latent_adaptation.pdf", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124643_581871/latent_adaptation.txt"]
+Syntax Warning: Mismatch between font type and embedded font file
+
+exit_code=0

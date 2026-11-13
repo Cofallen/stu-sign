@@ -1,0 +1,8 @@
+{
+  "runs": [
+    "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261110_121840_331963",
+    "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261110_121924_844491"
+  ],
+  "trace_exact_equal": true,
+  "max_difference": 0.0
+}

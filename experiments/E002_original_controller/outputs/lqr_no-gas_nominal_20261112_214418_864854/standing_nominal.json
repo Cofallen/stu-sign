@@ -1,0 +1,20 @@
+{
+  "path": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261112_214418_864854/standing_nominal.mp4",
+  "width": 640,
+  "height": 360,
+  "fps": 30,
+  "frames": 301,
+  "sim_duration_s": 9.999999999999897,
+  "encoded_duration_s": 10.033333333333333,
+  "camera": {
+    "preset": "terrain",
+    "azimuth": 135.0,
+    "elevation": -32.0,
+    "distance": 7.0,
+    "lookat_z": 0.35
+  },
+  "follow": false,
+  "hud": false,
+  "codec": "libx264/yuv420p",
+  "note": "Rendering-only output; not used by control or acceptance."
+}

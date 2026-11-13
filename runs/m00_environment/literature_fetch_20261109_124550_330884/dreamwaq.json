@@ -1,0 +1,22 @@
+{
+  "id": "dreamwaq",
+  "kind": "paper",
+  "title": "DreamWaQ: Learning Robust Quadrupedal Locomotion With Implicit Terrain Imagination via Deep Reinforcement Learning",
+  "arxiv": "2301.10602",
+  "url": "https://arxiv.org/abs/2301.10602",
+  "local": "references/papers/research_20261109/dreamwaq.pdf",
+  "purpose": "基础：本体感知与隐式环境表征",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_verified_pdf",
+  "authors": [
+    "Nahrendra, I Made Aswin",
+    "Yu, Byeongho",
+    "Myung, Hyun"
+  ],
+  "date": "2023/01/25",
+  "version": "v2",
+  "pdf_url": "https://arxiv.org/pdf/2301.10602v2",
+  "sha256": "fb02d20879c38b2ca7d0b52ff58174f2119451dea23e946c3eecfccdfcce1cfd",
+  "bytes": 2788181,
+  "exit_code": 0
+}

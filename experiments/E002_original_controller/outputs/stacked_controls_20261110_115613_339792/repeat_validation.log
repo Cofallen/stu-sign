@@ -1,0 +1,5 @@
+[keys t=1.00] w
+[teleop t=2.00] jump requested
+[teleop t=6.00] jump requested
+[keys t=9.00] released
+repeat_jump_0.278 None 0.00036775368359949896 0.2779906819510248

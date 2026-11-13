@@ -1,0 +1,24 @@
+{
+  "id": "dreamerv3_code",
+  "kind": "code",
+  "title": "danijar/dreamerv3",
+  "url": "https://github.com/danijar/dreamerv3.git",
+  "local": "upstream/research_20261109/dreamerv3",
+  "attribution": "作者维护的重实现；不是论文历史环境锁",
+  "purpose": "世界模型、想象轨迹、actor critic",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_read_only_not_executed",
+  "commit": "e01491fad6434b2245a3b8ca201dd7faedcc458c",
+  "tree": "f30a567465a43cd47a182a7204abd85c95e4445a",
+  "tracked_status": "",
+  "license_files": [
+    {
+      "path": "upstream/research_20261109/dreamerv3/LICENSE",
+      "sha256": "9a0db563b71a42110ce6e52c066ec957ca908dd2fbff91e85df09d81a43076d2"
+    }
+  ],
+  "license": "pending text inspection",
+  "submodules_initialized": false,
+  "lfs_downloaded": false,
+  "exit_code": 0
+}

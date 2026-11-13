@@ -1,0 +1,97 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/controller.py",
+    "--viewer",
+    "--duration",
+    "10"
+  ],
+  "mode": "stand",
+  "process_exit_code": 0,
+  "run": "lqr_no-gas_nominal_20261109_194945_606175",
+  "process_wall_including_startup_s": 12.353470154997922,
+  "result": {
+    "timing": {
+      "sync_calls": 304,
+      "sync_wall_s": 0.24643823299993528,
+      "sync_max_s": 0.0018522049977036659,
+      "hud_calls": 0,
+      "hud_wall_s": 0.0,
+      "sleep_wall_s": 0.7856566309201298,
+      "late_steps": 5031,
+      "max_lag_s": 0.10708187500131316,
+      "initial_sync_wall_s": 0.03897703799884766,
+      "initial_hud_wall_s": 0.0,
+      "initial_hud_calls": 0,
+      "real_time_factor": 0.9997129325313525,
+      "loop_non_ui_non_sleep_s": 8.970776635080256
+    },
+    "viewer_options": {
+      "camera_type": 0,
+      "left_ui": true,
+      "right_ui": true,
+      "hud": false
+    },
+    "case": "nominal",
+    "control": "lqr",
+    "variant": "no-gas",
+    "duration_s": 9.999999999999897,
+    "terminated": false,
+    "termination_reason": null,
+    "timeout": true,
+    "final_tilt_rad": 2.877100991487911e-06,
+    "max_tilt_rad": 2.925419018310404e-06,
+    "max_xy_drift_m": 3.353388385881284e-05,
+    "max_external_force_n": 0.0,
+    "max_closure_m": 2.505290300765799e-06,
+    "passive_actuator_torque_nm": 0.0,
+    "min_height_m": 0.24923829606657252,
+    "max_torque_nm": [
+      10.404981921205502,
+      0.0008867673379268432,
+      10.329155018258952,
+      0.0008752104467723587,
+      10.75658985170817,
+      10.649151369137233
+    ],
+    "nonwheel_contacts": [],
+    "mpc_solves": 0,
+    "video": null,
+    "camera": "iso",
+    "final_base_xy_m": [
+      2.456595919372915e-05,
+      5.878303567837907e-07
+    ],
+    "final_yaw_rad": 4.49083963451792e-05,
+    "mode": "drive",
+    "interactive": false,
+    "teleop": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.27792320714470026,
+      "yaw": 4.49083963451792e-05,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [],
+      "current_jump": null
+    },
+    "final_odometry_error_m": 1.956668929605331e-07,
+    "wall_s": 10.002871499000321,
+    "warnings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+    "passed": true
+  },
+  "near_realtime": true
+}

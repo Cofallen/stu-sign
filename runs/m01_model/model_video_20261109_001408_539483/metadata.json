@@ -1,0 +1,9 @@
+{
+  "mujoco": "3.11.0",
+  "xml_sha256": "551351d3ae7c53916f7f8b8961f6d3e6148056a84b4596dc8e9e486feecb42cd",
+  "fps": 25,
+  "renderer": "Mesa software EGL; MuJoCo Renderer",
+  "policy": null,
+  "appearance": "source visual mesh triangles; user-selected upstream MJCF palette; collision group hidden",
+  "task": "passive contact diagnostics; not a trained controller"
+}

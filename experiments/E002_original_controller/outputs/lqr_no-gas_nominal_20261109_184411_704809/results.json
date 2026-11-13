@@ -1,0 +1,124 @@
+{
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 14.727999999997277,
+  "terminated": true,
+  "termination_reason": "viewer_closed",
+  "timeout": false,
+  "final_tilt_rad": 0.008008892696296448,
+  "max_tilt_rad": 0.008008892696296448,
+  "max_xy_drift_m": 1.3239863774353895,
+  "max_closure_m": 9.684580668243963e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.1954753129187773,
+  "max_torque_nm": [
+    30.0,
+    4.3429141646821705,
+    30.0,
+    4.442506704656741,
+    30.0,
+    30.0
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": "iso",
+  "final_base_xy_m": [
+    1.323985808341484,
+    0.0013132481214612206
+  ],
+  "final_yaw_rad": 0.0023598240777850926,
+  "mode": "drive",
+  "interactive": true,
+  "teleop": {
+    "speed": 0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 0.0023598240777850926,
+    "message": "jump complete",
+    "jump_phase": "idle",
+    "jumps": [
+      {
+        "start": 11.252999999999203,
+        "start_height": 0.24923273620487293,
+        "max_height": 0.3766820606112667,
+        "airborne_s": 0.24000000000000019,
+        "max_upward_velocity": 1.2913451253303725
+      }
+    ],
+    "key_events": [
+      {
+        "time": 0.8780000000000007,
+        "key": "w",
+        "speed": 0.1,
+        "yaw_rate": 0.0,
+        "length": 0.27792320714470026
+      },
+      {
+        "time": 0.9510000000000007,
+        "key": "w",
+        "speed": 0.2,
+        "yaw_rate": 0.0,
+        "length": 0.27792320714470026
+      },
+      {
+        "time": 1.0010000000000006,
+        "key": "w",
+        "speed": 0.3,
+        "yaw_rate": 0.0,
+        "length": 0.27792320714470026
+      },
+      {
+        "time": 5.052000000000022,
+        "key": "x",
+        "speed": 0.0,
+        "yaw_rate": 0.0,
+        "length": 0.27792320714470026
+      },
+      {
+        "time": 7.051000000000689,
+        "key": "q",
+        "speed": 0.0,
+        "yaw_rate": 0.0,
+        "length": 0.258
+      },
+      {
+        "time": 7.101000000000706,
+        "key": "q",
+        "speed": 0.0,
+        "yaw_rate": 0.0,
+        "length": 0.238
+      },
+      {
+        "time": 9.248000000000314,
+        "key": "r",
+        "speed": 0.0,
+        "yaw_rate": 0.0,
+        "length": 0.27792320714470026
+      },
+      {
+        "time": 11.251999999999203,
+        "key": "j",
+        "speed": 0.0,
+        "yaw_rate": 0.0,
+        "length": 0.27792320714470026
+      }
+    ],
+    "current_jump": null
+  },
+  "final_odometry_error_m": 3.2414980813584853,
+  "wall_s": 22.886966791000305,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+  "passed": true
+}

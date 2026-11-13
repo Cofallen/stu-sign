@@ -1,0 +1,757 @@
+{
+  "nq": 13,
+  "nv": 12,
+  "nu": 6,
+  "neq": 0,
+  "mass": 18.3492386,
+  "gravity": [
+    0.0,
+    0.0,
+    -9.81
+  ],
+  "dt": 0.002,
+  "bodies": [
+    {
+      "name": "base_link",
+      "mass": 14.528116,
+      "com": [
+        0.00822124,
+        0.00099127,
+        0.0982217
+      ],
+      "principal_inertia": [
+        0.37108959201499137,
+        0.3523351217176619,
+        0.2826952862673469
+      ],
+      "inertia_quat_wxyz": [
+        -0.04840425895442663,
+        0.6723135508755358,
+        -0.025275882527462046,
+        0.7382497184467214
+      ]
+    },
+    {
+      "name": "rf0_Link",
+      "mass": 1.1132,
+      "com": [
+        0.05527628,
+        -0.01655437,
+        -0.00927161
+      ],
+      "principal_inertia": [
+        0.00641833375357,
+        0.00468512858131977,
+        0.0020456876651102143
+      ],
+      "inertia_quat_wxyz": [
+        -0.0051759967551693875,
+        0.69317303641519,
+        0.054435673899611514,
+        0.7186940295088271
+      ]
+    },
+    {
+      "name": "rf1_Link",
+      "mass": 0.3068726,
+      "com": [
+        -0.00283459,
+        -0.07106759,
+        0.0068255
+      ],
+      "principal_inertia": [
+        0.002540497750782056,
+        0.002480160214193894,
+        8.560203502404906e-05
+      ],
+      "inertia_quat_wxyz": [
+        0.4831821444716971,
+        0.5027397318285495,
+        -0.49013344225520566,
+        0.5230267546576902
+      ]
+    },
+    {
+      "name": "r_wheel_Link",
+      "mass": 0.49069,
+      "com": [
+        4.3469e-06,
+        -0.00019294,
+        0.019568
+      ],
+      "principal_inertia": [
+        0.0005818896135812794,
+        0.00034146039015564496,
+        0.0003397199962630758
+      ],
+      "inertia_quat_wxyz": [
+        -0.002196836606422281,
+        0.7071471648307885,
+        -0.0022736183902725693,
+        0.7070593269592884
+      ]
+    },
+    {
+      "name": "lf0_Link",
+      "mass": 1.1128,
+      "com": [
+        0.055403,
+        0.016584,
+        -0.0092702
+      ],
+      "principal_inertia": [
+        0.006411571619774098,
+        0.004675501083692525,
+        0.002048147296533381
+      ],
+      "inertia_quat_wxyz": [
+        0.00463483612385257,
+        0.693099238172241,
+        -0.053838073148578136,
+        0.7188139023549953
+      ]
+    },
+    {
+      "name": "lf1_Link",
+      "mass": 0.30687,
+      "com": [
+        -0.0028358,
+        0.071068,
+        0.0068255
+      ],
+      "principal_inertia": [
+        0.002540497750782056,
+        0.002480160214193894,
+        8.560203502404906e-05
+      ],
+      "inertia_quat_wxyz": [
+        0.5027397318285495,
+        0.4831821444716971,
+        -0.5230267546576902,
+        0.49013344225520566
+      ]
+    },
+    {
+      "name": "l_wheel_Link",
+      "mass": 0.49069,
+      "com": [
+        -4.3477e-06,
+        0.00019294,
+        0.019568
+      ],
+      "principal_inertia": [
+        0.0005818896135812794,
+        0.00034146039015564496,
+        0.0003397199962630758
+      ],
+      "inertia_quat_wxyz": [
+        0.0022736183902725693,
+        0.7070593269592884,
+        0.002196836606422281,
+        0.7071471648307885
+      ]
+    }
+  ],
+  "joints": [
+    {
+      "name": "root",
+      "qpos_address": 0,
+      "dof_address": 0,
+      "axis_local": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "axis_world_zero": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "limited": false,
+      "range": [
+        0.0,
+        0.0
+      ],
+      "actuator_force_limited": false,
+      "actuator_force_range": [
+        0.0,
+        0.0
+      ],
+      "damping": 0.0,
+      "armature": 0.0
+    },
+    {
+      "name": "rf0_Joint",
+      "qpos_address": 7,
+      "dof_address": 6,
+      "axis_local": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "axis_world_zero": [
+        0.0,
+        -0.9999999999932537,
+        -3.6732051031940216e-06
+      ],
+      "limited": true,
+      "range": [
+        -100.0,
+        100.0
+      ],
+      "actuator_force_limited": true,
+      "actuator_force_range": [
+        -30.0,
+        30.0
+      ],
+      "damping": 0.0,
+      "armature": 0.0
+    },
+    {
+      "name": "rf1_Joint",
+      "qpos_address": 8,
+      "dof_address": 7,
+      "axis_local": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "axis_world_zero": [
+        0.0,
+        -0.9999999999932537,
+        -3.6732051031940216e-06
+      ],
+      "limited": true,
+      "range": [
+        -0.9,
+        0.65
+      ],
+      "actuator_force_limited": true,
+      "actuator_force_range": [
+        -30.0,
+        30.0
+      ],
+      "damping": 0.0,
+      "armature": 0.0
+    },
+    {
+      "name": "r_wheel_Joint",
+      "qpos_address": 9,
+      "dof_address": 8,
+      "axis_local": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "axis_world_zero": [
+        0.0,
+        -0.9999999999932537,
+        -3.6732051031940216e-06
+      ],
+      "limited": false,
+      "range": [
+        0.0,
+        0.0
+      ],
+      "actuator_force_limited": true,
+      "actuator_force_range": [
+        -50.0,
+        50.0
+      ],
+      "damping": 0.0,
+      "armature": 0.0
+    },
+    {
+      "name": "lf0_Joint",
+      "qpos_address": 10,
+      "dof_address": 9,
+      "axis_local": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "axis_world_zero": [
+        0.0,
+        0.9999999999932537,
+        -3.6732051031940216e-06
+      ],
+      "limited": true,
+      "range": [
+        -100.0,
+        100.0
+      ],
+      "actuator_force_limited": true,
+      "actuator_force_range": [
+        -30.0,
+        30.0
+      ],
+      "damping": 0.0,
+      "armature": 0.0
+    },
+    {
+      "name": "lf1_Joint",
+      "qpos_address": 11,
+      "dof_address": 10,
+      "axis_local": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "axis_world_zero": [
+        0.0,
+        0.9999999999932537,
+        -3.6732051031940216e-06
+      ],
+      "limited": true,
+      "range": [
+        -0.65,
+        0.9
+      ],
+      "actuator_force_limited": true,
+      "actuator_force_range": [
+        -30.0,
+        30.0
+      ],
+      "damping": 0.0,
+      "armature": 0.0
+    },
+    {
+      "name": "l_wheel_Joint",
+      "qpos_address": 12,
+      "dof_address": 11,
+      "axis_local": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "axis_world_zero": [
+        0.0,
+        0.9999999999932537,
+        -3.6732051031940216e-06
+      ],
+      "limited": false,
+      "range": [
+        0.0,
+        0.0
+      ],
+      "actuator_force_limited": true,
+      "actuator_force_range": [
+        -50.0,
+        50.0
+      ],
+      "damping": 0.0,
+      "armature": 0.0
+    }
+  ],
+  "actuators": [
+    {
+      "name": "motor_lf0_Joint",
+      "transmission_type": 0,
+      "target_id": 4,
+      "gear": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ctrl_limited": true,
+      "ctrl_range": [
+        -30.0,
+        30.0
+      ]
+    },
+    {
+      "name": "motor_lf1_Joint",
+      "transmission_type": 0,
+      "target_id": 5,
+      "gear": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ctrl_limited": true,
+      "ctrl_range": [
+        -30.0,
+        30.0
+      ]
+    },
+    {
+      "name": "motor_l_wheel_Joint",
+      "transmission_type": 0,
+      "target_id": 6,
+      "gear": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ctrl_limited": true,
+      "ctrl_range": [
+        -50.0,
+        50.0
+      ]
+    },
+    {
+      "name": "motor_rf0_Joint",
+      "transmission_type": 0,
+      "target_id": 1,
+      "gear": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ctrl_limited": true,
+      "ctrl_range": [
+        -30.0,
+        30.0
+      ]
+    },
+    {
+      "name": "motor_rf1_Joint",
+      "transmission_type": 0,
+      "target_id": 2,
+      "gear": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ctrl_limited": true,
+      "ctrl_range": [
+        -30.0,
+        30.0
+      ]
+    },
+    {
+      "name": "motor_r_wheel_Joint",
+      "transmission_type": 0,
+      "target_id": 3,
+      "gear": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ctrl_limited": true,
+      "ctrl_range": [
+        -50.0,
+        50.0
+      ]
+    }
+  ],
+  "geoms": [
+    {
+      "name": "floor",
+      "body": "world",
+      "type": 0,
+      "contype": 2,
+      "conaffinity": 1,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "base_link_collision_0",
+      "body": "base_link",
+      "type": 7,
+      "contype": 1,
+      "conaffinity": 2,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "base_link_0_visual_0",
+      "body": "base_link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "base_link_0_visual_1",
+      "body": "base_link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "base_link_0_visual_2",
+      "body": "base_link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "base_link_0_visual_3",
+      "body": "base_link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "base_link_0_visual_4",
+      "body": "base_link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "base_link_0_visual_5",
+      "body": "base_link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "base_link_0_visual_6",
+      "body": "base_link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "base_link_0_visual_7",
+      "body": "base_link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "base_link_0_visual_8",
+      "body": "base_link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "rf0_Link_collision_0",
+      "body": "rf0_Link",
+      "type": 7,
+      "contype": 1,
+      "conaffinity": 2,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "rf0_Link_0_visual_0",
+      "body": "rf0_Link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "rf1_Link_collision_0",
+      "body": "rf1_Link",
+      "type": 7,
+      "contype": 1,
+      "conaffinity": 2,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "rf1_Link_0_visual_0",
+      "body": "rf1_Link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "r_wheel_Link_collision_0",
+      "body": "r_wheel_Link",
+      "type": 7,
+      "contype": 1,
+      "conaffinity": 2,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "r_wheel_Link_0_visual_0",
+      "body": "r_wheel_Link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "lf0_Link_collision_0",
+      "body": "lf0_Link",
+      "type": 7,
+      "contype": 1,
+      "conaffinity": 2,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "lf0_Link_0_visual_0",
+      "body": "lf0_Link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "lf1_Link_collision_0",
+      "body": "lf1_Link",
+      "type": 7,
+      "contype": 1,
+      "conaffinity": 2,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "lf1_Link_0_visual_0",
+      "body": "lf1_Link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "l_wheel_Link_collision_0",
+      "body": "l_wheel_Link",
+      "type": 7,
+      "contype": 1,
+      "conaffinity": 2,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    },
+    {
+      "name": "l_wheel_Link_0_visual_0",
+      "body": "l_wheel_Link",
+      "type": 7,
+      "contype": 0,
+      "conaffinity": 0,
+      "condim": 3,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ]
+    }
+  ]
+}

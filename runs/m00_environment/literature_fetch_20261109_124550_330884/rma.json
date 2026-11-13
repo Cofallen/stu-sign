@@ -1,0 +1,23 @@
+{
+  "id": "rma",
+  "kind": "paper",
+  "title": "RMA: Rapid Motor Adaptation for Legged Robots",
+  "arxiv": "2107.04034",
+  "url": "https://arxiv.org/abs/2107.04034",
+  "local": "references/papers/research_20261109/rma.pdf",
+  "purpose": "基础：本体历史与在线适应",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_verified_pdf",
+  "authors": [
+    "Kumar, Ashish",
+    "Fu, Zipeng",
+    "Pathak, Deepak",
+    "Malik, Jitendra"
+  ],
+  "date": "2021/07/08",
+  "version": "v1",
+  "pdf_url": "https://arxiv.org/pdf/2107.04034v1",
+  "sha256": "d8660da881851756287efab24d85f5c629ba97878f70297eb429a8e8a9a57846",
+  "bytes": 16534863,
+  "exit_code": 0
+}

@@ -1,0 +1,66 @@
+{"command": ["/home/cofallen/miniconda3/envs/mjlab/bin/python", "-B", "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/controller.py", "--headless", "--duration", "10", "--control", "lqr-mpc"], "cwd": "/home/cofallen/Code/毕业设计", "python": "/home/cofallen/miniconda3/envs/mjlab/bin/python", "runtime_paths": {"project": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller", "output": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr-mpc_no-gas_nominal_20261109_232950_851921", "modules": {"LQR_six": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/__init__.py", "LQR_six.get_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_sensor.py", "LQR_six.write_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/write_sensor.py", "LQR_six.mymath": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mymath.py", "LQR_six.leg_data": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/leg_data.py", "LQR_six.vmc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/vmc.py", "LQR_six.get_state": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_state.py", "LQR_six.lqr": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr.py", "LQR_six.mympc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mympc.py", "LQR_six.lqr_controller": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr_controller.py", "LQR_six.render_stand": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/render_stand.py", "LQR_six.jump": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/jump.py", "LQR_six.teleop": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/teleop.py", "LQR_six.keyboardInput": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/keyboardInput.py", "LQR_six.simulation": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/simulation.py"}}, "args": {"control": "lqr-mpc", "variant": "no-gas", "case": "nominal", "duration": 10.0, "headless": true, "viewer": false, "no_drive": false, "no_ui": false, "camera_follow": false, "hud": false, "camera": "iso", "video": null, "video_size": "960x540", "video_fps": 30, "no_hud": false, "follow": false, "hold": false, "drive": false}, "versions": {"mujoco": "3.11.0", "numpy": "2.5.4", "scipy": "1.18.1"}, "mass_kg": 21.054624999999998, "physics_dt_s": 0.001, "control_dt_s": 0.01, "feedback": "Author six-state LQR/VMC; IMU + wheel odometry; VMC uses full-model linkage Jacobian/qvel", "file_sha256": {"controller.py": "051e2d916bd6a07195cda235048a4164065919afc5c894f992601f83c0a35621", "standing_pose.json": "e94e06734096270711e2134e226a1d2b05beb893c886cc7e1ea1ca3a73fa1d70", "gain_schedule.json": "bd71b73c78cc18ac05c94f2a25266abd905a86c56b65301431354e2e4541931c", "LQR_six/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "LQR_six/get_sensor.py": "c6b257a10d3288aeebb0a18db9f15aeebe67da5273f5169f5cbd7943e19fb223", "LQR_six/get_state.py": "a38da1c5b914e52cc77be4ad3ad35a3269119aab9aba3902dc392a69b85f9bef", "LQR_six/jump.py": "dd5524da693adb0e73e2cef141dc47659ed8383269568740802d78b4b8ac5413", "LQR_six/keyboardInput.py": "abc649b980c3218ee019f8814e9ccac9872a9e030913a5d2db569eace087fbbf", "LQR_six/leg_data.py": "ec4226d1eadb79775a7567b347153647037a71dbc4ae70b6cd1ba1fa1b60e4c4", "LQR_six/lqr.py": "fe7d7bcd38783391a4a1bdd0ea1448b36cf6604d7410fdadd286a92cd6dcf580", "LQR_six/lqr_controller.py": "6c3430a217284711fde4ba63529844c19e04c7c2f853fa90eed946f1fbafcbe7", "LQR_six/mymath.py": "00ae3961d93a4ad46920dd46bee96d4d9a14e294c2beb7ab97334141be267426", "LQR_six/mympc.py": "c6224a5c2c70acc49f6b20363972ce1f210f12fd26932f162fb0b18a3bec2de1", "LQR_six/render_stand.py": "fdc14b6814b11adb489ed50d4636bc8f76778db5eeb2b755bb6a7510ccf6a233", "LQR_six/simulation.py": "1d9306640a9d8d9eace6339eb605f1573bb9850002c9527321f3b335139e7dbf", "LQR_six/teleop.py": "f501d5fbb5ac5df17070f8e0c84de75e5607e550a4f161572a2f31fc439e7c45", "LQR_six/vmc.py": "d62dcbd1aba16507705810c4f4f425c71bb43d1beb19677a21b9c7ed4081fb8e", "LQR_six/vofa.py": "a0a289ae54b17c9b6cd8c10219d1fdb988bc2c491e8352a457dd211faa67a0b8", "LQR_six/write_sensor.py": "f2aadcec19cd5106e24a825956057a770b676c39fedf55429b910879a5439362", "assets/robot_gas_spring_damped.xml": "9b77973e72253511f798866e709021349af8386b2b80855ae9b90ce66319009f", "assets/robot_no_gas_spring.xml": "263185e1f4a2a61d9e54803610d3e6b978c5ede259223552f278b3d623430088"}, "thresholds": {"duration_s": 10.0, "max_xy_drift_m": 0.1, "final_tilt_rad": 0.05, "max_closure_m": 0.0001, "min_height_m": 0.12, "fall_tilt_rad": 0.6}, "seed": null}
+{
+  "timing": {
+    "sync_calls": 0,
+    "sync_wall_s": 0.0,
+    "sync_max_s": 0.0,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 0.0,
+    "late_steps": 0,
+    "max_lag_s": 0.0,
+    "initial_sync_wall_s": 0.0,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.9835573267862189,
+    "loop_non_ui_non_sleep_s": 10.16717554499337
+  },
+  "viewer_options": null,
+  "case": "nominal",
+  "control": "lqr-mpc",
+  "variant": "no-gas",
+  "duration_s": 9.999999999999897,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 8.736820008643175e-07,
+  "max_tilt_rad": 1.6828510854250576e-06,
+  "max_xy_drift_m": 3.642868233943934e-05,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 2.50528748632998e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.24923799530759055,
+  "max_torque_nm": [
+    10.404774781658947,
+    0.0009231561215441342,
+    10.328110104530928,
+    0.0008944060934134207,
+    10.756568869471907,
+    10.648126513733024
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 2002,
+  "video": null,
+  "camera": null,
+  "final_base_xy_m": [
+    2.5900159011803432e-05,
+    -8.64165581190791e-09
+  ],
+  "final_yaw_rad": 3.103096926253435e-06,
+  "mode": "stand",
+  "interactive": false,
+  "teleop": null,
+  "final_odometry_error_m": 2.0653613400588481e-07,
+  "wall_s": 10.16717554499337,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "standing: full duration, final 5 s tilt <0.05 rad, xy drift <0.1 m, closure <1e-4 m, no warning, no passive actuation, wheel-only contact",
+  "passed": true
+}

@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "stage": "verification harness historical baseline lookup",
+  "error": "Historical src/wheel_leg/control/standing.py is absent in current workspace; this run did not recreate or modify it",
+  "next": "Compare only currently present protected files, explicitly list missing historical paths; independently copy E002"
+}

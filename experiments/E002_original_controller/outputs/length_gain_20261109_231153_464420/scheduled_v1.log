@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/length_gain_20261109_231153_464420/experiment.py", line 44, in <module>
+    name=f'{kind}_{length:.3f}';r,a,q,u,m=run(kind,length,seconds=8 if kind=='pose' else 10);results[name]=r;np.savez_compressed(out/(name+'.npz'),samples=a,qpos=q,ctrl=u);(out/(name+'.json')).write_text(json.dumps(r,indent=2));print(name,r['failed'],r['final_tilt'],r['actual_length'],flush=True)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/length_gain_20261109_231153_464420/experiment.py", line 29, in run
+    tele.observe(m,d,.001);tele.update(imu,.001)
+                           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/teleop.py", line 103, in update
+    return self.status()
+           ^^^^^^^^^^^^^
+  File "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/teleop.py", line 112, in status
+    jump_phase=self.jump.phase, jumps=self.jump.history, key_events=self.key_events,
+                                                                    ^^^^^^^^^^^^^^^
+AttributeError: 'Teleop' object has no attribute 'key_events'

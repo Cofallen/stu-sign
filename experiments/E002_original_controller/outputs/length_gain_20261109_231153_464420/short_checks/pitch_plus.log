@@ -1,0 +1,67 @@
+/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_pitch-plus_20261109_232932_331909
+{
+  "timing": {
+    "sync_calls": 0,
+    "sync_wall_s": 0.0,
+    "sync_max_s": 0.0,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 0.0,
+    "late_steps": 0,
+    "max_lag_s": 0.0,
+    "initial_sync_wall_s": 0.0,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 1.226577983907472,
+    "loop_non_ui_non_sleep_s": 8.152763322999817
+  },
+  "viewer_options": null,
+  "case": "pitch-plus",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 9.999999999999897,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 2.1661760909691022e-06,
+  "max_tilt_rad": 0.029998562499412924,
+  "max_xy_drift_m": 0.005070988588509572,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 2.6236075271832675e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.24901939582545501,
+  "max_torque_nm": [
+    12.807059406093423,
+    2.9271234091347926,
+    12.730397995206012,
+    2.92944119656934,
+    11.32204028753479,
+    11.21431558824792
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": null,
+  "final_base_xy_m": [
+    -1.078041945924766e-05,
+    -4.1956159515050425e-07
+  ],
+  "final_yaw_rad": 2.775161209674453e-06,
+  "mode": "stand",
+  "interactive": false,
+  "teleop": null,
+  "final_odometry_error_m": 2.6220931069355047e-05,
+  "wall_s": 8.152763322999817,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "standing: full duration, final 5 s tilt <0.05 rad, xy drift <0.1 m, closure <1e-4 m, no warning, no passive actuation, wheel-only contact",
+  "passed": true
+}
+

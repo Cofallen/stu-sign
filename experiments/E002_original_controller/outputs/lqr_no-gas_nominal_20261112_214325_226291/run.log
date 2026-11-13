@@ -1,0 +1,279 @@
+{"command": ["/home/cofallen/miniconda3/envs/mjlab/bin/python", "-B", "controller.py", "--headless", "--terrain", "step10", "--step-trial-x=-.92"], "cwd": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller", "python": "/home/cofallen/miniconda3/envs/mjlab/bin/python", "runtime_paths": {"project": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller", "output": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261112_214325_226291", "modules": {"LQR_six": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/__init__.py", "LQR_six.get_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_sensor.py", "LQR_six.write_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/write_sensor.py", "LQR_six.mymath": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mymath.py", "LQR_six.parameters": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/parameters.py", "LQR_six.leg_data": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/leg_data.py", "LQR_six.vmc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/vmc.py", "LQR_six.get_state": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_state.py", "LQR_six.lqr_model": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr_model.py", "LQR_six.lqr": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr.py", "LQR_six.mympc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mympc.py", "LQR_six.lqr_controller": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr_controller.py", "LQR_six.render_stand": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/render_stand.py", "LQR_six.jump": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/jump.py", "LQR_six.teleop": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/teleop.py", "LQR_six.step_trial": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/step_trial.py", "LQR_six.keyboardInput": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/keyboardInput.py", "LQR_six.simulation": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/simulation.py"}}, "args": {"terrain": "step10", "control": "lqr", "variant": "no-gas", "case": "nominal", "duration": 10.0, "headless": true, "viewer": false, "no_drive": false, "no_ui": false, "camera_follow": false, "hud": false, "camera": "iso", "video": null, "video_size": "960x540", "video_fps": 30, "no_hud": false, "follow": false, "hold": false, "drive": false, "step_trial_x": -0.92}, "versions": {"mujoco": "3.11.0", "numpy": "2.5.4", "scipy": "1.18.1"}, "mass_kg": 21.054624999999998, "physics_dt_s": 0.001, "control_dt_s": 0.002, "feedback": "Author six-state LQR/VMC; IMU + wheel odometry; VMC uses full-model linkage Jacobian/qvel", "file_sha256": {"controller.py": "8f5148b2b07f84c6e0b913e717470cd2f5fccc77641dbcbdb08898ba0b058b8b", "standing_pose.json": "e94e06734096270711e2134e226a1d2b05beb893c886cc7e1ea1ca3a73fa1d70", "gain_schedule.json": "bd71b73c78cc18ac05c94f2a25266abd905a86c56b65301431354e2e4541931c", "LQR_six/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "LQR_six/get_sensor.py": "e60aaa16656b57bce3f31bba6c5a319e917816454353ac6c97101d0d39cca657", "LQR_six/get_state.py": "a38da1c5b914e52cc77be4ad3ad35a3269119aab9aba3902dc392a69b85f9bef", "LQR_six/jump.py": "e00ae8c7f2391916c5a4befcb12105b4aaca9ba909867fd65f6dca30faf087ee", "LQR_six/keyboardInput.py": "3150624e3e04b9145bcdfc2b091cc5643215e501559b88113459eee8d19d7e3e", "LQR_six/leg_data.py": "ebdab486d5fc7babdabb0cb41126963090d3b05ba2eea524322aac67217a0ebd", "LQR_six/lqr.py": "ff73450b37837efd04ba92a456299b367f4b35f334ab88715e866d4391bff546", "LQR_six/lqr_controller.py": "d84637a92910b7adf330ebb7efda16dbe343f2b7da2d5e6f47cae0a0bf1668c3", "LQR_six/lqr_model.py": "35d894f16a77b2b1a4eb387cc8f44db5355a7e0ad2b5c276265df1b3c7c09c0b", "LQR_six/mymath.py": "b8efbc0daa798017dd6cd8ca2f30b3072a2d427466d9102cc8e31c401ec036eb", "LQR_six/mympc.py": "c6224a5c2c70acc49f6b20363972ce1f210f12fd26932f162fb0b18a3bec2de1", "LQR_six/parameters.py": "e22c9c916d873294d78766e45cc5f91dca79448233abea61d177646ba6310ec9", "LQR_six/render_stand.py": "b642394c9e3dfc80353c35851f27a5d13894d077be2a0ee65849592075531102", "LQR_six/simulation.py": "2c3473bb87fab5ca31fd8caa903a8ea59adf039b90135be3c375202655c55320", "LQR_six/step_trial.py": "25669cf697460ea376c7f48e61258a6a817a8eeb2fa0c172b812d0feae96583d", "LQR_six/teleop.py": "646b37a44b11fac2b14cbb87def7b81d2e4c4e0fde079ae5219cdcc74abde7d5", "LQR_six/vmc.py": "7afb2e130f9e969ab3607bf4dd24aa795a72f3d54bb6caa86fe70c79f364b6c9", "LQR_six/vofa.py": "a0a289ae54b17c9b6cd8c10219d1fdb988bc2c491e8352a457dd211faa67a0b8", "LQR_six/write_sensor.py": "f2aadcec19cd5106e24a825956057a770b676c39fedf55429b910879a5439362", "assets/robot_gas_spring_damped.xml": "9b77973e72253511f798866e709021349af8386b2b80855ae9b90ce66319009f", "assets/robot_no_gas_spring.xml": "263185e1f4a2a61d9e54803610d3e6b978c5ede259223552f278b3d623430088", "scenes/single_step_10cm.xml": "7e0a07cac1641fdc8e311c8779432a9fa7092eee538937d0cb0c073c8b586ee9", "scenes/training_terrain.xml": "d5f188d61f8d10774b140ece126103f30ede3349891a0bfd75c6b9d25675a2b7"}, "thresholds": {"duration_s": 10.0, "max_xy_drift_m": 0.1, "final_tilt_rad": 0.05, "max_closure_m": 0.0001, "min_height_m": 0.12, "fall_tilt_rad": 0.6, "fall_is_terminal": false, "numerical_error_is_terminal": true}, "seed": null}
+{
+  "timing": {
+    "sync_calls": 0,
+    "sync_wall_s": 0.0,
+    "sync_max_s": 0.0,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 0.0,
+    "late_steps": 0,
+    "max_lag_s": 0.0,
+    "initial_sync_wall_s": 0.0,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 1.269230281401851,
+    "loop_non_ui_non_sleep_s": 7.87879090700153
+  },
+  "viewer_options": null,
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 9.999999999999897,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 0.00015642809962766225,
+  "max_tilt_rad": 0.07466040628948281,
+  "max_xy_drift_m": 2.89421349450271,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 1.9143512719726487e-05,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.1426759631512679,
+  "max_torque_nm": [
+    30.0,
+    5.0,
+    30.0,
+    5.0,
+    30.0,
+    30.0
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": null,
+  "final_base_xy_m": [
+    -2.892284886882268,
+    -0.02726012262540408
+  ],
+  "final_yaw_rad": 0.012622714669878514,
+  "mode": "drive",
+  "interactive": false,
+  "teleop": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 0.012622714669878514,
+    "message": "jump complete",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [
+      {
+        "start": 2.561999999999829,
+        "start_height": 0.24884802738629722,
+        "max_height": 0.5061284614779444,
+        "start_com_z": 0.32031958918918635,
+        "max_com_z": 0.5735478936426056,
+        "max_wheel_clearance_m": 0.1826371109532219,
+        "airborne_s": 0.33600000000000024,
+        "max_upward_velocity": 2.1528409104495263,
+        "phases": [
+          {
+            "time": 2.561999999999829,
+            "phase": "crouch"
+          },
+          {
+            "time": 2.9629999999997847,
+            "phase": "thrust"
+          },
+          {
+            "time": 3.088999999999771,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 3.0989999999997697,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 3.0989999999997697,
+            "phase": "landing"
+          },
+          {
+            "time": 5.1620000000000585,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 3.088999999999771,
+        "no_liftoff": false
+      }
+    ],
+    "key_events": [
+      {
+        "time": 1.0000000000000007,
+        "pressed": "w"
+      },
+      {
+        "time": 2.560999999999829,
+        "key": "j"
+      },
+      {
+        "time": 3.4029999999997362,
+        "pressed": ""
+      }
+    ],
+    "current_jump": null
+  },
+  "final_odometry_error_m": -2.981012958708056,
+  "wall_s": 7.87879090700153,
+  "fall_events_s": [],
+  "gain_schedule": {
+    "lengths_m": {
+      "left": 0.27792538881579815,
+      "right": 0.2779243832462999
+    },
+    "K_left": [
+      [
+        -62.73668656309113,
+        -1.4656576456365062,
+        -21.938070203938043,
+        -18.069204350588297,
+        34.83391681081392,
+        4.242050025610988
+      ],
+      [
+        11.080140464381248,
+        0.15214737412285914,
+        4.242087193369718,
+        3.127849947246858,
+        170.54232425303127,
+        7.184621859548399
+      ]
+    ],
+    "K_right": [
+      [
+        -62.736675361483826,
+        -1.4656568909982597,
+        -21.938068012708715,
+        -18.069212802935244,
+        34.83400956246154,
+        4.242058068234298
+      ],
+      [
+        11.080170229964509,
+        0.15214804853301445,
+        4.2420982280866655,
+        3.127860377864259,
+        170.54230576879502,
+        7.184619197991217
+      ]
+    ],
+    "masses": {
+      "body_total_kg": 16.877574,
+      "body_per_side_kg": 8.438787,
+      "leg_kg": {
+        "l": 1.597924,
+        "r": 1.5983269999999998
+      },
+      "wheel_kg": {
+        "l": 0.4904,
+        "r": 0.4904
+      },
+      "total_kg": 21.054624999999998,
+      "wheel_radius_m": 0.06
+    },
+    "range_m": [
+      0.18,
+      0.34
+    ]
+  },
+  "step_trial": {
+    "thresholds": {
+      "takeoff_gap_m": [
+        0.05,
+        0.45
+      ],
+      "takeoff_vz_min": 0.05,
+      "airborne_min_s": 0.1,
+      "top_normal_z_min": 0.8,
+      "top_contact_z_min": 0.095,
+      "top_wheel_edge_margin_m": 0.06,
+      "stable_s": 2.0,
+      "stable_tilt_rad": 0.05,
+      "stable_speed_m_s": 0.05,
+      "max_closure_m": 0.0001
+    },
+    "checks": {
+      "takeoff": false,
+      "top_landing": false,
+      "clean_contact": false,
+      "stable": true,
+      "closure": true
+    },
+    "request": {
+      "t": 2.560999999999829,
+      "x": -0.9201818691519834,
+      "wheel_x": [
+        -0.9100829781920248,
+        -0.9103399382441697
+      ],
+      "vz": 0.0015125705760405932,
+      "speed": 1.1159908189510876,
+      "tilt": 4.66919262671947e-05,
+      "ground": 2,
+      "top": 0,
+      "side": false,
+      "body": false
+    },
+    "takeoff": {
+      "t": 3.0829999999997715,
+      "x": -1.4801765192154002,
+      "wheel_x": [
+        -1.52019249121713,
+        -1.4675367190277298
+      ],
+      "vz": 2.0932506140404556,
+      "speed": 2.2876570495741944,
+      "tilt": 0.035216405591375864,
+      "ground": 0,
+      "top": 0,
+      "side": false,
+      "body": false
+    },
+    "takeoff_gap_m": 0.07980750878287002,
+    "airborne_s": 0.014999999999998348,
+    "first_contact": {
+      "t": 3.09799999999977,
+      "x": -1.495134167088145,
+      "wheel_x": [
+        -1.5403331689251663,
+        -1.4821090685404272
+      ],
+      "vz": 1.8324468764957804,
+      "speed": 2.118406890739448,
+      "tilt": 0.034943342627709026,
+      "ground": 0,
+      "top": 0,
+      "side": true,
+      "body": false
+    },
+    "final": {
+      "t": 9.999999999999897,
+      "x": -2.892284886882268,
+      "wheel_x": [
+        -2.891941563831177,
+        -2.886792940025619
+      ],
+      "vz": -1.2092968515044977e-05,
+      "speed": 6.751688927803216e-05,
+      "tilt": 4.898704539009392e-06,
+      "ground": 0,
+      "top": 2,
+      "side": false,
+      "body": false
+    },
+    "stable_peak_speed_m_s": 0.0003273672533907754,
+    "stable_peak_tilt_rad": 5.9728724661261654e-06
+  },
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "step trial: full duration, no termination/warnings/falls, passive axes unactuated, all step_trial.checks pass",
+  "passed": false
+}

@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/tmp/e002_stacked_qdw44iqx/controller.py",
+    "--headless",
+    "--duration",
+    "10"
+  ],
+  "copy_path": "/tmp/e002_stacked_qdw44iqx",
+  "run": "/tmp/e002_stacked_qdw44iqx/outputs/lqr_no-gas_nominal_20261110_122345_928067",
+  "checks": {
+    "exit_ok": true,
+    "modules_local": true,
+    "output_local": true,
+    "original_outputs_unchanged": true
+  },
+  "passed": true
+}

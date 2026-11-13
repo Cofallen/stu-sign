@@ -1,0 +1,399 @@
+[
+  {
+    "id": "pets",
+    "kind": "paper",
+    "title": "Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models",
+    "arxiv": "1805.12114",
+    "url": "https://arxiv.org/abs/1805.12114",
+    "local": "references/papers/research_20261109/pets.pdf",
+    "purpose": "基础：概率动力学与模型集成",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_verified_pdf",
+    "authors": [
+      "Chua, Kurtland",
+      "Calandra, Roberto",
+      "McAllister, Rowan",
+      "Levine, Sergey"
+    ],
+    "date": "2018/05/30",
+    "version": "v2",
+    "pdf_url": "https://arxiv.org/pdf/1805.12114v2",
+    "sha256": "7dbf3c65ece763384258a60f5f4b26d7b849ad80765ed77435c4861f9583219c",
+    "bytes": 4020485,
+    "exit_code": 0
+  },
+  {
+    "id": "rma",
+    "kind": "paper",
+    "title": "RMA: Rapid Motor Adaptation for Legged Robots",
+    "arxiv": "2107.04034",
+    "url": "https://arxiv.org/abs/2107.04034",
+    "local": "references/papers/research_20261109/rma.pdf",
+    "purpose": "基础：本体历史与在线适应",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_verified_pdf",
+    "authors": [
+      "Kumar, Ashish",
+      "Fu, Zipeng",
+      "Pathak, Deepak",
+      "Malik, Jitendra"
+    ],
+    "date": "2021/07/08",
+    "version": "v1",
+    "pdf_url": "https://arxiv.org/pdf/2107.04034v1",
+    "sha256": "d8660da881851756287efab24d85f5c629ba97878f70297eb429a8e8a9a57846",
+    "bytes": 16534863,
+    "exit_code": 0
+  },
+  {
+    "id": "dreamwaq",
+    "kind": "paper",
+    "title": "DreamWaQ: Learning Robust Quadrupedal Locomotion With Implicit Terrain Imagination via Deep Reinforcement Learning",
+    "arxiv": "2301.10602",
+    "url": "https://arxiv.org/abs/2301.10602",
+    "local": "references/papers/research_20261109/dreamwaq.pdf",
+    "purpose": "基础：本体感知与隐式环境表征",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_verified_pdf",
+    "authors": [
+      "Nahrendra, I Made Aswin",
+      "Yu, Byeongho",
+      "Myung, Hyun"
+    ],
+    "date": "2023/01/25",
+    "version": "v2",
+    "pdf_url": "https://arxiv.org/pdf/2301.10602v2",
+    "sha256": "fb02d20879c38b2ca7d0b52ff58174f2119451dea23e946c3eecfccdfcce1cfd",
+    "bytes": 2788181,
+    "exit_code": 0
+  },
+  {
+    "id": "dreamerv3",
+    "kind": "paper",
+    "title": "Mastering Diverse Domains through World Models",
+    "arxiv": "2301.04104",
+    "url": "https://arxiv.org/abs/2301.04104",
+    "local": "references/papers/research_20261109/dreamerv3.pdf",
+    "purpose": "核心：潜在动力学与想象策略学习",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_verified_pdf",
+    "authors": [
+      "Hafner, Danijar",
+      "Pasukonis, Jurgis",
+      "Ba, Jimmy",
+      "Lillicrap, Timothy"
+    ],
+    "date": "2023/01/10",
+    "version": "v2",
+    "pdf_url": "https://arxiv.org/pdf/2301.04104v2",
+    "sha256": "d0385798e8bada8e81b915c1743be81d9ce8776f12ed937e09351995e099ce37",
+    "bytes": 2874717,
+    "exit_code": 0
+  },
+  {
+    "id": "tdmpc2",
+    "kind": "paper",
+    "title": "TD-MPC2: Scalable, Robust World Models for Continuous Control",
+    "arxiv": "2310.16828",
+    "url": "https://arxiv.org/abs/2310.16828",
+    "local": "references/papers/research_20261109/tdmpc2.pdf",
+    "purpose": "对照阅读：面向任务的世界模型与规划",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_verified_pdf",
+    "authors": [
+      "Hansen, Nicklas",
+      "Su, Hao",
+      "Wang, Xiaolong"
+    ],
+    "date": "2023/10/25",
+    "version": "v2",
+    "pdf_url": "https://arxiv.org/pdf/2310.16828v2",
+    "sha256": "99832c555b66665ad1e26cd48e75ea9dda4f3750175b993e7ed5b8dfe399b9e0",
+    "bytes": 7858004,
+    "exit_code": 0
+  },
+  {
+    "id": "daydreamer",
+    "kind": "paper",
+    "title": "DayDreamer: World Models for Physical Robot Learning",
+    "arxiv": "2206.14176",
+    "url": "https://arxiv.org/abs/2206.14176",
+    "local": "references/papers/research_20261109/daydreamer.pdf",
+    "purpose": "实物：世界模型的数据与控制闭环",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_verified_pdf",
+    "authors": [
+      "Wu, Philipp",
+      "Escontrela, Alejandro",
+      "Hafner, Danijar",
+      "Goldberg, Ken",
+      "Abbeel, Pieter"
+    ],
+    "date": "2022/06/28",
+    "version": "v1",
+    "pdf_url": "https://arxiv.org/pdf/2206.14176v1",
+    "sha256": "2ee10ae0961bef97ca522bb7ee5b7514e7a918a637dedad569b572b18bccb35e",
+    "bytes": 3126052,
+    "exit_code": 0
+  },
+  {
+    "id": "supermimic",
+    "kind": "paper",
+    "title": "SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable World Model",
+    "arxiv": "2610.28480",
+    "url": "https://arxiv.org/abs/2610.28480",
+    "local": "references/papers/research_20261109/supermimic.pdf",
+    "purpose": "核心：可微世界模型与短视界策略梯度",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_verified_pdf",
+    "authors": [
+      "Liao, Qiayuan",
+      "Shao, Yiyang",
+      "Long, Junfeng",
+      "Zakka, Kevin",
+      "Horowitz, Roberto",
+      "Abbeel, Pieter",
+      "Sreenath, Koushil"
+    ],
+    "date": "2026/10/20",
+    "version": "v1",
+    "pdf_url": "https://arxiv.org/pdf/2610.28480v1",
+    "sha256": "fe213017ab062f4acc3965da89abd3c29969163e144a2628a662b8ce46691009",
+    "bytes": 3524904,
+    "exit_code": 0
+  },
+  {
+    "id": "dmo",
+    "kind": "paper",
+    "title": "First Order Model-Based RL through Decoupled Backpropagation",
+    "arxiv": "2509.00215",
+    "url": "https://arxiv.org/abs/2509.00215",
+    "local": "references/papers/research_20261109/dmo.pdf",
+    "purpose": "进阶：学习模型梯度与前向仿真解耦",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_verified_pdf",
+    "authors": [
+      "Amigo, Joseph",
+      "Khorrambakht, Rooholla",
+      "Chane-Sane, Elliot",
+      "Mansard, Nicolas",
+      "Righetti, Ludovic"
+    ],
+    "date": "2025/08/29",
+    "version": "v2",
+    "pdf_url": "https://arxiv.org/pdf/2509.00215v2",
+    "sha256": "8a59f1a4d4ebfc891f6c956f0926bd2e4e00e08b4099010ffae0d1fd1f2002a7",
+    "bytes": 5117409,
+    "exit_code": 0
+  },
+  {
+    "id": "mbpo",
+    "kind": "paper",
+    "title": "When to Trust Your Model: Model-Based Policy Optimization",
+    "arxiv": "1906.08253",
+    "url": "https://arxiv.org/abs/1906.08253",
+    "local": "references/papers/research_20261109/mbpo.pdf",
+    "purpose": "基础：模型偏差与短展开",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_verified_pdf",
+    "authors": [
+      "Janner, Michael",
+      "Fu, Justin",
+      "Zhang, Marvin",
+      "Levine, Sergey"
+    ],
+    "date": "2019/06/19",
+    "version": "v3",
+    "pdf_url": "https://arxiv.org/pdf/1906.08253v3",
+    "sha256": "89d12b6142a285e541f6315a8911db469bea33514f3b80bdbe6e52439197b149",
+    "bytes": 3668344,
+    "exit_code": 0
+  },
+  {
+    "id": "macura",
+    "kind": "paper",
+    "title": "Trust the Model Where It Trusts Itself -- Model-Based Actor-Critic with Uncertainty-Aware Rollout Adaption",
+    "arxiv": "2405.19014",
+    "url": "https://arxiv.org/abs/2405.19014",
+    "local": "references/papers/research_20261109/macura.pdf",
+    "purpose": "查重：不确定性与自适应展开已有工作",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_verified_pdf",
+    "authors": [
+      "Frauenknecht, Bernd",
+      "Eisele, Artur",
+      "Subhasish, Devdutt",
+      "Solowjow, Friedrich",
+      "Trimpe, Sebastian"
+    ],
+    "date": "2024/05/29",
+    "version": "v3",
+    "pdf_url": "https://arxiv.org/pdf/2405.19014v3",
+    "sha256": "ad600c2b10edfeb44ae90a813cf18ae701697e5c03de76129b3747520236d860",
+    "bytes": 3101624,
+    "exit_code": 0
+  },
+  {
+    "id": "mbrl_lib",
+    "kind": "code",
+    "title": "facebookresearch/mbrl-lib",
+    "url": "https://github.com/facebookresearch/mbrl-lib.git",
+    "local": "upstream/research_20261109/mbrl-lib",
+    "attribution": "研究库维护者实现；含 PETS/MBPO，不等同原论文代码",
+    "purpose": "概率模型、模型训练与回放",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_read_only_not_executed",
+    "commit": "3f93cccfc8d635f74e335a2f07aab6e9a48fc021",
+    "tree": "89d981f00870072303ab0c438b0ed89f73b90db4",
+    "tracked_status": "",
+    "license_files": [
+      {
+        "path": "upstream/research_20261109/mbrl-lib/LICENSE",
+        "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+      }
+    ],
+    "license": "pending text inspection",
+    "submodules_initialized": false,
+    "lfs_downloaded": false,
+    "exit_code": 0
+  },
+  {
+    "id": "rma_cms",
+    "kind": "code",
+    "title": "antonilo/rl_locomotion",
+    "url": "https://github.com/antonilo/rl_locomotion.git",
+    "local": "upstream/research_20261109/rl_locomotion",
+    "attribution": "RMA 作者项目页链接的后续 CMS/RMA 派生实现",
+    "purpose": "适应网络与特权信息边界；Raisim 代码仅阅读",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_read_only_not_executed",
+    "commit": "f71db8195bfb49b6d964bf53be3c5adadb0c11b1",
+    "tree": "19b4e4a52317a32c6a3b7f0e6e99d99fa8c7d939",
+    "tracked_status": "",
+    "license_files": [
+      {
+        "path": "upstream/research_20261109/rl_locomotion/LICENSE.md",
+        "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+      }
+    ],
+    "license": "pending text inspection",
+    "submodules_initialized": false,
+    "lfs_downloaded": false,
+    "exit_code": 0
+  },
+  {
+    "id": "dreamerv3_code",
+    "kind": "code",
+    "title": "danijar/dreamerv3",
+    "url": "https://github.com/danijar/dreamerv3.git",
+    "local": "upstream/research_20261109/dreamerv3",
+    "attribution": "作者维护的重实现；不是论文历史环境锁",
+    "purpose": "世界模型、想象轨迹、actor critic",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_read_only_not_executed",
+    "commit": "e01491fad6434b2245a3b8ca201dd7faedcc458c",
+    "tree": "f30a567465a43cd47a182a7204abd85c95e4445a",
+    "tracked_status": "",
+    "license_files": [
+      {
+        "path": "upstream/research_20261109/dreamerv3/LICENSE",
+        "sha256": "9a0db563b71a42110ce6e52c066ec957ca908dd2fbff91e85df09d81a43076d2"
+      }
+    ],
+    "license": "pending text inspection",
+    "submodules_initialized": false,
+    "lfs_downloaded": false,
+    "exit_code": 0
+  },
+  {
+    "id": "tdmpc2_code",
+    "kind": "code",
+    "title": "nicklashansen/tdmpc2",
+    "url": "https://github.com/nicklashansen/tdmpc2.git",
+    "local": "upstream/research_20261109/tdmpc2",
+    "attribution": "作者官方实现",
+    "purpose": "潜在转移、价值学习与规划",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_read_only_not_executed",
+    "commit": "332f19e4aba4bffe2dc736f45ea7f7bdc585903a",
+    "tree": "5e88b03f946951d008e89fbdca79abf54f12f33f",
+    "tracked_status": "",
+    "license_files": [
+      {
+        "path": "upstream/research_20261109/tdmpc2/LICENSE",
+        "sha256": "440d4088a83d19c522dff58918bd92ccb9701c278a35295b92db2456373c4759"
+      }
+    ],
+    "license": "pending text inspection",
+    "submodules_initialized": false,
+    "lfs_downloaded": false,
+    "exit_code": 0
+  },
+  {
+    "id": "daydreamer_code",
+    "kind": "code",
+    "title": "danijar/daydreamer",
+    "url": "https://github.com/danijar/daydreamer.git",
+    "local": "upstream/research_20261109/daydreamer",
+    "attribution": "作者实现",
+    "purpose": "实物数据收集与学习架构",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_read_only_not_executed",
+    "commit": "709016ce11c32dad1f24c4cc77afdf980d2a92a8",
+    "tree": "5d9a5bc8402a84881d1d96b7deecb7b8dc5b66fe",
+    "tracked_status": "",
+    "license_files": [],
+    "license": "unknown: no root license file",
+    "submodules_initialized": false,
+    "lfs_downloaded": false,
+    "exit_code": 0
+  },
+  {
+    "id": "supermimic_reference",
+    "kind": "code",
+    "title": "YHFone/supermimic-mjlab",
+    "url": "https://github.com/YHFone/supermimic-mjlab.git",
+    "local": "upstream/research_20261109/supermimic-mjlab",
+    "attribution": "第三方 reference implementation；非作者官方代码",
+    "purpose": "PyTorch/mjlab 短展开参考；不执行",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_read_only_not_executed",
+    "commit": "9aab0a588c6941bf9862a2d444b711fd73e2b832",
+    "tree": "fc6a4a75febede1c048fc210a4babbd81961b52a",
+    "tracked_status": "",
+    "license_files": [
+      {
+        "path": "upstream/research_20261109/supermimic-mjlab/LICENSE",
+        "sha256": "e7cab5ca2b834298d3b7d28e7e69954ae8bb3d32216f505d68674fedd7de7329"
+      }
+    ],
+    "license": "pending text inspection",
+    "submodules_initialized": false,
+    "lfs_downloaded": false,
+    "exit_code": 0
+  },
+  {
+    "id": "dmo_code",
+    "kind": "code",
+    "title": "machines-in-motion/DMO_code",
+    "url": "https://github.com/machines-in-motion/DMO_code.git",
+    "local": "upstream/research_20261109/DMO_code",
+    "attribution": "作者项目页链接；页面标注 work in progress",
+    "purpose": "梯度路线对照；不默认完整可复现",
+    "accessed": "2026-11-09T12:45:50.330884+08:00",
+    "status": "downloaded_read_only_not_executed",
+    "commit": "f60a9ddb8f0a840b2e00602cd51e627fba394b78",
+    "tree": "488bc9c8054eee97cb5a19e1e98a53188cd91275",
+    "tracked_status": "",
+    "license_files": [
+      {
+        "path": "upstream/research_20261109/DMO_code/LICENSE.md",
+        "sha256": "0979acf365a652e7b06537346fe4635494d7cc066e09202547d7333366a70d5f"
+      }
+    ],
+    "license": "pending text inspection",
+    "submodules_initialized": false,
+    "lfs_downloaded": false,
+    "exit_code": 0
+  }
+]

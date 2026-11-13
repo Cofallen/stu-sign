@@ -1,0 +1,198 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "controller.py",
+    "--headless",
+    "--recovery-trial=-1.45",
+    "--recovery-prepare"
+  ],
+  "cwd": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller",
+  "python": "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+  "runtime_paths": {
+    "project": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller",
+    "output": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261113_111645_174708",
+    "modules": {
+      "LQR_six": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/__init__.py",
+      "LQR_six.get_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_sensor.py",
+      "LQR_six.parameters": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/parameters.py",
+      "LQR_six.write_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/write_sensor.py",
+      "LQR_six.mymath": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mymath.py",
+      "LQR_six.leg_data": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/leg_data.py",
+      "LQR_six.vmc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/vmc.py",
+      "LQR_six.get_state": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_state.py",
+      "LQR_six.lqr_model": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr_model.py",
+      "LQR_six.lqr": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr.py",
+      "LQR_six.mympc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mympc.py",
+      "LQR_six.lqr_controller": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr_controller.py",
+      "LQR_six.render_stand": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/render_stand.py",
+      "LQR_six.jump": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/jump.py",
+      "LQR_six.teleop": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/teleop.py",
+      "LQR_six.step_trial": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/step_trial.py",
+      "LQR_six.leg_rotate": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/leg_rotate.py",
+      "LQR_six.recovery": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/recovery.py",
+      "LQR_six.keyboardInput": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/keyboardInput.py",
+      "LQR_six.simulation": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/simulation.py"
+    }
+  },
+  "args": {
+    "terrain": "flat",
+    "control": "lqr",
+    "variant": "no-gas",
+    "case": "nominal",
+    "duration": 10.0,
+    "headless": true,
+    "viewer": false,
+    "no_drive": false,
+    "no_ui": false,
+    "camera_follow": false,
+    "hud": false,
+    "camera": "iso",
+    "video": null,
+    "video_size": "960x540",
+    "video_fps": 30,
+    "no_hud": false,
+    "follow": false,
+    "hold": false,
+    "drive": false,
+    "step_trial_x": null,
+    "step_up": false,
+    "auto_step_up": false,
+    "reverse_trial": null,
+    "recovery_trial": -1.45,
+    "recovery_prepare": true
+  },
+  "versions": {
+    "mujoco": "3.11.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "actuator_ctrlrange_nm": {
+    "act_lf0": [
+      -40.0,
+      40.0
+    ],
+    "act_lw": [
+      -5.0,
+      5.0
+    ],
+    "act_rf0": [
+      -40.0,
+      40.0
+    ],
+    "act_rw": [
+      -5.0,
+      5.0
+    ],
+    "act_lf20": [
+      -40.0,
+      40.0
+    ],
+    "act_rf20": [
+      -40.0,
+      40.0
+    ]
+  },
+  "mass_kg": 21.054624999999998,
+  "physics_dt_s": 0.001,
+  "control_dt_s": 0.002,
+  "feedback": "Author six-state LQR/VMC; IMU + wheel odometry; VMC uses full-model linkage Jacobian/qvel",
+  "file_sha256": {
+    "controller.py": "9506b531b9316a12aa65b0fd8e482f684a7c125909dd12c2befc6e14bf38fd3f",
+    "standing_pose.json": "e94e06734096270711e2134e226a1d2b05beb893c886cc7e1ea1ca3a73fa1d70",
+    "gain_schedule.json": "bd71b73c78cc18ac05c94f2a25266abd905a86c56b65301431354e2e4541931c",
+    "LQR_six/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "LQR_six/get_sensor.py": "e60aaa16656b57bce3f31bba6c5a319e917816454353ac6c97101d0d39cca657",
+    "LQR_six/get_state.py": "a38da1c5b914e52cc77be4ad3ad35a3269119aab9aba3902dc392a69b85f9bef",
+    "LQR_six/jump.py": "e00ae8c7f2391916c5a4befcb12105b4aaca9ba909867fd65f6dca30faf087ee",
+    "LQR_six/keyboardInput.py": "3150624e3e04b9145bcdfc2b091cc5643215e501559b88113459eee8d19d7e3e",
+    "LQR_six/leg_data.py": "ebdab486d5fc7babdabb0cb41126963090d3b05ba2eea524322aac67217a0ebd",
+    "LQR_six/leg_rotate.py": "372d7da09858512333527c8588982f234fa983fe58b2d4c466352ac92df59af3",
+    "LQR_six/lqr.py": "ff73450b37837efd04ba92a456299b367f4b35f334ab88715e866d4391bff546",
+    "LQR_six/lqr_controller.py": "db8dc5b19b429cf2e093cd9ba38d007c43bafb6ea0bf1da9e941b8bdba188e0d",
+    "LQR_six/lqr_model.py": "35d894f16a77b2b1a4eb387cc8f44db5355a7e0ad2b5c276265df1b3c7c09c0b",
+    "LQR_six/mymath.py": "b8efbc0daa798017dd6cd8ca2f30b3072a2d427466d9102cc8e31c401ec036eb",
+    "LQR_six/mympc.py": "c6224a5c2c70acc49f6b20363972ce1f210f12fd26932f162fb0b18a3bec2de1",
+    "LQR_six/parameters.py": "0a84fea7a832c15f451d038a27de536d6e8259d252ecce98deffe575f48ea4dd",
+    "LQR_six/recovery.py": "aef8abe276f400372e2bb80424ad31b17f7a41ae4860d70db131af9f9e98d1ed",
+    "LQR_six/render_stand.py": "b642394c9e3dfc80353c35851f27a5d13894d077be2a0ee65849592075531102",
+    "LQR_six/simulation.py": "6093a4d9b55f3a39b61e443a153ccb9721d2aaff97e28736b9ff90a55cb65f95",
+    "LQR_six/step_trial.py": "a166fee2a087e55e4d16c18f5250f7e01d6acb7f5b14c934b321182dfb79bc51",
+    "LQR_six/teleop.py": "7168a54cee6b338d8aa7df4d488d87374056c202ef381a5b0c2c07a6638242fc",
+    "LQR_six/vmc.py": "b5867c0d3996a35c672e7390b1b22a3e6b436205912713ceec4f40b684f8141a",
+    "LQR_six/vofa.py": "a0a289ae54b17c9b6cd8c10219d1fdb988bc2c491e8352a457dd211faa67a0b8",
+    "LQR_six/write_sensor.py": "51b69cffa60c69858bde259cf098abf76b22a5e37d34c210b265be340e365b66",
+    "assets/robot_gas_spring_damped.xml": "9b77973e72253511f798866e709021349af8386b2b80855ae9b90ce66319009f",
+    "assets/robot_no_gas_spring.xml": "263185e1f4a2a61d9e54803610d3e6b978c5ede259223552f278b3d623430088",
+    "scenes/single_step_10cm.xml": "7e0a07cac1641fdc8e311c8779432a9fa7092eee538937d0cb0c073c8b586ee9",
+    "scenes/step_up_course.xml": "140c733bc1a6c8e039406e81e15311167381dea9761aa3ef2ea93b5a0fa4e14a",
+    "scenes/training_terrain.xml": "d5f188d61f8d10774b140ece126103f30ede3349891a0bfd75c6b9d25675a2b7"
+  },
+  "thresholds": {
+    "duration_s": 10.0,
+    "max_xy_drift_m": 0.1,
+    "final_tilt_rad": 0.05,
+    "max_closure_m": 0.0001,
+    "min_height_m": 0.12,
+    "fall_tilt_rad": 0.6,
+    "fall_is_terminal": false,
+    "numerical_error_is_terminal": true
+  },
+  "recovery": {
+    "fall_theta": 2.5132741228718345,
+    "fall_imu_tilt": 0.6,
+    "fall_hold": 0.012,
+    "settle_time": 0.7,
+    "ready_hold": 0.045,
+    "rear_angle_min": -1.7,
+    "rear_angle_max": -0.65,
+    "ready_length": 0.265,
+    "prone_pitch_min": 1.22,
+    "prone_pitch_max": 2.02,
+    "extend_length": 0.32,
+    "extend_min": 0.25,
+    "extend_time": 0.6,
+    "prepare_settle": 0.4,
+    "rear_target": -1.05,
+    "rotate_time": 0.7,
+    "prepare_timeout": 2.4,
+    "prepare_hip_nm": 15.0,
+    "retract_length": 0.216,
+    "retract_amount": 0.075,
+    "retract_time": 0.45,
+    "retract_timeout": 1.5,
+    "retract_hip_nm": 16.0,
+    "swing_hip_nm": 24.0,
+    "swing_timeout": 2.3,
+    "hip_segment_time": 0.3934852194,
+    "hip_waypoints": [
+      [
+        -2.30738646,
+        0.09172996
+      ],
+      [
+        0.20536821,
+        0.08075211
+      ],
+      [
+        0.15386996,
+        0.41516217
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "handoff_earliest": 0.75,
+    "handoff_tilt": 0.25,
+    "handoff_gyro": 1.5,
+    "lqr_blend_time": 0.2643176248,
+    "handoff_wheel_nm": 3.0,
+    "rising_length": 0.2178260735,
+    "rising_time": 0.75,
+    "stand_extend_time": 0.7,
+    "transition_timeout": 3.0,
+    "stable_hold": 0.5
+  },
+  "seed": null
+}

@@ -1,0 +1,131 @@
+{
+  "timing": {
+    "sync_calls": 0,
+    "sync_wall_s": 0.0,
+    "sync_max_s": 0.0,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 0.0,
+    "late_steps": 0,
+    "max_lag_s": 0.0,
+    "initial_sync_wall_s": 0.0,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.41243294261601315,
+    "loop_non_ui_non_sleep_s": 24.24636581300001
+  },
+  "viewer_options": null,
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "gas",
+  "duration_s": 9.999999999999897,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 7.831558223425716e-07,
+  "max_tilt_rad": 1.921665537597105e-06,
+  "max_xy_drift_m": 3.634789825237833e-05,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 2.1994343515852623e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.24923867693286691,
+  "max_torque_nm": [
+    9.088709321475259,
+    0.0009185386602259189,
+    9.01197142201259,
+    0.0008998741979250893,
+    9.44051181720835,
+    9.331990701419238
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": null,
+  "final_base_xy_m": [
+    2.578305585993038e-05,
+    -8.27793019659992e-08
+  ],
+  "final_yaw_rad": 2.8892097290186626e-05,
+  "mode": "stand",
+  "interactive": false,
+  "teleop": null,
+  "final_odometry_error_m": 2.054514834149939e-07,
+  "wall_s": 24.24636581300001,
+  "fall_events_s": [],
+  "recovery": {
+    "phase": "idle",
+    "events": [],
+    "preparation_enabled": false
+  },
+  "gain_schedule": {
+    "lengths_m": {
+      "left": 0.2779238904791399,
+      "right": 0.2779185819112871
+    },
+    "K_left": [
+      [
+        -62.73726569450184,
+        -1.4656549196784512,
+        -21.938073799131338,
+        -18.069087798300135,
+        34.83367925607307,
+        4.242031059042228
+      ],
+      [
+        11.080017311729225,
+        0.15214908935646365,
+        4.242046784793599,
+        3.127795206117357,
+        170.54240851117808,
+        7.184630362737005
+      ]
+    ],
+    "K_right": [
+      [
+        -62.737206553834774,
+        -1.4656509368898434,
+        -21.938062228593484,
+        -18.06913236192821,
+        34.83416900361083,
+        4.24207351317237
+      ],
+      [
+        11.080174458298233,
+        0.1521526496227168,
+        4.242105051758584,
+        3.1278502717336374,
+        170.54231091205548,
+        7.184616310953027
+      ]
+    ],
+    "masses": {
+      "body_total_kg": 16.877574,
+      "body_per_side_kg": 8.438787,
+      "leg_kg": {
+        "l": 1.597924,
+        "r": 1.5983269999999998
+      },
+      "wheel_kg": {
+        "l": 0.4904,
+        "r": 0.4904
+      },
+      "total_kg": 21.054624999999998,
+      "wheel_radius_m": 0.06
+    },
+    "range_m": [
+      0.18,
+      0.34
+    ]
+  },
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "standing: full duration, final 5 s tilt <0.05 rad, xy drift <0.1 m, closure <1e-4 m, no warning, no passive actuation, wheel-only contact",
+  "passed": true
+}

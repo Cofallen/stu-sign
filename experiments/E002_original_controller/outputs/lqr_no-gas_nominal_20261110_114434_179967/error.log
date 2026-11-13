@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/controller.py", line 203, in main
+    teleop.update(imu, dt)
+  File "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/teleop.py", line 106, in update
+    leg.target['yaw'] = imu['euler'][2] + self.yaw_rate/self.yaw_kp
+                                          ~~~~~~~~~~~~~^~~~~~~~~~~~
+ZeroDivisionError: float division by zero

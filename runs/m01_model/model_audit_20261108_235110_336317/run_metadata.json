@@ -1,0 +1,13 @@
+{
+  "python": "3.12.13 | packaged by Anaconda, Inc. | (main, Mar 19 2026, 20:20:58) [GCC 14.3.0]",
+  "mujoco": "3.11.0",
+  "executable": "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/home/cofallen/Code/毕业设计/scripts/audit_model.py"
+  ],
+  "upstream_commit": "8204e853dfd2ed06d85a322e1a998c3d20a3be2c",
+  "source_sha256": "c4181e221e89fb4932a6e0389142a3385d953f03484bde4c819ef2afb3998fad",
+  "generated_xml_sha256": "8e033e0d1fa18b5814d8fd2d1abb945a20a663601cb42816d15373ba82d8f407"
+}

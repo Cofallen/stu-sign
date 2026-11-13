@@ -1,0 +1,14 @@
+{
+  "checked_documents": 18,
+  "checked_local_links": 84,
+  "broken_links": [
+    {
+      "file": "docs/02_milestones/M00_workspace_organization.md",
+      "target": "../../runs/m00_environment/workspace_organization_20261109_134450_155266/validation.json"
+    }
+  ],
+  "before_snapshots_verified": true,
+  "existing_files_moved": 0,
+  "simulation_or_training_run": false,
+  "exit_code": 1
+}

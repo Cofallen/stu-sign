@@ -1,0 +1,159 @@
+{
+  "date": "2026-11-09",
+  "scope": "Personal research reading; no dependencies, pretrained weights or datasets installed",
+  "items": [
+    {
+      "id": "pets",
+      "kind": "paper",
+      "title": "PETS",
+      "arxiv": "1805.12114",
+      "url": "https://arxiv.org/abs/1805.12114",
+      "local": "references/papers/research_20261109/pets.pdf",
+      "purpose": "基础：概率动力学与模型集成"
+    },
+    {
+      "id": "rma",
+      "kind": "paper",
+      "title": "RMA",
+      "arxiv": "2107.04034",
+      "url": "https://arxiv.org/abs/2107.04034",
+      "local": "references/papers/research_20261109/rma.pdf",
+      "purpose": "基础：本体历史与在线适应"
+    },
+    {
+      "id": "dreamwaq",
+      "kind": "paper",
+      "title": "DreamWaQ",
+      "arxiv": "2301.10602",
+      "url": "https://arxiv.org/abs/2301.10602",
+      "local": "references/papers/research_20261109/dreamwaq.pdf",
+      "purpose": "基础：本体感知与隐式环境表征"
+    },
+    {
+      "id": "dreamerv3",
+      "kind": "paper",
+      "title": "DreamerV3",
+      "arxiv": "2301.04104",
+      "url": "https://arxiv.org/abs/2301.04104",
+      "local": "references/papers/research_20261109/dreamerv3.pdf",
+      "purpose": "核心：潜在动力学与想象策略学习"
+    },
+    {
+      "id": "tdmpc2",
+      "kind": "paper",
+      "title": "TD-MPC2",
+      "arxiv": "2310.16828",
+      "url": "https://arxiv.org/abs/2310.16828",
+      "local": "references/papers/research_20261109/tdmpc2.pdf",
+      "purpose": "对照阅读：面向任务的世界模型与规划"
+    },
+    {
+      "id": "daydreamer",
+      "kind": "paper",
+      "title": "DayDreamer",
+      "arxiv": "2206.14176",
+      "url": "https://arxiv.org/abs/2206.14176",
+      "local": "references/papers/research_20261109/daydreamer.pdf",
+      "purpose": "实物：世界模型的数据与控制闭环"
+    },
+    {
+      "id": "supermimic",
+      "kind": "paper",
+      "title": "SuperMimic",
+      "arxiv": "2610.28480",
+      "url": "https://arxiv.org/abs/2610.28480",
+      "local": "references/papers/research_20261109/supermimic.pdf",
+      "purpose": "核心：可微世界模型与短视界策略梯度"
+    },
+    {
+      "id": "dmo",
+      "kind": "paper",
+      "title": "DMO",
+      "arxiv": "2509.00215",
+      "url": "https://arxiv.org/abs/2509.00215",
+      "local": "references/papers/research_20261109/dmo.pdf",
+      "purpose": "进阶：学习模型梯度与前向仿真解耦"
+    },
+    {
+      "id": "mbpo",
+      "kind": "paper",
+      "title": "MBPO",
+      "arxiv": "1906.08253",
+      "url": "https://arxiv.org/abs/1906.08253",
+      "local": "references/papers/research_20261109/mbpo.pdf",
+      "purpose": "基础：模型偏差与短展开"
+    },
+    {
+      "id": "macura",
+      "kind": "paper",
+      "title": "MACURA",
+      "arxiv": "2405.19014",
+      "url": "https://arxiv.org/abs/2405.19014",
+      "local": "references/papers/research_20261109/macura.pdf",
+      "purpose": "查重：不确定性与自适应展开已有工作"
+    },
+    {
+      "id": "mbrl_lib",
+      "kind": "code",
+      "title": "facebookresearch/mbrl-lib",
+      "url": "https://github.com/facebookresearch/mbrl-lib.git",
+      "local": "upstream/research_20261109/mbrl-lib",
+      "attribution": "研究库维护者实现；含 PETS/MBPO，不等同原论文代码",
+      "purpose": "概率模型、模型训练与回放"
+    },
+    {
+      "id": "rma_cms",
+      "kind": "code",
+      "title": "antonilo/rl_locomotion",
+      "url": "https://github.com/antonilo/rl_locomotion.git",
+      "local": "upstream/research_20261109/rl_locomotion",
+      "attribution": "RMA 作者项目页链接的后续 CMS/RMA 派生实现",
+      "purpose": "适应网络与特权信息边界；Raisim 代码仅阅读"
+    },
+    {
+      "id": "dreamerv3_code",
+      "kind": "code",
+      "title": "danijar/dreamerv3",
+      "url": "https://github.com/danijar/dreamerv3.git",
+      "local": "upstream/research_20261109/dreamerv3",
+      "attribution": "作者维护的重实现；不是论文历史环境锁",
+      "purpose": "世界模型、想象轨迹、actor critic"
+    },
+    {
+      "id": "tdmpc2_code",
+      "kind": "code",
+      "title": "nicklashansen/tdmpc2",
+      "url": "https://github.com/nicklashansen/tdmpc2.git",
+      "local": "upstream/research_20261109/tdmpc2",
+      "attribution": "作者官方实现",
+      "purpose": "潜在转移、价值学习与规划"
+    },
+    {
+      "id": "daydreamer_code",
+      "kind": "code",
+      "title": "danijar/daydreamer",
+      "url": "https://github.com/danijar/daydreamer.git",
+      "local": "upstream/research_20261109/daydreamer",
+      "attribution": "作者实现",
+      "purpose": "实物数据收集与学习架构"
+    },
+    {
+      "id": "supermimic_reference",
+      "kind": "code",
+      "title": "YHFone/supermimic-mjlab",
+      "url": "https://github.com/YHFone/supermimic-mjlab.git",
+      "local": "upstream/research_20261109/supermimic-mjlab",
+      "attribution": "第三方 reference implementation；非作者官方代码",
+      "purpose": "PyTorch/mjlab 短展开参考；不执行"
+    },
+    {
+      "id": "dmo_code",
+      "kind": "code",
+      "title": "machines-in-motion/DMO_code",
+      "url": "https://github.com/machines-in-motion/DMO_code.git",
+      "local": "upstream/research_20261109/DMO_code",
+      "attribution": "作者项目页链接；页面标注 work in progress",
+      "purpose": "梯度路线对照；不默认完整可复现"
+    }
+  ]
+}

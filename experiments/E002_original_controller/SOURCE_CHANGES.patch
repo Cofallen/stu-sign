@@ -1,0 +1,1990 @@
+--- origin/main:LQR_six/get_sensor.py
++++ LQR_six/get_sensor.py
+@@ -8,47 +8,50 @@
+         """
+         self.model = model
+         self.data = data
++        self.base_id = model.body('base_Link_del').id
++        joint_names = dict(joint_l1_L='lf0_Joint', joint_l6_L='l20_Joint',
++                           joint_wheel_L='l_wheel_Joint', joint_l1_R='rf0_Joint',
++                           joint_l6_R='r20_Joint', joint_wheel_R='r_wheel_Joint')
++        self.joint_qpos = {alias:int(model.joint(name).qposadr[0])
++                           for alias,name in joint_names.items()}
++        self.acc_sensor = data.sensor('base_lin_acc').data
++        self.gyro_sensor = data.sensor('base_ang_vel').data
+ 
+     # ---------------------------
+     # IMU
+     # ---------------------------
+     def get_orientation_quat(self):
+         """Return quaternion [w, x, y, z]"""
+-        return self.data.sensor("orientation").data.copy()
++        # 当前 XML 的 framequat/body 对应惯性主轴，不能直接当机身 IMU 姿态。
++        return self.data.xquat[self.base_id].copy()
+ 
+     def get_acc(self):
+         """Return linear acceleration (m/s^2)"""
+-        return self.data.sensor("acc").data.copy()
++        return self.acc_sensor.copy()
+ 
+     def get_gyro(self):
+         """Return angular velocity (rad/s)"""
+-        return self.data.sensor("gyro").data.copy()
++        return self.gyro_sensor.copy()
+ 
+     # ---------------------------
+     # Joint positions
+     # ---------------------------
+     def get_joint_positions(self):
+         """Return all joint positions as dict"""
+-        return {
+-            "joint_l1_L": self.data.sensor("joint_l1_L").data[0],
+-            "joint_l6_L": self.data.sensor("joint_l6_L").data[0],
+-            "joint_wheel_L": self.data.sensor("joint_wheel_L").data[0],
+-            "joint_l1_R": self.data.sensor("joint_l1_R").data[0],
+-            "joint_l6_R": self.data.sensor("joint_l6_R").data[0],
+-            "joint_wheel_R": self.data.sensor("joint_wheel_R").data[0],
+-        }
++        return {alias:self.data.qpos[index] for alias,index in self.joint_qpos.items()}
+ 
+     # ---------------------------
+     # Combined state (recommended)
+     # ---------------------------
+     def get_state(self):
+         """Return full robot state"""
++        quat = self.get_orientation_quat()
+         return {
+-            "quat": self.get_orientation_quat(),
++            "quat": quat,
+             "acc": self.get_acc(),
+             "gyro": self.get_gyro(),
+             "joints": self.get_joint_positions(),
+-            "euler": self.quat_to_euler(self.get_orientation_quat()),
++            "euler": self.quat_to_euler(quat),
+         }
+ 
+     # ---------------------------
+--- origin/main:LQR_six/get_state.py
++++ LQR_six/get_state.py
+@@ -1,7 +1,10 @@
++"""作者六状态接口；按当前模型轮径、轮轴方向和轮架转动补偿适配。"""
+ import numpy as np
+-from mymath import Discreteness
++from .mymath import Discreteness
+ 
+-RADIUS_WHEEL = 0.05  # 轮子半径，单位米
++RADIUS_WHEEL = 0.06
++HIP_HEIGHT = 0.08725
++
+ 
+ class StateEstimator:
+     def __init__(self, dt):
+@@ -9,74 +12,44 @@
+         self.disc_s = Discreteness(dt)
+         self.disc_theta_wl = Discreteness(dt)
+         self.disc_theta_wr = Discreteness(dt)
++        self.started = False
+ 
+     def update_left(self, leg, imu, dt):
+-        pitch = imu["euler"][1]
+-        gyro_x = imu["gyro"][1]
++        leg.state['theta'] = np.pi/2 - leg.vmc['phi0'] + imu['euler'][1]
++        leg.state['dtheta'] = leg.vmc['theta_dot']
++        leg.state['phi'] = -imu['euler'][1]
++        leg.state['dphi'] = -imu['gyro'][1]
+ 
+-        theta = np.pi/2 - leg.vmc["phi0"] + pitch
++    def update_right(self, leg, imu, dt):
++        leg.state['theta'] = -np.pi/2 + leg.vmc['phi0'] + imu['euler'][1]
++        leg.state['dtheta'] = leg.vmc['theta_dot']
++        leg.state['phi'] = -imu['euler'][1]
++        leg.state['dphi'] = -imu['gyro'][1]
+ 
+-        dtheta = leg.disc_theta.Diff(theta)
+-        ddtheta = leg.disc_dtheta.Diff(dtheta)
+-
+-        phi = -pitch
+-        dphi = -gyro_x
+-
+-        leg.state["theta"] = theta
+-        leg.state["dtheta"] = dtheta
+-        leg.state["ddtheta"] = ddtheta
+-        leg.state["phi"] = phi
+-        leg.state["dphi"] = dphi
+-    
+-    def update_right(self, leg, imu, dt):
+-        pitch = imu["euler"][1]
+-        gyro_x = imu["gyro"][1]
+-
+-        theta = -np.pi/2 + leg.vmc["phi0"] + pitch
+-
+-        dtheta = leg.disc_theta.Diff(theta)
+-        ddtheta = leg.disc_dtheta.Diff(dtheta)
+-
+-        phi = -pitch
+-        dphi = -gyro_x
+-
+-        leg.state["theta"] = theta
+-        leg.state["dtheta"] = dtheta
+-        leg.state["ddtheta"] = ddtheta
+-        leg.state["phi"] = phi
+-        leg.state["dphi"] = dphi
+-    
+     def update(self, leg_L, leg_R, motor, imu):
+-        # --- wheel angle ---
+-        theta_wl = -motor["left_wheel"]
+-        theta_wr = motor["right_wheel"]
+-
++        pitch = imu['euler'][1]
++        # 当前左轮正转/右轮反转为同一前进方向；加轮架相对机身的旋转。
++        theta_wl = -(motor['left_wheel'] + leg_L.vmc['carrier_pitch'] + pitch)
++        theta_wr = motor['right_wheel'] - leg_R.vmc['carrier_pitch'] - pitch
++        if not self.started:
++            self.disc_theta_wl.last_diff = theta_wl
++            self.disc_theta_wr.last_diff = theta_wr
++            self.started = True
+         dtheta_wl = self.disc_theta_wl.Diff(theta_wl)
+         dtheta_wr = self.disc_theta_wr.Diff(theta_wr)
+-
+-        # --- base velocity ---
+-        dot_s_b = -RADIUS_WHEEL * (dtheta_wl + dtheta_wr) / 2.0
+-
+-        # --- kinematic compensation ---
+-        dot_s = dot_s_b \
+-            + 0.5 * (
+-                leg_L.vmc["L0"] * leg_R.state["dtheta"] * np.cos(leg_L.state["theta"])
+-                + leg_R.vmc["L0"] * leg_L.state["dtheta"] * np.cos(leg_R.state["theta"])
+-            ) \
+-            + 0.5 * (
+-                leg_L.vmc["L0_dot"] * np.sin(leg_L.state["theta"])
+-                + leg_R.vmc["L0_dot"] * np.sin(leg_R.state["theta"])
+-            )
+-
+-        # --- integrate position ---
++        wheel_speed = -RADIUS_WHEEL*(dtheta_wl+dtheta_wr)/2
++        # 轮心速度 + 腿几何补偿 - 髋轴偏置转动，得到机身 X 方向里程计。
++        compensation = 0.0
++        for leg in (leg_L, leg_R):
++            theta = leg.state['theta']
++            compensation += (leg.vmc['L0']*leg.state['dtheta']*np.cos(theta)
++                             + leg.vmc['L0_dot']*np.sin(theta))/2
++        dot_s = wheel_speed + compensation - HIP_HEIGHT*np.cos(pitch)*imu['gyro'][1]
+         s = self.disc_s.Sum(dot_s)
+-
+-        # --- delta ---
+-        delta = leg_R.state["theta"] - leg_L.state["theta"]
+-
+-        # --- 写回 ---
+-        for leg in [leg_L, leg_R]:
+-            leg.state["s"] = s
+-            leg.state["dot_s"] = dot_s
+-            leg.state["delta"] = delta
+-        +        delta = leg_L.state['theta'] - leg_R.state['theta']
++        ddelta = leg_L.state['dtheta'] - leg_R.state['dtheta']
++        theta = (leg_L.state['theta']+leg_R.state['theta'])/2
++        dtheta = (leg_L.state['dtheta']+leg_R.state['dtheta'])/2
++        for leg in (leg_L, leg_R):
++            leg.state.update(s=s, dot_s=dot_s, theta=theta, dtheta=dtheta,
++                             delta=delta, ddelta=ddelta)
+--- origin/main:LQR_six/keyboardInput.py
++++ LQR_six/keyboardInput.py
+@@ -1,62 +1,175 @@
+-from pynput import keyboard
++"""X11 实际键位查询：补足 passive viewer 没有 key-release 回调的问题。
++
++只在本进程 MuJoCo 窗口有焦点且鼠标位于三维区时启用驾驶。
++W/S/A/D/Q/E 查询真实按住状态；J/X/R 查询按下边沿（100Hz）。
++不安装监听库，不用按键重复事件猜测释放，也不读取/记录其它程序的文本。
++"""
++import ctypes as C
++import ctypes.util
+ import threading
+-from mymath import Discreteness
++import os
++
+ 
+ class KeyboardInput:
+-    def __init__(self, dt):
++    def __init__(self):
++        library = ctypes.util.find_library('X11')
++        if not library:
++            raise RuntimeError('按住控制需要本机 X11 库；此后端尚未验证原生 Wayland/Windows。')
++        self.x11 = C.CDLL(library)
++        self.x11.XInitThreads()
++        self.x11.XOpenDisplay.argtypes = [C.c_char_p]
++        self.x11.XOpenDisplay.restype = C.c_void_p
++        self.display = self.x11.XOpenDisplay(None)
++        if not self.display:
++            raise RuntimeError('无法连接桌面 X11；请在图形终端运行，数值检查用 --headless。')
++        self.x11.XGetInputFocus.argtypes = [C.c_void_p, C.POINTER(C.c_ulong), C.POINTER(C.c_int)]
++        self.x11.XQueryKeymap.argtypes = [C.c_void_p, C.c_void_p]
++        self.x11.XStringToKeysym.argtypes = [C.c_char_p]
++        self.x11.XStringToKeysym.restype = C.c_ulong
++        self.x11.XKeysymToKeycode.argtypes = [C.c_void_p, C.c_ulong]
++        self.x11.XKeysymToKeycode.restype = C.c_uint
++        self.x11.XFetchName.argtypes = [C.c_void_p, C.c_ulong, C.POINTER(C.c_char_p)]
++        self.x11.XFree.argtypes = [C.c_void_p]
++        self.x11.XCloseDisplay.argtypes = [C.c_void_p]
++        self.keycodes = {key: self.x11.XKeysymToKeycode(self.display, self.x11.XStringToKeysym(key.encode()))
++                         for key in (*'wsadqejxr', 'Shift_L', 'Shift_R')}
++        # 被动抓取仅作用于本进程窗口中的驾驶键，避免 W/J 等同时切换显示。
++        signatures = {
++            'XInternAtom': ([C.c_void_p, C.c_char_p, C.c_int], C.c_ulong),
++            'XGetWindowProperty': ([C.c_void_p, C.c_ulong, C.c_ulong, C.c_long, C.c_long,
++                                   C.c_int, C.c_ulong, C.POINTER(C.c_ulong), C.POINTER(C.c_int),
++                                   C.POINTER(C.c_ulong), C.POINTER(C.c_ulong), C.POINTER(C.c_void_p)], C.c_int),
++            'XGrabKey': ([C.c_void_p, C.c_int, C.c_uint, C.c_ulong, C.c_int, C.c_int, C.c_int], C.c_int),
++            'XUngrabKey': ([C.c_void_p, C.c_int, C.c_uint, C.c_ulong], C.c_int),
++            'XQueryPointer': ([C.c_void_p, C.c_ulong, C.POINTER(C.c_ulong), C.POINTER(C.c_ulong),
++                               C.POINTER(C.c_int), C.POINTER(C.c_int), C.POINTER(C.c_int),
++                               C.POINTER(C.c_int), C.POINTER(C.c_uint)], C.c_int),
++            'XGetGeometry': ([C.c_void_p, C.c_ulong, C.POINTER(C.c_ulong), C.POINTER(C.c_int),
++                              C.POINTER(C.c_int), C.POINTER(C.c_uint), C.POINTER(C.c_uint),
++                              C.POINTER(C.c_uint), C.POINTER(C.c_uint)], C.c_int),
++            'XPending': ([C.c_void_p], C.c_int),
++            'XNextEvent': ([C.c_void_p, C.c_void_p], C.c_int),
++            'XFlush': ([C.c_void_p], C.c_int),
++        }
++        for name, (arguments, result) in signatures.items():
++            function = getattr(self.x11, name)
++            function.argtypes, function.restype = arguments, result
++        self.pid_atom = self.x11.XInternAtom(self.display, b'_NET_WM_PID', 0)
++        self.window = None
++        self.grabbed = False
++        self.viewport = None
++        self.previous = set()
++        self.actions = []
+         self.lock = threading.Lock()
+-        self.disc_s = Discreteness(dt)
++        self.latest = set()
++        self.stop = threading.Event()
++        self.worker = threading.Thread(target=self._watch, name='viewer-keys', daemon=True)
++        self.worker.start()
+ 
+-        self.target = {
+-            "theta": 0.0,
+-            "s": 0.0,
+-            "dot_s": 0.0,
+-            "phi": 0.0,
+-            "yaw": 0.0,
+-            "l0": 0.25,
+-        }
++    def _focus(self):
++        window, revert = C.c_ulong(), C.c_int()
++        self.x11.XGetInputFocus(self.display, C.byref(window), C.byref(revert))
++        return window.value
+ 
+-        self.step = {
+-            "dot_s": 1.0,
+-            "yaw": 0.05,
+-            "l0": 0.0003,
+-        }
++    def set_viewport(self, viewport):
++        """MuJoCo 公共 viewport；鼠标在侧面板内时释放驾驶键给原生 UI。"""
++        self.viewport = (viewport.left, viewport.bottom, viewport.width, viewport.height)
+ 
+-        self.pressed = set()
++    def _own_window(self, window):
++        if window <= 1:
++            return False
++        kind, bits, count, remaining, value = C.c_ulong(), C.c_int(), C.c_ulong(), C.c_ulong(), C.c_void_p()
++        self.x11.XGetWindowProperty(self.display, window, self.pid_atom, 0, 1, 0, 6,
++                                   C.byref(kind), C.byref(bits), C.byref(count), C.byref(remaining), C.byref(value))
++        own = bool(value.value and count.value == 1 and bits.value == 32
++                   and C.cast(value, C.POINTER(C.c_ulong))[0] == os.getpid())
++        if value.value:
++            self.x11.XFree(value)
++        return own
+ 
+-        self.listener = keyboard.Listener(
+-            on_press=self.on_press,
+-            on_release=self.on_release
+-        )
+-        self.listener.start()
++    def _in_viewport(self):
++        if self.viewport is None:
++            return False
++        root, child = C.c_ulong(), C.c_ulong()
++        rx, ry, x, y, mask = C.c_int(), C.c_int(), C.c_int(), C.c_int(), C.c_uint()
++        if not self.x11.XQueryPointer(self.display, self.window, C.byref(root), C.byref(child),
++                                      C.byref(rx), C.byref(ry), C.byref(x), C.byref(y), C.byref(mask)):
++            return False
++        gx, gy = C.c_int(), C.c_int()
++        width, height, border, depth = C.c_uint(), C.c_uint(), C.c_uint(), C.c_uint()
++        self.x11.XGetGeometry(self.display, self.window, C.byref(root), C.byref(gx), C.byref(gy),
++                             C.byref(width), C.byref(height), C.byref(border), C.byref(depth))
++        left, bottom, w, h = self.viewport
++        return left <= x.value < left+w and bottom <= height.value-1-y.value < bottom+h
+ 
+-    def on_press(self, key):
++    def _grab(self, enabled):
++        if enabled == self.grabbed:
++            return
++        for code in self.keycodes.values():
++            for modifiers in (0, 1, 2, 3, 16, 17, 18, 19):  # 普通键、CapsLock、NumLock；保留 Ctrl/Alt 组合。
++                if enabled:
++                    self.x11.XGrabKey(self.display, code, modifiers, self.window, 0, 1, 1)
++                else:
++                    self.x11.XUngrabKey(self.display, code, modifiers, self.window)
++        self.x11.XFlush(self.display)
++        self.grabbed = enabled
++
++    def on_key(self, key):
++        """兼容入口；驾驶由 poll 处理，原生面板中的键不转换成驾驶动作。"""
++        pass
++
++    def _read_keys(self):
++        """工作线程独占 X11 连接。"""
++        if not self.display:
++            return set(), []
++        focus = self._focus()
++        if self.window is None and self._own_window(focus):
++            self.window = focus
++        enabled = self.window is not None and focus == self.window and self._in_viewport()
++        self._grab(enabled)
++        # 抓取的事件归本连接；连续轴和动作边沿仍以真实键位为准，不靠重复事件。
++        event = (C.c_long * 24)()
++        while self.x11.XPending(self.display):
++            self.x11.XNextEvent(self.display, event)
++        if not enabled:
++            self.previous.clear()
++            return set(), []
++        bitmap = (C.c_ubyte * 32)()
++        self.x11.XQueryKeymap(self.display, bitmap)
++        pressed = {key for key, code in self.keycodes.items() if bitmap[code//8] & (1 << (code%8))}
++        actions = sorted((pressed-self.previous) & set('jxr'))
++        self.previous = pressed
++        held = pressed & set('wsadqe')
++        if pressed & {'Shift_L', 'Shift_R'}:
++            held.add('shift')
++        return held, actions
++
++    def _watch(self):
++        # X11 查询会等待显示服务器；放在线程内，不能阻塞 1kHz 物理循环。
++        try:
++            while not self.stop.is_set():
++                pressed, actions = self._read_keys()
++                with self.lock:
++                    self.latest = pressed
++                    self.actions.extend(actions)
++                self.stop.wait(.01)
++        finally:
++            # 连接异常也不能留下持续驾驶命令。
++            with self.lock:
++                self.latest.clear()
++                self.actions.clear()
++
++    def poll(self):
++        """非阻塞取最近真实键位及累计动作；刷新周期约10ms加X11响应时间。"""
+         with self.lock:
+-            self.pressed.add(key)
++            actions, self.actions = self.actions, []
++            return set(self.latest), actions
+ 
+-    def on_release(self, key):
++    def close(self):
++        self.stop.set()
++        self.worker.join()
+         with self.lock:
+-            if key in self.pressed:
+-                self.pressed.remove(key)
+-
+-    def update(self):
+-        with self.lock:
+-            if keyboard.Key.up in self.pressed:
+-                self.target["dot_s"] = self.step["dot_s"]
+-            elif keyboard.Key.down in self.pressed:
+-                self.target["dot_s"] = -self.step["dot_s"]
+-            else:
+-                self.target["dot_s"] = 0.0
+-
+-            self.target["s"] = self.disc_s.Sum(self.target["dot_s"])
+-
+-            if keyboard.Key.left in self.pressed:
+-                # self.target["yaw"] += self.step["yaw"]
+-                self.target["l0"] -= self.step["l0"]
+-            if keyboard.Key.right in self.pressed:
+-                # self.target["yaw"] -= self.step["yaw"]
+-                self.target["l0"] += self.step["l0"]
+-
+-    def get_target(self):
+-        with self.lock:
+-            return self.target.copy()+            if self.display:
++                self._grab(False)
++                self.x11.XCloseDisplay(self.display)
++                self.display = None
+--- origin/main:LQR_six/leg_data.py
++++ LQR_six/leg_data.py
+@@ -1,5 +1,6 @@
+ import numpy as np
+-from mymath import Discreteness, PID_control
++from .mymath import Discreteness, PID_control
++from .parameters import TARGET, PID, CONTROL
+ 
+ 
+ class Leg:
+@@ -23,18 +24,7 @@
+         }
+ 
+         # -------- target --------
+-        self.target = {
+-            "theta": 0.0,
+-            "dtheta": 0.0,
+-            "s": 0.0,
+-            "dot_s": 0.0,
+-            "phi": 0.0,
+-            "dphi": 0.0,
+-            "l0": 0.25,
+-            "roll": 0.0,
+-            "yaw": 0.0,
+-            "d2theta": 0.0
+-        }
++        self.target = TARGET.copy()
+ 
+         # -------- VMC --------
+         self.vmc = {
+@@ -60,11 +50,11 @@
+         }
+ 
+         # -------- PID --------
+-        self.pid_F = PID_control(4000, 1.0, 10000, 0.0)
+-        self.pid_roll = PID_control(1000, 0.0, 3000, 0.0)
++        self.pid_F = PID_control(*PID['legacy_leg_force'])
++        self.pid_roll = PID_control(*PID['legacy_leg_roll'])
+ 
+         # -------- limit --------
+         self.limit = {
+-            "T_max": 20.0,
+-            "W_max": 10.0,
++            "T_max": CONTROL['leg_torque_limit'],
++            "W_max": CONTROL['wheel_torque_limit'],
+         }--- origin/main:LQR_six/lqr.py
++++ LQR_six/lqr.py
+@@ -1,193 +1,138 @@
++"""完整闭链的离线六状态 LQR 与腿长三次拟合。
++
++get_k 在线性化工作点求 A/B/K；fit_ABK 拟合；GainSchedule 运行时仅算多项式。
++质量、惯量、关节与闭链直接读取本项目 XML，不使用旧 chuan 等效杆参数。
++状态 [theta,dtheta,s,dot_s,phi,dphi]；输入 [单轮力矩,单侧摆腿力矩]。
++"""
++import argparse
++import sys
++import hashlib
++import json
++from pathlib import Path
++
++# 支持从项目外用python -m或直接执行本文件；仅加入本小项目目录。
++if not __package__:
++    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
++    __package__ = 'LQR_six'
++
++import mujoco
+ import numpy as np
+-import sympy as sp
+-import scipy.linalg
+-# import serial
+-import struct
++from scipy.linalg import solve_continuous_are
+ 
+-# 获取步态周期内 各时刻 k 值
+-# TODO 写拟合/实时求解/其他mpc高级方法
+-def get_k_solve(L0_l, L0_r, theta, phi, R1, l1, mw1, mp1, M1, Iw1, Ip1, IM1):
+-    """
+-    get_k_gan 的 Docstring
+-    
+-    :param L0: 杆长 先只控左腿
+-    :param theta: 相对于垂直轴的顺时针夹角
+-    """
+-    L1 = L0_l / 2
+-    LM1 = L0_l / 2 
+-    pass
+-
+-def get_k(leg_length):
+-    # 1. 定义符号变量
+-    t = sp.symbols('t')
+-    theta = sp.Function('theta')(t)
+-    x = sp.Function('x')(t)
+-    phi = sp.Function('phi')(t)
+-    
+-    theta_dot, theta_ddot = sp.symbols('theta_dot theta_ddot')
+-    x_dot, x_ddot = sp.symbols('x_dot x_ddot')
+-    phi_dot, phi_ddot = sp.symbols('phi_dot phi_ddot')
+-
+-    # 中间变量和输入
+-    N, P, N_M, P_M = sp.symbols('N P N_M P_M')
+-    T, T_p = sp.symbols('T T_p')
+-
+-    # 2. 物理参数 (直接定义为数值，不再用符号)
+-    R_val = 0.05
+-    L_val = leg_length / 2.0
+-    L_M_val = leg_length / 2.0
+-    Body_val = 0.574
+-    l_val = 0.028
+-    m_w_val = 0.572
+-    m_p_val = 0.9810
+-    M_val = 10.0 / 2.0
+-    I_w_val = 0.5 * m_w_val * R_val**2
+-    # I_p_val = m_p_val * ((leg_length)**2 + 0.12**2) / 12.0
+-    # I_M_val = M_val * (0.24**2 + 0.22**2) / 12.0
+-    I_p_val = m_p_val * leg_length**2 / 12.0 + m_p_val * 0.0084306**2
+-    I_M_val = M_val * Body_val**2 / 12.0 + Body_val * l_val**2 
+-    g_val = 9.81
+-
+-    # 3. 动力学方程推导 (直接使用数值参数)
+-    x_b = x + (L_val + L_M_val) * sp.sin(theta)
+-    
+-    replacements = [
+-        (sp.diff(theta, t, 2), theta_ddot), 
+-        (sp.diff(x, t, 2), x_ddot), 
+-        (sp.diff(phi, t, 2), phi_ddot),
+-        (sp.diff(theta, t), theta_dot), 
+-        (sp.diff(x, t), x_dot), 
+-        (sp.diff(phi, t), phi_dot)
+-    ]
+-
+-    def diff_and_sub(expr, order=1):
+-        d_expr = sp.diff(expr, t, order)
+-        return d_expr.subs(replacements).subs(replacements)
+-
+-    # 方程 f4, f5, f7, f8 (带入数值)
+-    eq1 = N - N_M - m_p_val * (x_ddot + diff_and_sub(L_val * sp.sin(theta), 2))
+-    eq2 = P - P_M - m_p_val * g_val - m_p_val * diff_and_sub(L_val * sp.cos(theta), 2)
+-    eq3 = N_M - M_val * diff_and_sub(x_b - l_val * sp.sin(phi), 2)
+-    eq4 = P_M - M_val * g_val - M_val * diff_and_sub((L_val + L_M_val) * sp.cos(theta) + l_val * sp.cos(phi), 2)
+-
+-    # 4. 求解中间变量
+-    # 此时方程中只有 theta, phi 及其导数是符号，参数都是数字，求解会非常快
+-    sol_intermediate = sp.solve([eq1, eq2, eq3, eq4], [N, P, N_M, P_M], dict=True)
+-    if not sol_intermediate: return None
+-    
+-    sol_dict = sol_intermediate[0]
+-    N_sol = sol_dict[N]
+-    P_sol = sol_dict[P]
+-    N_M_sol = sol_dict[N_M]
+-    P_M_sol = sol_dict[P_M]
+-
+-    # 5. 求解状态变量方程
+-    eq_f3 = (T - N_sol * R_val) / (I_w_val / R_val + m_w_val * R_val) - x_ddot
+-    
+-    eq_f6 = (P_sol * L_val + P_M_sol * L_M_val) * sp.sin(theta) - \
+-            (N_sol * L_val + N_M_sol * L_M_val) * sp.cos(theta) - T + T_p - I_p_val * theta_ddot
+-            
+-    eq_f9 = T_p + N_M_sol * l_val * sp.cos(phi) + P_M_sol * l_val * sp.sin(phi) - I_M_val * phi_ddot
+-
+-    sols_acc = sp.solve([eq_f3, eq_f6, eq_f9], [theta_ddot, x_ddot, phi_ddot], dict=True)
+-    if not sols_acc: return None
+-        
+-    acc_dict = sols_acc[0]
+-    g1 = acc_dict[theta_ddot]
+-    g2 = acc_dict[x_ddot]
+-    g3 = acc_dict[phi_ddot]
+-
+-    # 6. 线性化
+-    theta0, x0, phi0 = sp.symbols('theta0 x0 phi0')
+-    subs_linear = [(theta, theta0), (x, x0), (phi, phi0)]
+-    
+-    g1 = g1.subs(subs_linear)
+-    g2 = g2.subs(subs_linear)
+-    g3 = g3.subs(subs_linear)
+-
+-    f_vec = sp.Matrix([theta_dot, g1, x_dot, g2, phi_dot, g3])
+-    state_vars = sp.Matrix([theta0, theta_dot, x0, x_dot, phi0, phi_dot])
+-    input_vars = sp.Matrix([T, T_p])
+-
+-    # 求雅可比 (此时表达式已经包含数值，求导会很简单)
+-    A_sym = f_vec.jacobian(state_vars)
+-    B_sym = f_vec.jacobian(input_vars)
+-
+-    # 7. 代入平衡点
+-    eq_point = {theta0: 0, theta_dot: 0, x0: 0, x_dot: 0, phi0: 0, phi_dot: 0, T: 0, T_p: 0}
+-    
+-    A_num = np.array(A_sym.subs(eq_point)).astype(np.float64)
+-    B_num = np.array(B_sym.subs(eq_point)).astype(np.float64)
+-
+-    # 8. LQR 求解
+-    Q = np.diag([3000, 1, 500, 1, 30000, 1])
+-    R_mat = np.diag([1, 1]) 
+-    try:
+-        P_sol = scipy.linalg.solve_continuous_are(A_num, B_num, Q, R_mat)
+-        K = np.linalg.inv(R_mat) @ B_num.T @ P_sol
+-        return A_num, B_num, np.array(K)
+-    except Exception as e:
+-        print(f"LQR Solver Error: {e}")
+-        return None, None, None
+-
+-def polyfit_matrix(x, Y, order):
+-    return [np.polyfit(x, Y[:, i], order) for i in range(Y.shape[1])]
+-
+-def fit_ABK():
+-    leg_lengths = np.arange(0.12, 0.36, 0.005)
+-
+-    A_all, B_all, K_all = [], [], []
+-
+-    for ll in leg_lengths:
+-        print("solve:", float(ll))
+-        A, B, K = get_k(float(ll))
+-
+-        if A is None:
+-            continue
+-
+-        A_all.append(A.flatten())
+-        B_all.append(B.flatten())
+-        K_all.append(K.flatten())
+-
+-    A_all = np.array(A_all)   # (N, 36)
+-    B_all = np.array(B_all)   # (N, 12)
+-    K_all = np.array(K_all)   # (N, 12)
+-
+-    order = 3
+-
+-    A_coeffs = polyfit_matrix(leg_lengths, A_all, order)
+-    B_coeffs = polyfit_matrix(leg_lengths, B_all, order)
+-    K_coeffs = polyfit_matrix(leg_lengths, K_all, order)
+-
+-    return A_coeffs, B_coeffs, K_coeffs
+-
+-def export_matrix(name, coeffs):
+-    print(f"float {name}[{len(coeffs)}][4] = {{")
+-    for c in coeffs:
+-        print("    { " + ", ".join(f"{x:.8f}" for x in c) + " },")
+-    print("};\n")
++ROOT = Path(__file__).resolve().parents[1]
++from .parameters import LQR_FIT, LINEARIZATION
++Q = np.diag(LQR_FIT['q'])
++R = np.diag(LQR_FIT['r'])
+ 
+ 
+-def export_all(Ac, Bc, Kc):
+-    export_matrix("A_coeffs", Ac)
+-    export_matrix("B_coeffs", Bc)
+-    export_matrix("K_coeffs", Kc)
+-    
+-def print_matrix(name, mat):
+-    print(f"self.{name} = np.array([")
+-    for row in mat:
+-        row_str = ", ".join([f"{float(x):.8f}" for x in row])
+-        print(f"    [{row_str}],")
+-    print("])\n")
+-    
+-    
+-if __name__ == "__main__":
+-    leg_len = 0.15   # 你想要的腿长
++# K求解分成三步：完整模型线性化 → CARE → 多腿长拟合。
++# 复杂的闭链Jacobian仅放lqr_model.py，不混在参数/矩阵操作中。
++from .lqr_model import linearize, mass_parameters
+ 
+-    A, B, K = get_k(leg_len)
+ 
+-    if A is not None:
+-        print_matrix("A", A)
+-        print_matrix("B", B)
+-        print_matrix("K", K)
+-        print_matrix("B_i", np.linalg.pinv(B))+def solve_lqr(A, B):
++    """给定六状态A/B，用Q/R代价求u=-Kx。"""
++    P = solve_continuous_are(A, B, Q, R)
++    return np.linalg.solve(R, B.T @ P)
++
++
++def get_k(leg_length, qpos, reference_torque, model, epsilon=None):
++    epsilon = LINEARIZATION['epsilon'] if epsilon is None else epsilon
++    A, B, projection_error = linearize(leg_length, qpos, reference_torque, model, epsilon)
++    K = solve_lqr(A, B)
++    return A, B, K, projection_error
++
++
++def polyfit_matrix(lengths, matrices, order=3):
++    """每个矩阵元素各自拟合一条曲线：结果[幂次, 行, 列]。"""
++    matrices = np.asarray(matrices)
++    rows, columns = matrices.shape[1:]
++    coefficients = np.zeros((order+1, rows, columns))
++    for row in range(rows):
++        for column in range(columns):
++            values = matrices[:, row, column]
++            coefficients[:, row, column] = np.polyfit(lengths, values, order)
++    return coefficients
++
++
++def fit_ABK(points, model, order=None):
++    """三个清晰步骤：逐腿长求解 → 归一化腿长 → 逐元素拟合。"""
++    order = LQR_FIT['order'] if order is None else order
++    if order != 3:
++        raise ValueError('当前运行端使用三次式，请保持order=3。')
++    lengths, A_samples, B_samples, K_samples, errors = [], [], [], [], []
++    for point in points:
++        A, B, K, error = get_k(point['length'], point['qpos'], point['ctrl'], model)
++        lengths.append(point['length'])
++        A_samples.append(A)
++        B_samples.append(B)
++        K_samples.append(K)
++        errors.append(error)
++
++    center, scale = LQR_FIT['center'], LQR_FIT['scale']
++    normalized_lengths = (np.array(lengths)-center)/scale
++    A_coeffs = polyfit_matrix(normalized_lengths, A_samples, order)
++    B_coeffs = polyfit_matrix(normalized_lengths, B_samples, order)
++    K_coeffs = polyfit_matrix(normalized_lengths, K_samples, order)
++    return dict(A_coeffs=A_coeffs.tolist(), B_coeffs=B_coeffs.tolist(), K_coeffs=K_coeffs.tolist(),
++                center_m=center, scale_m=scale, order=order,
++                length_range_m=[LQR_FIT['minimum'], LQR_FIT['maximum']],
++                masses=mass_parameters(model), Q=Q.tolist(), R=R.tolist(),
++                source='Full closed-chain planar linearization; per-side virtual torque inputs',
++                lengths_m=lengths, tangent_errors=errors,
++                samples=dict(A=np.array(A_samples).tolist(), B=np.array(B_samples).tolist(),
++                             K=np.array(K_samples).tolist()))
++
++
++class GainSchedule:
++    def __init__(self, variant='no-gas'):
++        path = ROOT/'gain_schedule.json'
++        self.config = json.loads(path.read_text())
++        self.data = self.config['variants'][variant]
++        filename = 'robot_no_gas_spring.xml' if variant == 'no-gas' else 'robot_gas_spring_damped.xml'
++        actual = hashlib.sha256((ROOT/'assets'/filename).read_bytes()).hexdigest()
++        if self.data['model_sha256'] != actual:
++            raise ValueError('XML与拟合增益版本不符，请重新标定。')
++        self.minimum,self.maximum = self.data['length_range_m']
++        self.coefficients = tuple(np.asarray(self.data[n],dtype=float)
++                                  for n in ('A_coeffs','B_coeffs','K_coeffs'))
++
++    def _argument(self, length):
++        length = min(self.maximum,max(self.minimum,float(length)))
++        return (length-self.data['center_m'])/self.data['scale_m'],length
++
++    @staticmethod
++    def _evaluate(coefficients, x):
++        C3, C2, C1, C0 = coefficients
++        return ((C3*x + C2)*x + C1)*x + C0
++
++    def get_K(self, length):
++        """控制循环只算K；不重复创建系数数组或计算不用的A/B。"""
++        x,length = self._argument(length)
++        return self._evaluate(self.coefficients[2],x),length
++
++    def evaluate(self, length):
++        x,length = self._argument(length)
++        A = self._evaluate(self.coefficients[0], x)
++        B = self._evaluate(self.coefficients[1], x)
++        K = self._evaluate(self.coefficients[2], x)
++        return A, B, K, length
++
++
++if __name__=='__main__':
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--variant', choices=['no-gas','gas'], default='no-gas')
++    parser.add_argument('--points',type=Path,required=True,help='稳定工作点JSON：length/qpos/ctrl')
++    parser.add_argument('--output',type=Path,required=True,help='写新路径，不覆写历史拟合')
++    args = parser.parse_args()
++    if args.output.exists():
++        parser.error('输出已存在，请使用新路径。')
++    points = json.loads(args.points.read_text())
++    variants = {}
++    for variant in [args.variant]:
++        filename = 'robot_no_gas_spring.xml' if variant == 'no-gas' else 'robot_gas_spring_damped.xml'
++        model = mujoco.MjModel.from_xml_path(str(ROOT/'assets'/filename))
++        variants[variant] = fit_ABK(points,model)
++        variants[variant]['model_sha256'] = hashlib.sha256((ROOT/'assets'/filename).read_bytes()).hexdigest()
++    args.output.write_text(json.dumps(dict(variants=variants,points_sha256=hashlib.sha256(args.points.read_bytes()).hexdigest()),indent=2)+'\n')
++    print(args.output)
+--- origin/main:LQR_six/lqr_controller.py
++++ LQR_six/lqr_controller.py
+@@ -1,185 +1,119 @@
++"""由作者 LQRController 适配：六状态、支撑 PID、左右 VMC 输出保持原结构。"""
+ import numpy as np
+-from mymath import PID_control
++import mujoco
++from .lqr import GainSchedule, mass_parameters, ROOT
++from .mymath import PID_control
++from .mympc import MPCController
++from .parameters import PID, CONTROL, DRIVE, REFERENCE
+ 
+-# -------- 常量（按你实际填）--------
+-MASS_BODY = 10.0
+-GRAVITY = 9.81
++GRAVITY = CONTROL['gravity']
++MAX_TORQUE_LEG_T = CONTROL['leg_torque_limit']
++MAX_TORQUE_LEG_W = CONTROL['wheel_torque_limit']
+ 
+-MAX_TORQUE_LEG_T = 40.0
+-MAX_TORQUE_LEG_W = 100.0
+-
+-import vofa
+ 
+ class LQRController:
+-    def __init__(self):
+-        # -------- LQR增益（你需要填真实K）--------
+-        self.A = np.array([
+-            [0.00000000, 1.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000],
+-            [391.70211876, 0.00000000, 0.00000000, 0.00000000, 1.98661410, 0.00000000],
+-            [0.00000000, 0.00000000, 0.00000000, 1.00000000, 0.00000000, 0.00000000],
+-            [-46.93083005, 0.00000000, 0.00000000, 0.00000000, -0.03544551, 0.00000000],
+-            [0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 1.00000000],
+-            [11.68661222, 0.00000000, 0.00000000, 0.00000000, 9.95509900, 0.00000000],
+-        ])
++    def __init__(self, mode='lqr', dt=None, model=None, variant='no-gas'):
++        dt = CONTROL['feedback_dt'] if dt is None else dt
++        # K(L)离线拟合，运行时按各腿实测长度求值；不在1kHz循环做CARE。
++        self.gains = GainSchedule(variant)
++        self.A, self.B, self.K, _ = self.gains.evaluate(CONTROL['nominal_length'])
++        self.schedule_enabled = True
++        self.K_left, self.K_right = self.K.copy(), self.K.copy()
++        self.gain_length = {'left': .278, 'right': .278}
++        if model is None:
++            filename = 'robot_no_gas_spring.xml' if variant == 'no-gas' else 'robot_gas_spring_damped.xml'
++            model = mujoco.MjModel.from_xml_path(str(ROOT/'assets'/filename))
++        self.physics_dt = model.opt.timestep
++        self.masses = mass_parameters(model)
++        self.support_mass = [self.masses['body_per_side_kg']+self.masses['leg_kg'][side]
++                             for side in ('l','r')]
++        self.mode = mode
++        self.dt = dt
++        self.time = 0.0
++        self.next_time = {side:0. for side in ('left','right')}
++        self.u = {side:np.zeros(2) for side in ('left','right')}
++        # 兼容MPC仍用nominal A/B；本轮K(L)不声称时变MPC已验收。
++        self.mpc = MPCController(self.A, self.B, N=CONTROL['mpc_horizon'], dt=dt) if mode == 'lqr-mpc' else None
++        if self.mpc is not None:
++            self.mpc.u_min = -np.array([CONTROL['mpc_wheel_limit'], CONTROL['mpc_pivot_limit']])
++            self.mpc.u_max = np.array([CONTROL['mpc_wheel_limit'], CONTROL['mpc_pivot_limit']])
++        self.pid_l0_p = PID_control(*PID['length_left'])
++        self.pid_l0_s = PID_control(*PID['length_right'])
++        self.pid_roll = PID_control(*PID['roll'])
++        self.pid_delta = PID_control(*PID['delta'])
++        self.pid_yaw = PID_control(*PID['yaw_rate'])
++        self.correction_time = None
++        self.corrections = (0., 0., 0.)
++        self.force_trim = [0., 0.]
++        self.pivot_trim = [0., 0.]
+ 
+-        self.B = np.array([
+-            [0.00000000, 0.00000000],
+-            [-164.65826694, 49.92885416],
+-            [0.00000000, 0.00000000],
+-            [22.71291988, -5.83460390],
+-            [0.00000000, 0.00000000],
+-            [-1.96266516, 8.69500008],
+-        ])
++    def set_standing_reference(self, leg_L, leg_R, reference_torque):
++        # 重力支撑修正来自此模型的静态站立点，不向被动轴施加力矩。
++        for i, leg in enumerate((leg_L, leg_R)):
++            sign = -1 if i == 0 else 1
++            physical_J = sign*leg.vmc['J']
++            F, Tp = np.linalg.solve(physical_J, reference_torque[[0, 4] if i == 0 else [2, 5]])
++            self.force_trim[i] = F - self.support_mass[i]*GRAVITY
++            self.pivot_trim[i] = Tp
++            if REFERENCE['measured_pose']:
++                leg.target['l0'] = leg.vmc['L0']
++            leg.target['theta'] = (leg.state['theta'] if REFERENCE['measured_pose'] else leg.target['theta'])+REFERENCE['theta_offset']
++            leg.target['phi'] = (leg.state['phi'] if REFERENCE['measured_pose'] else leg.target['phi'])+REFERENCE['phi_offset']
+ 
+-        self.K = np.array([
+-            [-61.60299326, -4.18541300, -21.92104795, -20.67561006, 44.69923054, 4.54768597],
+-            [14.67801961, 0.75238450, 4.41221675, 3.82666266, 168.92846876, 6.02502416],
+-        ])
++    def compute_lqr(self, leg, side='left'):
++        if self.time + 1e-10 < self.next_time[side]:
++            return self.u[side]
++        self.next_time[side] = self.time + self.dt
++        length = leg.vmc['L0'] if self.schedule_enabled else CONTROL['nominal_length']
++        K, used_length = self.gains.get_K(length)
++        setattr(self, 'K_'+side, K)
++        self.K = K  # 兼容旧调试接口；左右实际矩阵见K_left/K_right。
++        self.gain_length[side] = used_length
++        s = leg.state
++        x = np.array([s['theta'], s['dtheta'], s['s'], s['dot_s'], s['phi'], s['dphi']])
++        x_ref = np.array([leg.target[k] for k in ('theta', 'dtheta', 's', 'dot_s', 'phi', 'dphi')])
++        err = x - x_ref
++        if leg.target.get('braking',False):
++            reversing = s['dot_s'] * DRIVE['forward_sign'] < -DRIVE['speed_stopped']
++            gain = 'reverse_brake_velocity_gain' if reversing else 'brake_velocity_gain'
++            err[3] *= CONTROL[gain]
++        # 原程序把负号放在电机输出；这里显式 u=-K*err，轮轴方向在启动文件写清。
++        self.u[side] = -K @ err
++        if self.mpc is not None:
++            # 保留作者 lqr+mpc 分支的 0.2 叠加形式。未实现扰动估计时不伪造 d_hat。
++            self.u[side] += CONTROL['mpc_mix']*self.mpc.solve(err, np.zeros(2), np.zeros(6))
++        return self.u[side]
+ 
+-        self.B_i = np.array([
+-            [0.00000000, -0.00574222, 0.00000000, 0.00557167, 0.00000000, 0.03671203],
+-            [0.00000000, 0.00071543, 0.00000000, 0.01567879, 0.00000000, 0.12142138],
+-        ])
+-        # self.K = np.array([
+-        #     [0, 0, 0, 0, 0, 0],
+-        #     [0, 0, 0, 0, 0, 0],
+-        # ])  # --- IGNORE ---
++    def posture_corrections(self, leg, imu):
++        """公共姿态PID每物理步只算一次，左右两侧不能重复更新D项记忆。"""
++        if self.correction_time != self.time:
++            roll = self.pid_roll.position_pid(leg.target['roll'], imu['euler'][0])-CONTROL['roll_damping']*imu['gyro'][0]
++            delta = self.pid_delta.position_pid(leg.target['d2theta'], leg.state['delta'])-CONTROL['delta_damping']*leg.state['ddelta']
++            yaw = self.pid_yaw.position_pid(leg.target.get('yaw_rate',0.), imu['gyro'][2])
++            yaw = float(np.clip(yaw, -CONTROL['yaw_torque_limit'], CONTROL['yaw_torque_limit']))
++            self.correction_time, self.corrections = self.time, (roll,delta,yaw)
++        return self.corrections
+ 
+-
+-        # -------- PID --------
+-        self.pid_l0_p = PID_control(3000, 0, 1000, 0.15)
+-        self.pid_l0_s = PID_control(3000, 0, 1000, 0.15)
+-
+-        self.pid_roll = PID_control(0, 0, 0, 0)
+-        self.pid_delta = PID_control(10, 0, 0, 0)
+-        self.pid_yaw = PID_control(10, 0, 0, 0)
+-
+-    # -----------------------
+-    # 通用LQR计算
+-    # -----------------------
+-    def compute_lqr(self, leg):
+-        s = leg.state
+-
+-        x = np.array([
+-            s["theta"],
+-            s["dtheta"],
+-            s["s"],
+-            s["dot_s"],
+-            s["phi"],
+-            s["dphi"]
+-        ])
+-
+-        x_ref = np.array([
+-            leg.target.get("theta", 0),
+-            leg.target.get("dtheta", 0),
+-            leg.target.get("s", 0),
+-            leg.target.get("dot_s", 0),
+-            leg.target.get("phi", 0),
+-            leg.target.get("dphi", 0)
+-        ])
+-
+-        x_ref_dot = np.array([
+-            0,
+-            0,
+-            0,
+-            0,
+-            0,
+-            0
+-        ])
+-        err = x - x_ref
+-        
+-        ud = self.B_i @ self.A @ (x_ref_dot -x_ref)  # 仅x_ref_dot[1,5]使得ud不为0，但是没有意义
+-        u = self.K @ err   
+-        
+-        T_w = (u[0])
+-        T_p = (u[1])
+-
+-        return T_w, T_p
+-
+-    # -----------------------
+-    # 左腿控制
+-    # -----------------------
+     def control_left(self, leg, imu):
+-        # ---- LQR ----
+-        T_w, T_p = self.compute_lqr(leg)
+-
+-        # ---- PID: 支撑力 ----
+-        F0_p = self.pid_l0_p.position_pid(leg.target["l0"], leg.vmc["L0"])
+-        # F0_s = self.pid_l0_s.position_pid(F0_p, leg.vmc["L0_dot"])
+-
+-        dF_0 = F0_p
+-
+-        # ---- Roll ----
+-        dF_roll = self.pid_roll.position_pid(leg.target["roll"], imu["euler"][0])
+-
+-        # ---- Delta ----
+-        dF_delta = self.pid_delta.position_pid(leg.target["d2theta"], leg.state["delta"])
+-
+-        # ---- Yaw ----
+-        dF_yaw = self.pid_yaw.position_pid(leg.target["yaw"], imu["euler"][2])
+-
+-        # ---- F0 ----
+-        theta = leg.state["theta"]
+-
+-        F_0 = (
+-            MASS_BODY / 2.0 * GRAVITY / np.cos(theta)
+-            + dF_0
+-            # - dF_roll
+-        )
+-        
+-        # ---- 修正 ----
+-        T_p = T_p + dF_delta
+-        T_w = T_w + dF_yaw
+-
+-        # ---- 力 -> 关节 ----
+-        J = leg.vmc["J"]
+-
+-        tau = J @ np.array([F_0, T_p])
+-        tau_w = T_w
+-
+-        # ---- 限幅 ----
+-        tau[0] = np.clip(tau[0], -MAX_TORQUE_LEG_T, MAX_TORQUE_LEG_T)
+-        tau[1] = np.clip(tau[1], -MAX_TORQUE_LEG_T, MAX_TORQUE_LEG_T)
+-        tau_w = np.clip(tau_w, -MAX_TORQUE_LEG_W, MAX_TORQUE_LEG_W)
+-
++        T_w, T_p = self.compute_lqr(leg, 'left')
++        F0_p = self.pid_l0_p.position_pid(leg.target['l0'], leg.vmc['L0'], -self.physics_dt*leg.vmc['L0_dot'])
++        dF_roll, dF_delta, dF_yaw = self.posture_corrections(leg, imu)
++        F_0 = self.support_mass[0]*GRAVITY + self.force_trim[0] + F0_p - CONTROL['length_damping']*leg.vmc['L0_dot'] + dF_roll + leg.target.get('jump_force', 0.)
++        T_p = T_p + self.pivot_trim[0] + dF_delta
++        T_w = T_w - dF_yaw
++        tau = leg.vmc['J'] @ np.array([F_0, T_p])
++        tau = np.clip(tau, -MAX_TORQUE_LEG_T, MAX_TORQUE_LEG_T)
++        tau_w = np.clip(T_w, -MAX_TORQUE_LEG_W, MAX_TORQUE_LEG_W)
+         return tau, tau_w
+ 
+-    # -----------------------
+-    # 右腿控制（符号不同！）
+-    # -----------------------
+     def control_right(self, leg, imu):
+-        T_w, T_p = self.compute_lqr(leg)
+-
+-        F0_p = self.pid_l0_p.position_pid(leg.target["l0"], leg.vmc["L0"])
+-        # F0_s = self.pid_l0_s.position_pid(F0_p, leg.vmc["L0_dot"])
+-
+-        dF_0 = F0_p
+-
+-        # 注意符号（和C一致）
+-        dF_roll = -self.pid_roll.position_pid(leg.target["roll"], imu["euler"][0])
+-
+-        dF_delta = self.pid_delta.position_pid(leg.target["d2theta"], leg.state["delta"])
+-        dF_yaw = self.pid_yaw.position_pid(leg.target["yaw"], imu["euler"][2])
+-
+-        theta = leg.state["theta"]
+-
+-        F_0 = (
+-            MASS_BODY / 2.0 * GRAVITY / np.cos(theta)
+-            + dF_0
+-            # + dF_roll
+-        )
+-
+-        # 注意符号（关键区别）
+-        T_p = T_p - dF_delta
+-        T_w = T_w - dF_yaw
+-
+-        J = leg.vmc["J"]
+-
+-        tau = J @ np.array([F_0, T_p])
+-        tau_w = T_w
+-
+-        tau[0] = np.clip(tau[0], -MAX_TORQUE_LEG_T, MAX_TORQUE_LEG_T)
+-        tau[1] = np.clip(tau[1], -MAX_TORQUE_LEG_T, MAX_TORQUE_LEG_T)
+-        tau_w = np.clip(tau_w, -MAX_TORQUE_LEG_W, MAX_TORQUE_LEG_W)
+-
+-        return tau, tau_w+        T_w, T_p = self.compute_lqr(leg, 'right')
++        F0_p = self.pid_l0_s.position_pid(leg.target['l0'], leg.vmc['L0'], -self.physics_dt*leg.vmc['L0_dot'])
++        dF_roll, dF_delta, dF_yaw = self.posture_corrections(leg, imu)
++        F_0 = self.support_mass[1]*GRAVITY + self.force_trim[1] + F0_p - CONTROL['length_damping']*leg.vmc['L0_dot'] - dF_roll + leg.target.get('jump_force', 0.)
++        T_p = T_p + self.pivot_trim[1] - dF_delta
++        T_w = T_w + dF_yaw
++        tau = leg.vmc['J'] @ np.array([F_0, T_p])
++        tau = np.clip(tau, -MAX_TORQUE_LEG_T, MAX_TORQUE_LEG_T)
++        tau_w = np.clip(T_w, -MAX_TORQUE_LEG_W, MAX_TORQUE_LEG_W)
++        return tau, tau_w
+--- origin/main:LQR_six/mymath.py
++++ LQR_six/mymath.py
+@@ -46,14 +46,16 @@
+ 
+         self.output = 0.0
+ 
+-    def position_pid(self, targ ,feedback_value):
++    def position_pid(self, targ, feedback_value, derivative_delta=None):
+         # single step duration
+         self.last_err = self.err
+         self.targ_value = targ # 增加的
+         self.err = self.targ_value - feedback_value
+ 
+         self.err = self.err * self.err_LpfRatio + self.last_err * (1 - self.err_LpfRatio)
+-        self.output = (self.err - self.last_err) * self.kd
++        # 可用实测变化作D项，避免腿长目标跳变引起导数冲击。
++        difference = self.err-self.last_err if derivative_delta is None else derivative_delta
++        self.output = difference * self.kd
+         self.output += self.err * self.kp
+         self.integral += self.err * self.ki
+ 
+--- origin/lqr+mpc:LQR_six/mympc.py
++++ LQR_six/mympc.py
+@@ -21,6 +21,7 @@
+ class MPCController:
+     def __init__(self, A, B, N=30, dt=0.01):
+         self.A, self.B = c2d(A, B, dt)   # ✅ 必须离散化
++        self.solve_count = 0
+         self.N = N
+         self.dt = dt
+         
+@@ -101,8 +102,9 @@
+ 
+     # -----------------------------
+     def solve(self, x0, d_hat, x_ref=None):
++        self.solve_count += 1
+         if x_ref is None:
+-            x_ref = np.zeros(self.nx)
++            x_ref = np.zeros(self.nx_orig)
+ 
+         x0_aug = np.concatenate([x0, d_hat])
+         x_ref_aug = np.concatenate([x_ref, d_hat])
+@@ -114,8 +116,8 @@
+ 
+         try:
+             U = -np.linalg.solve(self.H, f)
+-        except:
+-            U = np.zeros(self.nu * self.N)
++        except np.linalg.LinAlgError as exc:
++            raise RuntimeError("MPC prediction solve failed") from exc
+ 
+         u0 = U[:self.nu]
+ 
+--- origin/main:LQR_six/vmc.py
++++ LQR_six/vmc.py
+@@ -1,131 +1,108 @@
++"""沿用作者 VMC/Leg 接口；仅把旧五杆几何换成完整并联模型的几何。
++
++当前后支路不是原 chuan.xml 的五杆，不能只替换四个杆长。
++这里从四处 connect 的 Jacobian 消去八个被动关节，仍只输出两腿电机。
++"""
++import mujoco
+ import numpy as np
+ 
+ 
+ class VMC:
+-    def __init__(self):
+-        # ---- geometry ----
+-        self.l1 = 0.215
+-        self.l2 = 0.258
+-        self.l3 = 0.258
+-        self.l4 = 0.215
+-        self.l5 = 0.0
++    def __init__(self, model, data):
++        self.model = model
++        self.data = data
++        self.active = [int(model.joint(n).dofadr[0]) for n in
++                       ('lf0_Joint', 'l20_Joint', 'rf0_Joint', 'r20_Joint')]
++        wheels = [int(model.joint(n).dofadr[0]) for n in ('l_wheel_Joint', 'r_wheel_Joint')]
++        self.passive = [i for i in range(6, model.nv) if i not in self.active+wheels]
++        self.base_id = model.body('base_Link_del').id
++        self.hip_ids = {s:model.joint(s+'f0_Joint').id for s in ('l','r')}
++        self.wheel_ids = {s:model.body(s+'_wheel_Link').id for s in ('l','r')}
++        self.knee_ids = {s:model.body(s+'f1_Link').id for s in ('l','r')}
++        self.common = None
+ 
+-    # ---------------------------
+-    # kinematics
+-    # ---------------------------
+-    def get_phi(self, phi1, phi4):
+-        l1, l2, l3, l4, l5 = self.l1, self.l2, self.l3, self.l4, self.l5
++    def _prepare(self):
++        """左右腿共用闭链消元与朝向，每次read_state只求一次。"""
++        model, data = self.model, self.data
++        # 1. 被动角速度 = -J_passive^+ J_active * 主动角速度。
++        equality = np.asarray(data.efc_J).reshape(-1, model.nv)
++        equality = equality[data.efc_type == mujoco.mjtConstraint.mjCNSTR_EQUALITY]
++        coupling = np.zeros((model.nv, 4))
++        coupling[self.active] = np.eye(4)
++        coupling[self.passive] = -np.linalg.pinv(equality[:, self.passive], rcond=1e-5) @ equality[:, self.active]
+ 
+-        x_B = -l5 / 2 + np.cos(phi1) * l1
+-        y_B = np.sin(phi1) * l1
++        base_id = self.base_id
++        base_rotation = data.xmat[base_id].reshape(3, 3)
++        forward = base_rotation[:, 0]
++        horizontal = forward.copy(); horizontal[2] = 0.
++        norm = np.linalg.norm(horizontal)
++        heading = horizontal/max(norm, 1e-8) if norm > 1e-8 else np.array([1.,0.,0.])
++        base_jac = np.zeros((3,model.nv)); base_rot_jac = np.zeros_like(base_jac)
++        mujoco.mj_jacBody(model, data, base_jac, base_rot_jac, base_id)
++        # d(omega cross forward)/dq，以及归一化水平朝向的导数。
++        skew = np.array([[0.,-forward[2],forward[1]], [forward[2],0.,-forward[0]],
++                         [-forward[1],forward[0],0.]])
++        heading_jac = (np.diag([1.,1.,0.])-np.outer(heading,heading))@(-skew@base_rot_jac)/max(norm,1e-8)
++        omega = base_rot_jac @ data.qvel
++        self.common = coupling, base_rotation, heading, heading_jac, omega
+ 
+-        x_D =  l5 / 2 + np.cos(phi4) * l4
+-        y_D = np.sin(phi4) * l4
+-
+-        A0 = 2 * l2 * (x_D - x_B)
+-        B0 = 2 * l2 * (y_D - y_B)
+-        l_BD = np.sqrt((x_D - x_B)**2 + (y_D - y_B)**2)
+-        C0 = l2**2 + l_BD**2 - l3**2
+-
+-        phi2 = 2 * np.arctan2(
+-            B0 + np.sqrt(A0**2 + B0**2 - C0**2),
+-            A0 + C0
+-        )
+-
+-        x_C = -l5 / 2 + l1 * np.cos(phi1) + l2 * np.cos(phi2)
+-        y_C =        l1 * np.sin(phi1) + l2 * np.sin(phi2)
+-
+-        phi3 = np.arctan2(y_C - y_D, x_C - x_D)
+-
+-        L0 = np.sqrt(x_C**2 + y_C**2)
+-        phi0 = np.arctan2(y_C, x_C)
+-
+-        return phi0, phi2, phi3, L0
+-
+-    # ---------------------------
+-    # Jacobian
+-    # ---------------------------
+-    def get_J(self, phi0, phi1, phi2, phi3, phi4, L0):
+-        l1, l4 = self.l1, self.l4
+-
+-        J = np.zeros((2, 2))
+-
+-        denom = np.sin(phi2 - phi3)
+-        if abs(denom) < 1e-6:
+-            return J  # 防止奇异
+-
+-        J[0, 0] = -l1 * np.sin(phi0 - phi3) * np.sin(phi1 - phi2) / denom
+-        J[0, 1] = -l1 * np.sin(phi1 - phi2) * np.cos(phi0 - phi3) / (L0 * denom)
+-        J[1, 0] = -l4 * np.sin(phi0 - phi2) * np.sin(phi3 - phi4) / denom
+-        J[1, 1] = -l4 * np.sin(phi3 - phi4) * np.cos(phi0 - phi2) / (L0 * denom)
+-
+-        return J
+-
+-    # ---------------------------
+-    # 主更新（写入 Leg）
+-    # ---------------------------
+     def update_left(self, leg, motor):
+-        """
+-        leg: Leg 类
+-        motor: dict {front, back}
+-        """
+-
+-        # ---- 角度映射（和你C一致）----
+-        phi1 = np.pi - motor["left_front"]
+-        phi4 = - motor["left_back"]
+-
+-        # ---- kinematics ----
+-        phi0, phi2, phi3, L0 = self.get_phi(phi1, phi4)
+-
+-        # ---- 离散微分 ----
+-        L0_dot = leg.disc_L.Diff(L0)
+-        L0_ddot = leg.disc_dL.Diff(L0_dot)
+-
+-        # ---- Jacobian ----
+-        J = self.get_J(phi0, phi1, phi2, phi3, phi4, L0)
+-
+-        # ---- 写入 Leg ----
+-        leg.vmc["phi0"] = phi0
+-        leg.vmc["phi1"] = phi1
+-        leg.vmc["phi2"] = phi2
+-        leg.vmc["phi3"] = phi3
+-        leg.vmc["phi4"] = phi4
+-
+-        leg.vmc["L0"] = L0
+-        leg.vmc["L0_dot"] = L0_dot
+-        leg.vmc["L0_ddot"] = L0_ddot
+-
+-        leg.vmc["J"] = J
++        self._prepare()
++        self._update(leg, 'l', 0, -1)
+ 
+     def update_right(self, leg, motor):
+-        """
+-        leg: Leg 类
+-        motor: dict {front, back}
+-        """
++        if self.common is None:
++            self._prepare()
++        self._update(leg, 'r', 2, +1)
++        self.common = None
+ 
+-        # ---- 角度映射（和你C一致）----
+-        phi1 = np.pi - motor["right_back"]
+-        phi4 = - motor["right_front"]
++    def _update(self, leg, side, column, output_sign):
++        model, data = self.model, self.data
++        coupling, base_rotation, heading, heading_jac, omega = self.common
+ 
+-        # ---- kinematics ----
+-        phi0, phi2, phi3, L0 = self.get_phi(phi1, phi4)
++        # 2. 髋轴到轮心的相对位置/速度；模型几何始终保留原完整闭链。
++        hip = data.xanchor[self.hip_ids[side]]
++        wheel = self.wheel_ids[side]
++        wheel_jac = np.zeros((3, model.nv)); rotation_jac = np.zeros_like(wheel_jac)
++        hip_jac = np.zeros_like(wheel_jac)
++        mujoco.mj_jacBody(model, data, wheel_jac, rotation_jac, wheel)
++        mujoco.mj_jac(model, data, hip_jac, rotation_jac, hip, self.base_id)
++        relative = data.xpos[wheel] - hip
++        relative_jac = wheel_jac - hip_jac
++        length = np.linalg.norm(relative)
++        length_jac = relative @ relative_jac / length
++        # 前后摆腿平面必须随偏航旋转，不能固定用世界X（转90°会退化）。
++        forward_distance = heading@relative
++        forward_jac = heading@relative_jac + relative@heading_jac
++        denominator = max(forward_distance**2+relative[2]**2,1e-8)
++        theta_jac = (relative[2]*forward_jac-forward_distance*relative_jac[2])/denominator
+ 
+-        # ---- 离散微分 ----
+-        L0_dot = leg.disc_L.Diff(L0)
+-        L0_ddot = leg.disc_dL.Diff(L0_dot)
+ 
+-        # ---- Jacobian ----
+-        J = self.get_J(phi0, phi1, phi2, phi3, phi4, L0)
++        # 3. 虚功：电机力矩 = [dL/dq; dtheta/dq].T @ [支撑力, 摆腿力矩]。
++        jacobian = np.vstack([length_jac, theta_jac]) @ coupling[:, column:column+2]
++        relative_body = base_rotation.T @ relative
++        theta_body = np.arctan2(-relative_body[0], -relative_body[2])
++        # Both sides use the same body frame. These angles are independent of
++        # the averaged leg state used by the standing LQR.
++        body_x, _, body_z = relative_body
++        angle_gradient = np.array([body_z, 0., -body_x]) / max(body_x**2 + body_z**2, 1e-8)
++        actuated = coupling[:, column:column+2]
++        body_angle_row = angle_gradient @ (base_rotation.T @ relative_jac @ actuated)
++        relative_velocity = relative_jac @ data.qvel
++        body_velocity = base_rotation.T @ (relative_velocity - np.cross(omega, relative))
++        body_pitch = np.arctan2(-base_rotation[2, 0], base_rotation[2, 2])
++        gravity_angle = theta_body + body_pitch
++        leg.vmc['theta_body'] = float(theta_body)
++        leg.vmc['theta_body_dot'] = float(angle_gradient @ body_velocity)
++        leg.vmc['theta_gravity'] = float(np.arctan2(np.sin(gravity_angle), np.cos(gravity_angle)))
++        leg.vmc['J_body'] = np.vstack((jacobian[0], body_angle_row)).T
++        knee_rotation = data.xmat[self.knee_ids[side]].reshape(3, 3)
++        carrier = base_rotation.T @ knee_rotation
+ 
+-        # ---- 写入 Leg ----
+-        leg.vmc["phi0"] = phi0
+-        leg.vmc["phi1"] = phi1
+-        leg.vmc["phi2"] = phi2
+-        leg.vmc["phi3"] = phi3
+-        leg.vmc["phi4"] = phi4
+-
+-        leg.vmc["L0"] = L0
+-        leg.vmc["L0_dot"] = L0_dot
+-        leg.vmc["L0_ddot"] = L0_ddot
+-
+-        leg.vmc["J"] = J+        leg.vmc['phi0'] = np.pi/2-theta_body if side == 'l' else np.pi/2+theta_body
++        leg.vmc['L0'] = float(length)
++        leg.vmc['L0_dot'] = float(length_jac @ data.qvel)
++        leg.vmc['theta_dot'] = float(theta_jac @ data.qvel)
++        leg.vmc['carrier_pitch'] = float(np.arctan2(-carrier[2, 0], carrier[0, 0]))
++        # 保留作者启动循环的“左腿取负、右腿取正”输出习惯。
++        leg.vmc['J'] = output_sign * jacobian.T
+--- origin/main:LQR_six/write_sensor.py
++++ LQR_six/write_sensor.py
+@@ -1,3 +1,6 @@
++from .parameters import CONTROL
++
++
+ class RobotController:
+     def __init__(self, model, data):
+         self.model = model
+@@ -5,44 +8,29 @@
+ 
+         # cache actuator ids (faster than string lookup every loop)
+         self.actuator_ids = {
+-            "left_front": model.actuator("left_front").id,
+-            "left_back": model.actuator("left_back").id,
+-            "left_wheel": model.actuator("left_wheel").id,
+-            "right_front": model.actuator("right_front").id,
+-            "right_back": model.actuator("right_back").id,
+-            "right_wheel": model.actuator("right_wheel").id,
++            "left_front": model.actuator("act_lf0").id,
++            "left_back": model.actuator("act_lf20").id,
++            "left_wheel": model.actuator("act_lw").id,
++            "right_front": model.actuator("act_rf0").id,
++            "right_back": model.actuator("act_rf20").id,
++            "right_wheel": model.actuator("act_rw").id,
+         }
++
++        # Only the four hip motors in this E002 simulation instance.
++        limit = CONTROL['leg_torque_limit']
++        for name, aid in self.actuator_ids.items():
++            if not name.endswith('_wheel'):
++                model.actuator_ctrlrange[aid] = (-limit, limit)
+ 
+     # ---------------------------
+     # Low-level actuator control
+     # ---------------------------
+     def set_actuator(self, name, value):
+-        self.data.ctrl[self.actuator_ids[name]] = value
++        aid = self.actuator_ids[name]
++        low, high = self.model.actuator_ctrlrange[aid]
++        self.data.ctrl[aid] = max(low, min(high, float(value)))
+ 
+-    # ---------------------------
+-    # Wheel control
+-    # ---------------------------
+-    def set_wheel_velocity(self, left, right):
+-        """
+-        NOTE:
+-        You are using position actuators in XML.
+-        So this actually sets TARGET POSITION, not velocity.
+-        """
+-        self.set_actuator("left_wheel", left)
+-        self.set_actuator("right_wheel", right)
+-
+-    # ---------------------------
+-    # Leg control (optional)
+-    # ---------------------------
+-    def set_leg_pose(self, lf, lb, rf, rb):
+-        self.set_actuator("left_front", lf)
+-        self.set_actuator("left_back", lb)
+-        self.set_actuator("right_front", rf)
+-        self.set_actuator("right_back", rb)
+-
+-    # ---------------------------
+-    # Stop all motors
+-    # ---------------------------
++    # XML 使用 motor：输入是 N·m，不是速度/位置目标。
+     def stop_all(self):
+-        for key in self.actuator_ids:
+-            self.set_actuator(key, 0.0)+        for name in self.actuator_ids:
++            self.set_actuator(name, 0.0)
+--- origin/main:LQR_six/controller.py
++++ controller.py
+@@ -1,105 +1,461 @@
++"""沿用作者 controller.py 的调用顺序；其余 Python 文件统一在 LQR_six。"""
++import argparse
++import json
++import os
++from pathlib import Path
++import sys
++import time
++import traceback
++import itertools
++from collections import deque
++
++# --video 走离屏渲染；MuJoCo 在 import 时选择 GL 后端，必须在导入前设置。
++# 有 X 显示时用 GLFW（能用到显卡、快）；纯无头环境退回 EGL。已有 MUJOCO_GL 设置优先。
++if any(a == '--video' or a.startswith('--video=') for a in sys.argv[1:]) and 'MUJOCO_GL' not in os.environ:
++    os.environ['MUJOCO_GL'] = 'glfw' if os.environ.get('DISPLAY') else 'egl'
++
+ import mujoco
+-import mujoco.viewer
+-import time
+-
+-from lqr_controller import LQRController
+-from leg_data import Leg
+-from get_sensor import RobotSensor
+-from write_sensor import RobotController
+-from vmc import VMC
+-from vofa import VOFA
+-from get_state import StateEstimator
+-from keyboardInput import KeyboardInput
+-
+-model = mujoco.MjModel.from_xml_path("chuan.xml")
+-data = mujoco.MjData(model)
+-
+-sensor = RobotSensor(model, data)
+-controller = RobotController(model, data)
+-
+-
+-dt = model.opt.timestep
+-
+-vmc = VMC()
+-leg_L = Leg(dt)
+-leg_R = Leg(dt)
+-vofa = VOFA()
+-state_estimator = StateEstimator(dt)
+-kb = KeyboardInput(dt)
+-
+-lqr = LQRController()
+-
+-with mujoco.viewer.launch_passive(model, data) as viewer:
+-    while viewer.is_running():
+-        start = time.time()
+-
+-        # --- control ---
+-        # controller.set_actuator("left_wheel", -0.1)
+-        # controller.set_actuator("left_front", 1.5)
+-        # controller.set_actuator("left_back",  1.5)
+-        # --- step simulation ---
+-        mujoco.mj_step(model, data)
+-
++import numpy as np
++from LQR_six.get_sensor import RobotSensor
++from LQR_six.write_sensor import RobotController
++from LQR_six.leg_data import Leg
++from LQR_six.vmc import VMC
++from LQR_six.get_state import StateEstimator
++from LQR_six.lqr_controller import LQRController
++from LQR_six.render_stand import CAMERA_PRESETS, StandVideo, setup_viewer, load_play_scene
++from LQR_six.teleop import Teleop
++from LQR_six.step_trial import StepTrial
++from LQR_six.recovery import Recovery
++from LQR_six.keyboardInput import KeyboardInput
++from LQR_six.simulation import create_output, closure_error, save_result
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--terrain', choices=['flat','training','step10','step-up'], default='flat', help='独立台阶/17度斜坡场景')
++    parser.add_argument('--control', choices=['lqr', 'lqr-mpc'], default='lqr')
++    parser.add_argument('--variant', choices=['no-gas', 'gas'], default='no-gas')
++    parser.add_argument('--case', choices=['nominal', 'pitch-plus', 'pitch-minus', 'push', 'roll'], default='nominal')
++    parser.add_argument('--duration', type=float, default=None, help='有限评测秒数；默认交互模式持续运行')
++    parser.add_argument('--headless', action='store_true', help='无窗口短评测，默认 10 秒')
++    parser.add_argument('--viewer', action='store_true', help='打开 MuJoCo 交互窗口')
++    parser.add_argument('--no-drive', action='store_true', help='仅站立/调试原生面板，关闭驾驶键')
++    parser.add_argument('--no-ui', action='store_true', help='可选：隐藏原生左右面板')
++    parser.add_argument('--camera-follow', action='store_true', help='可选：跟随机身；默认自由相机')
++    parser.add_argument('--hud', action='store_true', help='可选：以最多10Hz刷新简要文字，默认关闭')
++    parser.add_argument('--camera', choices=sorted(CAMERA_PRESETS), default='iso',
++                        help='窗口/录像的相机预设：iso 斜视、side 侧视、front 正视、legs 腿部特写')
++    parser.add_argument('--video', nargs='?', const='', default=None, metavar='PATH',
++                        help='离屏录 mp4；省略 PATH 时写到本次 outputs/；无桌面时也能看')
++    parser.add_argument('--video-size', default='960x540', metavar='WxH', help='录像分辨率，宽高须为偶数')
++    parser.add_argument('--video-fps', type=int, default=30, help='录像帧率（按仿真时间）')
++    parser.add_argument('--no-hud', action='store_true', help='录像不叠加姿态/腿长文字')
++    parser.add_argument('--follow', action='store_true', help='录像相机水平跟随基座；默认固定机位便于看漂移')
++    parser.add_argument('--hold', action='store_true', help='仿真结束后保持窗口打开，直到手动关闭')
++    parser.add_argument('--drive', action='store_true',
++                        help='键盘驾驶：W/S 前进后退、A/D 原地转向、Q/E 腿长、X 停、R 复位（需 --viewer）')
++    for action in parser._actions:
++        if action.dest not in ('camera', 'terrain', 'variant', 'help', 'headless', 'viewer', 'duration', 'no_ui', 'camera_follow', 'hud', 'no_drive'):
++            action.help = argparse.SUPPRESS
++    parser.add_argument('--step-trial-x', type=float, metavar='X',
++                        help='在 step10 无头短测中，于机身到达 X (m) 时触发一次 J')
++    parser.add_argument('--step-up', action='store_true',
++                        help='加载多地形场景，可用键盘驾驶')
++    parser.add_argument('--auto-step-up', action='store_true',
++                        help='加载多地形场景并自动跳上首级 10 cm 台阶')
++    parser.add_argument('--reverse-trial', choices=['release', 'switch', 'crouch', 'jump', 'turn'],
++                        help='无头后退/换向/短腿回归')
++    parser.add_argument('--recovery-trial', type=float, metavar='PITCH',
++                        help='从指定俯仰角（rad）放倒并验收自起；可用 --viewer 观看')
++    parser.add_argument('--recovery-direct-lqr', action='store_true',
++                        help='试验：后摆长腿状态直接进入受限 LQR')
++    parser.add_argument('--recovery-prepare', action='store_true',
++                        help='普通驾驶中允许倒地后伸腿和转腿准备（自起试验默认开启）')
++    parser.add_argument('--recovery-roll', type=float, default=0., metavar='ROLL',
++                        help='自起试验额外横滚角，单位 rad')
++    args = parser.parse_args()
++    if not np.isfinite(args.recovery_roll) or (args.recovery_roll and args.recovery_trial is None):
++        parser.error('--recovery-roll 需要配合 --recovery-trial 使用有限角度')
++    if args.step_up or args.auto_step_up:
++        args.terrain = 'step-up'
++        if args.camera == 'iso':
++            args.camera = 'terrain'
++    if args.auto_step_up:
++        if args.step_trial_x is None:
++            args.step_trial_x = -.85
++        if not args.headless and args.video is None:
++            args.viewer = True
++        if args.duration is None:
++            args.duration = 10.
++    if args.recovery_trial is not None and args.duration is None:
++        args.duration = 10.
++    if args.recovery_trial is not None and (
++        args.case != 'nominal' or args.reverse_trial or args.step_trial_x is not None
++        or not np.isfinite(args.recovery_trial)
++    ):
++        parser.error('--recovery-trial 需要 nominal 和有限俯仰角，且不能与其他自动测试叠加')
++    if args.reverse_trial and (not args.headless or args.terrain != 'flat'):
++        parser.error('--reverse-trial requires --headless with flat terrain')
++    if args.step_trial_x is not None and (
++        args.terrain not in ('step10', 'step-up') or not (args.headless or args.auto_step_up) or args.case != 'nominal'
++        or args.variant != 'no-gas' or args.control != 'lqr'
++        or not np.isfinite(args.step_trial_x) or not -1.6 < args.step_trial_x < 0
++    ):
++        parser.error('--step-trial-x 需要 --auto-step-up 或无头台阶场景、默认控制/模型/初始条件和 -1.6 < X < 0')
++    if not args.headless and args.duration is None and args.video is None:
++        args.viewer = True
++    if args.viewer:
++        args.drive = not args.no_drive and args.recovery_trial is None
++    if args.hold and args.viewer:
++        args.duration = None  # 继续真正积分，不能只保留一个冻结窗口。
++    if not args.viewer and args.duration is None:
++        args.duration = 10.
++    if args.duration is not None and args.duration < 10:
++        parser.error('短评测至少 10 s')
++    if args.viewer and args.headless:
++        parser.error('--headless 与 --viewer 二选一')
++    if args.viewer and args.video is not None:
++        parser.error('--viewer 与 --video 会争用 GL 后端，请二选一')
++    if args.drive and not args.viewer:
++        parser.error('--drive 需要同时打开 --viewer；无桌面请用 --video 只看不控')
++    if args.video_fps <= 0: parser.error('--video-fps 必须为正整数')
++    try:
++        width, height = (int(v) for v in args.video_size.lower().split('x'))
++    except ValueError:
++        parser.error('--video-size 需要 WxH，例如 960x540')
++    if args.video is not None and (width % 2 or height % 2):
++        parser.error('--video-size 宽高必须是偶数（libx264 yuv420p）')
++    root = Path(__file__).resolve().parent
++    filename = 'robot_no_gas_spring.xml' if args.variant == 'no-gas' else 'robot_gas_spring_damped.xml'
++    scene = {'training': 'training_terrain.xml', 'step10': 'single_step_10cm.xml',
++             'step-up': 'step_up_course.xml'}.get(args.terrain)
++    terrain = root/'scenes'/scene if scene else None
++    model = load_play_scene(root/'assets'/filename, terrain)
++    print(f'机器人模型：{filename}', flush=True)
++    data = mujoco.MjData(model)
++    pose = json.loads((root/'standing_pose.json').read_text())[args.variant]
++    data.qpos[:] = pose['qpos']  # 只在 reset 写姿态，积分中只写原六个电机。
++    data.ctrl[:] = pose['ctrl']
++    mujoco.mj_forward(model, data)
++    sensor = RobotSensor(model, data)
++    controller = RobotController(model, data)
++    dt = model.opt.timestep
++    vmc = VMC(model, data)
++    leg_L, leg_R = Leg(dt), Leg(dt)
++    state_estimator = StateEstimator(dt)
++    lqr = LQRController(mode=args.control, model=model, variant=args.variant)
++
++    def read_state():
+         state = sensor.get_state()
+-
+-        imu = {
+-            "acc": state["acc"],
+-            "gyro": state["gyro"],
+-            "euler": state["euler"]
++        imu = {'acc':state['acc'], 'gyro':state['gyro'], 'euler':state['euler']}
++        motor = {
++            'left_front': state['joints']['joint_l1_L'],
++            'left_back': state['joints']['joint_l6_L'],
++            'right_front': state['joints']['joint_l1_R'],
++            'right_back': state['joints']['joint_l6_R'],
++            'left_wheel': state['joints']['joint_wheel_L'],
++            'right_wheel': state['joints']['joint_wheel_R'],
+         }
+-
+-        # 左腿
+-        motor = {
+-            "left_front": state["joints"]["joint_l1_L"],
+-            "left_back": state["joints"]["joint_l6_L"],
+-            "right_front": state["joints"]["joint_l1_R"],
+-            "right_back": state["joints"]["joint_l6_R"],
+-            "left_wheel": state["joints"]["joint_wheel_L"],
+-            "right_wheel": state["joints"]["joint_wheel_R"],
+-        }
+-
+         vmc.update_left(leg_L, motor)
+         vmc.update_right(leg_R, motor)
+-
+         state_estimator.update_left(leg_L, imu, dt)
+         state_estimator.update_right(leg_R, imu, dt)
+         state_estimator.update(leg_L, leg_R, motor, imu)
+-
+-        # vofa.send_command(leg_L.vmc["L0"],leg_R.vmc["L0"])
+-        # vofa.send_command(leg_L.state["theta"], leg_L.state["dtheta"] ,leg_L.state["s"], leg_L.state["phi"], leg_L.state["dphi"],)
+-        vofa.send_command(leg_L.state["phi"], leg_L.state["dphi"], leg_L.state["s"], leg_L.state["dot_s"], leg_L.state["theta"], leg_L.state["dtheta"])
+-
+-        # 左腿
+-        tau_L, tau_w_L = lqr.control_left(leg_L, imu)
+-
+-        # 右腿
+-        tau_R, tau_w_R = lqr.control_right(leg_R, imu)
+-
+-        # ---- 输出到MuJoCo ----
+-        controller.set_actuator("left_front", -tau_L[0])
+-        controller.set_actuator("left_back",  -tau_L[1])
+-        controller.set_actuator("left_wheel", -tau_w_L)
+-
+-        controller.set_actuator("right_front", tau_R[0])
+-        controller.set_actuator("right_back",  tau_R[1])
+-        controller.set_actuator("right_wheel", tau_w_R)
+-
+-        target = kb.get_target()
+-        kb.update()
+-        leg_L.target["dot_s"] = target["dot_s"]
+-        leg_R.target["dot_s"] = target["dot_s"]
+-        leg_L.target["s"] = target["s"]
+-        leg_R.target["s"] = target["s"]
+-    
+-        leg_L.target["yaw"] = target["yaw"]
+-        leg_R.target["yaw"] = target["yaw"]
+-        leg_L.target["l0"] = target["l0"]
+-        leg_R.target["l0"] = target["l0"]
+-
+-        # --- sync viewer ---
+-        viewer.sync()
+-
+-        elapsed = time.time() - start
+-        if elapsed < dt:
+-            time.sleep(dt - elapsed)
+-            +        return imu
++
++    imu = read_state()
++    lqr.set_standing_reference(leg_L, leg_R, np.array(pose['ctrl']))
++    home_targets = [leg.target.copy() for leg in (leg_L, leg_R)]
++    trial = StepTrial(model, args.step_trial_x) if args.step_trial_x is not None else None
++    teleop = Teleop(leg_L, leg_R) if args.drive or trial is not None or args.reverse_trial else None
++    perturb = np.zeros(model.nv)
++    if args.recovery_trial is not None:
++        perturb[3:5] = args.recovery_roll, args.recovery_trial
++        data.ctrl[:] = 0.
++    if args.case == 'pitch-plus': perturb[4] = .03
++    if args.case == 'pitch-minus': perturb[4] = -.03
++    if args.case == 'roll': perturb[3] = .03
++    mujoco.mj_integratePos(model, data.qpos, perturb, 1.)
++    state_estimator = StateEstimator(dt)  # 初始化编码器差分，避免把 reset 跳变当速度。
++    out = create_output(root, args, model)
++    geom_names = [model.geom(i).name for i in range(model.ngeom)]
++    ground_names = {'floor'} | {n for n in geom_names if n.startswith(('step10_', 'step20_', 'ramp17'))}
++    ground_ids = {model.geom(name).id for name in ground_names}
++    recovery = Recovery(model, controller, (leg_L, leg_R), pose['qpos'], ground_ids,
++                        prepare=args.recovery_prepare or args.recovery_trial is not None,
++                        direct_lqr=args.recovery_direct_lqr)
++    if args.recovery_trial is not None and abs(args.recovery_trial) >= .7 and not args.recovery_roll:
++        recovery.begin_fall(data.time, trigger='trial_reset')
++    viewer = video = keyboard = None
++    initial_view = None
++    timing = dict(sync_calls=0, sync_wall_s=0., sync_max_s=0., hud_calls=0, hud_wall_s=0.,
++                  sleep_wall_s=0., late_steps=0, max_lag_s=0., initial_sync_wall_s=0.)
++    hud_cache = ['', 0.]
++    if args.viewer:
++        from mujoco import viewer as mjviewer
++        try:
++            keyboard = KeyboardInput() if teleop is not None and trial is None else None
++            viewer = mjviewer.launch_passive(model, data,
++                                             key_callback=keyboard.on_key if keyboard else None,
++                                             show_left_ui=not args.no_ui, show_right_ui=not args.no_ui)
++        except Exception as exc:
++            (out/'error.log').write_text(traceback.format_exc())
++            (out/'exit_status.json').write_text('{"exit_code":1}\n')
++            raise SystemExit(f'无法打开 MuJoCo 窗口：{exc}\n没有可用桌面时请改用 --video 录像。')
++        setup_viewer(viewer, model, args.camera, follow=args.camera_follow)
++        initial_sync = time.perf_counter()
++        viewer.sync()  # 启动时全量同步一次；运行中只同步状态。
++        timing['initial_sync_wall_s'] = time.perf_counter()-initial_sync
++        initial_view = dict(azimuth=float(viewer.cam.azimuth), elevation=float(viewer.cam.elevation),
++                            vis_flags=viewer.opt.flags.tolist(), render_flags=viewer.user_scn.flags.tolist())
++        print('窗口已打开：左键旋转、右键平移、滚轮缩放、H 帮助；关闭窗口即结束。', flush=True)
++        if trial is not None:
++            print('自动台阶短测运行中，可调整视角。', flush=True)
++        elif args.recovery_trial is not None:
++            print('自起演示：自然倒地 → 后摆长腿判定 → 收腿 → LQR 接管。', flush=True)
++        elif keyboard is not None:
++            print(Teleop.help_text()+'；鼠标移入三维区启用驾驶，移入侧面板或失焦停止。', flush=True)
++
++    def update_viewer_text():
++        if viewer is None:
++            return
++        if recovery.phase != 'idle':
++            event = recovery.events[-1]
++            angles = [leg.vmc['theta_body'] for leg in (leg_L, leg_R)]
++            text = (f"Recovery: {recovery.phase} {event.get('reason', '')} "
++                    f"theta L/R {angles[0]:+.2f}/{angles[1]:+.2f} rad")
++        elif teleop is not None and args.hud:
++            text = (f"t={data.time:.1f}s x={data.qpos[0]:+.2f}m v={teleop.speed:+.2f}m/s "
++                    f"l0={teleop.l0:.3f}m {teleop.jump_phase}")
++        else:
++            text = ''
++        now = time.perf_counter()
++        if text == hud_cache[0] or now-hud_cache[1] < .1:
++            return
++        hud_cache[:] = [text, now]
++        started = time.perf_counter()
++        viewer.set_texts([(mujoco.mjtFontScale.mjFONTSCALE_100, mujoco.mjtGridPos.mjGRID_BOTTOMLEFT,
++                          text, '')] if text else [])
++        timing['hud_wall_s'] += time.perf_counter()-started
++        timing['hud_calls'] += 1
++
++    update_viewer_text()
++    timing['initial_hud_wall_s'] = timing['hud_wall_s']
++    timing['initial_hud_calls'] = timing['hud_calls']
++    timing['hud_wall_s'] = 0.
++    timing['hud_calls'] = 0
++    if args.video is not None:
++        video_path = Path(args.video) if args.video else out/f'standing_{args.case}.mp4'
++        video = StandVideo(model, video_path, width=width, height=height, fps=args.video_fps,
++                           camera=args.camera, hud=not args.no_hud, follow=args.follow)
++        print(f'录制中：{video.path}（{width}x{height} @ {args.video_fps} fps，相机 {args.camera}）', flush=True)
++    rows=[];motion=[];final_tilts=deque(maxlen=5001);contacts=set()
++    max_external_force=0.
++    max_closure=max_drift=max_passive=max_tilt=0.;min_height=float(data.qpos[2]);termination=None
++    fall_events=[]; was_fallen=False
++    closure_sites = [(model.site(f'{side}_front_site{i}').id, model.site(f'{side}_rear_site{i}').id)
++                     for side in ('Left','Right') for i in (1,2)]
++    active = [int(model.jnt_dofadr[model.actuator_trnid[a,0]]) for a in range(model.nu)]
++    passive = [i for i in range(6,model.nv) if i not in active]
++    max_torque = np.zeros(model.nu)
++    begin=time.perf_counter();steps=round(args.duration/dt) if args.duration is not None else None
++
++    def video_info(status):
++        return dict(control=args.control, variant=args.variant, case=args.case,
++                    t=float(data.time), duration=args.duration,
++                    roll=float(imu['euler'][0]), pitch=float(imu['euler'][1]),
++                    tilt_peak=max_tilt, length_l=float(leg_L.vmc['L0']),
++                    length_r=float(leg_R.vmc['L0']), base_z=float(data.qpos[2]), status=status)
++
++    try:
++        for step in itertools.count():
++            mujoco.mj_forward(model, data)
++            imu = read_state()
++            max_external_force=max(max_external_force,float(np.linalg.norm(data.xfrc_applied[:,:3],axis=1).max()))
++            lqr.time = data.time
++            tilt = float(abs(imu['euler'][:2]).max())
++            previous_phase = recovery.phase
++            phase = recovery.update(data, imu)
++            if phase != previous_phase:
++                event = recovery.events[-1]
++                detail = event.get('reason', '')
++                print(f'[recovery t={data.time:.2f}] {phase} {detail}'.rstrip(), flush=True)
++                if phase == 'failed':
++                    np.savez_compressed(out/f'fallen_{len(recovery.events):03d}.npz',
++                                        qpos=data.qpos, qvel=data.qvel, ctrl=data.ctrl)
++            if phase in ('idle', 'rising') and phase != previous_phase:
++                if phase == 'rising' or previous_phase != 'transition':
++                    state_estimator = StateEstimator(dt)
++                    imu = read_state()
++                for leg, target in zip((leg_L, leg_R), home_targets):
++                    leg.target.update(target)
++                if phase == 'rising':
++                    recovery.entry_attitude = [leg_L.state['theta'], leg_L.state['phi']]
++                if phase == 'idle':
++                    for leg in (leg_L, leg_R):
++                        leg.target['s'] = leg.state['s']
++            if phase == 'settle' and previous_phase == 'idle' and teleop is not None:
++                teleop.cancel_for_recovery()
++            if teleop is not None and phase == 'idle':
++                if trial is not None:
++                    trial.sample(data, tilt, teleop)
++                if args.reverse_trial:
++                    t = data.time
++                    keys = set()
++                    if args.reverse_trial == 'crouch' and .25 <= t < 1:
++                        keys.add('q')
++                    if 1 <= t < 4:
++                        keys.add('s')
++                        if args.reverse_trial == 'turn' and 2 <= t < 3.5:
++                            keys.add('a')
++                    elif args.reverse_trial == 'switch' and 4 <= t < 6:
++                        keys.add('w')
++                    teleop.set_pressed(keys)
++                    if args.reverse_trial == 'jump' and step == round(2.5/dt):
++                        teleop.on_key('j')
++                if keyboard is not None and step%10 == 0:
++                    keyboard.set_viewport(viewer.viewport)
++                    pressed, actions = keyboard.poll()
++                    teleop.set_pressed(pressed)
++                    for key in actions:
++                        teleop.on_key(key)
++                teleop.observe(model, data, dt)
++                teleop.update(imu, dt)
++            max_tilt=max(max_tilt,tilt)
++            # 可视化只读当前状态；帧按仿真时间取，不改变控制周期。
++            if video is not None:
++                status = phase if phase != 'idle' else ('standing' if tilt < .05 else 'balancing')
++                video.maybe_capture(data, video_info(status))
++            # 核心控制与作者一致：六状态反馈 → 支撑/姿态修正 → VMC → 六电机。
++            if phase == 'idle' or phase in recovery.lqr_phases:
++                if phase != 'idle':
++                    lengths, _ = recovery.targets(data.time)
++                    for leg, length, home in zip((leg_L, leg_R), lengths, home_targets):
++                        leg.target['l0'] = length
++                        if recovery.belly_lift:
++                            alpha = min((data.time - recovery.since) / .40, 1.) if phase == 'rising' else 1.
++                            for key, measured in zip(('theta', 'phi'), recovery.entry_attitude):
++                                leg.target[key] = measured + alpha * (home[key] - measured)
++                tau_L, tau_w_L = lqr.control_left(leg_L, imu)
++                tau_R, tau_w_R = lqr.control_right(leg_R, imu)
++                hip_torque = np.concatenate((-tau_L, tau_R))
++                wheel_torque = np.array([tau_w_L, -tau_w_R])
++                if phase == 'idle':
++                    for name, value in zip(recovery.hips + recovery.wheels, (*hip_torque, *wheel_torque)):
++                        controller.set_actuator(name, value)
++                else:
++                    recovery.drive(data, (hip_torque, wheel_torque))
++            else:
++                recovery.drive(data)
++
++            # 以下只做日志/验收，不回馈控制器。
++            max_closure=max(max_closure,closure_error(model,data,closure_sites))
++            max_drift=max(max_drift,float(np.linalg.norm(data.qpos[:2])))
++            max_passive=max(max_passive,float(abs(data.qfrc_actuator[passive]).max()))
++            min_height=min(min_height,float(data.qpos[2]));max_torque=np.maximum(max_torque,abs(data.ctrl))
++            if args.duration is None or data.time >= args.duration-5: final_tilts.append(tilt)
++            for contact in data.contact:
++                for g in contact.geom:
++                    name=geom_names[int(g)]
++                    if name not in ground_names and name not in ('l_wheel_Link_collision_0','r_wheel_Link_collision_0'):contacts.add(name)
++            fallen = phase != 'idle'  # 下蹲/落地压缩不能仅因高度低而关闭支撑
++            if fallen and not was_fallen:
++                fall_events.append(float(data.time))
++                print(f'[fall t={data.time:.2f}] phase={phase}', flush=True)
++            was_fallen = fallen
++            if not np.isfinite(data.qpos).all() or any(w.number for w in data.warning):termination='numerical_error'
++            if step%10==0:
++                motion.append([data.time, data.qpos[12], data.qpos[9], data.ncon, *data.qpos[:3]])
++                rows.append([data.time,*data.qpos[:3],*imu['euler'],*[leg_L.state[k] for k in ('theta','dtheta','s','dot_s','phi','dphi')],leg_L.vmc['L0'],leg_R.vmc['L0'],*data.ctrl,
++                             *[leg.vmc['theta_body'] for leg in (leg_L, leg_R)],
++                             *[leg.vmc['theta_gravity'] for leg in (leg_L, leg_R)]])
++            if termination or (steps is not None and step>=steps):
++                if video is not None:
++                    video.capture_final(data,video_info('terminated' if termination else
++                                                        status))
++                break
++            if args.case=='push':
++                data.xfrc_applied[:]=0
++                if 5<=data.time<5.2:data.xfrc_applied[1,0]=10.
++            elif viewer is None:
++                # 无窗口的验收运行保持外力为零；窗口模式保留 MuJoCo 交互拖动产生的外力。
++                data.xfrc_applied[:]=0
++            mujoco.mj_step(model,data)
++            if viewer is not None:
++                if not viewer.is_running():termination='viewer_closed';break
++                if step%33==0:  # 约30Hz显示，与1kHz物理/控制分离。
++                    update_viewer_text()
++                    sync_started = time.perf_counter()
++                    viewer.sync(state_only=True)
++                    sync_elapsed = time.perf_counter()-sync_started
++                    timing['sync_wall_s'] += sync_elapsed
++                    timing['sync_max_s'] = max(timing['sync_max_s'], sync_elapsed)
++                    timing['sync_calls'] += 1
++                delay=begin+data.time-time.perf_counter()
++                if delay>0:
++                    sleep_started=time.perf_counter()
++                    time.sleep(delay)
++                    timing['sleep_wall_s'] += time.perf_counter()-sleep_started
++                else:
++                    timing['max_lag_s'] = max(timing['max_lag_s'], -delay)
++                    timing['late_steps'] += int(-delay > dt)
++        wall_s = time.perf_counter()-begin
++        timing['real_time_factor'] = float(data.time/wall_s) if wall_s else 0.
++        timing['loop_non_ui_non_sleep_s'] = wall_s-timing['sync_wall_s']-timing['hud_wall_s']-timing['sleep_wall_s']
++        result=dict(timing=timing, viewer_options=dict(camera_type=int(viewer.cam.type), left_ui=not args.no_ui, right_ui=not args.no_ui, hud=args.hud, initial=initial_view,
++                    final=dict(azimuth=float(viewer.cam.azimuth), elevation=float(viewer.cam.elevation),
++                               vis_flags=viewer.opt.flags.tolist(), render_flags=viewer.user_scn.flags.tolist())) if viewer is not None else None, case=args.case,control=args.control,variant=args.variant,duration_s=data.time,
++                    terminated=termination is not None,termination_reason=termination,timeout=termination is None and steps is not None and step>=steps,
++                    final_tilt_rad=max(final_tilts) if final_tilts else 100.,max_tilt_rad=max_tilt,max_xy_drift_m=max_drift,
++                    max_external_force_n=max_external_force,max_closure_m=max_closure,passive_actuator_torque_nm=max_passive,min_height_m=min_height,
++                    max_torque_nm=max_torque.tolist(),nonwheel_contacts=sorted(contacts),
++                    mpc_solves=lqr.mpc.solve_count if lqr.mpc is not None else 0,
++                    video=str(video.path) if video is not None else None,
++                    camera=args.camera if (viewer is not None or video is not None) else None,
++                    final_base_xy_m=[float(data.qpos[0]),float(data.qpos[1])],
++                    final_yaw_rad=float(imu['euler'][2]),
++                    mode='drive' if teleop is not None else 'stand',
++                    interactive=args.viewer and args.duration is None,
++                    teleop=teleop.status() if teleop is not None else None,
++                    final_odometry_error_m=float(leg_L.state['s']-data.qpos[0]),wall_s=wall_s)
++        np.savez_compressed(out/'motion.npz', samples=np.array(motion),
++                            columns=np.array(['time','left_wheel_angle','right_wheel_angle','contact_count','base_x','base_y','base_z']))
++        result['fall_events_s'] = fall_events
++        result['recovery'] = dict(phase=recovery.phase, events=recovery.events,
++                                  preparation_enabled=recovery.prepare)
++        if args.recovery_trial is not None:
++            result['mode'] = 'recovery'
++            result['recovery']['trial_pitch_rad'] = args.recovery_trial
++            result['recovery']['trial_roll_rad'] = args.recovery_roll
++            result['recovery']['expected_upright'] = np.hypot(args.recovery_trial, args.recovery_roll) < .15
++            result['recovery']['expected_upright'] = bool(result['recovery']['expected_upright'])
++            result['recovery']['final_speed_m_s'] = float(np.linalg.norm(data.qvel[:3]))
++        result['gain_schedule'] = dict(lengths_m=lqr.gain_length, K_left=lqr.K_left.tolist(),
++                                       K_right=lqr.K_right.tolist(), masses=lqr.masses,
++                                       range_m=[lqr.gains.minimum,lqr.gains.maximum])
++        if trial is not None:
++            result['step_trial'] = trial.finish(out, result)
++        saved=save_result(out,result,rows,model,data)
++        if viewer is not None:
++            # 本机 GLFW/passive viewer 在解释器退出阶段会崩溃；结果已写盘，关闭后直接结束进程。
++            viewer.close()
++            if keyboard is not None:keyboard.close()
++            sys.stdout.flush();sys.stderr.flush();os._exit(saved)
++        return saved
++    except Exception:
++        (out/'error.log').write_text(traceback.format_exc());(out/'exit_status.json').write_text('{"exit_code":2}\n')
++        if viewer is not None:
++            try:viewer.close()
++            except Exception:pass
++            sys.stdout.flush();sys.stderr.flush();os._exit(2)
++        raise
++    finally:
++        if keyboard is not None:keyboard.close()
++        if video is not None:video.close()
++        if viewer is not None:
++            try:viewer.close()
++            except Exception:pass
++
++
++if __name__ == '__main__':
++    raise SystemExit(main())

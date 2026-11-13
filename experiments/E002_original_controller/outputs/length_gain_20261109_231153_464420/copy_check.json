@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/tmp/e002_length_copy_oqr2f5h3/controller.py",
+    "--headless",
+    "--duration",
+    "10"
+  ],
+  "copy_path": "/tmp/e002_length_copy_oqr2f5h3",
+  "run": "/tmp/e002_length_copy_oqr2f5h3/outputs/lqr_no-gas_nominal_20261109_233601_153593",
+  "checks": {
+    "exit_ok": true,
+    "output_local": true,
+    "modules_local": true,
+    "original_outputs_unchanged": true
+  },
+  "passed": true
+}

@@ -1,0 +1,39 @@
+{
+  "kind": "turn_left",
+  "length": 0.278,
+  "duration": 20.00000000000146,
+  "wall_s": 14.339432213000237,
+  "failed": "fall",
+  "first_fall": 6.24500000000042,
+  "max_tilt": 0.8179968633489376,
+  "final_tilt": 0.07565681458607972,
+  "actual_length": 0.3413818505708179,
+  "jump": {
+    "speed": -0.0,
+    "dot_target": 150.03717502509207,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 1.0330629205798505,
+    "message": "ready",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [],
+    "key_events": [
+      {
+        "time": 1.0000000000000007,
+        "pressed": "a"
+      },
+      {
+        "time": 12.000999999998788,
+        "pressed": ""
+      }
+    ],
+    "current_jump": null
+  },
+  "max_com_z": 0.3225820804604673,
+  "max_base_z": 0.2749303216267027,
+  "max_wheel_clearance": 0.4708481595185177,
+  "max_actual_yaw_rate": 6.603761912736021,
+  "final_actual_yaw_rate": 0.20865738076674892,
+  "K_changed": true
+}

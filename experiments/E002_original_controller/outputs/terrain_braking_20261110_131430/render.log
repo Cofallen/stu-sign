@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/terrain_braking_20261110_131430/render_terrain.py", line 9, in <module>
+    with mujoco.Renderer(m,height=540,width=960) as render:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cofallen/miniconda3/envs/mjlab/lib/python3.12/site-packages/mujoco/rendering/classic/renderer.py", line 60, in __init__
+    raise ValueError(f"""
+ValueError: Image width 960 > framebuffer width 640. Either reduce the image
+width or specify a larger offscreen framebuffer in the model XML using the
+clause:
+<visual>
+  <global offwidth="my_width"/>
+</visual>

@@ -1,0 +1,70 @@
+{
+  "visual_checks": [
+    {
+      "link": "base_link",
+      "exact_triangles": true,
+      "source_faces": 1538081,
+      "output_faces": 1538081,
+      "rgba": "1 1 1 1",
+      "color_matches_selected_upstream": true
+    },
+    {
+      "link": "rf0_Link",
+      "exact_triangles": true,
+      "source_faces": 76616,
+      "output_faces": 76616,
+      "rgba": "1 1 1 1",
+      "color_matches_selected_upstream": true
+    },
+    {
+      "link": "rf1_Link",
+      "exact_triangles": true,
+      "source_faces": 46178,
+      "output_faces": 46178,
+      "rgba": "1 1 1 1",
+      "color_matches_selected_upstream": true
+    },
+    {
+      "link": "r_wheel_Link",
+      "exact_triangles": true,
+      "source_faces": 48256,
+      "output_faces": 48256,
+      "rgba": "0.18 0.18 0.18 1",
+      "color_matches_selected_upstream": true
+    },
+    {
+      "link": "lf0_Link",
+      "exact_triangles": true,
+      "source_faces": 76564,
+      "output_faces": 76564,
+      "rgba": "1 1 1 1",
+      "color_matches_selected_upstream": true
+    },
+    {
+      "link": "lf1_Link",
+      "exact_triangles": true,
+      "source_faces": 46126,
+      "output_faces": 46126,
+      "rgba": "1 1 1 1",
+      "color_matches_selected_upstream": true
+    },
+    {
+      "link": "l_wheel_Link",
+      "exact_triangles": true,
+      "source_faces": 48256,
+      "output_faces": 48256,
+      "rgba": "0.18 0.18 0.18 1",
+      "color_matches_selected_upstream": true
+    }
+  ],
+  "visual_geom_count": 15,
+  "no_visual_collision": true,
+  "identical_mass_and_inertia": true,
+  "max_qpos_difference_250_steps": 0.0,
+  "tolerance": 1e-10,
+  "seed": 0,
+  "source_geometry_unchanged": true,
+  "model_sha256": "551351d3ae7c53916f7f8b8961f6d3e6148056a84b4596dc8e9e486feecb42cd",
+  "script_sha256": "7b704f33c30e6ecd8729ba4ae795c122cc197d7dd3c40ec855f5d85eafcaf316",
+  "passed": true
+}

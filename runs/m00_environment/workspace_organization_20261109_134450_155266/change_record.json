@@ -1,0 +1,107 @@
+{
+  "purpose": "Documentation navigation and multi-window coordination; no model/code/experiment relocation",
+  "files_before": [
+    {
+      "path": "README.md",
+      "before_sha256": "5d5832aff74f76f2fe66bc9956dd23e7a3876d0a56d5511bd782f32fbd222e99",
+      "snapshot": "runs/m00_environment/workspace_organization_20261109_134450_155266/before/README.md"
+    },
+    {
+      "path": "AGENTS.md",
+      "before_sha256": "41a58348a1a16fa3a6c0be0a5e22a63c41d25a10609ff443a32479b443e11f02",
+      "snapshot": "runs/m00_environment/workspace_organization_20261109_134450_155266/before/AGENTS.md"
+    },
+    {
+      "path": "docs/01_project/overview.md",
+      "before_sha256": "8cd45506f266c1e012981c8d9183b29bf5da3216b2a0e0447a82019cf5ff212a",
+      "snapshot": "runs/m00_environment/workspace_organization_20261109_134450_155266/before/docs/01_project/overview.md"
+    },
+    {
+      "path": "docs/01_project/CONVENTIONS.md",
+      "before_sha256": "892ff8e80f982dc44df933e67c2eaffab2083edce2453e9d6072945bf76de08e",
+      "snapshot": "runs/m00_environment/workspace_organization_20261109_134450_155266/before/docs/01_project/CONVENTIONS.md"
+    },
+    {
+      "path": "docs/01_project/TOPIC_CANDIDATES_20261109.md",
+      "before_sha256": "1ca49cb7de2860ae1800745076730457d2d13415b30754d4b6d112cacfee37ef",
+      "snapshot": "runs/m00_environment/workspace_organization_20261109_134450_155266/before/docs/01_project/TOPIC_CANDIDATES_20261109.md"
+    }
+  ],
+  "historical_files_moved": [],
+  "simulation_or_training": false,
+  "files_after": [
+    {
+      "path": "README.md",
+      "sha256": "25c89b9f2669b695d342ba09031caae3f9948fe07f2e2401a824cfc40a82dc29"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "9c0c31deb5e1297b789a8c2152c2e7b0efa56e52d75cb4b7c9ae5c4ee1654403"
+    },
+    {
+      "path": "docs/README.md",
+      "sha256": "06220c4e0fa79b2e26469b5de462e4922ad3c56e78b73eab063f3251c8a23389"
+    },
+    {
+      "path": "scripts/README.md",
+      "sha256": "c7e0775b7a72cfc74735bff8c175f60d1e73b1a0db454b02c7e434bd7e0a284a"
+    },
+    {
+      "path": "runs/README.md",
+      "sha256": "edf0901c00e8dc34e09d774164483a3025266b052abeed804d5a7a5d31117864"
+    },
+    {
+      "path": "upstream/README.md",
+      "sha256": "7ac3387b3c4bd13f95faafddfc7a611c986df3f4354fe5fc210c9261acd1a1fd"
+    },
+    {
+      "path": "references/README.md",
+      "sha256": "ec90fd01804954c3741f4d0f0ded2f38e487bd0d7cf98e4eaa7a4b834b7ef8d4"
+    },
+    {
+      "path": "assets/README.md",
+      "sha256": "5d2056b7b403555af30d1803d72b5e3addc38a7e128a4b3e3100725199345a81"
+    },
+    {
+      "path": "docs/01_project/overview.md",
+      "sha256": "e1016c18e33033e32466551d5d7b486c27880afb36aaaa00a649c41b41747251"
+    },
+    {
+      "path": "docs/01_project/WORKSPACE_GUIDE.md",
+      "sha256": "24806881689a4b1dabec263d84a67ba0bb2e5e0cab8bb017e3eb7d1e0e3e3283"
+    },
+    {
+      "path": "docs/01_project/CONVENTIONS.md",
+      "sha256": "2d15283ef7099cda4410ee404ab2b7d29e50d72ae6b9d9c25704a2c132262b4d"
+    },
+    {
+      "path": "docs/02_milestones/README.md",
+      "sha256": "71bd2ce9fe783f1eb3ef4dd68ff6d80d831a53c623c4ce9e175802663b2a8adb"
+    },
+    {
+      "path": "docs/02_milestones/M00_workspace_organization.md",
+      "sha256": "68a5a8c4cb110e1b7bd011b50cf1d207917e5629f2aa0c65f58c291535d8799c"
+    },
+    {
+      "path": "docs/03_learning/M00_03_工作区与多窗口协作.md",
+      "sha256": "b7ce27f6eff5ad5cf6d0f7a7e733be0c8856162dc37db04b17ff6e6592221483"
+    },
+    {
+      "path": "docs/04_tasks/README.md",
+      "sha256": "e099ca77e96aa8cbc23e7816fc9d62bdbc072bc7ab1d5c1040bebc58374cc9d3"
+    },
+    {
+      "path": "docs/04_tasks/T001_research_scope.md",
+      "sha256": "6c43a888614006ac0dd5636a77344ece4c00fb260384bf02a8a983fbab2f884d"
+    },
+    {
+      "path": "docs/04_tasks/T002_control_data_contract.md",
+      "sha256": "ceeff9cf75097a2619184ad48d76c62160679bd8021c92e8254e853f65ede8e8"
+    },
+    {
+      "path": "docs/04_tasks/T000_workspace_organization.md",
+      "sha256": "225fc335f9cac37d6122bf5263a54c0c1292b7c348ec083517b38fd80f9a5845"
+    }
+  ],
+  "finished": "2026-11-09T13:48:26.555424+08:00"
+}

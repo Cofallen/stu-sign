@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "/tmp/e002_1113_probe.py",
+    "prep",
+    "--pitch=-1.45",
+    "--count",
+    "16"
+  ],
+  "cwd": "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller",
+  "mujoco": "3.11.0",
+  "numpy": "2.5.4",
+  "args": {
+    "mode": "prep",
+    "pitch": -1.45,
+    "roll": 0.0,
+    "count": 16,
+    "seed": 42
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-09",
+  "checked_local_markdown_links": 32,
+  "link_errors": [],
+  "python_syntax": "passed",
+  "original_context_files": "hashes unchanged",
+  "license_snapshots": "hashes verified",
+  "upstream_checkout": "clean",
+  "relocated_imports": "passed",
+  "relocated_model_cpu_smoke": "8 gates passed",
+  "relocated_script_and_model_hashes": "verified",
+  "video": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 640,
+        "height": 480,
+        "duration": "5.040000",
+        "nb_frames": "126"
+      }
+    ]
+  }
+}

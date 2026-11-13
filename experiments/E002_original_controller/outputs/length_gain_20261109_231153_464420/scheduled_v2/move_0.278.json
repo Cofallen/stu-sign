@@ -1,0 +1,44 @@
+{
+  "kind": "move",
+  "length": 0.278,
+  "duration": 9.999999999999897,
+  "wall_s": 6.533850717998575,
+  "failed": null,
+  "max_tilt": 0.0007775884113120157,
+  "final_tilt": 0.00014031601810658226,
+  "actual_length": 0.27788688850074084,
+  "jump": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 8.06980086163966e-06,
+    "message": "ready",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [],
+    "key_events": [
+      {
+        "time": 1.0000000000000007,
+        "pressed": "w"
+      },
+      {
+        "time": 3.0009999999997805,
+        "pressed": ""
+      },
+      {
+        "time": 5.000000000000004,
+        "pressed": "s"
+      },
+      {
+        "time": 7.000000000000672,
+        "pressed": ""
+      }
+    ],
+    "current_jump": null
+  },
+  "max_com_z": 0.3209033832587592,
+  "max_base_z": 0.24996925469701461,
+  "max_wheel_clearance": -0.0008873826247459415,
+  "K_changed": true
+}

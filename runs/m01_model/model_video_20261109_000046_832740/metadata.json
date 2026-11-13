@@ -1,0 +1,8 @@
+{
+  "mujoco": "3.11.0",
+  "xml_sha256": "3257eadcd1924bae6fbe39bb8594977cc5b6d2441d3b3cd872841f67a66d6393",
+  "fps": 25,
+  "renderer": "Mesa software EGL; MuJoCo Renderer",
+  "policy": null,
+  "task": "passive contact diagnostics; not a trained controller"
+}

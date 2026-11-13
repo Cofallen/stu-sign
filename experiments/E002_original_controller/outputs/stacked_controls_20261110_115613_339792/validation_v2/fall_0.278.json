@@ -1,0 +1,30 @@
+{
+  "kind": "fall",
+  "length": 0.278,
+  "duration": 11.999999999998789,
+  "wall_s": 9.325890246999734,
+  "failed": "fall",
+  "first_fall": 1.0010000000000006,
+  "max_tilt": 3.140804607642808,
+  "final_tilt": 0.21407207648630636,
+  "actual_length": 0.1843885599527159,
+  "jump": {
+    "speed": -0.0,
+    "dot_target": 2.1708623046659654,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 1.0190953268480514,
+    "message": "ready",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [],
+    "key_events": [],
+    "current_jump": null
+  },
+  "max_com_z": 0.4033829960682676,
+  "max_base_z": 0.474390233010998,
+  "max_wheel_clearance": 0.6306439459506683,
+  "max_actual_yaw_rate": 18.296526501704314,
+  "final_actual_yaw_rate": 0.05119980440028728,
+  "K_changed": true
+}

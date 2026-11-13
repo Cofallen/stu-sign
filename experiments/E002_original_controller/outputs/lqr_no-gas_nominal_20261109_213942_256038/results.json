@@ -1,0 +1,231 @@
+{
+  "timing": {
+    "sync_calls": 613,
+    "sync_wall_s": 0.9217334130262316,
+    "sync_max_s": 0.017377710002620006,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 2.176086880703224,
+    "late_steps": 7656,
+    "max_lag_s": 0.08537047100253403,
+    "initial_sync_wall_s": 0.03704459100117674,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.9999694715086066,
+    "loop_non_ui_non_sleep_s": 17.124797072272486
+  },
+  "viewer_options": {
+    "camera_type": 1,
+    "left_ui": true,
+    "right_ui": true,
+    "hud": false,
+    "initial": {
+      "azimuth": 135.0,
+      "elevation": -12.0,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "final": {
+      "azimuth": -125.9645669291339,
+      "elevation": -3.496062992125985,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 20.22200000000173,
+  "terminated": true,
+  "termination_reason": "fall",
+  "timeout": false,
+  "final_tilt_rad": 0.16368978638570814,
+  "max_tilt_rad": 0.16368978638570814,
+  "max_xy_drift_m": 1.226569374821847,
+  "max_external_force_n": 89.44116896641235,
+  "max_closure_m": 6.016930994808428e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.11911635038888016,
+  "max_torque_nm": [
+    14.58420325304712,
+    5.0,
+    13.832533300124966,
+    5.0,
+    20.719052280292285,
+    23.39883127362998
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": "iso",
+  "final_base_xy_m": [
+    1.212794872389466,
+    -0.1833058339406447
+  ],
+  "final_yaw_rad": -0.7341405176903277,
+  "mode": "drive",
+  "interactive": true,
+  "teleop": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.18,
+    "yaw": -0.7341405176903277,
+    "message": "ready",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [],
+    "key_events": [
+      {
+        "time": 0.35000000000000026,
+        "pressed": "q"
+      },
+      {
+        "time": 1.449999999999951,
+        "pressed": ""
+      },
+      {
+        "time": 1.949999999999896,
+        "pressed": "e"
+      },
+      {
+        "time": 3.1199999999997674,
+        "pressed": ""
+      },
+      {
+        "time": 3.249999999999753,
+        "pressed": "e"
+      },
+      {
+        "time": 3.5799999999997167,
+        "pressed": ""
+      },
+      {
+        "time": 4.149999999999721,
+        "pressed": "e"
+      },
+      {
+        "time": 4.419999999999811,
+        "pressed": ""
+      },
+      {
+        "time": 4.539999999999851,
+        "pressed": "q"
+      },
+      {
+        "time": 5.190000000000068,
+        "pressed": ""
+      },
+      {
+        "time": 5.690000000000235,
+        "pressed": "q"
+      },
+      {
+        "time": 6.420000000000479,
+        "pressed": ""
+      }
+    ],
+    "current_jump": null
+  },
+  "final_odometry_error_m": -1.1672050840147374,
+  "wall_s": 20.22261736600194,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+  "passed": false
+}

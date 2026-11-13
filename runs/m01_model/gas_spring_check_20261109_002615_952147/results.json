@@ -1,0 +1,178 @@
+{
+  "results": [
+    {
+      "file": "robot_no_gas_spring.xml",
+      "initial": {
+        "knees_rad": [
+          0.4,
+          -0.4
+        ],
+        "base_to_wheel_z_m": [
+          0.11913137214761549,
+          0.11913137214761549
+        ],
+        "spring_length_m": []
+      },
+      "max_torque_nm": 0.05075971377259725,
+      "finite": true,
+      "retracted": {
+        "knees_rad": [
+          0.7999999999999794,
+          -0.7999999999999794
+        ],
+        "base_to_wheel_z_m": [
+          0.05984444386737908,
+          0.05984444386737908
+        ],
+        "spring_length_m": []
+      },
+      "extended": {
+        "knees_rad": [
+          0.40000000000000024,
+          -0.40000000000000024
+        ],
+        "base_to_wheel_z_m": [
+          0.11913137214761549,
+          0.11913137214761549
+        ],
+        "spring_length_m": []
+      },
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "leg_retraction_m": [
+        0.059286928280236406,
+        0.059286928280236406
+      ],
+      "passed": true
+    },
+    {
+      "file": "robot_gas_spring_damped.xml",
+      "initial": {
+        "knees_rad": [
+          0.4,
+          -0.4
+        ],
+        "base_to_wheel_z_m": [
+          0.11913137214761549,
+          0.11913137214761549
+        ],
+        "spring_length_m": [
+          0.14594301457876277,
+          0.14594301457876277
+        ]
+      },
+      "max_torque_nm": 2.5739920394314155,
+      "finite": true,
+      "retracted": {
+        "knees_rad": [
+          0.7701081475358111,
+          -0.770108147535811
+        ],
+        "base_to_wheel_z_m": [
+          0.0650253104942401,
+          0.0650253104942401
+        ],
+        "spring_length_m": [
+          0.13106208389622162,
+          0.13106208389622165
+        ]
+      },
+      "extended": {
+        "knees_rad": [
+          0.3705317199071073,
+          -0.3705317199071073
+        ],
+        "base_to_wheel_z_m": [
+          0.12251726024271292,
+          0.12251726024271292
+        ],
+        "spring_length_m": [
+          0.14725424683101795,
+          0.14725424683101795
+        ]
+      },
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "leg_retraction_m": [
+        0.05410606165337539,
+        0.05410606165337539
+      ],
+      "passed": true
+    }
+  ],
+  "damping_test": [
+    {
+      "damping_n_s_m": 0.0,
+      "passive_power_w": 0.0,
+      "expected_power_w": -0.0,
+      "tendon_velocity_m_s": [
+        -0.031002797584915153,
+        -0.03100279758491516
+      ]
+    },
+    {
+      "damping_n_s_m": 10.0,
+      "passive_power_w": -0.019223469161824422,
+      "expected_power_w": -0.019223469161824422,
+      "tendon_velocity_m_s": [
+        -0.031002797584915153,
+        -0.03100279758491516
+      ]
+    },
+    {
+      "damping_n_s_m": 50.0,
+      "passive_power_w": -0.0961173458091221,
+      "expected_power_w": -0.09611734580912211,
+      "tendon_velocity_m_s": [
+        -0.031002797584915153,
+        -0.03100279758491516
+      ]
+    }
+  ],
+  "xml_info": [
+    {
+      "file": "robot_no_gas_spring.xml",
+      "sha256": "7aed8d1b2713aa343515c2843aecf0145dd3dffda63638a60dea3a76de4eec60",
+      "nq": 13,
+      "nv": 12,
+      "nu": 6,
+      "neq": 0,
+      "ntendon": 0,
+      "mass_kg": 18.3492386
+    },
+    {
+      "file": "robot_gas_spring_damped.xml",
+      "sha256": "5c896fc52d6db67fda953b7df4197957d01a598e5d10a8e6a8b0ce0212286d9c",
+      "nq": 13,
+      "nv": 12,
+      "nu": 6,
+      "neq": 0,
+      "ntendon": 2,
+      "mass_kg": 18.3492386
+    }
+  ],
+  "python": "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+  "mujoco": "3.11.0",
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/home/cofallen/Code/毕业设计/scripts/m01_model/check_gas_spring_variants.py"
+  ],
+  "fixture": "Root fixed in air, zero gravity, diagnostic PD80/3; not balance or locomotion",
+  "script_sha256": "cc27c28adc5acc108b888971b7da195f4d3fa5495119f9e60e3557984161d215",
+  "passed": true
+}

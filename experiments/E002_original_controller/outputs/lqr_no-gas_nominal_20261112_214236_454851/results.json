@@ -1,0 +1,259 @@
+{
+  "timing": {
+    "sync_calls": 0,
+    "sync_wall_s": 0.0,
+    "sync_max_s": 0.0,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 0.0,
+    "late_steps": 0,
+    "max_lag_s": 0.0,
+    "initial_sync_wall_s": 0.0,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 1.311807656222269,
+    "loop_non_ui_non_sleep_s": 7.623068787994271
+  },
+  "viewer_options": null,
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 9.999999999999897,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 0.00010039153949793247,
+  "max_tilt_rad": 0.04059217914251451,
+  "max_xy_drift_m": 9.436099143431194,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 1.938781659496734e-05,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.10701940561135877,
+  "max_torque_nm": [
+    30.0,
+    5.0,
+    30.0,
+    3.5275314688777577,
+    30.0,
+    30.0
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": null,
+  "final_base_xy_m": [
+    -9.419875949924638,
+    -0.5530860084058633
+  ],
+  "final_yaw_rad": 0.07470551279691288,
+  "mode": "drive",
+  "interactive": false,
+  "teleop": {
+    "speed": -1.2,
+    "dot_target": -1.2,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 0.07470551279691288,
+    "message": "jump complete",
+    "pressed": "w",
+    "jump_phase": "idle",
+    "jumps": [
+      {
+        "start": 2.498999999999836,
+        "start_height": 0.24873017133815567,
+        "max_height": 0.5085729315884672,
+        "start_com_z": 0.32022809514490896,
+        "max_com_z": 0.5844124543001564,
+        "max_wheel_clearance_m": 0.30707301329457554,
+        "airborne_s": 0.5570000000000004,
+        "max_upward_velocity": 2.1686275126127095,
+        "phases": [
+          {
+            "time": 2.498999999999836,
+            "phase": "crouch"
+          },
+          {
+            "time": 2.8999999999997916,
+            "phase": "thrust"
+          },
+          {
+            "time": 3.0259999999997778,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 3.266999999999751,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 3.433999999999733,
+            "phase": "landing"
+          },
+          {
+            "time": 5.0990000000000375,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 3.0259999999997778,
+        "no_liftoff": false
+      }
+    ],
+    "key_events": [
+      {
+        "time": 1.0000000000000007,
+        "pressed": "w"
+      },
+      {
+        "time": 2.497999999999836,
+        "key": "j"
+      }
+    ],
+    "current_jump": null
+  },
+  "final_odometry_error_m": 5.244575070799699,
+  "wall_s": 7.623068787994271,
+  "fall_events_s": [],
+  "gain_schedule": {
+    "lengths_m": {
+      "left": 0.27792366275193897,
+      "right": 0.2779200983237903
+    },
+    "K_left": [
+      [
+        -62.73666733546877,
+        -1.465656350299511,
+        -21.938066442672813,
+        -18.069218859117115,
+        34.83407601969655,
+        4.2420638308349226
+      ],
+      [
+        11.080191557239619,
+        0.15214853175500104,
+        4.242106134540546,
+        3.127867851485269,
+        170.54229252466348,
+        7.184617290961308
+      ]
+    ],
+    "K_right": [
+      [
+        -62.7366276289275,
+        -1.4656536753855292,
+        -21.93805867525,
+        -18.06924882077771,
+        34.834404800809295,
+        4.242092339934955
+      ],
+      [
+        11.08029706898449,
+        0.15215092240566763,
+        4.242145249790487,
+        3.127904825508199,
+        170.54222700202118,
+        7.18460785633402
+      ]
+    ],
+    "masses": {
+      "body_total_kg": 16.877574,
+      "body_per_side_kg": 8.438787,
+      "leg_kg": {
+        "l": 1.597924,
+        "r": 1.5983269999999998
+      },
+      "wheel_kg": {
+        "l": 0.4904,
+        "r": 0.4904
+      },
+      "total_kg": 21.054624999999998,
+      "wheel_radius_m": 0.06
+    },
+    "range_m": [
+      0.18,
+      0.34
+    ]
+  },
+  "step_trial": {
+    "thresholds": {
+      "takeoff_gap_m": [
+        0.05,
+        0.45
+      ],
+      "takeoff_vz_min": 0.05,
+      "airborne_min_s": 0.1,
+      "top_normal_z_min": 0.8,
+      "top_contact_z_min": 0.095,
+      "top_wheel_edge_margin_m": 0.06,
+      "stable_s": 2.0,
+      "stable_tilt_rad": 0.05,
+      "stable_speed_m_s": 0.05,
+      "max_closure_m": 0.0001
+    },
+    "checks": {
+      "takeoff": true,
+      "top_landing": false,
+      "clean_contact": true,
+      "stable": false,
+      "closure": true
+    },
+    "takeoff": {
+      "t": 3.0199999999997784,
+      "x": -1.4033916434567024,
+      "wheel_x": [
+        -1.443321948481355,
+        -1.3907916241115308
+      ],
+      "vz": 2.1113384851475674,
+      "speed": 2.297077160084413,
+      "tilt": 0.035243919748218305,
+      "ground": 0,
+      "top": 0,
+      "side": false,
+      "body": false
+    },
+    "takeoff_gap_m": 0.156678051518645,
+    "airborne_s": 0.4129999999999545,
+    "first_contact": {
+      "t": 3.432999999999733,
+      "x": -1.8367684831300268,
+      "wheel_x": [
+        -1.8640486807890162,
+        -1.8139654618596182
+      ],
+      "vz": -2.0610405661631352,
+      "speed": 2.3065041129493786,
+      "tilt": 0.003141113948926937,
+      "ground": 1,
+      "top": 0,
+      "side": false,
+      "body": false
+    },
+    "final": {
+      "t": 9.999999999999897,
+      "x": -9.419875949924638,
+      "wheel_x": [
+        -9.432178004955357,
+        -9.401766444126123
+      ],
+      "vz": 2.577797074213374e-06,
+      "speed": 1.1925415434705233,
+      "tilt": 5.118797006996829e-05,
+      "ground": 2,
+      "top": 0,
+      "side": false,
+      "body": false
+    },
+    "stable_peak_speed_m_s": 1.1925888594661425,
+    "stable_peak_tilt_rad": 5.3109799865733376e-05
+  },
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "step trial: full duration, no termination/warnings/falls, passive axes unactuated, all step_trial.checks pass",
+  "passed": false
+}

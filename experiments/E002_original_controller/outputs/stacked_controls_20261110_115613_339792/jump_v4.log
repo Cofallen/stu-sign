@@ -1,0 +1,8 @@
+[keys t=1.00] w
+[teleop t=3.00] jump requested
+WARNING: Nan, Inf or huge value in QACC at DOF 16. The simulation is unstable. Time = 6.6740.
+
+[keys t=6.68] released
+move_jump_0.278 numerical_warning 3.1373894742910644 0.3822178686412961
+[teleop t=2.00] jump requested
+jump_0.278 fall 7.128271510800659e-06 0.27792223936344945

@@ -1,0 +1,30 @@
+["curl", "-fLsS", "--retry", "2", "--connect-timeout", "20", "--max-time", "90", "https://arxiv.org/abs/2509.00215", "-o", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/dmo.html"]
+
+exit_code=0
+["curl", "-fLsS", "--retry", "2", "--connect-timeout", "20", "--max-time", "150", "https://arxiv.org/pdf/2509.00215v2", "-o", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/dmo.pdf.part"]
+
+exit_code=0
+["pdfinfo", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/dmo.pdf.part"]
+Title:           First Order Model-Based RL through Decoupled Backpropagation
+Author:          Joseph Amigo; Rooholla Khorrambakht; Elliot Chane-Sane; Nicolas Mansard; Ludovic Righetti
+Creator:         arXiv GenPDF (tex2pdf:)
+Producer:        pikepdf 8.15.1
+Custom Metadata: yes
+Metadata Stream: yes
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           22
+Encrypted:       no
+Page size:       612 x 792 pts (letter)
+Page rot:        0
+File size:       5117409 bytes
+Optimized:       no
+PDF version:     1.5
+
+exit_code=0
+["pdftotext", "-layout", "/home/cofallen/Code/毕业设计/references/papers/research_20261109/dmo.pdf", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/dmo.txt"]
+
+exit_code=0

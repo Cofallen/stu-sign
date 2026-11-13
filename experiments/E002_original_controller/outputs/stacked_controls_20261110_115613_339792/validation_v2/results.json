@@ -1,0 +1,341 @@
+{
+  "turn_left_0.278": {
+    "kind": "turn_left",
+    "length": 0.278,
+    "duration": 20.00000000000146,
+    "wall_s": 16.19826794399978,
+    "failed": null,
+    "first_fall": null,
+    "max_tilt": 0.0008284824945452043,
+    "final_tilt": 3.7307550099307847e-06,
+    "actual_length": 0.2779239816904485,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.27792320714470026,
+      "yaw": 1.5619293124753575,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [
+        {
+          "time": 1.0000000000000007,
+          "pressed": "a"
+        },
+        {
+          "time": 12.000999999998788,
+          "pressed": ""
+        }
+      ],
+      "current_jump": null
+    },
+    "max_com_z": 0.32054583298388917,
+    "max_base_z": 0.24926237533484089,
+    "max_wheel_clearance": -0.000951786103369906,
+    "max_actual_yaw_rate": 0.7178349126225206,
+    "final_actual_yaw_rate": 0.0001434404521358542,
+    "K_changed": true
+  },
+  "turn_right_0.278": {
+    "kind": "turn_right",
+    "length": 0.278,
+    "duration": 20.00000000000146,
+    "wall_s": 15.069772759000443,
+    "failed": null,
+    "first_fall": null,
+    "max_tilt": 0.0008577489557501541,
+    "final_tilt": 2.8471069737306676e-06,
+    "actual_length": 0.2779254507363455,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.27792320714470026,
+      "yaw": -1.562792605434547,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [
+        {
+          "time": 1.0000000000000007,
+          "pressed": "d"
+        },
+        {
+          "time": 12.000999999998788,
+          "pressed": ""
+        }
+      ],
+      "current_jump": null
+    },
+    "max_com_z": 0.32055672884724506,
+    "max_base_z": 0.24927352218010704,
+    "max_wheel_clearance": -0.0009575962392557313,
+    "max_actual_yaw_rate": 0.7179844022125482,
+    "final_actual_yaw_rate": 0.00015213859127567018,
+    "K_changed": true
+  },
+  "spin_left_0.278": {
+    "kind": "spin_left",
+    "length": 0.278,
+    "duration": 20.00000000000146,
+    "wall_s": 14.58068875400022,
+    "failed": null,
+    "first_fall": null,
+    "max_tilt": 0.001014942593551066,
+    "final_tilt": 4.088944980512292e-06,
+    "actual_length": 0.27792447449172347,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.27792320714470026,
+      "yaw": -3.0447358116100456,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [
+        {
+          "time": 1.0000000000000007,
+          "pressed": "ashift"
+        },
+        {
+          "time": 2.0009999999998906,
+          "pressed": "shift"
+        },
+        {
+          "time": 12.000999999998788,
+          "pressed": ""
+        }
+      ],
+      "current_jump": null
+    },
+    "max_com_z": 0.32057946324833403,
+    "max_base_z": 0.2492939624407996,
+    "max_wheel_clearance": -0.000919920151271375,
+    "max_actual_yaw_rate": 0.8815912441555493,
+    "final_actual_yaw_rate": 0.00019567105456222425,
+    "K_changed": true
+  },
+  "spin_right_0.278": {
+    "kind": "spin_right",
+    "length": 0.278,
+    "duration": 20.00000000000146,
+    "wall_s": 16.750490859999445,
+    "failed": null,
+    "first_fall": null,
+    "max_tilt": 0.0010575180826750646,
+    "final_tilt": 3.8113322584166565e-06,
+    "actual_length": 0.277925693048922,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.27792320714470026,
+      "yaw": 3.0431547140192383,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [
+        {
+          "time": 1.0000000000000007,
+          "pressed": "dshift"
+        },
+        {
+          "time": 2.0009999999998906,
+          "pressed": "shift"
+        },
+        {
+          "time": 12.000999999998788,
+          "pressed": ""
+        }
+      ],
+      "current_jump": null
+    },
+    "max_com_z": 0.3205842750031113,
+    "max_base_z": 0.24929389762385729,
+    "max_wheel_clearance": -0.0009252278961761617,
+    "max_actual_yaw_rate": 0.8817572305925655,
+    "final_actual_yaw_rate": 0.0001446899401592158,
+    "K_changed": true
+  },
+  "move_jump_0.278": {
+    "kind": "move_jump",
+    "length": 0.278,
+    "duration": 0.001,
+    "wall_s": 3.1937145370002327,
+    "failed": "numerical_warning",
+    "first_fall": 3.1439999999997648,
+    "max_tilt": 3.123202412551051,
+    "final_tilt": 3.123202412551051,
+    "actual_length": 0.37716882600751384,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": -1.1992,
+      "yaw_rate": 0.0,
+      "l0": 0.27792320714470026,
+      "yaw": 1.7872890667458568e-18,
+      "message": "jump requested",
+      "pressed": "",
+      "jump_phase": "landing",
+      "jumps": [],
+      "key_events": [
+        {
+          "time": 1.0000000000000007,
+          "pressed": "w"
+        },
+        {
+          "time": 2.9999999999997806,
+          "key": "j"
+        },
+        {
+          "time": 4.0449999999996855,
+          "pressed": ""
+        }
+      ],
+      "current_jump": {
+        "start": 3.0009999999997805,
+        "start_height": 0.2490826880829082,
+        "max_height": 1.770804831697776,
+        "start_com_z": 0.32042893052480653,
+        "max_com_z": 1.742249793957621,
+        "max_wheel_clearance_m": 1.872418100914136,
+        "airborne_s": 0.8800000000000007,
+        "max_upward_velocity": 1437.6216888053136,
+        "phases": [
+          {
+            "time": 3.0009999999997805,
+            "phase": "crouch"
+          },
+          {
+            "time": 3.4019999999997363,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 3.5649999999997184,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 3.5649999999997184,
+            "phase": "landing"
+          }
+        ],
+        "liftoff": 3.4019999999997363
+      }
+    },
+    "max_com_z": 0.4634090611342101,
+    "max_base_z": 0.472998167241869,
+    "max_wheel_clearance": 0.6690624781441417,
+    "max_actual_yaw_rate": 6.719227671302254,
+    "final_actual_yaw_rate": 6.719227671302254,
+    "K_changed": true
+  },
+  "jump_0.278": {
+    "kind": "jump",
+    "length": 0.278,
+    "duration": 11.999999999998789,
+    "wall_s": 9.273425139999745,
+    "failed": "fall",
+    "first_fall": 2.1459999999998747,
+    "max_tilt": 0.8501776645290934,
+    "final_tilt": 0.19665669281845266,
+    "actual_length": 0.3028668640417131,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 150.12536225528177,
+      "yaw_rate": 0.0,
+      "l0": 0.27792320714470026,
+      "yaw": -0.09818610787721858,
+      "message": "jump complete",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [
+        {
+          "start": 2.0009999999998906,
+          "start_height": 0.24924094834383698,
+          "max_height": 0.4717900843190432,
+          "start_com_z": 0.32051493109938894,
+          "max_com_z": 0.5468816895282469,
+          "max_wheel_clearance_m": 0.45096649737806155,
+          "airborne_s": 1.1749999999999814,
+          "max_upward_velocity": 2.5607090141306132,
+          "phases": [
+            {
+              "time": 2.0009999999998906,
+              "phase": "crouch"
+            },
+            {
+              "time": 2.4019999999998465,
+              "phase": "thrust"
+            },
+            {
+              "time": 2.5129999999998343,
+              "phase": "flight_tuck"
+            },
+            {
+              "time": 2.7539999999998077,
+              "phase": "flight_extend"
+            },
+            {
+              "time": 2.8729999999997946,
+              "phase": "landing"
+            },
+            {
+              "time": 4.603999999999872,
+              "phase": "idle"
+            }
+          ],
+          "liftoff": 2.5129999999998343,
+          "no_liftoff": false
+        }
+      ],
+      "key_events": [
+        {
+          "time": 1.9999999999998905,
+          "key": "j"
+        }
+      ],
+      "current_jump": null
+    },
+    "max_com_z": 0.5468547798692737,
+    "max_base_z": 0.47178787699298247,
+    "max_wheel_clearance": 0.4471453271255465,
+    "max_actual_yaw_rate": 1.7746853810803052,
+    "final_actual_yaw_rate": 0.966367806207106,
+    "K_changed": true
+  },
+  "fall_0.278": {
+    "kind": "fall",
+    "length": 0.278,
+    "duration": 11.999999999998789,
+    "wall_s": 9.325890246999734,
+    "failed": "fall",
+    "first_fall": 1.0010000000000006,
+    "max_tilt": 3.140804607642808,
+    "final_tilt": 0.21407207648630636,
+    "actual_length": 0.1843885599527159,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 2.1708623046659654,
+      "yaw_rate": 0.0,
+      "l0": 0.27792320714470026,
+      "yaw": 1.0190953268480514,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [],
+      "current_jump": null
+    },
+    "max_com_z": 0.4033829960682676,
+    "max_base_z": 0.474390233010998,
+    "max_wheel_clearance": 0.6306439459506683,
+    "max_actual_yaw_rate": 18.296526501704314,
+    "final_actual_yaw_rate": 0.05119980440028728,
+    "K_changed": true
+  }
+}

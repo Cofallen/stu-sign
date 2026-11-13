@@ -1,0 +1,102 @@
+"""全部常用调参入口。单位见注释；不修改这里的模型真实质量/惯量。
+
+PID沿用作者离散形式：P=kp*e，D=kd*(e-e_last)，不是kd*de/dt。
+当前使用的ki都为0（原PID实现未把积分加入返回值）。
+"""
+DRIVE = dict(
+    speed_max=1.2, forward_sign=-1.,           # m/s；W对应模型-X
+    reverse_speed_max=.85, reverse_accel=1., reverse_brake_accel=1.25,
+    accel=1.5, brake_accel=2.,                # m/s²
+    yaw_rate_max=2., spin_rate=4.,            # rad/s，普通A/D / 按住Shift
+    yaw_accel=.6, yaw_brake=2.,               # rad/s²，逐渐起转/停转
+    spin_direction=1.,                        # +1左转；A/D可更新方向
+    yaw_stopped=.08, yaw_command_deadband=.01, speed_stopped=.03, stop_hold_delay=.15,       # rad/s、s；停稳才锁位置
+    turn_brake_accel=2.,                      # m/s²，转完后的纵向制动
+    l0_min=.16, l0_max=.36, l0_rate=.12,       # m、m/s；K仍截断至.18–.34
+)
+JUMP = dict(
+    crouch_length=.20, extend_length=.34, force=400.,  # m、N/侧
+    crouch_time=.40, thrust_time=.20, total_time=2.60, # s
+    tuck_length=.18, tuck_hold_time=.24, length_rate=2.,              # m、s；实际离地后维持
+    landing_clearance=.06, landing_vz=-.3,            # 低空下落时提前展腿
+    liftoff_confirm=.006, liftoff_vz=.05,             # s、m/s
+    landing_feedback_delay=.10, landing_feedback_ramp=.25, landing_feedback_vz=.15, landing_length_tolerance=.03, # s，接触后渐恢复速度制动
+    tuck_enabled=True,
+)
+# (kp, ki, kd, 初始目标)；目标在每步position_pid调用中更新。
+PID = dict(
+    length_left=(2000., 0., 0., .278),
+    length_right=(2000., 0., 0., .278),
+    roll=(1000., 0., 0., 0.),
+    delta=(50., 0., 0., 0.),
+    yaw_rate=(3., 0., 0., 0.),                # 对角速度误差反馈，不再追角度
+    legacy_leg_force=(4000., 1., 10000., 0.), # Leg历史接口；主控制不调用
+    legacy_leg_roll=(1000., 0., 3000., 0.),    # Leg历史接口；主控制不调用
+)
+CONTROL = dict(
+    feedback_dt=.002, nominal_length=.278, brake_velocity_gain=2., reverse_brake_velocity_gain=1.35,
+    roll_damping=80., delta_damping=3., length_damping=80.,
+    yaw_torque_limit=1.2,                     # Nm/轮差动，给平衡留力矩余量
+    leg_torque_limit=40., wheel_torque_limit=5., # 最终仍受XML限幅
+    mpc_mix=.2, mpc_horizon=30, mpc_wheel_limit=5., mpc_pivot_limit=20.,
+    gravity=9.81,
+)
+TARGET = dict(
+    theta=0., dtheta=0., s=0., dot_s=0., phi=0., dphi=0.,
+    l0=.278, roll=0., yaw=0., yaw_rate=0., d2theta=0., jump_force=0., braking=False,
+)
+REFERENCE = dict(
+    measured_pose=True,                       # reset实测theta/phi/L0作为平衡点
+    theta_offset=0., phi_offset=0.,           # rad；基于实测姿态微调
+)
+# 评测记录跌倒，但不因跌倒退出；只在非有限数值/数值警告时停止。
+MONITOR = dict(fall_height=.12, fall_tilt=.6)
+# LQR代价和离线拟合参数。修改Q/R后必须重新生成系数，运行不会自动重拟合。
+LQR_FIT = dict(q=(3000., 1., 500., 1., 30000., 1.), r=(1., 1.),
+               order=3, center=.26, scale=.08, minimum=.18, maximum=.34)
+
+# 已有gain_schedule.json标定时使用的支撑内环，供离线模型求导。
+# 与运行PID分开列出：更改运行PID后需复验，不能声称旧K已重新标定。
+LINEARIZATION = dict(length_kp=2000., length_damping=80.,
+                     roll_kp=1000., roll_damping=80., delta_kp=50., delta_damping=3.,
+                     epsilon=1e-5, projection_limit=.01, pinv_rcond=1e-5)
+
+# E002 recovery calibration, SI units. Geometry, thresholds and torque limits
+# are for the simulator. The user's firmware is the state sequencing reference.
+RECOVERY = dict(
+    fall_theta=.8 * 3.141592653589793, fall_imu_tilt=.60, fall_hold=.012,
+    settle_time=.70, ready_hold=.045,
+    rear_angle_min=-1.70, rear_angle_max=-.65, ready_length=.265,
+    prone_pitch_min=1.22, prone_pitch_max=2.02,
+    extend_length=.32, extend_min=.250, extend_time=.60, prepare_settle=.40,
+    rear_target=-1.05, rotate_time=.70, prepare_timeout=2.40, prepare_hip_nm=15.,
+    retract_length=.216, retract_amount=.075, retract_time=.45, retract_timeout=1.50,
+    retract_hip_nm=16., swing_hip_nm=24., swing_timeout=2.30,
+    handoff_earliest=.60, handoff_wheel_nm=3.,
+    rising_time=.75, stand_extend_time=.70,
+    transition_timeout=3., stable_hold=.50,
+)
+
+# Waypoints are (common swing, front/rear differential), in radians.
+# Prepared starts have a different leg angle after the active rear rotation.
+RECOVERY_DIRECT = dict(
+    hip_segment_time=.4887676866565007,
+    hip_waypoints=((-2.7222106502593193, .022013559842042396),
+                   (.514508365224433, -.03424189231655542),
+                   (.847367735841968, .16926389508461082)),
+    handoff_tilt=.35, handoff_gyro=5.,
+    lqr_blend_time=.2184968613165178, wheel_blend_time=.2184968613165178,
+    rising_length=.2174379343118601,
+)
+RECOVERY_PREPARED = dict(
+    hip_segment_time=.39348521942047326,
+    hip_waypoints=((-2.307386462485899, .09172995582295573),
+                   (.20536820675234574, .08075210952092747),
+                   (.15386995967885989, .4151621651750064)),
+    handoff_tilt=.28, handoff_gyro=4.5,
+    lqr_blend_time=.16, wheel_blend_time=.10, rising_length=.21782607352390168,
+)
+
+RECOVERY_BELLY = dict(handoff_tilt=.75, lift_angle=.18, lift_time=.65, lift_length=.29,
+                      lift_entry_theta=.82,
+                      lqr_blend_time=.08, wheel_blend_time=.10, rising_length=.185)

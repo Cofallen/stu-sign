@@ -1,0 +1,10 @@
+{
+  "length_range_m": [
+    0.18,
+    0.34
+  ],
+  "fit_order": 3,
+  "holdout": "midpoints between fit knots; eigenvalues and rollouts",
+  "physics": "unchanged complete linkage and actuator limits",
+  "jump": "airborne tuck then prelanding extension; compare COM/body/wheel clearance; no guarantee COM rise from internal forces"
+}

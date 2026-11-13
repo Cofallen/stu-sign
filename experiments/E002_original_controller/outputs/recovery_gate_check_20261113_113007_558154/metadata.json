@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/tmp/e002_1113_gate_verify.py"
+  ],
+  "cwd": "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller",
+  "seed": null,
+  "mujoco": "3.11.0",
+  "numpy": "2.5.4",
+  "hashes": {
+    "assets/robot_no_gas_spring.xml": "263185e1f4a2a61d9e54803610d3e6b978c5ede259223552f278b3d623430088",
+    "standing_pose.json": "e94e06734096270711e2134e226a1d2b05beb893c886cc7e1ea1ca3a73fa1d70",
+    "LQR_six/recovery.py": "8066ed85365883601ed051133a0619d08ad1a650851f9d788598187ad54d2579",
+    "LQR_six/vmc.py": "b5867c0d3996a35c672e7390b1b22a3e6b436205912713ceec4f40b684f8141a",
+    "LQR_six/leg_rotate.py": "372d7da09858512333527c8588982f234fa983fe58b2d4c466352ac92df59af3",
+    "LQR_six/parameters.py": "e3c525a9a943677c8950a9ebe1531eab2deee4651771345932fc15c3e39b873a"
+  }
+}

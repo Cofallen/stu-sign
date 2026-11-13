@@ -1,0 +1,40 @@
+{
+  "scenario": "rotation",
+  "passes": 1,
+  "accepted": false,
+  "trace_columns": [
+    "drift_m",
+    "abs_roll_rad",
+    "abs_pitch_rad",
+    "speed_abs_error_m_s",
+    "left_length_abs_error_m",
+    "right_length_abs_error_m",
+    "yaw_abs_error_rad_s",
+    "forward_m_s",
+    "yaw_rad_s",
+    "robot/act_lf0",
+    "robot/act_lw",
+    "robot/act_rf0",
+    "robot/act_rw",
+    "robot/act_lf20",
+    "robot/act_rf20",
+    "base_height_m"
+  ],
+  "episodes": [
+    {
+      "seed": 42,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.616498589515686,
+      "final_tilt_rad": 0.02604598179459572,
+      "steady_mae": [
+        0.034003712236881256,
+        0.004214652348309755,
+        0.0056073591113090515,
+        0.016684291884303093
+      ]
+    }
+  ]
+}

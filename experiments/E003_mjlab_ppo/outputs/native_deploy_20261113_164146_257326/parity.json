@@ -1,0 +1,5 @@
+{
+  "observation_max_abs": 0.20000000298023224,
+  "action_max_abs": 0.322592169046402,
+  "poses": 3
+}

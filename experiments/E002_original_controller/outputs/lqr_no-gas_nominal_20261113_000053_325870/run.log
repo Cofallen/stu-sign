@@ -1,0 +1,843 @@
+{"command": ["/home/cofallen/miniconda3/bin/python", "-B", "controller.py", "--step-up"], "cwd": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller", "python": "/home/cofallen/miniconda3/bin/python", "runtime_paths": {"project": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller", "output": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261113_000053_325870", "modules": {"LQR_six": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/__init__.py", "LQR_six.get_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_sensor.py", "LQR_six.parameters": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/parameters.py", "LQR_six.write_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/write_sensor.py", "LQR_six.mymath": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mymath.py", "LQR_six.leg_data": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/leg_data.py", "LQR_six.vmc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/vmc.py", "LQR_six.get_state": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_state.py", "LQR_six.lqr_model": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr_model.py", "LQR_six.lqr": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr.py", "LQR_six.mympc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mympc.py", "LQR_six.lqr_controller": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr_controller.py", "LQR_six.render_stand": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/render_stand.py", "LQR_six.jump": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/jump.py", "LQR_six.teleop": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/teleop.py", "LQR_six.step_trial": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/step_trial.py", "LQR_six.recovery": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/recovery.py", "LQR_six.keyboardInput": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/keyboardInput.py", "LQR_six.simulation": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/simulation.py"}}, "args": {"terrain": "step-up", "control": "lqr", "variant": "no-gas", "case": "nominal", "duration": null, "headless": false, "viewer": true, "no_drive": false, "no_ui": false, "camera_follow": false, "hud": false, "camera": "terrain", "video": null, "video_size": "960x540", "video_fps": 30, "no_hud": false, "follow": false, "hold": false, "drive": true, "step_trial_x": null, "step_up": true, "auto_step_up": false, "reverse_trial": null, "recovery_trial": null}, "versions": {"mujoco": "3.9.0", "numpy": "2.4.6", "scipy": "1.18.1"}, "actuator_ctrlrange_nm": {"act_lf0": [-40.0, 40.0], "act_lw": [-5.0, 5.0], "act_rf0": [-40.0, 40.0], "act_rw": [-5.0, 5.0], "act_lf20": [-40.0, 40.0], "act_rf20": [-40.0, 40.0]}, "mass_kg": 21.054624999999998, "physics_dt_s": 0.001, "control_dt_s": 0.002, "feedback": "Author six-state LQR/VMC; IMU + wheel odometry; VMC uses full-model linkage Jacobian/qvel", "file_sha256": {"controller.py": "a4619de690925c1ecb12068d7cf1766aee5d217e4278b5bfeb4023d0340d66f7", "standing_pose.json": "e94e06734096270711e2134e226a1d2b05beb893c886cc7e1ea1ca3a73fa1d70", "gain_schedule.json": "bd71b73c78cc18ac05c94f2a25266abd905a86c56b65301431354e2e4541931c", "LQR_six/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "LQR_six/get_sensor.py": "e60aaa16656b57bce3f31bba6c5a319e917816454353ac6c97101d0d39cca657", "LQR_six/get_state.py": "a38da1c5b914e52cc77be4ad3ad35a3269119aab9aba3902dc392a69b85f9bef", "LQR_six/jump.py": "e00ae8c7f2391916c5a4befcb12105b4aaca9ba909867fd65f6dca30faf087ee", "LQR_six/keyboardInput.py": "3150624e3e04b9145bcdfc2b091cc5643215e501559b88113459eee8d19d7e3e", "LQR_six/leg_data.py": "ebdab486d5fc7babdabb0cb41126963090d3b05ba2eea524322aac67217a0ebd", "LQR_six/lqr.py": "ff73450b37837efd04ba92a456299b367f4b35f334ab88715e866d4391bff546", "LQR_six/lqr_controller.py": "db8dc5b19b429cf2e093cd9ba38d007c43bafb6ea0bf1da9e941b8bdba188e0d", "LQR_six/lqr_model.py": "35d894f16a77b2b1a4eb387cc8f44db5355a7e0ad2b5c276265df1b3c7c09c0b", "LQR_six/mymath.py": "b8efbc0daa798017dd6cd8ca2f30b3072a2d427466d9102cc8e31c401ec036eb", "LQR_six/mympc.py": "c6224a5c2c70acc49f6b20363972ce1f210f12fd26932f162fb0b18a3bec2de1", "LQR_six/parameters.py": "4ebc4773c28022f22c8182af77bad2e80b880c8815336db9ffff26f95fb84243", "LQR_six/recovery.py": "03b496f29f56dca34d9a988cfb59497f5973b11d236578d1100dacc639d9dacc", "LQR_six/render_stand.py": "b642394c9e3dfc80353c35851f27a5d13894d077be2a0ee65849592075531102", "LQR_six/simulation.py": "39aa5f51f55bc1a048754746a991052a9c27fb1f77bc4a34af3337b5d7bd63ec", "LQR_six/step_trial.py": "a166fee2a087e55e4d16c18f5250f7e01d6acb7f5b14c934b321182dfb79bc51", "LQR_six/teleop.py": "7168a54cee6b338d8aa7df4d488d87374056c202ef381a5b0c2c07a6638242fc", "LQR_six/vmc.py": "7afb2e130f9e969ab3607bf4dd24aa795a72f3d54bb6caa86fe70c79f364b6c9", "LQR_six/vofa.py": "a0a289ae54b17c9b6cd8c10219d1fdb988bc2c491e8352a457dd211faa67a0b8", "LQR_six/write_sensor.py": "51b69cffa60c69858bde259cf098abf76b22a5e37d34c210b265be340e365b66", "assets/robot_gas_spring_damped.xml": "9b77973e72253511f798866e709021349af8386b2b80855ae9b90ce66319009f", "assets/robot_no_gas_spring.xml": "263185e1f4a2a61d9e54803610d3e6b978c5ede259223552f278b3d623430088", "scenes/single_step_10cm.xml": "7e0a07cac1641fdc8e311c8779432a9fa7092eee538937d0cb0c073c8b586ee9", "scenes/step_up_course.xml": "140c733bc1a6c8e039406e81e15311167381dea9761aa3ef2ea93b5a0fa4e14a", "scenes/training_terrain.xml": "d5f188d61f8d10774b140ece126103f30ede3349891a0bfd75c6b9d25675a2b7"}, "thresholds": {"duration_s": null, "max_xy_drift_m": 0.1, "final_tilt_rad": 0.05, "max_closure_m": 0.0001, "min_height_m": 0.12, "fall_tilt_rad": 0.6, "fall_is_terminal": false, "numerical_error_is_terminal": true}, "seed": null}
+{
+  "timing": {
+    "sync_calls": 4844,
+    "sync_wall_s": 5.896514347885386,
+    "sync_max_s": 0.022684376999677625,
+    "hud_calls": 25,
+    "hud_wall_s": 0.0007753019890515134,
+    "sleep_wall_s": 2.471438788707019,
+    "late_steps": 134148,
+    "max_lag_s": 0.49491811304324074,
+    "initial_sync_wall_s": 0.03763986100238981,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.9998455949485557,
+    "loop_non_ui_non_sleep_s": 151.47695254241262
+  },
+  "viewer_options": {
+    "camera_type": 0,
+    "left_ui": true,
+    "right_ui": true,
+    "hud": false,
+    "initial": {
+      "azimuth": 135.0,
+      "elevation": -32.0,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "final": {
+      "azimuth": 136.41732283464555,
+      "elevation": -31.645669291338578,
+      "vis_flags": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "render_flags": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 159.82100000039907,
+  "terminated": true,
+  "termination_reason": "viewer_closed",
+  "timeout": false,
+  "final_tilt_rad": 0.7573016224404067,
+  "max_tilt_rad": 2.6433907713183,
+  "max_xy_drift_m": 4.630019547981004,
+  "max_external_force_n": 437.0616841925931,
+  "max_closure_m": 0.00021404770207252938,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.04557435365194656,
+  "max_torque_nm": [
+    40.0,
+    5.0,
+    40.0,
+    5.0,
+    40.0,
+    40.0
+  ],
+  "nonwheel_contacts": [
+    "base_Link_del_collision_0",
+    "l21_Link_collision_0",
+    "l22_Link_collision_0",
+    "l23_Link_collision_0",
+    "lf0_Link_collision_0",
+    "lf1_Link_collision_0",
+    "r21_Link_collision_0",
+    "r22_Link_collision_0",
+    "r23_Link_collision_0",
+    "rf0_Link_collision_0",
+    "rf1_Link_collision_0"
+  ],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": "terrain",
+  "final_base_xy_m": [
+    -0.017309253866971148,
+    4.174708422337985
+  ],
+  "final_yaw_rad": 0.8037908741894808,
+  "mode": "drive",
+  "interactive": true,
+  "teleop": {
+    "speed": 0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": -1.696452966779072,
+    "message": "reset targets",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [],
+    "key_events": [
+      {
+        "time": 3.8099999999996914,
+        "pressed": "e"
+      },
+      {
+        "time": 4.369999999999794,
+        "pressed": ""
+      },
+      {
+        "time": 4.739999999999918,
+        "pressed": "q"
+      },
+      {
+        "time": 5.540000000000185,
+        "pressed": ""
+      },
+      {
+        "time": 7.030000000000682,
+        "pressed": "d"
+      },
+      {
+        "time": 9.170000000000357,
+        "pressed": ""
+      },
+      {
+        "time": 10.109999999999836,
+        "pressed": "w"
+      },
+      {
+        "time": 10.869999999999415,
+        "pressed": ""
+      },
+      {
+        "time": 11.019999999999332,
+        "pressed": "w"
+      },
+      {
+        "time": 11.339999999999154,
+        "pressed": ""
+      },
+      {
+        "time": 12.209999999998672,
+        "pressed": "w"
+      },
+      {
+        "time": 12.839999999998323,
+        "pressed": ""
+      },
+      {
+        "time": 13.81999999999778,
+        "pressed": "w"
+      },
+      {
+        "time": 14.329999999997497,
+        "pressed": ""
+      },
+      {
+        "time": 15.069999999997087,
+        "pressed": "w"
+      },
+      {
+        "time": 15.359999999996926,
+        "pressed": ""
+      },
+      {
+        "time": 18.1499999999992,
+        "pressed": "w"
+      },
+      {
+        "time": 18.73999999999992,
+        "pressed": ""
+      },
+      {
+        "time": 19.51000000000086,
+        "pressed": "w"
+      },
+      {
+        "time": 19.840000000001265,
+        "pressed": ""
+      },
+      {
+        "time": 20.550000000002132,
+        "pressed": "w"
+      },
+      {
+        "time": 20.870000000002523,
+        "pressed": ""
+      },
+      {
+        "time": 21.430000000003208,
+        "pressed": "a"
+      },
+      {
+        "time": 23.790000000006092,
+        "pressed": ""
+      },
+      {
+        "time": 24.580000000007058,
+        "pressed": "d"
+      },
+      {
+        "time": 24.840000000007375,
+        "pressed": ""
+      },
+      {
+        "time": 25.120000000007717,
+        "pressed": "d"
+      },
+      {
+        "time": 25.54000000000823,
+        "pressed": ""
+      },
+      {
+        "time": 25.80000000000855,
+        "pressed": "d"
+      },
+      {
+        "time": 26.110000000008927,
+        "pressed": ""
+      },
+      {
+        "time": 26.510000000009416,
+        "pressed": "a"
+      },
+      {
+        "time": 27.0700000000101,
+        "pressed": ""
+      },
+      {
+        "time": 27.33000000001042,
+        "pressed": "w"
+      },
+      {
+        "time": 27.88000000001109,
+        "pressed": ""
+      },
+      {
+        "time": 28.940000000012386,
+        "pressed": "a"
+      },
+      {
+        "time": 28.970000000012423,
+        "pressed": ""
+      },
+      {
+        "time": 29.04000000001251,
+        "pressed": "w"
+      },
+      {
+        "time": 29.240000000012753,
+        "pressed": ""
+      },
+      {
+        "time": 29.490000000013058,
+        "pressed": "w"
+      },
+      {
+        "time": 29.670000000013278,
+        "pressed": ""
+      },
+      {
+        "time": 30.08000000001378,
+        "pressed": "w"
+      },
+      {
+        "time": 30.53000000001433,
+        "pressed": ""
+      },
+      {
+        "time": 31.000000000014904,
+        "pressed": "d"
+      },
+      {
+        "time": 31.420000000015417,
+        "pressed": ""
+      },
+      {
+        "time": 31.70000000001576,
+        "pressed": "d"
+      },
+      {
+        "time": 32.64000000001463,
+        "pressed": ""
+      },
+      {
+        "time": 33.63000000001232,
+        "pressed": "a"
+      },
+      {
+        "time": 33.9400000000116,
+        "pressed": ""
+      },
+      {
+        "time": 35.28000000000848,
+        "pressed": "s"
+      },
+      {
+        "time": 36.3000000000061,
+        "pressed": ""
+      },
+      {
+        "time": 39.41999999999883,
+        "pressed": "s"
+      },
+      {
+        "time": 39.949999999997594,
+        "pressed": ""
+      },
+      {
+        "time": 39.979999999997524,
+        "pressed": "s"
+      },
+      {
+        "time": 40.16999999999708,
+        "pressed": ""
+      },
+      {
+        "time": 45.12999999998552,
+        "pressed": "w"
+      },
+      {
+        "time": 47.01999999998112,
+        "key": "j"
+      },
+      {
+        "time": 48.0999999999786,
+        "pressed": ""
+      },
+      {
+        "time": 60.03999999995077,
+        "pressed": "d"
+      },
+      {
+        "time": 60.64999999994935,
+        "pressed": ""
+      },
+      {
+        "time": 60.909999999948745,
+        "pressed": "d"
+      },
+      {
+        "time": 61.25999999994793,
+        "pressed": ""
+      },
+      {
+        "time": 61.33999999994774,
+        "pressed": "w"
+      },
+      {
+        "time": 62.71999999994453,
+        "pressed": ""
+      },
+      {
+        "time": 63.03999999994378,
+        "pressed": "d"
+      },
+      {
+        "time": 64.83999999994555,
+        "pressed": ""
+      },
+      {
+        "time": 67.58999999995868,
+        "pressed": "d"
+      },
+      {
+        "time": 69.62999999996842,
+        "pressed": ""
+      },
+      {
+        "time": 69.95999999997,
+        "pressed": "w"
+      },
+      {
+        "time": 71.18999999997587,
+        "pressed": ""
+      },
+      {
+        "time": 71.77999999997868,
+        "pressed": "d"
+      },
+      {
+        "time": 74.20999999999029,
+        "pressed": ""
+      },
+      {
+        "time": 74.94999999999382,
+        "pressed": "d"
+      },
+      {
+        "time": 75.19999999999501,
+        "pressed": ""
+      },
+      {
+        "time": 76.45000000000098,
+        "pressed": "d"
+      },
+      {
+        "time": 77.10000000000409,
+        "pressed": ""
+      },
+      {
+        "time": 77.70000000000695,
+        "pressed": "w"
+      },
+      {
+        "time": 78.25000000000958,
+        "pressed": ""
+      },
+      {
+        "time": 78.48000000001068,
+        "pressed": "d"
+      },
+      {
+        "time": 78.70000000001173,
+        "pressed": ""
+      },
+      {
+        "time": 79.44000000001526,
+        "pressed": "a"
+      },
+      {
+        "time": 79.58000000001593,
+        "pressed": ""
+      },
+      {
+        "time": 79.90000000001746,
+        "pressed": "a"
+      },
+      {
+        "time": 80.21000000001894,
+        "pressed": ""
+      },
+      {
+        "time": 80.95000000002247,
+        "pressed": "a"
+      },
+      {
+        "time": 81.13000000002333,
+        "pressed": ""
+      },
+      {
+        "time": 82.06000000002777,
+        "pressed": "w"
+      },
+      {
+        "time": 82.33000000002906,
+        "pressed": ""
+      },
+      {
+        "time": 82.5700000000302,
+        "pressed": "d"
+      },
+      {
+        "time": 83.30000000003369,
+        "pressed": ""
+      },
+      {
+        "time": 83.57000000003498,
+        "pressed": "w"
+      },
+      {
+        "time": 84.31000000003851,
+        "pressed": ""
+      },
+      {
+        "time": 84.59000000003985,
+        "pressed": "a"
+      },
+      {
+        "time": 84.80000000004085,
+        "pressed": ""
+      },
+      {
+        "time": 85.07000000004214,
+        "pressed": "a"
+      },
+      {
+        "time": 85.21000000004281,
+        "pressed": ""
+      },
+      {
+        "time": 85.68000000004506,
+        "pressed": "a"
+      },
+      {
+        "time": 86.62000000004954,
+        "pressed": ""
+      },
+      {
+        "time": 86.67000000004978,
+        "pressed": "s"
+      },
+      {
+        "time": 89.020000000061,
+        "pressed": ""
+      },
+      {
+        "time": 90.11000000006621,
+        "pressed": "s"
+      },
+      {
+        "time": 90.62000000006864,
+        "pressed": ""
+      },
+      {
+        "time": 92.64000000007829,
+        "pressed": "w"
+      },
+      {
+        "time": 95.0300000000897,
+        "key": "j"
+      },
+      {
+        "time": 96.06000000009462,
+        "pressed": ""
+      },
+      {
+        "time": 102.35000000012465,
+        "pressed": "w"
+      },
+      {
+        "time": 103.6600000001309,
+        "pressed": ""
+      },
+      {
+        "time": 103.66400000013093,
+        "key": "r"
+      }
+    ],
+    "current_jump": null
+  },
+  "final_odometry_error_m": 571.8590914432596,
+  "wall_s": 159.84568098099408,
+  "fall_events_s": [
+    103.66400000013093,
+    120.03400000020909,
+    126.81500000024147,
+    133.83300000027498,
+    139.18500000030053,
+    143.8690000003229,
+    150.60900000035508,
+    154.85100000037534,
+    158.1970000003913
+  ],
+  "recovery": {
+    "phase": "settle",
+    "events": [
+      {
+        "phase": "settle",
+        "time_s": 103.66400000013093,
+        "attempt": 0,
+        "pitch_rad": -0.6059116809187202,
+        "trigger": "body_contact"
+      },
+      {
+        "phase": "balance",
+        "time_s": 119.94600000020867,
+        "attempt": 0
+      },
+      {
+        "phase": "failed",
+        "time_s": 120.03400000020909,
+        "attempt": 0,
+        "reason": "balance_timeout_or_refall"
+      },
+      {
+        "phase": "settle",
+        "time_s": 120.53400000021148,
+        "attempt": 0,
+        "retry": true
+      },
+      {
+        "phase": "balance",
+        "time_s": 124.81500000023192,
+        "attempt": 0
+      },
+      {
+        "phase": "failed",
+        "time_s": 126.81500000024147,
+        "attempt": 0,
+        "reason": "balance_timeout_or_refall"
+      },
+      {
+        "phase": "settle",
+        "time_s": 127.31500000024386,
+        "attempt": 0,
+        "retry": true
+      },
+      {
+        "phase": "balance",
+        "time_s": 131.83300000026543,
+        "attempt": 0
+      },
+      {
+        "phase": "failed",
+        "time_s": 133.83300000027498,
+        "attempt": 0,
+        "reason": "balance_timeout_or_refall"
+      },
+      {
+        "phase": "settle",
+        "time_s": 134.33300000027737,
+        "attempt": 0,
+        "retry": true
+      },
+      {
+        "phase": "balance",
+        "time_s": 137.18500000029098,
+        "attempt": 0
+      },
+      {
+        "phase": "failed",
+        "time_s": 139.18500000030053,
+        "attempt": 0,
+        "reason": "balance_timeout_or_refall"
+      },
+      {
+        "phase": "settle",
+        "time_s": 139.68500000030292,
+        "attempt": 0,
+        "retry": true
+      },
+      {
+        "phase": "balance",
+        "time_s": 141.86900000031335,
+        "attempt": 0
+      },
+      {
+        "phase": "failed",
+        "time_s": 143.8690000003229,
+        "attempt": 0,
+        "reason": "balance_timeout_or_refall"
+      },
+      {
+        "phase": "settle",
+        "time_s": 144.3690000003253,
+        "attempt": 0,
+        "retry": true
+      },
+      {
+        "phase": "balance",
+        "time_s": 148.60900000034553,
+        "attempt": 0
+      },
+      {
+        "phase": "failed",
+        "time_s": 150.60900000035508,
+        "attempt": 0,
+        "reason": "balance_timeout_or_refall"
+      },
+      {
+        "phase": "settle",
+        "time_s": 151.10900000035747,
+        "attempt": 0,
+        "retry": true
+      },
+      {
+        "phase": "balance",
+        "time_s": 152.8510000003658,
+        "attempt": 0
+      },
+      {
+        "phase": "failed",
+        "time_s": 154.85100000037534,
+        "attempt": 0,
+        "reason": "balance_timeout_or_refall"
+      },
+      {
+        "phase": "settle",
+        "time_s": 155.35100000037772,
+        "attempt": 0,
+        "retry": true
+      },
+      {
+        "phase": "balance",
+        "time_s": 156.19700000038176,
+        "attempt": 0
+      },
+      {
+        "phase": "failed",
+        "time_s": 158.1970000003913,
+        "attempt": 0,
+        "reason": "balance_timeout_or_refall"
+      },
+      {
+        "phase": "settle",
+        "time_s": 158.6970000003937,
+        "attempt": 0,
+        "retry": true
+      }
+    ]
+  },
+  "gain_schedule": {
+    "lengths_m": {
+      "left": 0.34,
+      "right": 0.29966155408340855
+    },
+    "K_left": [
+      [
+        -63.500768383598086,
+        -1.5163192394133498,
+        -22.053646773525287,
+        -17.77370056497382,
+        29.724581719072702,
+        3.827295836993862
+      ],
+      [
+        9.550875121248342,
+        0.12429293568386968,
+        3.6253939518156306,
+        2.5827976787012865,
+        171.49555576983377,
+        7.319447449766034
+      ]
+    ],
+    "K_right": [
+      [
+        -62.976771425918805,
+        -1.4827418435133966,
+        -21.981683459730693,
+        -17.906884579916934,
+        32.93634960022454,
+        4.079242839119628
+      ],
+      [
+        10.480028581128455,
+        0.13928470344040936,
+        4.015545760648794,
+        2.9175068383817315,
+        170.90761228693728,
+        7.237409600405094
+      ]
+    ],
+    "masses": {
+      "body_total_kg": 16.877574,
+      "body_per_side_kg": 8.438787,
+      "leg_kg": {
+        "l": 1.597924,
+        "r": 1.5983269999999998
+      },
+      "wheel_kg": {
+        "l": 0.4904,
+        "r": 0.4904
+      },
+      "total_kg": 21.054624999999998,
+      "wheel_radius_m": 0.06
+    },
+    "range_m": [
+      0.18,
+      0.34
+    ]
+  },
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+  "passed": false
+}

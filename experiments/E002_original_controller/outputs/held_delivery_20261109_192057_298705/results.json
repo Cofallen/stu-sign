@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "syntax": true,
+  "no_hidden_parent_import": true,
+  "formal_xml_hashes_unchanged": true,
+  "source_checkout_clean": true,
+  "source_manifest_current": true,
+  "readme_has_parameter_table_interfaces_call_example_and_mermaid": true,
+  "local_links_checked": 72,
+  "broken_links": [],
+  "behavior_evidence": "outputs/hold_validation_20261109_191633_911604/results.json",
+  "stand_regression": "outputs/lqr_no-gas_nominal_20261109_191634_995848/results.json",
+  "after_real_gui_changes": "Only null/focus guard and refusal message, no control values changed",
+  "limitations": "X11 only; physical braking ~1.5 simulation seconds; separate parameter cases, not arbitrary combinations"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "supermimic",
+  "kind": "paper",
+  "title": "SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable World Model",
+  "arxiv": "2610.28480",
+  "url": "https://arxiv.org/abs/2610.28480",
+  "local": "references/papers/research_20261109/supermimic.pdf",
+  "purpose": "核心：可微世界模型与短视界策略梯度",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_verified_pdf",
+  "authors": [
+    "Liao, Qiayuan",
+    "Shao, Yiyang",
+    "Long, Junfeng",
+    "Zakka, Kevin",
+    "Horowitz, Roberto",
+    "Abbeel, Pieter",
+    "Sreenath, Koushil"
+  ],
+  "date": "2026/10/20",
+  "version": "v1",
+  "pdf_url": "https://arxiv.org/pdf/2610.28480v1",
+  "sha256": "fe213017ab062f4acc3965da89abd3c29969163e144a2628a662b8ce46691009",
+  "bytes": 3524904,
+  "exit_code": 0
+}

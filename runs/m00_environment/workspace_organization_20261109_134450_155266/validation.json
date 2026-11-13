@@ -1,0 +1,10 @@
+{
+  "checked_documents": 18,
+  "checked_local_links": 84,
+  "broken_links": [],
+  "before_snapshots_verified": true,
+  "existing_files_moved": 0,
+  "simulation_or_training_run": false,
+  "exit_code": 0,
+  "prior_attempt": "validation_attempt1.json: validator compared non-normalized paths for its own pending output; corrected with resolved paths; no document target change required"
+}

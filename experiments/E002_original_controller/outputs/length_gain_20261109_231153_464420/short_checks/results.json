@@ -1,0 +1,41 @@
+{
+  "pitch_plus": {
+    "command": [
+      "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+      "-B",
+      "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller/controller.py",
+      "--headless",
+      "--duration",
+      "10",
+      "--case",
+      "pitch-plus"
+    ],
+    "exit_code": 0
+  },
+  "gas": {
+    "command": [
+      "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+      "-B",
+      "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller/controller.py",
+      "--headless",
+      "--duration",
+      "10",
+      "--variant",
+      "gas"
+    ],
+    "exit_code": 0
+  },
+  "mpc_compat": {
+    "command": [
+      "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+      "-B",
+      "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller/controller.py",
+      "--headless",
+      "--duration",
+      "10",
+      "--control",
+      "lqr-mpc"
+    ],
+    "exit_code": 0
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "timing": {
+    "sync_calls": 0,
+    "sync_wall_s": 0.0,
+    "sync_max_s": 0.0,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 0.0,
+    "late_steps": 0,
+    "max_lag_s": 0.0,
+    "initial_sync_wall_s": 0.0,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.20871476596437646,
+    "loop_non_ui_non_sleep_s": 47.912278528998286
+  },
+  "viewer_options": null,
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 9.999999999999897,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 3.141592639121221,
+  "max_tilt_rad": 3.141592653589793,
+  "max_xy_drift_m": 0.11647631635442669,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 5.968674670522251e-05,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.24923829606657252,
+  "max_torque_nm": [
+    11.537527907408979,
+    0.0,
+    11.245791450972298,
+    0.0,
+    5.3510362304843655,
+    5.536747475877066
+  ],
+  "nonwheel_contacts": [
+    "base_Link_del_collision_0"
+  ],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": null,
+  "final_base_xy_m": [
+    0.10861873056730394,
+    -0.0012137819336492655
+  ],
+  "final_yaw_rad": 3.1079443806105016,
+  "mode": "recovery",
+  "interactive": false,
+  "teleop": null,
+  "final_odometry_error_m": -0.7617139278192833,
+  "wall_s": 47.912278528998286,
+  "fall_events_s": [
+    0.0
+  ],
+  "recovery": {
+    "phase": "settle",
+    "events": [
+      {
+        "phase": "settle",
+        "time_s": 0.0,
+        "attempt": 0,
+        "trigger": "trial_reset"
+      },
+      {
+        "phase": "extend",
+        "time_s": 0.7450000000000006,
+        "attempt": 0,
+        "body_pitch_rad": -3.0901328643892736,
+        "imu_roll_pitch_rad": [
+          -3.0513919781425716,
+          -0.05125095539780716
+        ],
+        "gyro_norm_rad_s": 0.4401992642461592,
+        "body_contact": true,
+        "rear_ready": false,
+        "theta_body_rad": [
+          2.357458743994633,
+          2.4258390250945636
+        ],
+        "theta_gravity_rad": [
+          -0.7326741203946407,
+          -0.66429383929471
+        ],
+        "leg_lengths_m": [
+          0.3109509247510658,
+          0.34044158112035566
+        ]
+      },
+      {
+        "phase": "rotate",
+        "time_s": 1.7449999999999186,
+        "attempt": 0,
+        "body_pitch_rad": -3.0845433275459477,
+        "imu_roll_pitch_rad": [
+          -3.1186684783048073,
+          -0.057034368971458325
+        ],
+        "gyro_norm_rad_s": 0.031793911784537186,
+        "body_contact": true,
+        "rear_ready": false,
+        "theta_body_rad": [
+          2.3690683125798158,
+          2.426997700715562
+        ],
+        "theta_gravity_rad": [
+          -0.715475014966132,
+          -0.6575456268303856
+        ],
+        "leg_lengths_m": [
+          0.3249468759407868,
+          0.3217502626762959
+        ]
+      },
+      {
+        "phase": "failed",
+        "time_s": 4.145999999999719,
+        "attempt": 0,
+        "reason": "rear_prone_pose_not_reached",
+        "body_pitch_rad": -3.079260479747474,
+        "imu_roll_pitch_rad": [
+          -3.1415634957930814,
+          -0.06233217381589146
+        ],
+        "gyro_norm_rad_s": 0.007299184950756138,
+        "body_contact": true,
+        "rear_ready": false,
+        "theta_body_rad": [
+          -1.1094288923595286,
+          -1.1098998187906999
+        ],
+        "theta_gravity_rad": [
+          2.094495935072584,
+          2.0940250086414123
+        ],
+        "leg_lengths_m": [
+          0.309547645129595,
+          0.30971838388050577
+        ]
+      },
+      {
+        "phase": "settle",
+        "time_s": 4.645999999999886,
+        "attempt": 0,
+        "retry": true,
+        "body_pitch_rad": -3.079219613133371,
+        "imu_roll_pitch_rad": [
+          -3.141530632319667,
+          -0.062373040336769804
+        ],
+        "gyro_norm_rad_s": 0.015868461150068763,
+        "body_contact": true,
+        "rear_ready": false,
+        "theta_body_rad": [
+          -2.9753638062884638,
+          -2.9608979288560566
+        ],
+        "theta_gravity_rad": [
+          0.2286018877577514,
+          0.2430677651901585
+        ],
+        "leg_lengths_m": [
+          0.25671993448732117,
+          0.25763786421572665
+        ]
+      }
+    ],
+    "preparation_enabled": true,
+    "trial_pitch_rad": 3.0,
+    "trial_roll_rad": 0.0,
+    "expected_upright": false,
+    "final_speed_m_s": 0.005055616323614769
+  },
+  "gain_schedule": {
+    "lengths_m": {
+      "left": 0.278,
+      "right": 0.278
+    },
+    "K_left": [
+      [
+        -62.7375176046252,
+        -1.4657136492038847,
+        -21.938232735260694,
+        -18.0685774000791,
+        34.827036315032935,
+        4.241453417907778
+      ],
+      [
+        11.077932471724868,
+        0.15209735492661494,
+        4.241268609328214,
+        3.12707621677263,
+        170.5436952641008,
+        7.184819277714956
+      ]
+    ],
+    "K_right": [
+      [
+        -62.7375176046252,
+        -1.4657136492038847,
+        -21.938232735260694,
+        -18.0685774000791,
+        34.827036315032935,
+        4.241453417907778
+      ],
+      [
+        11.077932471724868,
+        0.15209735492661494,
+        4.241268609328214,
+        3.12707621677263,
+        170.5436952641008,
+        7.184819277714956
+      ]
+    ],
+    "masses": {
+      "body_total_kg": 16.877574,
+      "body_per_side_kg": 8.438787,
+      "leg_kg": {
+        "l": 1.597924,
+        "r": 1.5983269999999998
+      },
+      "wheel_kg": {
+        "l": 0.4904,
+        "r": 0.4904
+      },
+      "total_kg": 21.054624999999998,
+      "wheel_radius_m": 0.06
+    },
+    "range_m": [
+      0.18,
+      0.34
+    ]
+  },
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "self-right: completed hip swing and LQR handoff; stable final 5 s, full duration, no warning, no passive actuation",
+  "passed": false
+}

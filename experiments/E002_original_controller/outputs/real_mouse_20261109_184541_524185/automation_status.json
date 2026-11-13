@@ -1,0 +1,5 @@
+{
+  "automation_passed": false,
+  "error": "X_SetInputFocus BadMatch, script exited before controlled mouse sequence",
+  "child_status": "Viewer left running; no finalized result claimed at this observation"
+}

@@ -1,0 +1,177 @@
+{
+  "timing": {
+    "sync_calls": 0,
+    "sync_wall_s": 0.0,
+    "sync_max_s": 0.0,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 0.0,
+    "late_steps": 0,
+    "max_lag_s": 0.0,
+    "initial_sync_wall_s": 0.0,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 1.1941983171227069,
+    "loop_non_ui_non_sleep_s": 8.373818533000303
+  },
+  "viewer_options": null,
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 9.999999999999897,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 0.04172082175608599,
+  "max_tilt_rad": 3.1415518688477406,
+  "max_xy_drift_m": 0.3593152356304939,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 5.025136751107892e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.05383215557667918,
+  "max_torque_nm": [
+    15.880122296391882,
+    0.0,
+    15.757161473605144,
+    0.0,
+    24.0,
+    24.0
+  ],
+  "nonwheel_contacts": [
+    "base_Link_del_collision_0",
+    "lf0_Link_collision_0",
+    "lf1_Link_collision_0",
+    "rf0_Link_collision_0",
+    "rf1_Link_collision_0"
+  ],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": null,
+  "final_base_xy_m": [
+    0.3590508634015068,
+    -0.007350009331481285
+  ],
+  "final_yaw_rad": -0.04923541007410312,
+  "mode": "recovery",
+  "interactive": false,
+  "teleop": null,
+  "final_odometry_error_m": -0.3646626454204279,
+  "wall_s": 8.373818533000303,
+  "fall_events_s": [
+    0.0,
+    3.5549999999997195
+  ],
+  "recovery": {
+    "phase": "settle",
+    "events": [
+      {
+        "phase": "settle",
+        "time_s": 0.0,
+        "attempt": 0,
+        "pitch_rad": 1.449998562499413,
+        "trigger": "body_contact"
+      },
+      {
+        "phase": "swing",
+        "time_s": 0.7000000000000005,
+        "attempt": 1,
+        "pitch_rad": 1.681434996984205,
+        "wheel_body_x_m": [
+          0.21504963290485993,
+          0.21171462723257853
+        ]
+      },
+      {
+        "phase": "balance",
+        "time_s": 1.5539999999999397,
+        "attempt": 1,
+        "pitch_rad": -0.08294165760885971
+      },
+      {
+        "phase": "failed",
+        "time_s": 3.5549999999997195,
+        "attempt": 1,
+        "reason": "balance_timeout_or_refall"
+      },
+      {
+        "phase": "settle",
+        "time_s": 4.055999999999689,
+        "attempt": 1,
+        "retry": true
+      }
+    ],
+    "trial_pitch_rad": 1.45,
+    "final_speed_m_s": 8.812982758489274e-05
+  },
+  "gain_schedule": {
+    "lengths_m": {
+      "left": 0.3368777749616776,
+      "right": 0.3348193305177962
+    },
+    "K_left": [
+      [
+        -63.45263559157457,
+        -1.5137312700213015,
+        -22.048012512194205,
+        -17.773565435102526,
+        29.970215657692783,
+        3.8448339532045805
+      ],
+      [
+        9.616207028892802,
+        0.12505057950147216,
+        3.655652022148108,
+        2.6072014859175523,
+        171.4501858326818,
+        7.31343067260516
+      ]
+    ],
+    "K_right": [
+      [
+        -63.42181281328128,
+        -1.51201869504977,
+        -22.044330121825663,
+        -17.774579603122426,
+        30.13180583829099,
+        3.856556692551751
+      ],
+      [
+        9.659775619685448,
+        0.125586536530292,
+        3.675515120077423,
+        2.62336946241508,
+        171.42048237697875,
+        7.309455548465334
+      ]
+    ],
+    "masses": {
+      "body_total_kg": 16.877574,
+      "body_per_side_kg": 8.438787,
+      "leg_kg": {
+        "l": 1.597924,
+        "r": 1.5983269999999998
+      },
+      "wheel_kg": {
+        "l": 0.4904,
+        "r": 0.4904
+      },
+      "total_kg": 21.054624999999998,
+      "wheel_radius_m": 0.06
+    },
+    "range_m": [
+      0.18,
+      0.34
+    ]
+  },
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "self-right: completed hip swing and LQR handoff; stable final 5 s, full duration, no warning, no passive actuation",
+  "passed": false
+}

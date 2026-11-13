@@ -1,0 +1,9 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/tmp/check_author_copy.py"
+  ],
+  "cwd": "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1",
+  "python": "/home/cofallen/miniconda3/envs/mjlab/bin/python"
+}

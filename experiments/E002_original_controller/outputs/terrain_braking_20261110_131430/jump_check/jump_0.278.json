@@ -1,0 +1,74 @@
+{
+  "kind": "jump",
+  "length": 0.278,
+  "duration": 11.999999999998789,
+  "wall_s": 7.966225190999467,
+  "failed": null,
+  "first_fall": null,
+  "max_tilt": 0.0306520443349729,
+  "final_tilt": 5.198568281129552e-06,
+  "actual_length": 0.2779225700407769,
+  "jump": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 0.032238458939116366,
+    "message": "jump complete",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [
+      {
+        "start": 2.0009999999998906,
+        "start_height": 0.2492408942238323,
+        "max_height": 0.49838985482058185,
+        "start_com_z": 0.32051487506062376,
+        "max_com_z": 0.5742811805848564,
+        "max_wheel_clearance_m": 0.2973776259076511,
+        "airborne_s": 0.4310000000000003,
+        "max_upward_velocity": 2.1133844056804203,
+        "phases": [
+          {
+            "time": 2.0009999999998906,
+            "phase": "crouch"
+          },
+          {
+            "time": 2.4019999999998465,
+            "phase": "thrust"
+          },
+          {
+            "time": 2.5269999999998327,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 2.7279999999998106,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 2.923999999999789,
+            "phase": "landing"
+          },
+          {
+            "time": 4.6019999999998715,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 2.5269999999998327,
+        "no_liftoff": false
+      }
+    ],
+    "key_events": [
+      {
+        "time": 1.9999999999998905,
+        "key": "j"
+      }
+    ],
+    "current_jump": null
+  },
+  "max_com_z": 0.5742760325387595,
+  "max_base_z": 0.49838251948277396,
+  "max_wheel_clearance": 0.2973776259076511,
+  "max_actual_yaw_rate": 0.18437872149662785,
+  "final_actual_yaw_rate": 2.3878777565309985e-05,
+  "K_changed": true
+}

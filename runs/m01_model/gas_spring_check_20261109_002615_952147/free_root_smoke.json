@@ -1,0 +1,32 @@
+[
+  {
+    "file": "robot_no_gas_spring.xml",
+    "time": 2.0000000000000013,
+    "finite": true,
+    "warning_counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "contacts": 5
+  },
+  {
+    "file": "robot_gas_spring_damped.xml",
+    "time": 2.0000000000000013,
+    "finite": true,
+    "warning_counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "contacts": 4
+  }
+]

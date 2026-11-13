@@ -1,0 +1,124 @@
+窗口已打开：左键旋转、右键平移、滚轮缩放、H 帮助；关闭窗口即结束。
+HOLD W/S move, A/D turn, Q/E length; RELEASE brakes/holds; J jump, X stop, R reset
+[keys t=1.33] w
+[keys t=3.04] released
+[keys t=4.34] s
+[keys t=5.37] released
+[keys t=6.72] q
+[keys t=6.77] released
+[keys t=7.48] e
+[keys t=7.53] released
+[teleop t=8.16] reset targets
+[teleop t=9.16] jump requested
+/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261109_191115_398914
+{
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 11.140999999999265,
+  "terminated": true,
+  "termination_reason": "viewer_closed",
+  "timeout": false,
+  "final_tilt_rad": 0.023619434917309383,
+  "max_tilt_rad": 0.023619434917309383,
+  "max_xy_drift_m": 1.775594842328235,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 1.7349411405622564e-05,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.14124813258806151,
+  "max_torque_nm": [
+    30.0,
+    4.295096757240581,
+    30.0,
+    4.659857701106577,
+    30.0,
+    30.0
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": "iso",
+  "final_base_xy_m": [
+    -0.6939653345383455,
+    0.012032089794587546
+  ],
+  "final_yaw_rad": 0.01817394144224016,
+  "mode": "drive",
+  "interactive": true,
+  "teleop": {
+    "speed": -0.0,
+    "dot_target": 0.0,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 0.01817394144224016,
+    "message": "jump complete",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [
+      {
+        "start": 9.161000000000362,
+        "start_height": 0.24923151708524302,
+        "max_height": 0.47060969244181317,
+        "airborne_s": 0.4210000000000003,
+        "max_upward_velocity": 1.9067601864194672
+      }
+    ],
+    "key_events": [
+      {
+        "time": 1.3299999999999643,
+        "pressed": "w"
+      },
+      {
+        "time": 3.039999999999776,
+        "pressed": ""
+      },
+      {
+        "time": 4.339999999999784,
+        "pressed": "s"
+      },
+      {
+        "time": 5.370000000000128,
+        "pressed": ""
+      },
+      {
+        "time": 6.720000000000579,
+        "pressed": "q"
+      },
+      {
+        "time": 6.7700000000005955,
+        "pressed": ""
+      },
+      {
+        "time": 7.480000000000833,
+        "pressed": "e"
+      },
+      {
+        "time": 7.530000000000849,
+        "pressed": ""
+      },
+      {
+        "time": 8.160000000000917,
+        "key": "r"
+      },
+      {
+        "time": 9.160000000000363,
+        "key": "j"
+      }
+    ],
+    "current_jump": null
+  },
+  "final_odometry_error_m": 5.042228704539834,
+  "wall_s": 33.24818822299858,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "drive demo: full duration, no termination/warnings, final 5 s tilt <0.05 rad, passive axes unactuated; xy drift not judged",
+  "passed": true
+}
+

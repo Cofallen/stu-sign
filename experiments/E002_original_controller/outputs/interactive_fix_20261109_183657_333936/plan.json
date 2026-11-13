@@ -1,0 +1,16 @@
+{
+  "scope": "Only E002 entry, scene display, keyboard targets/jump support and documentation; no formal XML or upstream modification",
+  "before_sha256": {
+    "experiments/E002_original_controller/controller.py": "5f4c8d7929a23f59e386ff3e13a8fc9ecfadbcd1eace7d1c1572256f99a60f1b",
+    "experiments/E002_original_controller/LQR_six/teleop.py": "10eebbcb333df17dc2e464c3b6aa81a3caca0369e3e76f5adac55790d222f094",
+    "experiments/E002_original_controller/LQR_six/render_stand.py": "9ba5c3961a16bf3fb7d5ccd8669bc7ee2ab1d8fe8acc3a0df8cb9d583f27e58a",
+    "experiments/E002_original_controller/LQR_six/lqr_controller.py": "7c6273a5e3f3fe160851a364ed87bcb1ce8719c5c53ad62b2326afd31bd24c89",
+    "experiments/E002_original_controller/LQR_six/simulation.py": "6fb002bcf64b4b19712cbe3efc60402ef107c39533e262c0ccf1e8269e704b6e"
+  },
+  "acceptance": {
+    "walk": "command then actual base displacement >0.1m, wheel rotation, no fall for 10s",
+    "height": "actual L responds to two keyboard targets, no fall",
+    "jump": "motor-only action, both wheels airborne, measurable upward motion, stable landing; failed attempts retained",
+    "GUI": "real window key events and screenshots; sim time progresses past prior hold deadline"
+  }
+}

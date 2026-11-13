@@ -1,0 +1,14 @@
+{
+  "held_out_seeds": [12001,12002,12003,12004,12005,12006,12007,12008,12009,12010,12011,12012,12013,12014,12015,12016,12017,12018,12019,12020],
+  "required_passes": 18,
+  "episode_seconds": 30,
+  "initial_base_pitch_rad": [-0.025, 0.025],
+  "stand_drift_m": 0.10,
+  "stand_final_tilt_rad": 0.05,
+  "yaw_mae_rad_s": 0.10,
+  "velocity_mae_m_s": 0.10,
+  "leg_length_mae_m": 0.02,
+  "steady_state_ignore_seconds_after_change": 2.0,
+  "short_train_max_physics_steps": 1000000,
+  "short_train_max_wall_seconds": 1800
+}

@@ -1,0 +1,192 @@
+{
+  "date": "2026-11-08",
+  "note": "All moved file bytes verified unchanged at move; script path updates follow separately. Historical run metadata is preserved as originally recorded.",
+  "moves": [
+    {
+      "from": "01_Codex使用指南_机器人毕设.md",
+      "to": "docs/00_context/01_Codex使用指南_机器人毕设.md",
+      "file_sha256_at_move": {
+        "01_Codex使用指南_机器人毕设.md": "437a33dcbb1c34daa9ac402a4545083559e1e896fe4a0691719813be948f9945"
+      }
+    },
+    {
+      "from": "02_毕业设计选题大纲_文献核对版.md",
+      "to": "docs/00_context/02_毕业设计选题大纲_文献核对版.md",
+      "file_sha256_at_move": {
+        "02_毕业设计选题大纲_文献核对版.md": "5ba39c1764642850ea5b08782666ed86834e0f8cc34c6ccff15204d88fe9b558"
+      }
+    },
+    {
+      "from": "03_本机环境总览_mjlab_IsaacLab_IsaacSim.md",
+      "to": "docs/00_context/03_本机环境总览_mjlab_IsaacLab_IsaacSim.md",
+      "file_sha256_at_move": {
+        "03_本机环境总览_mjlab_IsaacLab_IsaacSim.md": "0555a90f4d743eeab313cdda938dddee5ec31490afbfe0d9b832755cf2f13d9d"
+      }
+    },
+    {
+      "from": "毕设选题大纲_可微世界模型持续学习.md",
+      "to": "docs/00_context/毕设选题大纲_可微世界模型持续学习.md",
+      "file_sha256_at_move": {
+        "毕设选题大纲_可微世界模型持续学习.md": "5207f3e65a52e5c5ec8c09dc62f7c44b5d3f6d331fe7d0b4617e3f3783508519"
+      }
+    },
+    {
+      "from": "04_轮腿项目任务总览与进度.md",
+      "to": "docs/02_milestones/M00_environment.md",
+      "file_sha256_at_move": {
+        "04_轮腿项目任务总览与进度.md": "838bed591a82da8a1b0f73d68d00d612c59d0a3d2302a8989b57bce372e4d42b"
+      }
+    },
+    {
+      "from": "scripts/prepare_model.py",
+      "to": "scripts/m01_model/prepare_model.py",
+      "file_sha256_at_move": {
+        "prepare_model.py": "175f03f2243b043c6ef6fbb675e0098c25ef69ac29572ab74f2f5b2b87060cfe"
+      }
+    },
+    {
+      "from": "scripts/check_imports.py",
+      "to": "scripts/m00_environment/check_imports.py",
+      "file_sha256_at_move": {
+        "check_imports.py": "b8ddaf8ff9f6182147827e87979b82d1337f9ad4294ee022f9f260ee42b811fe"
+      }
+    },
+    {
+      "from": "scripts/render_model_audit.py",
+      "to": "scripts/m01_model/render_model_audit.py",
+      "file_sha256_at_move": {
+        "render_model_audit.py": "c699ac94942863c346dc75e2a059911fbf475862f6d75a80d3fbd47d4d18f748"
+      }
+    },
+    {
+      "from": "scripts/audit_model.py",
+      "to": "scripts/m01_model/audit_model.py",
+      "file_sha256_at_move": {
+        "audit_model.py": "28f8d26768326c1f3ecd737171cc2ba6e037114e2b9594eebc56ca4e1c2db74d"
+      }
+    },
+    {
+      "from": "scripts/check_contact_solver.py",
+      "to": "scripts/m01_model/check_contact_solver.py",
+      "file_sha256_at_move": {
+        "check_contact_solver.py": "13f4ec81a6475f91be62eb5aaa12df2fd021498e9b7e95a0956c2b8132d35dd6"
+      }
+    },
+    {
+      "from": "runs/model_audit_20261108_235417_273979",
+      "to": "runs/m01_model/model_audit_20261108_235417_273979",
+      "file_sha256_at_move": {
+        "compiled_model.json": "0194b4d00acc3b6f4f440d92925e88e682571237cb3eedda2d701ff944e71d6f",
+        "joint_mapping.csv": "394a68d5339554e53def641a9a2d08a0fac0362c44830cc59c8462e4d920c71d",
+        "passive_trajectory.csv": "655546b42274a383f5ed304396cf7b5103e084007c9eb0b5289745281bf5cb42",
+        "physics_checks.json": "3a597705b45a806414a2dfdd4a23a60d63e13373dc3fd61b96f2502fc043ea9d",
+        "run_metadata.json": "8799b37f58855c966110fac498780f36dadd5699326b9303213f5b1c2531dfe9",
+        "upstream_loads.json": "8ae61c5f04e8cd3cdd13a8e76b7f2586fe7efaece31173db53c68544f927009b",
+        "urdf_inventory.json": "62f695bebfa595c65c5bb061cd2e1af14cc5996a4d02d7a42593af65800ebae8"
+      }
+    },
+    {
+      "from": "runs/model_video_20261108_235448_375655",
+      "to": "runs/m01_model/model_video_20261108_235448_375655",
+      "file_sha256_at_move": {
+        "final.png": "115e83bfe3672f2cac9de6e6b654d4639890f2a72eef8f760c21ebd0f779c38e",
+        "initial.png": "75d1f61c622ef0e1a6d24353b2866538747add560c90e5c7f4e8e1b2456b8ea1",
+        "metadata.json": "ec6e2c3afc98830f87d6c4466a0f858674f6a539759be651bca4d8a0efd19fd8",
+        "passive_contact.mp4": "cf1a6dd7401ffd8c72a404937c3081abced6cf5e102b89656ac5ab921f3b4f0b",
+        "states.npz": "dc6c05e8b65855713271d0eea720bc954906d56843bc1bb868e30cf2ee0b7613"
+      }
+    },
+    {
+      "from": "runs/model_audit_20261108_235056_985207",
+      "to": "runs/m01_model/model_audit_20261108_235056_985207",
+      "file_sha256_at_move": {}
+    },
+    {
+      "from": "runs/model_audit_20261108_235218_419039",
+      "to": "runs/m01_model/model_audit_20261108_235218_419039",
+      "file_sha256_at_move": {
+        "compiled_model.json": "0194b4d00acc3b6f4f440d92925e88e682571237cb3eedda2d701ff944e71d6f",
+        "joint_mapping.csv": "394a68d5339554e53def641a9a2d08a0fac0362c44830cc59c8462e4d920c71d",
+        "passive_trajectory.csv": "ef587c0a3bfd3c6226c637fbddea181f93888bd5111e9cd1e4566fbd8ba086ae",
+        "physics_checks.json": "eacba5bda94e283805505cfed68998f5003942ecef75f2a239024fdbe7492356",
+        "run_metadata.json": "715927df1aad89315e09947f1b1d772ae32b4f03b5e93319b9ba50625b0ad24a",
+        "upstream_loads.json": "8ae61c5f04e8cd3cdd13a8e76b7f2586fe7efaece31173db53c68544f927009b",
+        "urdf_inventory.json": "62f695bebfa595c65c5bb061cd2e1af14cc5996a4d02d7a42593af65800ebae8"
+      }
+    },
+    {
+      "from": "runs/model_audit_20261108_235110_336317",
+      "to": "runs/m01_model/model_audit_20261108_235110_336317",
+      "file_sha256_at_move": {
+        "compiled_model.json": "0194b4d00acc3b6f4f440d92925e88e682571237cb3eedda2d701ff944e71d6f",
+        "joint_mapping.csv": "394a68d5339554e53def641a9a2d08a0fac0362c44830cc59c8462e4d920c71d",
+        "passive_trajectory.csv": "ef587c0a3bfd3c6226c637fbddea181f93888bd5111e9cd1e4566fbd8ba086ae",
+        "physics_checks.json": "b21363bb21f0ad0acbf2aa209d350b7371a7fc8b240f7ddfeeec51ae0b46c71e",
+        "run_metadata.json": "715927df1aad89315e09947f1b1d772ae32b4f03b5e93319b9ba50625b0ad24a",
+        "upstream_loads.json": "8ae61c5f04e8cd3cdd13a8e76b7f2586fe7efaece31173db53c68544f927009b",
+        "urdf_inventory.json": "62f695bebfa595c65c5bb061cd2e1af14cc5996a4d02d7a42593af65800ebae8"
+      }
+    },
+    {
+      "from": "runs/imports_20261108_234030_306309",
+      "to": "runs/m00_environment/imports_20261108_234030_306309",
+      "file_sha256_at_move": {
+        "isaac.log": "0bcae343221ff824a30430b91a08082703796bd4e36fd8dd8b9628ed460d03bf",
+        "isaac_packages.json": "30cc5287f3984ac9e38e1393be04ca9533466cda0f98e7fcb080a3d1d170eb4d",
+        "matplotlib/fontlist-v3.11.0.json": "cc33b57864e1b867ee7a3b71d58a08b9fe669a52680e3260e7c57d35732f2c37",
+        "mjlab.log": "1a420c0d35452f5af1bfbc00cf31c38ff392e3b277468c8c008b9317360c9d16",
+        "mjlab_packages.json": "f5abe70078da17b5894c092e897da32663942ddf46fb2c1bf6ddaad9e3ff334e",
+        "results.json": "5abf10b3dfb385ed065a949549b9207fc39f0ce76ee0725de3e7858e8349c139"
+      }
+    },
+    {
+      "from": "runs/model_audit_20261108_235540_281023",
+      "to": "runs/m01_model/model_audit_20261108_235540_281023",
+      "file_sha256_at_move": {
+        "compiled_model.json": "0194b4d00acc3b6f4f440d92925e88e682571237cb3eedda2d701ff944e71d6f",
+        "joint_mapping.csv": "394a68d5339554e53def641a9a2d08a0fac0362c44830cc59c8462e4d920c71d",
+        "passive_trajectory.csv": "655546b42274a383f5ed304396cf7b5103e084007c9eb0b5289745281bf5cb42",
+        "physics_checks.json": "d4821f4c7a08bd8177f4ba93be1a42121a45ad41fd409e45d3df7495142562ef",
+        "run_metadata.json": "8799b37f58855c966110fac498780f36dadd5699326b9303213f5b1c2531dfe9",
+        "upstream_loads.json": "8ae61c5f04e8cd3cdd13a8e76b7f2586fe7efaece31173db53c68544f927009b",
+        "urdf_inventory.json": "62f695bebfa595c65c5bb061cd2e1af14cc5996a4d02d7a42593af65800ebae8"
+      }
+    },
+    {
+      "from": "runs/contact_solver_20261108_235311_344833",
+      "to": "runs/m01_model/contact_solver_20261108_235311_344833",
+      "file_sha256_at_move": {
+        "results.json": "2ab340937b22e54f48eaa52520c8a5ce75729b551d246feb663493487882b43c"
+      }
+    },
+    {
+      "from": "runs/model_audit_20261108_235622_886178",
+      "to": "runs/m01_model/model_audit_20261108_235622_886178",
+      "file_sha256_at_move": {
+        "acceptance.json": "f79e84440904aa4f44b0971388c9ec1ec13bd3ebbb54cf7501beec48651fba66",
+        "compiled_model.json": "0194b4d00acc3b6f4f440d92925e88e682571237cb3eedda2d701ff944e71d6f",
+        "joint_mapping.csv": "394a68d5339554e53def641a9a2d08a0fac0362c44830cc59c8462e4d920c71d",
+        "passive_trajectory.csv": "655546b42274a383f5ed304396cf7b5103e084007c9eb0b5289745281bf5cb42",
+        "physics_checks.json": "d4821f4c7a08bd8177f4ba93be1a42121a45ad41fd409e45d3df7495142562ef",
+        "run_metadata.json": "9afa49b085aeaace140eb3cbbac9e13c336c3469b80560048e15dfd56d1692bb",
+        "upstream_loads.json": "8ae61c5f04e8cd3cdd13a8e76b7f2586fe7efaece31173db53c68544f927009b",
+        "urdf_inventory.json": "62f695bebfa595c65c5bb061cd2e1af14cc5996a4d02d7a42593af65800ebae8"
+      }
+    },
+    {
+      "from": "assets/infantry_v4_simplified",
+      "to": "assets/robots/infantry_v4_standard_simplified",
+      "file_sha256_at_move": {
+        "base_link_0_hull.stl": "c65a5370f948d4c6ef806650cecc2f7d21fcaca86fdd46c96949be33e0685d66",
+        "l_wheel_Link_0_hull.stl": "60d15cea32354673f1fd477eab05e2c81278fff4d6a7ee354164e0fca9298073",
+        "lf0_Link_0_hull.stl": "c47dfc9ced9421422eb4ef4f098e25208421e67e96092da00ee7f030086e39ed",
+        "lf1_Link_0_hull.stl": "b9a825ee2f1b5b01442a6c9d6919be37765b4a6937cb0bea0f2f1ba5a47c8e28",
+        "manifest.json": "040c436986b02e191f283c385197d1f838eb63ab4ef80511647bc960b85cd74e",
+        "r_wheel_Link_0_hull.stl": "9f4b11cc9c612d99058f568e3e7774dd79420651761ae684c482f0128349188b",
+        "rf0_Link_0_hull.stl": "bd5aecdcb02cfc6bebd307718313c33629e7f808b718b0aca3bead122074c06b",
+        "rf1_Link_0_hull.stl": "5a4e8e616d8fb61a2f40534b02d7e4b3478363457a940f56084d19da5212d715",
+        "robot.xml": "3257eadcd1924bae6fbe39bb8594977cc5b6d2441d3b3cd872841f67a66d6393"
+      }
+    }
+  ]
+}

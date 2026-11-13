@@ -1,0 +1,25 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "scripts/m02_standing/check_design.py",
+    "--design-run",
+    "runs/m02_standing/lqr_no-gas_20261109_135714_434732"
+  ],
+  "cwd": "/home/cofallen/Code/毕业设计",
+  "python": "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+  "design_run": "runs/m02_standing/lqr_no-gas_20261109_135714_434732",
+  "design_sha256": "e69938f1d39274f569889b74148a0f20bf23d2850e78f1f2ca22ae92e09f7de7",
+  "implementation_sha256": "0ce4e93b002bac34156143ef4f4de218ef58940673462c3f16b4a9822140df0f",
+  "versions": {
+    "mujoco": "3.11.0",
+    "numpy": "2.5.4"
+  },
+  "random_seed": null,
+  "thresholds": {
+    "unconstrained_gain_error": 1e-07,
+    "bound_tolerance": 1e-09,
+    "projected_gradient_inf_norm": 0.0001
+  },
+  "purpose": "Static algorithm checks, no dynamic simulation, no new tuning"
+}

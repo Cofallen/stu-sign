@@ -1,0 +1,58 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/tmp/validate_author_suite.py"
+  ],
+  "cwd": "/home/cofallen/Code/毕业设计",
+  "planned_checks": [
+    [
+      "lqr",
+      "no-gas",
+      "nominal",
+      10
+    ],
+    [
+      "lqr",
+      "no-gas",
+      "pitch-minus",
+      10
+    ],
+    [
+      "lqr",
+      "no-gas",
+      "roll",
+      10
+    ],
+    [
+      "lqr",
+      "no-gas",
+      "push",
+      30
+    ],
+    [
+      "lqr",
+      "no-gas",
+      "pitch-plus",
+      30
+    ],
+    [
+      "lqr-mpc",
+      "no-gas",
+      "push",
+      10
+    ],
+    [
+      "lqr",
+      "gas",
+      "nominal",
+      10
+    ],
+    [
+      "lqr-mpc",
+      "gas",
+      "nominal",
+      10
+    ]
+  ]
+}

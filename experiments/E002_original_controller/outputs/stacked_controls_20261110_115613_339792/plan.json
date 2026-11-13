@@ -1,0 +1,12 @@
+{
+  "spin_semantics": "hold Shift; last A/D chooses direction; release ramps to zero",
+  "checks": [
+    "10s nominal",
+    "20s A/D release both directions",
+    "20s spin release both directions",
+    "moving+jump",
+    "overturned simulation continues",
+    "actual shift combinations"
+  ],
+  "no_training": true
+}

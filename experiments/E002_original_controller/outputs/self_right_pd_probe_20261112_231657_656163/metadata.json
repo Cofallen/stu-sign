@@ -1,0 +1,1 @@
+{"command": ["/home/cofallen/miniconda3/envs/mjlab/bin/python", "-B", "/tmp/e002_recover_probe.py"], "cwd": "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller", "seed": null, "purpose": "Single hip target probe without LQR handoff", "outcome": "No standing recovery"}

@@ -1,0 +1,446 @@
+                                            Online Adaptation to Latent Physical Properties for Learning from
+                                                                     Demonstration
+                                                                        Kotaro Kajitsuka1,2 , Masaki Murooka2 , and Fumio Kanehiro1,2
+
+
+                                           Abstract— Manipulating visually identical objects with dif-
+                                        ferent physical properties requires adapting actions based on
+                                        information acquired through interaction. We address the prob-
+                                        lem of learning from demonstrations how to adapt manipulation
+arXiv:2611.06118v1 [cs.RO] 4 Nov 2026
+
+
+
+
+                                        actions, such as regrasping and changing contact locations,
+                                        based on physical-property information acquired during inter-
+                                        action. To this end, we propose a learning-from-demonstration
+                                        method that learns latent representations of physical properties
+                                        needed to predict object responses and conditions a policy on
+                                        online estimates of these representations. A dynamics model
+                                        and object-specific latent representations are jointly learned
+                                        from demonstrations that include behaviors adapting to the
+                                        objects’ physical properties, and the learned representations are
+                                        then used to condition an imitation policy. During execution,
+                                        the dynamics model and policy weights remain fixed, while
+                                        the latent representation is updated based on the discrepancy            Fig. 1. Overview of the proposed approach. ① Teleoperated demonstrations
+                                        between predicted and actual observations, allowing interaction          include adaptive actions based on observed object responses, such as
+                                        with the object to inform action generation. Real-world and sim-         regrasping or changing contact locations. ② Using the same demonstra-
+                                        ulation experiments with objects whose centers of mass differ            tions, we first jointly learn a dynamics model and object-specific physical
+                                        suggest that online adaptation through latent representations            representations, then train an imitation policy conditioned on the learned
+                                        of physical properties can improve task success rates. However,          representations. This learns both dynamics and adaptive actions that depend
+                                        in simulation, success rates on center-of-mass locations absent          on physical properties. ③ Starting from a reference physical representation,
+                                        from the demonstrations remained around 30%, indicating                  the robot updates it from prediction errors and conditions subsequent
+                                                                                                                 actions on the estimate. The figure illustrates uniform density as the initial
+                                        limited adaptation to unseen physical properties. Project page:
+                                                                                                                 assumption.
+                                        https://isri-aist.github.io/latent-dynamics-project-page/
+
+                                                                I. I NTRODUCTION
+                                                                                                                    Beyond LfD, online system identification has been ex-
+                                           Learning from demonstration (LfD) has been applied to a               tensively studied through analytical approaches, dynamics-
+                                        wide range of robotic manipulation tasks, including manip-               based property estimation [5], and adaptation using
+                                        ulation of deformable objects and long-horizon tasks. These              simulation-trained dynamics models [6]. Connecting this
+                                        methods have shown strong performance in settings where                  body of work with LfD could substantially broaden the
+                                        visual observations provide sufficient information for action            range of manipulation problems that can be learned from
+                                        selection [1], while adding force measurements supports                  demonstrations.
+                                        delicate tasks such as wiping [2], [3]. Humans infer physical               In this work, we collect demonstrations of property-
+                                        properties such as mass and friction through interaction                 dependent manipulation using visually identical objects with
+                                        and use this information to guide subsequent actions, for                different centers of mass (CoM) or centers of friction (CoF).
+                                        example, adjusting their grasp and posture when lifting a                The demonstrations include corrective actions in response
+                                        heavy object.                                                            to unexpected object motion, such as regrasping or chang-
+                                           Regrasping or changing contact locations based on in-                 ing contact locations. Within this setting, we propose and
+                                        ferred properties requires retaining information from earlier            evaluate an imitation learning method that adapts online to
+                                        contacts and using it to select subsequent actions. Policies             differences in object physical properties.
+                                        conditioned on a short observation window may struggle                      Fig. 1 provides an overview of the proposed approach.
+                                        when action selection requires information outside that win-                To adapt to these latent physical properties, we introduce
+                                        dow [4]. In this work, we focus specifically on physical                 an implicit dynamics parameter di as a latent representation
+                                        properties inferred from earlier interactions.                           of object i. We first learn the dynamics model and di from
+                                          1 University of Tsukuba, Tsukuba, Japan.
+                                                                                                                 demonstrations, then train a policy conditioned on the learned
+                                          2 CNRS-AIST JRL (Joint Robotics Laboratory), IRL3218, National In-     representation. During execution, we update the estimate d̂
+                                        stitute of Advanced Industrial Science and Technology (AIST), Tsukuba,   online using discrepancies between model predictions and
+                                        Japan. tactile.kajitsuka@aist.go.jp                                      actual observations, and generate actions conditioned on the
+                                           This work was partially supported by JST CREST, Japan, under Grant
+                                        Number JPMJCR2553, and JST Moonshot R&D Program, Japan, under
+                                                                                                                 inferred properties.
+                                        Grant Number JPMJMS263D.                                                    The method has two advantages. First, it initially learns a
+dynamics model and implicit physical representations solely         during lifting, for example, can inform a later grasp after the
+from demonstrations, without prior measurements of the              object has been put down. A policy conditioned only on a
+objects’ physical properties. Second, its continuous repre-         recent observation window loses access to such information
+sentation, rather than a discrete object category, is intended      once it falls outside the window. Simply extending the
+to support adaptation to unseen objects.                            window does not guarantee better performance. Sobol Mark
+   Our contributions are as follows:                                et al. [13] show that limited coverage of observation histories
+   • We show that interaction data in manipulation demon-           can lead policies to rely on spurious correlations that fail
+     strations can be used to learn implicit representations of     under rollout distribution shift. Their BPP method uses a
+     differences in object physical properties.                     vision-language model to identify keyframes corresponding
+   • We demonstrate that combining LfD with dynamics-               to task-relevant events, reducing these correlations and im-
+     based property estimation improves performance on              proving task performance.
+     tasks involving visually identical objects with different         Recurrent approaches, including the spatial-attention
+     physical properties, including deformable objects.             model of Ichiwara et al. [14] and Mamba-based MTIL [4],
+                                                                    instead encode observation history in an internal state used
+                     II. R ELATED W ORK                             for action generation. Our approach focuses this retained
+A. Physical Property Estimation for Manipulation                    information on physical properties relevant to predicting
+   Physical properties such as mass and friction affect object      object responses, using a latent representation updated from
+responses and therefore matter for prediction and control.          dynamics prediction errors during execution.
+Analytical models support approaches such as hybrid model
+predictive control for planar manipulation [7], but require         C. World Models for Policy Learning and Adaptation
+specifying physical parameters and suitable assumptions                World models predict the consequences of actions and
+about contact and friction. The cost of characterizing each         can inform policy learning and execution. An et al. [15]
+object in advance motivates estimating its properties through       propose a Feedback World Model that predicts future visual
+interaction.                                                        features and corrects its predictions online using observation
+   For predicting object responses, latent representations          feedback to guide Diffusion Policy denoising. For nonpre-
+can capture relevant physical differences without explicitly        hensile manipulation, Lyu et al. [16] introduce DyWA, which
+estimating physical parameters such as mass or friction             distills a simulation-trained reinforcement learning teacher
+coefficients. Longhini et al. [8] learn latent representations of   into a student that jointly predicts actions and subsequent
+elasticity from pulling interactions to condition graph-based       task states. Its history-based adaptation representation is
+predictions of cloth dynamics. Evans et al. [9] infer latent        supervised by teacher features encoding object geometry and
+context from state transitions, including real-robot sliding        physical parameters.
+interactions with different objects and surfaces, to adapt             Yuan et al. [17] integrate a pretrained Cosmos world
+dynamics predictions. Simulation-trained models also enable         model [18], an action model, and a force predictor in Ada-
+adaptation to real objects: EXI-Net [6] updates explicit            WorldPolicy. Prediction errors drive online updates to low-
+and implicit dynamics parameters from prediction errors             rank network parameters, enabling adaptation to both visual
+during planar pushing, while Poke and Strike [10] learns            and physical domain shifts. Our focus is on learning object-
+an exploration policy and a property estimator, then uses the       specific physical representations by minimizing prediction
+estimated properties to condition task execution.                   errors on demonstration data, without physical-parameter
+   Physical representations have also been incorporated into        supervision. Our method instead updates only the latent
+LfD. Aoyama et al. [11] pretrain haptic representations from        physical representation online, keeping the dynamics model
+simulated force sequences and use a few real demonstrations         and policy weights fixed.
+to learn wiping motions adapted to sponge stiffness and sur-
+face friction. Saito et al. [12] infer ingredient characteristics                    III. P ROPOSED M ETHOD
+from multimodal observations during stirring with a wooden
+                                                                    A. Overview
+spatula, then use the inferred representation to select and
+manipulate tools. Both methods obtain these representations            Fig. 2 summarizes the proposed method. We first collect
+through a dedicated exploration phase before task execution.        demonstrations of manipulation adapted to the differing
+Our demonstrations instead integrate task execution with re-        physical properties of visually identical objects (step ①
+sponses to unexpected object behavior, including regrasping         in Fig. 1). From these demonstrations, we jointly learn a
+and changes in contact location. We update the physical             dynamics model that predicts future observations and an
+representation throughout execution to support these adaptive       implicit dynamics parameter representing the latent physical
+behaviors without explicitly separating exploration from the        properties of each object (step ②-1 in Fig. 2). In step ②-2,
+task.                                                               we annotate the demonstrations with the learned physical
+                                                                    representations and train a Diffusion Policy conditioned on
+B. History-Dependent Imitation Learning                             observations and these representations. During deployment
+  Adaptive manipulation may depend on information that is           (step ③), we keep the model and policy weights fixed,
+no longer directly observable: an off-center mass detected          update the implicit dynamics parameter using discrepancies
+  Fig. 2.   Training and deployment pipeline of the proposed method. t denotes the discrete time-step index, and H is the prediction horizon in steps.
+
+
+
+between predicted and actual observations, and generate                       the action sequence over the next H steps, and the implicit
+actions conditioned on the current estimate.                                  dynamics parameter. The prediction target is yt = zt , or yt =
+                                                                              (zt , wt ) when forces and torques are included for the pushing
+B. Data Collection, Training, and Online Adaptation                           task. We implement the dynamics model as a multilayer
+     ① Demonstration Collection: We construct a dataset D                     perceptron (MLP):
+by collecting demonstrations of manipulation adapted to the
+differing physical properties of M types of visually identical                            ŷt+1:t+H = fθ (zt−1:t , pt−1:t , at:t+H−1 , di ) .        (1)
+objects (step ① in Fig. 1). The operator commands adaptive
+actions based on information acquired through interaction                        Here, ŷ denotes the predictions and θ the model param-
+during manipulation. For each demonstration, we record                        eters. Training minimizes the mean squared error between
+observations and robot action commands and assign an                          the predictions and the corresponding actual observations.
+object-type label i (i = 0, . . . , M −1). We use the same dataset            Omitting the prediction-horizon indices t + 1 : t + H, the
+to train the dynamics model and the policy.                                   prediction loss is
+     ②-1 Learning Dynamics and Physical Representations:
+We first train a variational autoencoder (VAE) [19] from                                 Ldyn (θ , di ) = MSE(ẑ, z) + λw MSE(ŵ, w).                (2)
+scratch on the demonstration images (step ②-1 in Fig. 2).
+After training, we freeze the encoder and denote the low-                        Here, MSE denotes the mean squared error over all
+dimensional features extracted from the image at time t by                    timesteps and components in the prediction horizon, and
+zt .                                                                          λw weights the force/torque prediction error. We omit the
+     Let di denote the implicit dynamics parameter for object                 second term for tasks without force/torque prediction. For
+type i. It is a learnable embedding vector shared across                      each demonstration, we select di using its object label i and
+all timesteps and demonstrations of that object type. We                      jointly optimize θ and {di } to minimize the prediction loss:
+initialize each component of di to 0.2i.
+                                                                                           (θ ∗ , {d∗i }) = arg min ED Ldyn (θ , di ) .
+                                                                                                                                    
+     Let pt denote the robot’s proprioceptive information at                                                                                         (3)
+                                                                                                               θ ,{di }
+time t. For the pushing task, the observations also in-
+clude forces and torques wt measured by a six-axis wrist                         Thus, the learned physical representations capture object
+force/torque sensor.                                                          differences relevant to observation prediction, without requir-
+     Let at be the action command issued to the robot at time t               ing explicit physical parameter values.
+and H the prediction horizon. The dynamics model predicts                        ②-2 Policy Learning with Physical Representations:
+future observations from the image features and proprio-                      We annotate the demonstrations of object i with its learned
+ceptive information at the previous and current timesteps,                    physical representation d∗i from (3), yielding a dataset Dd
+(step ②-2 in Fig. 2). Let o denote the observation history sup-                        IV. E XPERIMENTAL S ETUP
+plied to the policy and a the demonstrated action sequence.
+We train a Diffusion Policy [1] π(a | o, d∗i ) conditioned on         A. Manipulation Tasks
+the observation history and d∗i . During this stage, d∗i remains         We evaluate the proposed method on two real-world tasks
+fixed and only the policy is trained.                                 and use a simulation task to compare dynamics model
+   The imitation learning objective can be expressed in terms         input representations and observation history lengths (Fig. 3).
+of the conditional action distribution as                             Throughout this paper, unseen objects refer to objects with
+        π ∗ = arg min E(o,a,d∗i )∼Dd [− log π(a | o, d∗i )] .   (4)   CoM locations not included in the demonstrations. We evalu-
+                    π                                                 ate adaptation to these unseen CoM locations in Box Pushing
+   ③ Deployment and Online Adaptation: Finally, we de-                and Horizontal Lifting.
+ploy the learned policy to control the robot and update the           (a) Pouch Placement: The robot must pick up a deformable
+physical representation online using observations acquired            pouch and place it inside a designated frame within a time
+through interaction (step ③ in Fig. 2). Let d̂ denote the             limit (Fig. 3(a)). We vary the CoM by changing the position
+estimated physical representation of the object being manip-          of a weight inside the pouch and collect demonstrations
+ulated. We initialize it with a learned d∗i corresponding to a        for three configurations, with the CoM near the robot, at
+plausible assumption about the object’s physical properties           the center, or far from the robot. Inserting the pouch into
+based on its appearance, such as uniform density or a center          the frame is difficult unless it is level, so the demonstrator
+of friction at the center of the contact area. Given the              gently sets it down and regrasps it only if it tilts. We evaluate
+observation history and the current estimate, the learned             the policies on the same three CoM configurations used for
+policy π ∗ (a | o, d̂) generates an action sequence for the robot     demonstration collection.
+to execute.                                                           (b) Box Pushing: The robot must push a rectangular box
+   We store executed action commands in a buffer and                  to the left until its two left corners lie on the yellow
+input them to the dynamics model fθ ∗ together with past              tape (Fig. 3(b)). In the demonstrations, the box is initially
+image features, proprioceptive information, and d̂. The model         placed at a random orientation between two yellow lines;
+predicts observations from a past timestep up to the present,         evaluation uses two fixed initial poses. In the demonstrations,
+and we compute the loss in (2) from the discrepancies                 the operator first aligns the box with the tape, then pushes
+between these predictions and the actual observations. We             at a location aligned with its CoM to translate it without
+update only d̂ while keeping the model parameters θ ∗ and             rotation. Task performance therefore depends directly on
+the weights of π ∗ fixed. In gradient descent form, the update        how quickly the CoM can be inferred during execution.
+is                                                                    A slider provides 11 equally spaced weight positions; we
+                     d̂ ← d̂ − ηd ∇d̂ Ldyn (θ ∗ , d̂).        (5)     collect demonstrations at five positions and evaluate at all
+Here, ηd is the step size for updating d̂. We use the updated         11, including the six unseen positions.
+estimate for the next policy inference and repeat action              (c) Horizontal Lifting: The robot must lift a bar and hold it
+generation and online adaptation.                                     level above a specified height at the end of a 17-s episode
+                                                                      (Fig. 3(c)). The bar has red and blue halves of equal length.
+C. Retraining with an Augmented Dataset
+                                                                      We collect demonstrations for three CoM locations: the
+   If the dynamics model does not adequately capture inter-           center of the red half, the center of the bar, and the center
+actions encountered during execution, prediction-error-based          of the blue half. In every demonstration, a teleoperator who
+updates may fail to estimate the physical representation cor-         does not know the object’s physical properties first grasps
+responding to the target object. To improve online estimation,        the bar at its geometric center. If the bar remains level, the
+we can retrain both the dynamics model and the VAE that               operator maintains that posture; if it tilts, the operator gently
+provides its visual representation using action-observation           sets it down, regrasps near the inferred CoM, and lifts it
+data collected during rollouts, without retraining the policy.        again. Thus, the demonstrations explicitly include deliberate
+Training the dynamics model on a broader data distribution            adaptation, rather than recovery after an accidental drop.
+is expected to improve the accuracy of online adaptation.             Evaluation covers these three seen configurations and four
+   First, we add rollout data to the demonstrations collected         additional, unseen CoM locations.
+in step ① of Section III-B, regardless of task success, to form
+an augmented dataset.
+                                                                      B. Experimental Protocol
+   Next, we retrain the VAE from scratch on images from the
+augmented dataset, freeze the resulting encoder, and retrain             All experiments are conducted using RoboManipBase-
+the dynamics model. During dynamics model retraining, we              lines [20]. The real-world experiments use a UFACTORY
+keep {d∗i } fixed and optimize only θ . Keeping the weights           xArm7 and one fixed external RealSense D435 camera posi-
+of π ∗ and the learned representations {d∗i } fixed allows            tioned to view the workspace for each task. The simulation
+us to use additional, autonomously collected interaction              uses a Universal Robots UR5e manipulator with a parallel
+data without retraining the policy. Although the rollouts are         gripper. The control period is approximately 0.129 s for the
+autonomous, their collection still requires operational effort,       real robot and 0.096 s for Horizontal Lifting; online updates
+such as resetting the environment.                                    of the physical representation use the same period.
+            (a) Pouch Placement                                (b) Box Pushing                                (c) Horizontal Lifting
+Fig. 3. Manipulation tasks with objects whose centers of mass differ: (a) Pouch Placement and (b) Box Pushing on a real robot, and (c) Horizontal
+Lifting in simulation.
+
+
+                              TABLE I
+                                                                          gripper joint angles, and object position and orientation from
+D EMONSTRATION AND EVALUATION COUNTS . E ACH ENTRY GIVES THE
+                                                                          the simulator. The actions specify target end-effector position
+     COUNT PER OBJECT CONFIGURATION , WITH THE TOTAL IN
+                                                                          and orientation and a gripper joint-angle command. These
+   PARENTHESES . E VALUATION COUNTS ARE PER TRAINING SEED .
+                                                                          observation and action definitions are shared by all methods
+    Task                  Demonstrations      Evaluation rollouts         within each task.
+    Pouch Placement           12 (36)                3 (9)                D. Training and Online Adaptation
+    Box Pushing               10 (50)               2 (22)
+    Horizontal Lifting        25 (75)               10 (70)                  Across all tasks, we restrict changes in weight position
+                                                                          and the resulting changes in CoM and CoF locations to one
+                                                                          dimension. Accordingly, we use a scalar implicit dynamics
+                                                                          parameter. We set the dynamics model’s prediction horizon
+  Table I summarizes the demonstration and evaluation
+                                                                          to H = 14 steps, corresponding to approximately 1.8 s in the
+counts. Within each task, we use the same initial-pose distri-
+                                                                          real-world experiments and 1.3 s in simulation.
+bution for all object configurations to avoid bias associated
+                                                                             The image-based dynamics model uses nine-dimensional
+with object type. We train each method with three random
+                                                                          VAE features, with measured and commanded joint posi-
+seeds and aggregate success rates across evaluation rollouts.
+                                                                          tions, including the gripper, as proprioceptive inputs and
+C. Compared Methods and Policy Inputs                                     action inputs, respectively. A given end-effector pose can
+   Our baseline is a standard Diffusion Policy (DP) trained on            correspond to multiple joint configurations, which appear
+pooled demonstrations without distinguishing object types.                differently in the fixed external camera (Fig. 2). Using end-
+Both the baseline and our method use an observation history               effector pose as input can make image-feature prediction un-
+of two timesteps (approximately 0.2 s). For the two real-                 stable; joint positions avoid this ambiguity. For Box Pushing,
+world tasks, we compare this baseline with our method using               we normalize image features and force/torque measurements
+an image-based dynamics model. For Horizontal Lifting,                    separately and weight their prediction errors equally (λw = 1
+we compare four methods: standard DP, DP with a 16-                       in (2)).
+step observation history (approximately 1.5 s), denoted DP                   We update the physical representation online using
+(long history), and our method with either a state-based or               Adam [21], with a step size of ηd = 6 × 10−3 for the state-
+an image-based dynamics model. The state-based dynamics                   based dynamics model and ηd = 8 × 10−3 for the image-
+model replaces the image features zt with the object’s                    based model.
+position and orientation from the simulator in both the input                               V. E XPERIMENTAL R ESULTS
+history and the prediction targets. The image-based model
+uses VAE features as described in Section III. These variants             A. Physical Representation Learning and Online Estimation
+differ in the observations used as dynamics model inputs and                 Fig. 4 evaluates whether the learned physical representa-
+prediction targets; their policy inputs are identical.                    tions d∗i capture differences in object responses and whether
+   For both real-world tasks, the policies receive RGB images             d̂ can be estimated online during rollouts.
+and end-effector position and orientation. Additional inputs                 The examples in the left column of Fig. 4 illustrate lower
+are gripper joint angles for Pouch Placement and measured                 prediction errors when the model is conditioned on the
+forces and torques for Box Pushing. The policies output com-              corresponding d∗i , although each example represents only a
+mands specifying target end-effector position and orientation,            single episode.
+with an additional gripper joint-angle command for Pouch                     The heatmaps in the center column show that, for Pouch
+Placement.                                                                Placement and Horizontal Lifting, the mean prediction error
+   For Horizontal Lifting, all four methods use a state-based             is lower with the representation corresponding to the actual
+DP conditioned on end-effector position and orientation,                  object than with those of other objects. This suggests that
+Fig. 4. Dynamics model evaluation. Left: prediction errors on validation demonstrations excluded from all training. Solid lines use the representation
+of the actual object; dashed lines use those of other objects. Errors are measured in image features, except in (c-1), which shows position error. Panel
+(b) also compares predicted and measured force Fy along the pushing direction. Panels (c-1) and (c-2) use the same episode. Center: prediction-error
+differences averaged over all validation data for each object, relative to using its corresponding d∗i . Rows indicate the actual objects and columns the
+input representations. Positive values indicate larger errors when using another object’s representation. Values in the heatmaps are reported in units of
+10−3 . Right: online estimates d̂ for all evaluation rollouts on seen objects only, with one curve per rollout. Horizontal dashed lines mark the learned,
+fixed representations d∗i ; curves and reference lines for the same object share a color. For unseen objects with weight positions between those of two seen
+objects, convergence to values between the corresponding learned representations is desirable. Box Pushing trajectories are shown in Fig. 6. The objects
+with centered weights have indices 1, 2, and 0 in Pouch Placement, Box Pushing, and Horizontal Lifting, respectively.
+
+
+
+the learned d∗i capture differences in object responses and                         Failures of the proposed method exhibited a different pat-
+that the model uses these differences for prediction. For Box                   tern: when the pouch tilted after lifting, d̂ sometimes updated
+Pushing, however, the corresponding d∗i does not yield the                      too slowly and remained near its initial value corresponding
+lowest error for some objects, indicating that the representa-                  to a centered CoM. The policy then attempted to insert the
+tions do not always adequately capture differences between                      tilted pouch into the frame without first setting it down to
+objects.                                                                        change the grasp location, resulting in failure. Such attempts
+                                                                                to insert a tilted pouch were not observed in standard DP
+B. Real-World Experiments                                                       rollouts. This suggests that, when visual observations and
+   Fig. 5 summarizes the real-world results.                                    the estimated physical representation favor different actions,
+   For Pouch Placement, the proposed method achieves a                          the policy may prioritize the behavior associated with d̂.
+success rate of 66.7%, compared with 40.7% for standard                            For Box Pushing, standard DP and the proposed method
+DP, an improvement of approximately 26 percentage points.                       trained only on demonstrations achieved similar success
+   In failed DP rollouts, the policy sometimes regrasped the                    rates. DP’s successes were unevenly distributed across ob-
+pouch at a location that did not account for its CoM, even                      jects, favoring those with lower indices, and were more
+after lifting it and setting it down once.                                      common when little change in pushing location was needed
+                                                                                                             TABLE II
+                                                                                 S UCCESS RATES (%) FOR H ORIZONTAL L IFTING , REPORTED AS MEAN ±
+                                                                                    SAMPLE STANDARD DEVIATION ACROSS THREE TRAINING SEEDS .
+
+
+                                                                                                               Seen      Unseen
+                                                                                    Method                    Objects    Objects      Total
+                                                                                    DP                       85.6 ± 5.1 21.7 ± 5.2 49.0 ± 0.8
+                                                                                    DP (long history)        85.6 ± 5.1 6.7 ± 2.9 40.5 ± 3.0
+                                                                                    Proposed (state-based) 96.7 ± 3.3 30.0 ± 6.6 58.6 ± 2.9
+                                                                                    Proposed (image-based) 92.2 ± 3.8 32.5 ± 2.5 58.1 ± 0.8
+
+
+
+Fig. 5. Task success rates for Pouch Placement and Box Pushing on a real         are therefore expected from the additional data. This com-
+robot. “Proposed + retraining” denotes retraining the VAE and dynamics
+model on the augmented dataset while keeping the policy fixed. Error
+                                                                                 parison examines how improved physical-property estimation
+bars denote approximate 95% Wilson confidence intervals computed from            affects behavior and task success while the policy remains
+rollouts pooled across three training seeds, treating rollouts as independent.   fixed. Because retraining uses observation–action sequences
+All seeds were evaluated on the same fixed test configurations. Successes
+per seed: Pouch Placement (of 9), DP 4, 4, 3; Proposed 6, 6, 6. Box Pushing
+                                                                                 regardless of task outcome, failed rollouts can also contribute
+(of 22), DP 9, 11, 12; Proposed 10, 10, 13; Proposed + retraining 13, 13,        to model learning.
+17.                                                                                 After retraining, rollouts exhibited fewer unnecessary
+                                                                                 changes in contact location and more successful episodes.
+                                                                                 These results suggest that more stable physical-property esti-
+                                                                                 mation reduced unnecessary contact changes and contributed
+                                                                                 to the increase in success rate.
+                                                                                    Across both real-world tasks, episodes in which d̂ took
+                                                                                 an incorrect value tended to fail. This suggests that d̂
+                                                                                 influences action selection as a policy conditioning input
+                                                                                 and that accurate estimation is important for generating
+Fig. 6.     Online estimates d̂ for Box Pushing before (left) and after
+(right) reinitializing and retraining the VAE and dynamics model on the          appropriate actions. The results therefore suggest that task
+augmented dataset. Colors indicate object types. Dashed horizontal lines         success depends on the predictive accuracy of the dynamics
+denote the learned d∗i for objects 0–4 (blue, orange, green, red, and purple,    model used for online physical-property estimation.
+respectively).
+                                                                                 C. Simulation Experiments
+after the initial contact. Before retraining, the proposed                          Table II reports the results for Horizontal Lifting. For each
+method showed less variation in success across objects than                      training seed, we evaluate 30 rollouts on seen objects and 40
+DP. However, it sometimes changed the contact location                           on unseen objects; the total success rate is computed over all
+unnecessarily even when the initial push was already at an                       70 rollouts.
+appropriate location. This behavior was observed when d̂                            The proposed method achieves a higher mean overall suc-
+took an incorrect value.                                                         cess rate than both standard DP and DP (long history), with
+   We next augmented the original demonstrations with                            either the state-based or the image-based dynamics model.
+autonomous rollouts of the proposed method on the five                           Compared with standard DP, DP (long history) achieves the
+training objects, regardless of task success. Keeping the                        same success rate on seen objects but a lower rate on unseen
+policy weights and the learned physical representations {d∗i }                   objects, indicating that simply extending the observation
+fixed, we reinitialized the VAE and dynamics model and                           history does not improve performance in this experiment.
+retrained both from scratch on the augmented dataset.                               As shown in Fig. 4(c-1) and (c-2), both dynamics models
+   After retraining, the success rate increased by approxi-                      achieve the lowest mean prediction error when conditioned
+mately 15 percentage points. Pooled across seeds, success                        on the representation d∗i corresponding to the actual object.
+rates on seen and unseen CoM locations were similar for                             The online estimates tend to vary more with the image-
+each method: 50.0% and 47.2% for DP, 53.3% and 47.2%                             based dynamics model than with the state-based model, yet
+for the proposed method, and 66.7% and 63.9% after retrain-                      the two variants achieve similar overall success rates.
+ing. Fig. 6 compares the trajectories of d̂ before and after                        On unseen objects, both variants outperform the baselines
+retraining.                                                                      in mean success rate, but their rates remain around 30%.
+   As shown in Fig. 6, the estimates for some objects exhibit                    Adapting to CoM locations absent from the demonstrations
+smaller deviations and less variability after retraining. The                    therefore remains challenging.
+initial-position settings for the box were unchanged between
+the two evaluations, and the added rollouts were collected                                              VI. L IMITATIONS
+under the same initial-position conditions as the evaluation.                      Our method does not always reliably estimate the physical
+Improved prediction and estimation under these conditions                        representation d̂ from brief interactions. In the real-world
+experiments, delayed or inaccurate estimates were associ-                      [3] H. Choi, Y. Hou, C. Pan, S. Hong, A. Patel, X. Xu, M. R. Cutkosky,
+ated with inappropriate insertion attempts and unnecessary                         and S. Song, “In-the-wild compliant manipulation with UMI-FT,” in
+                                                                                   2026 IEEE International Conference on Robotics and Automation
+changes in contact location. In simulation, success rates on                       (ICRA). IEEE, 2026.
+CoM locations absent from the demonstrations remained                          [4] Y. Zhou, Y. Lin, F. Peng, J. Chen, K. Huang, H. Yang, and Z. Yin,
+around 30%, indicating limited adaptation to unseen physical                       “MTIL: Encoding full history with mamba for temporal imitation
+                                                                                   learning,” IEEE Robotics and Automation Letters, vol. 10, no. 11,
+properties. Effective policy conditioning therefore requires                       pp. 11 761–11 767, 2025.
+rapid and accurate estimation of d̂ from observations dur-                     [5] M. Murooka, S. Nozawa, Y. Kakiuchi, K. Okada, and M. Inaba,
+ing task execution. Future work should investigate whether                         “Feasibility evaluation of object manipulation by a humanoid robot
+                                                                                   based on recursive estimation of the object’s physical properties,”
+pretrained visual representations and dynamics models can                          in 2017 IEEE International Conference on Robotics and Automation
+improve prediction accuracy and the stability of online                            (ICRA), 2017, pp. 4082–4089.
+estimation, and whether these improvements lead to better                      [6] T. Murooka, M. Hamaya, F. v. Drigalski, K. Tanaka, and Y. Ijiri,
+                                                                                   “EXI-Net: Explicitly/implicitly conditioned network for multiple en-
+adaptation to unseen CoM locations.                                                vironment sim-to-real transfer,” in Proceedings of the 2020 Conference
+   Our experiments primarily varied weight positions in one                        on Robot Learning, vol. 155. PMLR, 2021, pp. 1221–1230.
+dimension and used a scalar physical representation di . We                    [7] F. R. Hogan and A. Rodriguez, “Reactive planar non-prehensile
+                                                                                   manipulation with hybrid model predictive control,” The International
+have not evaluated conditions in which the CoM varies in                           Journal of Robotics Research, vol. 39, no. 7, pp. 755–773, 2020.
+three dimensions or tasks that require switching behaviors                     [8] A. Longhini, M. Moletta, A. Reichlin, M. C. Welle, D. Held, Z. Er-
+according to object mass. Further evaluation with multidi-                         ickson, and D. Kragic, “EDO-Net: Learning elastic properties of
+                                                                                   deformable objects from graph dynamics,” in 2023 IEEE International
+mensional physical representations is needed to determine                          Conference on Robotics and Automation (ICRA), 2023, pp. 3875–
+whether the method can learn adaptive behaviors for these                          3881.
+variations in physical properties.                                             [9] B. Evans, A. Thankaraj, and L. Pinto, “Context is everything: Implicit
+                                                                                   identification for dynamics adaptation,” in 2022 International Confer-
+                                                                                   ence on Robotics and Automation (ICRA), 2022, pp. 2642–2648.
+                         VII. C ONCLUSION                                     [10] M. Y. Aoyama, J. Moura, J. D. A. Ferrandis, and S. Vijayakumar,
+                                                                                   “Poke and strike: Learning task-informed exploration policies,” in 9th
+                                                                                   Annual Conference on Robot Learning, 2025.
+   We presented an imitation learning method that learns                      [11] M. Y. Aoyama, J. Moura, N. Saito, and S. Vijayakumar, “Few-
+latent representations of physical properties from demonstra-                      shot learning of force-based motions from demonstration through
+tions to predict object responses and updates these represen-                      pre-training of haptic representation,” in 2024 IEEE International
+                                                                                   Conference on Robotics and Automation (ICRA), 2024, pp. 12 839–
+tations online using prediction errors during task execution.                      12 845.
+The same demonstrations provide supervision for predicting                    [12] N. Saito, T. Ogata, S. Funabashi, H. Mori, and S. Sugano, “How
+object responses and learning adaptive actions, including                          to select and use tools? : Active perception of target objects using
+                                                                                   multimodal deep learning,” IEEE Robotics and Automation Letters,
+regrasping and changes in contact location. Conditioning                           vol. 6, no. 2, pp. 2517–2524, 2021.
+the fixed Diffusion Policy on the online estimate allows                      [13] M. S. Mark, M. Attarian, C. Fu, D. Dwibedi, J. Liang, D. Shah, and
+information acquired through interaction to guide these                            A. Kumar, “Long-Context Robot Imitation Learning by Focusing on
+                                                                                   Key History Frames,” in Proceedings of Robotics: Science and Systems
+behaviors. Real-world and simulation experiments showed                            (RSS), Sydney, Australia, 2026.
+that the learned representations capture differences in object                [14] H. Ichiwara, H. Ito, K. Yamamoto, H. Mori, and T. Ogata, “Spatial
+responses and that conditioning on their online estimates                          attention point network for deep-learning-based robust autonomous
+                                                                                   robot motion generation,” arXiv preprint arXiv:2103.01598, 2021.
+strongly influences action selection and affects adaptation                   [15] T. An, J. Jia, G. Li, J. Li, C. Zhou, P. Liu, B. Lyu, J. Bai, X. Guo,
+performance. Retraining the VAE and dynamics model on                              G. Li, and J. Yang, “Feedback world model enables precise guidance
+demonstrations augmented with autonomous rollout data                              of diffusion policy,” arXiv preprint arXiv:2605.15705, 2026.
+                                                                              [16] J. Lyu, Z. Li, X. Shi, C. Xu, Y. Wang, and H. Wang, “DyWA:
+further improved task success while keeping the policy fixed.                      Dynamics-adaptive world action model for generalizable non-
+Our evaluation was limited to one-dimensional variation                            prehensile manipulation,” in Proceedings of the IEEE/CVF Interna-
+in mass distribution, with Pouch Placement evaluated only                          tional Conference on Computer Vision (ICCV), 2025, pp. 11 058–
+                                                                                   11 068.
+on seen configurations, and adaptation to unseen config-                      [17] G. Yuan, Q. Qiao, J. Zhang, and D. Xu, “AdaWorldPolicy: World-
+urations was not strong in either the real-world or the                            model-driven diffusion policy with online adaptive learning for robotic
+simulation experiments. Nevertheless, these results suggest                        manipulation,” arXiv preprint arXiv:2602.20057, 2026.
+                                                                              [18] A. Ali, J. Bai, M. Bala, Y. Balaji, A. Blakeman, T. Cai, et al.,
+that online adaptation through latent physical representations                     “World simulation with video foundation models for physical AI,”
+can improve imitation-based manipulation of objects whose                          arXiv preprint arXiv:2511.00062, 2025.
+physical properties cannot be distinguished visually.                         [19] D. P. Kingma and M. Welling, “Auto-encoding variational bayes,” in
+                                                                                   International Conference on Learning Representations (ICLR), 2014.
+                                                                              [20] M. Murooka, T. Motoda, R. Nakajo, H. Oh, K. Makihara, K. Shirai,
+                            R EFERENCES                                            T. Ogata, and Y. Domae, “RoboManipBaselines: A unified framework
+                                                                                   for imitation learning in robotic manipulation across real and simula-
+                                                                                   tion environments,” IEEE Access, vol. 14, pp. 97 896–97 909, 2026.
+ [1] C. Chi, Z. Xu, S. Feng, E. Cousineau, Y. Du, B. Burchfiel, R. Tedrake,   [21] D. P. Kingma and J. Ba, “Adam: A method for stochastic opti-
+     and S. Song, “Diffusion policy: Visuomotor policy learning via action         mization,” in International Conference on Learning Representations
+     diffusion,” The International Journal of Robotics Research, vol. 44,          (ICLR), 2015.
+     no. 10-11, pp. 1684–1704, 2025.
+ [2] Y. Hou, Z. Liu, C. Chi, E. Cousineau, N. Kuppuswamy, S. Feng,
+     B. Burchfiel, and S. Song, “Adaptive compliance policy: Learning
+     approximate compliance for diffusion guided control,” in 2025 IEEE
+     International Conference on Robotics and Automation (ICRA). IEEE,
+     2025, pp. 4829–4836.
+

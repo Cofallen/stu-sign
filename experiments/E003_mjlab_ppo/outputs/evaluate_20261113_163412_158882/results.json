@@ -1,0 +1,325 @@
+{
+  "scenario": "rotation",
+  "passes": 20,
+  "accepted": true,
+  "trace_columns": [
+    "drift_m",
+    "abs_roll_rad",
+    "abs_pitch_rad",
+    "speed_abs_error_m_s",
+    "left_length_abs_error_m",
+    "right_length_abs_error_m",
+    "yaw_abs_error_rad_s",
+    "forward_m_s",
+    "yaw_rad_s",
+    "robot/act_lf0",
+    "robot/act_lw",
+    "robot/act_rf0",
+    "robot/act_rw",
+    "robot/act_lf20",
+    "robot/act_rf20",
+    "base_height_m"
+  ],
+  "episodes": [
+    {
+      "seed": 12001,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.00380926881916821,
+      "final_tilt_rad": 0.0004297258274164051,
+      "steady_mae": [
+        1.58690418174956e-05,
+        0.002079622121527791,
+        0.0020667333155870438,
+        1.7498850866104476e-05
+      ]
+    },
+    {
+      "seed": 12002,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.003892909036949277,
+      "final_tilt_rad": 0.00042979902355000377,
+      "steady_mae": [
+        2.1947984350845218e-05,
+        0.0020797441247850657,
+        0.0020668325014412403,
+        1.8230639398097992e-05
+      ]
+    },
+    {
+      "seed": 12003,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.003810369875282049,
+      "final_tilt_rad": 0.00042970821959897876,
+      "steady_mae": [
+        1.8329679733142257e-05,
+        0.0020796777680516243,
+        0.0020667738281190395,
+        1.7791791833587922e-05
+      ]
+    },
+    {
+      "seed": 12004,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0038092706818133593,
+      "final_tilt_rad": 0.0004296789411455393,
+      "steady_mae": [
+        1.5267549315467477e-05,
+        0.002079639583826065,
+        0.0020667484495788813,
+        1.739056642691139e-05
+      ]
+    },
+    {
+      "seed": 12005,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0038092778995633125,
+      "final_tilt_rad": 0.0004297484119888395,
+      "steady_mae": [
+        1.5831392374821007e-05,
+        0.002079622121527791,
+        0.002066727727651596,
+        1.7459231457905844e-05
+      ]
+    },
+    {
+      "seed": 12006,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0038181787822395563,
+      "final_tilt_rad": 0.00042958150152117014,
+      "steady_mae": [
+        2.368428249610588e-05,
+        0.002079357858747244,
+        0.0020664725452661514,
+        1.6264215446426533e-05
+      ]
+    },
+    {
+      "seed": 12007,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0038144257850944996,
+      "final_tilt_rad": 0.0004295572289265692,
+      "steady_mae": [
+        1.9773498934227973e-05,
+        0.002079406287521124,
+        0.002066520042717457,
+        1.6559477444388904e-05
+      ]
+    },
+    {
+      "seed": 12008,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.003810248337686062,
+      "final_tilt_rad": 0.0004296930565033108,
+      "steady_mae": [
+        1.8331016690353863e-05,
+        0.002079675905406475,
+        0.0020667770877480507,
+        1.7796763131627813e-05
+      ]
+    },
+    {
+      "seed": 12009,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0038097307551652193,
+      "final_tilt_rad": 0.0004296342085581273,
+      "steady_mae": [
+        1.418816827936098e-05,
+        0.002079629572108388,
+        0.0020667454227805138,
+        1.717007762636058e-05
+      ]
+    },
+    {
+      "seed": 12010,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0038097503129392862,
+      "final_tilt_rad": 0.0004296929982956499,
+      "steady_mae": [
+        1.738361970637925e-05,
+        0.0020796682219952345,
+        0.002066768938675523,
+        1.7678679796517827e-05
+      ]
+    },
+    {
+      "seed": 12011,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0038117030635476112,
+      "final_tilt_rad": 0.0004298376734368503,
+      "steady_mae": [
+        2.0014840629301034e-05,
+        0.0020796952303498983,
+        0.0020667898934334517,
+        1.8012398868449964e-05
+      ]
+    },
+    {
+      "seed": 12012,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0038154544308781624,
+      "final_tilt_rad": 0.0004295752150937915,
+      "steady_mae": [
+        2.107217369484715e-05,
+        0.0020794030278921127,
+        0.0020665235351771116,
+        1.6468657122459263e-05
+      ]
+    },
+    {
+      "seed": 12013,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0038126290310174227,
+      "final_tilt_rad": 0.00042976922122761607,
+      "steady_mae": [
+        2.0931840481352992e-05,
+        0.002079732483252883,
+        0.0020668250508606434,
+        1.8095601262757555e-05
+      ]
+    },
+    {
+      "seed": 12014,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.003813293529674411,
+      "final_tilt_rad": 0.00042961278813891113,
+      "steady_mae": [
+        1.848148531280458e-05,
+        0.0020794447045773268,
+        0.0020665705669671297,
+        1.6712478100089356e-05
+      ]
+    },
+    {
+      "seed": 12015,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.003809737740084529,
+      "final_tilt_rad": 0.0004297611303627491,
+      "steady_mae": [
+        1.7441256204620004e-05,
+        0.0020796693861484528,
+        0.0020667684730142355,
+        1.7685351849650033e-05
+      ]
+    },
+    {
+      "seed": 12016,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0038129270542412996,
+      "final_tilt_rad": 0.00042978193960152566,
+      "steady_mae": [
+        2.1191865016589873e-05,
+        0.002079736441373825,
+        0.0020668283104896545,
+        1.8136455764761195e-05
+      ]
+    },
+    {
+      "seed": 12017,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.003809416899457574,
+      "final_tilt_rad": 0.0004296684346627444,
+      "steady_mae": [
+        1.4516860574076418e-05,
+        0.002079657046124339,
+        0.002066775457933545,
+        1.7296033547609113e-05
+      ]
+    },
+    {
+      "seed": 12018,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0038121144752949476,
+      "final_tilt_rad": 0.00042969497735612094,
+      "steady_mae": [
+        1.642939605517313e-05,
+        0.0020794395823031664,
+        0.0020665619522333145,
+        1.686866926320363e-05
+      ]
+    },
+    {
+      "seed": 12019,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0038098266813904047,
+      "final_tilt_rad": 0.00042978531564585865,
+      "steady_mae": [
+        1.7530244804220274e-05,
+        0.002079672645777464,
+        0.0020667731296271086,
+        1.7682927136775106e-05
+      ]
+    },
+    {
+      "seed": 12020,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0038102350663393736,
+      "final_tilt_rad": 0.00042976977420039475,
+      "steady_mae": [
+        1.8133541743736714e-05,
+        0.0020796777680516243,
+        0.0020667731296271086,
+        1.7790525816963054e-05
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "scope": "standard V4 simplified CPU smoke only",
+  "gates": {
+    "inertia": true,
+    "freefall": true,
+    "signed_pulses": true,
+    "limits": true,
+    "torque_clip": true,
+    "static_fixture": true,
+    "contact_depth": true,
+    "no_numerical_warnings": true
+  },
+  "passed": true,
+  "excluded": [
+    "parallel mechanism acceptance",
+    "upright balance",
+    "mjlab GPU",
+    "Isaac Lab"
+  ]
+}

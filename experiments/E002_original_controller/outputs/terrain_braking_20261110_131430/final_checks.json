@@ -1,0 +1,9 @@
+{
+  "links": true,
+  "syntax": true,
+  "source_hashes": true,
+  "original_robot_hashes": true,
+  "copy_passed": true,
+  "functional_checks": true,
+  "traversal_verified": false
+}

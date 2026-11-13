@@ -1,0 +1,9 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "experiments/E002_original_controller/outputs/terrain_braking_20261110_131430/finish_tests.py"
+  ],
+  "seed": null,
+  "physics_dt": 0.001,
+  "source": "experiment.py current E002 modules"
+}

@@ -1,0 +1,325 @@
+{
+  "scenario": "stand",
+  "passes": 0,
+  "accepted": false,
+  "trace_columns": [
+    "drift_m",
+    "abs_roll_rad",
+    "abs_pitch_rad",
+    "speed_abs_error_m_s",
+    "left_length_abs_error_m",
+    "right_length_abs_error_m",
+    "yaw_abs_error_rad_s",
+    "forward_m_s",
+    "yaw_rad_s",
+    "robot/act_lf0",
+    "robot/act_lw",
+    "robot/act_rf0",
+    "robot/act_rw",
+    "robot/act_lf20",
+    "robot/act_rf20",
+    "base_height_m"
+  ],
+  "episodes": [
+    {
+      "seed": 12001,
+      "seconds": 1.36,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.03439551591873169,
+      "final_tilt_rad": 0.25845128297805786,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12002,
+      "seconds": 0.8300000000000001,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.027622735127806664,
+      "final_tilt_rad": 0.24877949059009552,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12003,
+      "seconds": 1.05,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.027531996369361877,
+      "final_tilt_rad": 0.255160391330719,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12004,
+      "seconds": 1.51,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.03653796762228012,
+      "final_tilt_rad": 0.259621262550354,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12005,
+      "seconds": 1.37,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.03453681617975235,
+      "final_tilt_rad": 0.2584744989871979,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12006,
+      "seconds": 1.8,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.33001846075057983,
+      "final_tilt_rad": 0.6055587530136108,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12007,
+      "seconds": 2.02,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.3402999937534332,
+      "final_tilt_rad": 0.6220836639404297,
+      "steady_mae": [
+        0.07731412351131439,
+        0.06383799016475677,
+        0.06311865150928497,
+        0.31844407320022583
+      ]
+    },
+    {
+      "seed": 12008,
+      "seconds": 1.05,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.02749912440776825,
+      "final_tilt_rad": 0.2552627623081207,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12009,
+      "seconds": 2.67,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.028811616823077202,
+      "final_tilt_rad": 0.2582874894142151,
+      "steady_mae": [
+        0.11471573263406754,
+        0.032954756170511246,
+        0.035504795610904694,
+        0.05760008841753006
+      ]
+    },
+    {
+      "seed": 12010,
+      "seconds": 1.1400000000000001,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.029988300055265427,
+      "final_tilt_rad": 0.2569626569747925,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12011,
+      "seconds": 0.93,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.024403974413871765,
+      "final_tilt_rad": 0.25167161226272583,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12012,
+      "seconds": 1.93,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.3348305821418762,
+      "final_tilt_rad": 0.6078425645828247,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12013,
+      "seconds": 0.88,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.025999750941991806,
+      "final_tilt_rad": 0.25003474950790405,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12014,
+      "seconds": 2.14,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.3441092073917389,
+      "final_tilt_rad": 0.6187076568603516,
+      "steady_mae": [
+        0.27550870180130005,
+        0.0633407011628151,
+        0.0626290887594223,
+        0.13176564872264862
+      ]
+    },
+    {
+      "seed": 12015,
+      "seconds": 1.1300000000000001,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.02980121038854122,
+      "final_tilt_rad": 0.2569737136363983,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12016,
+      "seconds": 0.87,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.026518668979406357,
+      "final_tilt_rad": 0.24952279031276703,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12017,
+      "seconds": 1.81,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.03810328245162964,
+      "final_tilt_rad": 0.2610839605331421,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12018,
+      "seconds": 2.37,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.34767982363700867,
+      "final_tilt_rad": 0.6071317195892334,
+      "steady_mae": [
+        0.3402743339538574,
+        0.060101624578237534,
+        0.05870703235268593,
+        0.08513925224542618
+      ]
+    },
+    {
+      "seed": 12019,
+      "seconds": 1.12,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.029555054381489754,
+      "final_tilt_rad": 0.2568194270133972,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "seed": 12020,
+      "seconds": 1.06,
+      "passed": false,
+      "terminated": true,
+      "timeout": false,
+      "drift_m": 0.027989955618977547,
+      "final_tilt_rad": 0.2556375563144684,
+      "steady_mae": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

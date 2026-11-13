@@ -1,0 +1,11 @@
+{
+  "case": "jump",
+  "command": [
+    "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller/controller.py",
+    "--viewer",
+    "--duration",
+    "12"
+  ],
+  "scope": "Actual main control loop with deterministic held-key schedule; no real GUI or X11 release proof",
+  "script": "from pathlib import Path\nimport sys,datetime,json,contextlib\nfrom zoneinfo import ZoneInfo\np=Path('/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller');case=sys.argv[1]\nout=p/'outputs'/('held_trial_'+case+'_'+datetime.datetime.now(ZoneInfo('Asia/Shanghai')).strftime('%Y%m%d_%H%M%S_%f'));out.mkdir()\nsys.path.insert(0,str(p));import controller,mujoco,mujoco.viewer\nCurrent=None;original=controller.Teleop\nclass Recorded(original):\n def __init__(self,*a,**kw):\n  global Current\n  super().__init__(*a,**kw);Current=self\nclass Keys:\n def __init__(self):self.jumped=False\n def on_key(self,key):pass\n def poll(self):\n  t=Current.clock;held=set();actions=[]\n  if case=='forward' and 2<=t<5:held={'w'}\n  if case=='backward' and 2<=t<5:held={'s'}\n  if case=='legs':\n   if 1<=t<3:held={'q'}\n   if 4<=t<6:held={'e'}\n  if case=='jump' and t>=2 and not self.jumped:actions=['j'];self.jumped=True\n  return held,actions\n def close(self):pass\nclass Window:\n def __init__(self,m,d):self.opt=mujoco.MjvOption();self.cam=mujoco.MjvCamera();self.user_scn=mujoco.MjvScene(m,maxgeom=10)\n def lock(self):return contextlib.nullcontext()\n def set_texts(self,*a):pass\n def is_running(self):return True\n def sync(self):pass\n def close(self):pass\ncontroller.Teleop=Recorded;controller.KeyboardInput=Keys;mujoco.viewer.launch_passive=lambda m,d,**kw:Window(m,d)\ncontroller.time.sleep=lambda s:None\ncontroller.os._exit=lambda n:(_ for _ in ()).throw(SystemExit(n))\nargv=[str(p/'controller.py'),'--viewer','--duration','12'];sys.argv=argv\n(out/'metadata.json').write_text(json.dumps(dict(case=case,command=argv,scope='Actual main control loop with deterministic held-key schedule; no real GUI or X11 release proof',script=Path(__file__).read_text()),indent=2)+'\\n')\ntry:code=controller.main()\nexcept SystemExit as e:code=e.code\n(out/'exit_status.json').write_text(json.dumps(dict(exit_code=code))+'\\n');print(out);sys.exit(code)\n"
+}

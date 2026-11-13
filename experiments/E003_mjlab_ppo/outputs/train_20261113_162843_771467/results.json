@@ -1,0 +1,6 @@
+{
+  "iterations": 65,
+  "physics_steps": 1996800,
+  "policy_steps": 199680,
+  "checkpoint": "model_64.pt"
+}

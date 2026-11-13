@@ -1,0 +1,7 @@
+{
+  "interpreter": "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+  "seed": null,
+  "physical_dt": 0.001,
+  "feedback_dt": 0.01,
+  "scope": "CPU short tests only; no formal asset/environment changes or training"
+}

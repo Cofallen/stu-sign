@@ -1,0 +1,29 @@
+{
+  "purpose": "Source reading and archived early CPU prototypes; not formal acceptance",
+  "python": "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+  "cwd": "/home/cofallen/Code/毕业设计",
+  "date": "2026-11-09T13:57:08.145552+08:00",
+  "notes": "Prototypes initially executed via /tmp; source snapshots retained here. Probe v1 is intentionally unsuccessful; no contact force balance. v2 uses absolute centered differences. Production script acceptance is separate.",
+  "commits": {
+    "main": "b0f14e8ee9331d572738885691389742028cb796",
+    "lqr+mpc": "f8039cde95b8c2a9150c6016621ea928c9215c36",
+    "mpc": "faaa4e2f5e08bfd6c3ff0d7e09933f17b44e85eb"
+  },
+  "replay_command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/home/cofallen/Code/毕业设计/runs/m02_standing/source_and_probes_20261109_135708_139243/stand_probe.py"
+  ],
+  "replay_exit_code": 0,
+  "replay_acceptance": "REJECTED: max root z acceleration ~9.78 m/s², 0 contacts; process returning 0 is not equilibrium success",
+  "sha256": {
+    "lqr_mpc_lqr_controller.py": "f68d4012f5fd7b0eba48c0811076f5b16ed86c8a033eaf29c351c02ff3555ec5",
+    "stand_10ms.py": "72cc2271adef9dc151750c4276a578d485c7b851154fce989e29385d123baec0",
+    "stand_lqr_probe.py": "d0e665612efe9c7ff4587acb920ccc2b622ad066d1f800839f5f4adbb7c09efa",
+    "stand_probe.py": "ad316fe3a5897a9b3fc9f07d4ff9d589d4fc4da074b612fe48ad02b345b6e608",
+    "stand_probe_v2.py": "c33a4e92c016bdbeca75f9e29ba774b7287aa235a17fa59f681d692490053798",
+    "main_lqr_controller.py": "620e4227cf6dd104abb4686a72daff2ffd5cada4afe0ba9f2a9ede017a6d9f66",
+    "lqr_mpc_mympc.py": "bc03ec325d311a99b3ffa1232da59b4799eea516ec7ed2a77af3cef16b4f65eb",
+    "check_dare.py": "558b9931e6b47f6d403bd36bf4d995509b678bff9a7e7ea72c7c1fdc8feda77b"
+  }
+}

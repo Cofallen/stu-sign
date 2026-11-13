@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "python_files": 14,
+  "runtime_layout": "controller.py at root; all other Python under LQR_six",
+  "source_manifest_hashes_match": true,
+  "asset_hashes_match": true,
+  "formal_xml_unmodified": true,
+  "upstream_clean": true,
+  "local_links_checked": 69,
+  "broken_links": [],
+  "symlinks": [],
+  "source_runtime_files_sha256": {
+    "controller.py": "8e4e28e5c628e7cf9730c6e0655bcdd416267c8f5b8190de726e3f519642c377",
+    "LQR_six/mymath.py": "00ae3961d93a4ad46920dd46bee96d4d9a14e294c2beb7ab97334141be267426",
+    "LQR_six/lqr_controller.py": "7c6273a5e3f3fe160851a364ed87bcb1ce8719c5c53ad62b2326afd31bd24c89",
+    "LQR_six/simulation.py": "4b573432b8dd1dde74f53486dc8260da35475bd539ff43068ef141065c38d6a5",
+    "LQR_six/keyboardInput.py": "d00b177254c15c7fe460dfd99ccafd3eb7b4354178812975a45c396ba31bda3e",
+    "LQR_six/vofa.py": "a0a289ae54b17c9b6cd8c10219d1fdb988bc2c491e8352a457dd211faa67a0b8",
+    "LQR_six/vmc.py": "d62dcbd1aba16507705810c4f4f425c71bb43d1beb19677a21b9c7ed4081fb8e",
+    "LQR_six/write_sensor.py": "f2aadcec19cd5106e24a825956057a770b676c39fedf55429b910879a5439362",
+    "LQR_six/mympc.py": "c6224a5c2c70acc49f6b20363972ce1f210f12fd26932f162fb0b18a3bec2de1",
+    "LQR_six/get_state.py": "a38da1c5b914e52cc77be4ad3ad35a3269119aab9aba3902dc392a69b85f9bef",
+    "LQR_six/lqr.py": "a4b660fc40cfc65a58e80c8a885c85f94bff23a2d48747c4674359c57b28f2ac",
+    "LQR_six/get_sensor.py": "c6b257a10d3288aeebb0a18db9f15aeebe67da5273f5169f5cbd7943e19fb223",
+    "LQR_six/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "LQR_six/leg_data.py": "2bb7abcc723b3d8bb23ea6047ae1c825be1f8c437b52907407a29782475f5893"
+  }
+}

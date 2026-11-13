@@ -1,0 +1,36 @@
+{
+  "case": "pitch-minus",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 9.999999999999897,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 3.6576927345910277e-06,
+  "max_xy_drift_m": 0.004893447180209706,
+  "max_closure_m": 3.5132586740259875e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.24883788273922897,
+  "max_torque_nm": [
+    11.148063861244182,
+    2.9221536830579993,
+    11.070535985355939,
+    2.9246733436479784,
+    13.361045066795002,
+    13.279741331946722
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "final_odometry_error_m": -4.133803381249996e-05,
+  "wall_s": 7.348381100000552,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "passed": true
+}

@@ -1,0 +1,19 @@
+{
+  "id": "daydreamer_code",
+  "kind": "code",
+  "title": "danijar/daydreamer",
+  "url": "https://github.com/danijar/daydreamer.git",
+  "local": "upstream/research_20261109/daydreamer",
+  "attribution": "作者实现",
+  "purpose": "实物数据收集与学习架构",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_read_only_not_executed",
+  "commit": "709016ce11c32dad1f24c4cc77afdf980d2a92a8",
+  "tree": "5d9a5bc8402a84881d1d96b7deecb7b8dc5b66fe",
+  "tracked_status": "",
+  "license_files": [],
+  "license": "unknown: no root license file",
+  "submodules_initialized": false,
+  "lfs_downloaded": false,
+  "exit_code": 0
+}

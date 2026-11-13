@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "scripts/m02_standing/run_standing.py",
+    "--controller",
+    "mpc",
+    "--duration",
+    "30",
+    "--cases",
+    "nominal,pitch-plus,pitch-minus,push,roll,pitch-large"
+  ],
+  "cwd": "/home/cofallen/Code/毕业设计",
+  "args": {
+    "controller": "mpc",
+    "variant": "no-gas",
+    "duration": 30.0,
+    "cases": "nominal,pitch-plus,pitch-minus,push,roll,pitch-large",
+    "horizon": 15,
+    "video": false,
+    "viewer": false
+  }
+}

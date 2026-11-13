@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "experiments/E002_original_controller/outputs/length_gain_20261109_231153_464420/experiment.py",
+    "scheduled_v2"
+  ],
+  "interpreter": "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+  "physics_dt": 0.001,
+  "feedback_dt": 0.01,
+  "seed": null,
+  "versions": {
+    "mujoco": "3.11.0"
+  },
+  "scope": "no-gas ramp poses/sweep/move/jump; no GUI; independent same controller modules"
+}

@@ -1,0 +1,5 @@
+{
+  "iterations": 4,
+  "steps_per_iteration": 61440,
+  "physics_steps_cap": 245760
+}

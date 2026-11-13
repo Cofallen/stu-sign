@@ -1,0 +1,22 @@
+{
+  "id": "latent_adaptation",
+  "kind": "paper",
+  "title": "Online Adaptation to Latent Physical Properties for Learning from Demonstration",
+  "arxiv": "2611.06118",
+  "url": "https://arxiv.org/abs/2611.06118",
+  "local": "references/papers/research_20261109/latent_adaptation.pdf",
+  "purpose": "近期查重：预测误差更新物理隐变量已有先例；不是本项目原创",
+  "accessed": "2026-11-09T12:46:43.581871+08:00",
+  "status": "downloaded_verified_pdf",
+  "authors": [
+    "Kajitsuka, Kotaro",
+    "Murooka, Masaki",
+    "Kanehiro, Fumio"
+  ],
+  "date": "2026/11/04",
+  "version": "v1",
+  "pdf_url": "https://arxiv.org/pdf/2611.06118v1",
+  "sha256": "c76a0163d45f6229734559f48189aef81f8d35f25b8cc9161afdd8694afa69de",
+  "bytes": 6020040,
+  "exit_code": 0
+}

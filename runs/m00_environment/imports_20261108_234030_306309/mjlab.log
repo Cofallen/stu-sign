@@ -1,0 +1,6 @@
+/home/cofallen/miniconda3/envs/mjlab/lib/python3.12/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+3.12.13 | packaged by Anaconda, Inc. | (main, Mar 19 2026, 20:20:58) [GCC 14.3.0]
+MuJoCo import OK 3.11.0 /home/cofallen/miniconda3/envs/mjlab/lib/python3.12/site-packages/mujoco/__init__.py
+mjlab import OK 1.6.0 /home/cofallen/mjlab/src/mjlab/__init__.py
+Synthetic CPU step OK 0.002

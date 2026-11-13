@@ -1,0 +1,4 @@
+["git", "-c", "core.hooksPath=/dev/null", "clone", "--depth", "1", "--no-recurse-submodules", "https://github.com/danijar/daydreamer.git", "/home/cofallen/Code/毕业设计/upstream/research_20261109/daydreamer"]
+Cloning into '/home/cofallen/Code/毕业设计/upstream/research_20261109/daydreamer'...
+
+exit_code=0

@@ -1,0 +1,18 @@
+/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/self_right_capture_20261112_231415_381727
+0 1.5238596747741562 [1092, np.float64(-1.4986764278964213), np.float64(0.26874093868586163), np.float64(0.23310347040501184)] 415 [[1.4290953821296712, -0.5320381382014481, -2.995474877162212], [2.4776681875060422, -0.3483800772043738, 3.0952834673945677], [-1.0243333488136466, -0.39432650285921833, -0.31410936593121264]]
+Traceback (most recent call last):
+  File "/tmp/e002_recover_capture.py", line 76, in <module>
+    tilt=balance()
+         ^^^^^^^^^
+  File "/tmp/e002_recover_capture.py", line 48, in balance
+    imu=read(est,L,R)
+        ^^^^^^^^^^^^^
+  File "/tmp/e002_recover_capture.py", line 34, in read
+    vmc.update_left(L,motors);vmc.update_right(R,motors)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/vmc.py", line 55, in update_right
+    self._update(leg, 'r', 2, +1)
+  File "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/vmc.py", line 87, in _update
+    leg.vmc['phi0'] = np.pi/2-theta_body if side == 'l' else np.pi/2+theta_body
+    ^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'vmc'

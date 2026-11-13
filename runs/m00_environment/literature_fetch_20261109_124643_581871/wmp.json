@@ -1,0 +1,27 @@
+{
+  "id": "wmp",
+  "kind": "paper",
+  "title": "World Model-based Perception for Visual Legged Locomotion",
+  "arxiv": "2409.16784",
+  "url": "https://arxiv.org/abs/2409.16784",
+  "local": "references/papers/research_20261109/wmp.pdf",
+  "purpose": "核心：世界模型表征辅助感知与策略；视觉拓展参考",
+  "accessed": "2026-11-09T12:46:43.581871+08:00",
+  "status": "downloaded_verified_pdf",
+  "authors": [
+    "Lai, Hang",
+    "Cao, Jiahang",
+    "Xu, Jiafeng",
+    "Wu, Hongtao",
+    "Lin, Yunfeng",
+    "Kong, Tao",
+    "Yu, Yong",
+    "Zhang, Weinan"
+  ],
+  "date": "2024/09/25",
+  "version": "v1",
+  "pdf_url": "https://arxiv.org/pdf/2409.16784v1",
+  "sha256": "2df0291956fd21ce758dd3fa3d69e768de0906034e1b4d04e8650817e0632ed8",
+  "bytes": 5753504,
+  "exit_code": 0
+}

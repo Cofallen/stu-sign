@@ -1,0 +1,190 @@
+{
+  "passed": true,
+  "cases": {
+    "forward": {
+      "run": "lqr_no-gas_nominal_20261109_190823_102893",
+      "physical_passed": true,
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max_tilt_rad": 0.0007796306539849146,
+      "max_closure_m": 2.6935066760610306e-06,
+      "max_external_force_n": 0.0,
+      "key_events": [
+        {
+          "time": 2.0099999999998897,
+          "pressed": "w"
+        },
+        {
+          "time": 5.000000000000004,
+          "pressed": ""
+        }
+      ],
+      "actual_speed_plateau_m_s": -1.175994905023039,
+      "late_stop_peak_speed_m_s": 0.006167957856860085,
+      "release_to_below_005m_s": 1.4700000000004954
+    },
+    "backward": {
+      "run": "lqr_no-gas_nominal_20261109_190901_722408",
+      "physical_passed": true,
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max_tilt_rad": 0.0008515557613452355,
+      "max_closure_m": 2.9232860380030235e-06,
+      "max_external_force_n": 0.0,
+      "key_events": [
+        {
+          "time": 2.0099999999998897,
+          "pressed": "s"
+        },
+        {
+          "time": 5.000000000000004,
+          "pressed": ""
+        }
+      ],
+      "actual_speed_plateau_m_s": 1.1762426066491827,
+      "late_stop_peak_speed_m_s": 0.006133150136065524,
+      "release_to_below_005m_s": 1.4700000000004954
+    },
+    "legs": {
+      "run": "lqr_no-gas_nominal_20261109_190911_797771",
+      "physical_passed": true,
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max_tilt_rad": 0.00039396177434195803,
+      "max_closure_m": 3.607591165038281e-06,
+      "max_external_force_n": 0.0,
+      "key_events": [
+        {
+          "time": 1.0000000000000007,
+          "pressed": "q"
+        },
+        {
+          "time": 3.0099999999997795,
+          "pressed": ""
+        },
+        {
+          "time": 4.009999999999674,
+          "pressed": "e"
+        },
+        {
+          "time": 6.000000000000338,
+          "pressed": ""
+        }
+      ],
+      "actual_short_mean_m": 0.18043605825707598,
+      "actual_long_mean_m": 0.33973237784892935
+    },
+    "jump": {
+      "run": "lqr_no-gas_nominal_20261109_190922_046888",
+      "physical_passed": true,
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max_tilt_rad": 0.02362048334579985,
+      "max_closure_m": 1.734808126017838e-05,
+      "max_external_force_n": 0.0,
+      "key_events": [
+        {
+          "time": 2.0099999999998897,
+          "key": "j"
+        }
+      ],
+      "jump_rise_m": 0.22136960319623225,
+      "airborne_s": 0.4210000000000003
+    },
+    "real_keys": {
+      "run": "lqr_no-gas_nominal_20261109_191115_398914",
+      "physical_passed": true,
+      "warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "max_tilt_rad": 0.023619434917309383,
+      "max_closure_m": 1.7349411405622564e-05,
+      "max_external_force_n": 0.0,
+      "key_events": [
+        {
+          "time": 1.3299999999999643,
+          "pressed": "w"
+        },
+        {
+          "time": 3.039999999999776,
+          "pressed": ""
+        },
+        {
+          "time": 4.339999999999784,
+          "pressed": "s"
+        },
+        {
+          "time": 5.370000000000128,
+          "pressed": ""
+        },
+        {
+          "time": 6.720000000000579,
+          "pressed": "q"
+        },
+        {
+          "time": 6.7700000000005955,
+          "pressed": ""
+        },
+        {
+          "time": 7.480000000000833,
+          "pressed": "e"
+        },
+        {
+          "time": 7.530000000000849,
+          "pressed": ""
+        },
+        {
+          "time": 8.160000000000917,
+          "key": "r"
+        },
+        {
+          "time": 9.160000000000363,
+          "key": "j"
+        }
+      ],
+      "jump_rise_m": 0.22137817535657014,
+      "airborne_s": 0.4210000000000003
+    }
+  },
+  "criteria": "Direction signs, actual 1.2±0.1m/s plateau, settled actual speed<0.05, actual length within2mm at 0.18/0.34 targets, jump rise>0.20m and airborne>0.35s, no warnings/passive actuation",
+  "scope": "Four 12s deterministic held-key physical trials plus actual XTest down/up GUI trial",
+  "limitations": [
+    "Actual braking is not instantaneous; ~1.5 simulation seconds to <0.05m/s in this trial",
+    "X11 backend only",
+    "No hardware or arbitrary high-speed/leg-height combinations"
+  ]
+}

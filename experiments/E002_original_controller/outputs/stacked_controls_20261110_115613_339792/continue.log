@@ -1,0 +1,146 @@
+[fall t=1.00] 继续仿真；可继续操作或关闭后重启
+[fall t=2.60] 继续仿真；可继续操作或关闭后重启
+[fall t=3.14] 继续仿真；可继续操作或关闭后重启
+WARNING: Nan, Inf or huge value in QACC at DOF 12. The simulation is unstable. Time = 4.5850.
+
+/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261110_121333_280398
+{
+  "timing": {
+    "sync_calls": 0,
+    "sync_wall_s": 0.0,
+    "sync_max_s": 0.0,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 0.0,
+    "late_steps": 0,
+    "max_lag_s": 0.0,
+    "initial_sync_wall_s": 0.0,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.00022818245452085612,
+    "loop_non_ui_non_sleep_s": 4.382457898000212
+  },
+  "viewer_options": null,
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 0.001,
+  "terminated": true,
+  "termination_reason": "numerical_error",
+  "timeout": false,
+  "final_tilt_rad": 100.0,
+  "max_tilt_rad": 3.1412615942897073,
+  "max_xy_drift_m": 4.877947362153073,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 0.3286792413216899,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.12301085489739212,
+  "max_torque_nm": [
+    30.0,
+    5.0,
+    30.0,
+    5.0,
+    30.0,
+    30.0
+  ],
+  "nonwheel_contacts": [
+    "base_Link_del_collision_0",
+    "l23_Link_collision_0",
+    "lf0_Link_collision_0",
+    "lf1_Link_collision_0",
+    "r23_Link_collision_0",
+    "rf0_Link_collision_0",
+    "rf1_Link_collision_0"
+  ],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": null,
+  "final_base_xy_m": [
+    -1.2695862546685924e-18,
+    -2.134459759628144e-20
+  ],
+  "final_yaw_rad": 1.7872890667458568e-18,
+  "mode": "stand",
+  "interactive": false,
+  "teleop": null,
+  "final_odometry_error_m": -0.28571525380044704,
+  "wall_s": 4.382457898000212,
+  "fall_events_s": [
+    1.0010000000000006,
+    2.6039999999998242,
+    3.1369999999997655
+  ],
+  "gain_schedule": {
+    "lengths_m": {
+      "left": 0.28542109797496057,
+      "right": 0.34
+    },
+    "K_left": [
+      [
+        -62.81948243129601,
+        -1.4713861202815042,
+        -21.953901675545666,
+        -18.008314252285654,
+        34.156626856868925,
+        4.183454619964624
+      ],
+      [
+        10.86364226785556,
+        0.1473252722725282,
+        4.161428484836533,
+        3.052022796697226,
+        170.67556269328742,
+        7.2038499862273255
+      ]
+    ],
+    "K_right": [
+      [
+        -63.500768383598086,
+        -1.5163192394133498,
+        -22.053646773525287,
+        -17.77370056497382,
+        29.724581719072702,
+        3.827295836993862
+      ],
+      [
+        9.550875121248342,
+        0.12429293568386968,
+        3.6253939518156306,
+        2.5827976787012865,
+        171.49555576983377,
+        7.319447449766034
+      ]
+    ],
+    "masses": {
+      "body_total_kg": 16.877574,
+      "body_per_side_kg": 8.438787,
+      "leg_kg": {
+        "l": 1.597924,
+        "r": 1.5983269999999998
+      },
+      "wheel_kg": {
+        "l": 0.4904,
+        "r": 0.4904
+      },
+      "total_kg": 21.054624999999998,
+      "wheel_radius_m": 0.06
+    },
+    "range_m": [
+      0.18,
+      0.34
+    ]
+  },
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0
+  ],
+  "acceptance": "standing: full duration, final 5 s tilt <0.05 rad, xy drift <0.1 m, closure <1e-4 m, no warning, no passive actuation, wheel-only contact",
+  "passed": false
+}
+
+standing_exit_code 1

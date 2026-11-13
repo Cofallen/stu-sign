@@ -1,0 +1,48 @@
+{
+  "original_hinge_count": 14,
+  "new_hinge_count": 14,
+  "connect_count": 4,
+  "max_body_pose_error_20_source_coordinate_samples": 7.771561172376096e-16,
+  "max_mass_error": 0.0,
+  "max_inertia_error": 0.0,
+  "equality_jacobian_rank": 8,
+  "internal_independent_dofs": 6,
+  "closure_pin_relative_rotation_range_rad": {
+    "Left_loop1": 0.4097242886181823,
+    "Left_loop2": 0.40969491332032537,
+    "Right_loop1": 0.40972418305571795,
+    "Right_loop2": 0.4096948077565209
+  },
+  "damping_test": [
+    {
+      "c_n_s_m": 0.0,
+      "power_w": 0.0,
+      "expected_w": -0.0
+    },
+    {
+      "c_n_s_m": 10.0,
+      "power_w": -0.02051793352002645,
+      "expected_w": -0.02051793352002645
+    },
+    {
+      "c_n_s_m": 50.0,
+      "power_w": -0.10258966760013224,
+      "expected_w": -0.10258966760013224
+    }
+  ],
+  "motion_run": "runs/m01_model/parallel_check_20261109_004237_385074",
+  "xml_sha256": {
+    "robot_no_gas_spring.xml": "263185e1f4a2a61d9e54803610d3e6b978c5ede259223552f278b3d623430088",
+    "robot_gas_spring_damped.xml": "9b77973e72253511f798866e709021349af8386b2b80855ae9b90ce66319009f"
+  },
+  "source_sha256": "37d934a964acc66f3ebafcf74741fcb6302c5aa8856a7e4b99e97c864bbff0f0",
+  "script_sha256": "7cf6dacc360af0f021eafc61ea3c20d40196604bce17690dae0042d5e37738a0",
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/home/cofallen/Code/毕业设计/scripts/m01_model/check_parallel_integrity.py",
+    "--motion-run",
+    "/home/cofallen/Code/毕业设计/runs/m01_model/parallel_check_20261109_004237_385074"
+  ],
+  "passed": true
+}

@@ -1,0 +1,19 @@
+/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/self_right_capture_20261112_231415_382110
+0 1.6780916749014345 [2912, np.float64(1.6772046525240247), np.float64(0.2747853953467535), np.float64(0.003851887832408021)] 415 [[1.4290953821296712, -0.5320381382014481, -2.995474877162212], [2.4776681875060422, -0.3483800772043738, 3.0952834673945677], [-1.0243333488136466, -0.39432650285921833, -0.31410936593121264]]
+1 0.25461328483692797 [1992, np.float64(-0.04470887202313406), np.float64(0.06055310088440105), np.float64(-0.0035753430886194502)] 250 [[2.2374416923867413, 0.6315354593091526, 1.3919543467124837], [0.15721075546541563, -0.273019136478753, -0.8245988296296556], [1.660316844757567, 0.2649445471835622, -4.723407929664518]]
+Traceback (most recent call last):
+  File "/tmp/e002_recover_capture.py", line 76, in <module>
+    tilt=balance()
+         ^^^^^^^^^
+  File "/tmp/e002_recover_capture.py", line 48, in balance
+    imu=read(est,L,R)
+        ^^^^^^^^^^^^^
+  File "/tmp/e002_recover_capture.py", line 34, in read
+    vmc.update_left(L,motors);vmc.update_right(R,motors)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/vmc.py", line 55, in update_right
+    self._update(leg, 'r', 2, +1)
+  File "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/vmc.py", line 87, in _update
+    leg.vmc['phi0'] = np.pi/2-theta_body if side == 'l' else np.pi/2+theta_body
+    ^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'vmc'

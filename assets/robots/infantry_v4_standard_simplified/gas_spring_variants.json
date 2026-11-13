@@ -1,0 +1,135 @@
+{
+  "parent_xml_sha256": "551351d3ae7c53916f7f8b8961f6d3e6148056a84b4596dc8e9e486feecb42cd",
+  "generator_sha256": "3f648eab6667673a5da123c71301203832160cc001ea4571853f47fbc438da80",
+  "variant_files": {
+    "robot_no_gas_spring.xml": "7aed8d1b2713aa343515c2843aecf0145dd3dffda63638a60dea3a76de4eec60",
+    "robot_gas_spring_damped.xml": "5c896fc52d6db67fda953b7df4197957d01a598e5d10a8e6a8b0ce0212286d9c"
+  },
+  "mesh_changes": [
+    {
+      "link": "lf0_Link",
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/lf0_Link.STL",
+      "source_sha256": "c5336ee23e1e2e18ea2e081a4cac463b70db66c9f8ca58f1e5a31916f8de8f75",
+      "source_faces": 76564,
+      "removed_faces": 862,
+      "retained_faces": 75702,
+      "removed_components": [
+        {
+          "faces": 708,
+          "bounds": [
+            [
+              0.010500000789761543,
+              0.03755219280719757,
+              -0.016049999743700027
+            ],
+            [
+              0.12740018963813782,
+              0.05249146372079849,
+              -0.0010500001953914762
+            ]
+          ]
+        },
+        {
+          "faces": 154,
+          "bounds": [
+            [
+              0.09931989759206772,
+              0.0390249527990818,
+              -0.011549999937415123
+            ],
+            [
+              0.1861288845539093,
+              0.05102532356977463,
+              -0.005549999885261059
+            ]
+          ]
+        }
+      ],
+      "visual": "lf0_Link_without_rigid_gas_spring.stl",
+      "visual_sha256": "15f1127cafd101dc6f3c8d5e204803e2491a439712bfdb7c0ec007b47bcc1e00",
+      "collision": "lf0_Link_without_rigid_gas_spring_hull.stl",
+      "collision_sha256": "55ffe1602d8afa67f80c7c7a2954f7250bc733caf3a7474441a69a4b1063b0a6"
+    },
+    {
+      "link": "rf0_Link",
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/rf0_Link.STL",
+      "source_sha256": "fea24f3bccf0c47d1f96105a1e1debb7a808816ec9ace28a6cbc5bbabf7c5e4c",
+      "source_faces": 76616,
+      "removed_faces": 862,
+      "retained_faces": 75754,
+      "removed_components": [
+        {
+          "faces": 154,
+          "bounds": [
+            [
+              0.09931989759206772,
+              -0.05102532356977463,
+              -0.011549999937415123
+            ],
+            [
+              0.1861288845539093,
+              -0.0390249527990818,
+              -0.005549999885261059
+            ]
+          ]
+        },
+        {
+          "faces": 708,
+          "bounds": [
+            [
+              0.010500000789761543,
+              -0.05249146372079849,
+              -0.016049999743700027
+            ],
+            [
+              0.12740018963813782,
+              -0.03755219280719757,
+              -0.0010500000789761543
+            ]
+          ]
+        }
+      ],
+      "visual": "rf0_Link_without_rigid_gas_spring.stl",
+      "visual_sha256": "a1c31b69dbee58c4b873a53cfda87c5d72e590e16bb0ec5cb4b4880b82e4cf90",
+      "collision": "rf0_Link_without_rigid_gas_spring_hull.stl",
+      "collision_sha256": "674bdde4b6d8777b660d185ab5d9e0ab23971f2f7a7f2aea5442cb0ae1f39b7f"
+    }
+  ],
+  "attachment_source": "upstream/fudan_rl_wheel_leg/mujoco/assert_now/infantry_binglian_yuntai/infantry_V2/meshes/mjmodel.xml",
+  "attachments": [
+    {
+      "site": "left_gas_spring_upper",
+      "link": "lf0_Link",
+      "pos": "0.0155 0.0445 -0.008",
+      "source_site": "left_lf0_qitanhuang"
+    },
+    {
+      "site": "left_gas_spring_lower",
+      "link": "lf1_Link",
+      "pos": "0.005 0.046 -0.005",
+      "source_site": "left_lf1_qitanhuang"
+    },
+    {
+      "site": "right_gas_spring_upper",
+      "link": "rf0_Link",
+      "pos": "0.0155 -0.0445 -0.008",
+      "source_site": "right_lf0_qitanhuang"
+    },
+    {
+      "site": "right_gas_spring_lower",
+      "link": "rf1_Link",
+      "pos": "0.005 -0.046 -0.005",
+      "source_site": "right_lf1_qitanhuang"
+    }
+  ],
+  "model": "Compression-only equivalent linear spatial tendon; no new DOFs or rigid closure",
+  "parameters": {
+    "stiffness_n_m": 1000.0,
+    "damping_n_s_m": 10.0,
+    "free_length_m": 0.2,
+    "calibrated": false
+  },
+  "mass_note": "URDF provides lumped link inertias only; retained in both variants. No unsupported gas-spring mass subtraction.",
+  "visualization": "MuJoCo spatial tendon: automatic variable-length display, not a detailed telescopic CAD cylinder",
+  "attachment_note": "Upstream gas-spring sites adapted to standard V4 link frames; hardware attachment calibration pending"
+}

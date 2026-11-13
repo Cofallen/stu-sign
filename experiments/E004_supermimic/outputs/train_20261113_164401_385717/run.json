@@ -1,0 +1,22 @@
+{
+  "settings": {
+    "initial_actor": "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E003_mjlab_ppo/outputs/train_20261113_163126_398557/model_1478.pt",
+    "device": "cuda:0",
+    "num_envs": 128,
+    "iterations": 8,
+    "seed": 42,
+    "argv": [
+      "train.py",
+      "--initial-actor",
+      "../E003_mjlab_ppo/outputs/train_20261113_163126_398557/model_1478.pt",
+      "--iterations",
+      "8",
+      "--num-envs",
+      "128"
+    ],
+    "initial_sha256": "c73955d7ce31475c118b4c173503479b2b5e0bcbc625ac95252f3b76f68879b7",
+    "python": "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "torch": "2.15.0+cu132"
+  },
+  "exit_code": 0
+}

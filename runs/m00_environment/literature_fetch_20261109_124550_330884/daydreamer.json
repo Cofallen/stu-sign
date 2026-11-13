@@ -1,0 +1,24 @@
+{
+  "id": "daydreamer",
+  "kind": "paper",
+  "title": "DayDreamer: World Models for Physical Robot Learning",
+  "arxiv": "2206.14176",
+  "url": "https://arxiv.org/abs/2206.14176",
+  "local": "references/papers/research_20261109/daydreamer.pdf",
+  "purpose": "实物：世界模型的数据与控制闭环",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_verified_pdf",
+  "authors": [
+    "Wu, Philipp",
+    "Escontrela, Alejandro",
+    "Hafner, Danijar",
+    "Goldberg, Ken",
+    "Abbeel, Pieter"
+  ],
+  "date": "2022/06/28",
+  "version": "v1",
+  "pdf_url": "https://arxiv.org/pdf/2206.14176v1",
+  "sha256": "2ee10ae0961bef97ca522bb7ee5b7514e7a918a637dedad569b572b18bccb35e",
+  "bytes": 3126052,
+  "exit_code": 0
+}

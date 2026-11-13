@@ -1,0 +1,78 @@
+{
+  "kind": "move_jump",
+  "length": 0.278,
+  "duration": 0.001,
+  "wall_s": 4.691176177000216,
+  "failed": "numerical_warning",
+  "first_fall": 3.1469999999997644,
+  "max_tilt": 3.140254574132289,
+  "final_tilt": 3.1391295336521594,
+  "actual_length": 0.3190142381194579,
+  "jump": {
+    "speed": -0.0,
+    "dot_target": -215.1830078161506,
+    "yaw_rate": 0.0,
+    "l0": 0.27792320714470026,
+    "yaw": 1.7872890667458568e-18,
+    "message": "jump complete",
+    "pressed": "",
+    "jump_phase": "idle",
+    "jumps": [
+      {
+        "start": 3.0009999999997805,
+        "start_height": 0.24908268518872714,
+        "max_height": 0.4719233379153794,
+        "start_com_z": 0.32042892855621646,
+        "max_com_z": 0.4711607207992764,
+        "max_wheel_clearance_m": 0.6635282708915173,
+        "airborne_s": 1.9639999999998945,
+        "max_upward_velocity": 2.426775270463388,
+        "phases": [
+          {
+            "time": 3.0009999999997805,
+            "phase": "crouch"
+          },
+          {
+            "time": 3.4019999999997363,
+            "phase": "flight_tuck"
+          },
+          {
+            "time": 3.5539999999997196,
+            "phase": "flight_extend"
+          },
+          {
+            "time": 3.5539999999997196,
+            "phase": "landing"
+          },
+          {
+            "time": 5.6260000000002135,
+            "phase": "idle"
+          }
+        ],
+        "liftoff": 3.4019999999997363,
+        "no_liftoff": false
+      }
+    ],
+    "key_events": [
+      {
+        "time": 1.0000000000000007,
+        "pressed": "w"
+      },
+      {
+        "time": 2.9999999999997806,
+        "key": "j"
+      },
+      {
+        "time": 7.000000000000672,
+        "pressed": ""
+      }
+    ],
+    "current_jump": null
+  },
+  "max_com_z": 0.6073932959276809,
+  "max_base_z": 0.6890599124346849,
+  "max_wheel_clearance": 0.6950123773493286,
+  "max_actual_yaw_rate": 22.955772280488397,
+  "final_actual_yaw_rate": 18.856317227699748,
+  "K_changed": true
+}

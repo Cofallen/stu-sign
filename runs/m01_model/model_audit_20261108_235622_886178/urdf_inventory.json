@@ -1,0 +1,3722 @@
+[
+  {
+    "path": "upstream/fudan_rl_wheel_leg/jump/resources/robots/infantry_V1/urdf/infantry_V1.urdf",
+    "sha256": "948a86c85f5bbda145fc040b97e8eab23d1db31e7db74e60cc4282ca2b0ea386",
+    "total_mass": 15.54238,
+    "links": [
+      {
+        "name": "base_link",
+        "mass": 11.69,
+        "com": {
+          "xyz": "-0.010069 0.00010673 0.067003",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.24145",
+          "ixy": "-0.00030335",
+          "ixz": "-0.0082381",
+          "iyy": "0.22555",
+          "iyz": "-9.443E-05",
+          "izz": "0.41337"
+        },
+        "principal_inertia": [
+          0.22554387003257678,
+          0.24106224331307957,
+          0.4137638866543437
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.052842226691312666
+      },
+      {
+        "name": "rf0_Link",
+        "mass": 1.1284,
+        "com": {
+          "xyz": "0.056869 -0.016331 -0.0092923",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.0020837",
+          "ixy": "-0.00025846",
+          "ixz": "-0.00015224",
+          "iyy": "0.004896",
+          "iyz": "0.00011055",
+          "izz": "0.0066392"
+        },
+        "principal_inertia": [
+          0.0020557656347478287,
+          0.004910709101779392,
+          0.006652425263472785
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0003140494730544362
+      },
+      {
+        "name": "rf1_Link",
+        "mass": 0.30687,
+        "com": {
+          "xyz": "-0.0027879 -0.071068 0.0068255",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.0024737",
+          "ixy": "0.00012524",
+          "ixz": "-3.47E-06",
+          "iyy": "9.269E-05",
+          "iyz": "3.434E-05",
+          "izz": "0.00254"
+        },
+        "principal_inertia": [
+          8.563632133071833e-05,
+          0.0024802233666210293,
+          0.0025405303120482527
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.532937590349468e-05
+      },
+      {
+        "name": "r_wheel_Link",
+        "mass": 0.49107,
+        "com": {
+          "xyz": "4.344E-06 -0.00019279 0.019561",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00033977",
+          "ixy": "0",
+          "ixz": "3E-08",
+          "iyy": "0.00034151",
+          "iyz": "-1.52E-06",
+          "izz": "0.00058201"
+        },
+        "principal_inertia": [
+          0.000339769996264199,
+          0.0003415003937516687,
+          0.0005820196099841323
+        ],
+        "positive_definite": true,
+        "triangle_margin": 9.925078003173533e-05
+      },
+      {
+        "name": "lf0_Link",
+        "mass": 1.1281,
+        "com": {
+          "xyz": "0.056995 0.01636 -0.0092905",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00208547",
+          "ixy": "0.00025333",
+          "ixz": "-0.0001532",
+          "iyy": "0.00488676",
+          "iyz": "-0.00011073",
+          "izz": "0.00663189"
+        },
+        "principal_inertia": [
+          0.002058287651596734,
+          0.004900643869022004,
+          0.0066451884793812584
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0003137430412374796
+      },
+      {
+        "name": "lf1_Link",
+        "mass": 0.30687,
+        "com": {
+          "xyz": "-0.0027891 0.071068 0.0068255",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00247367",
+          "ixy": "-0.00012525",
+          "ixz": "-3.47E-06",
+          "iyy": "9.269E-05",
+          "iyz": "-3.434E-05",
+          "izz": "0.00254003"
+        },
+        "principal_inertia": [
+          8.563519865460823e-05,
+          0.0024801945492916293,
+          0.0025405602520537623
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.526949589247516e-05
+      },
+      {
+        "name": "l_wheel_Link",
+        "mass": 0.49107,
+        "com": {
+          "xyz": "-4.3438E-06 0.00019279 0.019561",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00033977",
+          "ixy": "0",
+          "ixz": "-3E-08",
+          "iyy": "0.00034151",
+          "iyz": "1.52E-06",
+          "izz": "0.00058201"
+        },
+        "principal_inertia": [
+          0.000339769996264199,
+          0.0003415003937516687,
+          0.0005820196099841323
+        ],
+        "positive_definite": true,
+        "triangle_margin": 9.925078003173533e-05
+      }
+    ],
+    "joints": [
+      {
+        "name": "rf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "rf0_Link",
+        "origin": {
+          "xyz": "0 -0.1877 0.08725",
+          "rpy": "1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "rf1_Joint",
+        "type": "revolute",
+        "parent": "rf0_Link",
+        "child": "rf1_Link",
+        "origin": {
+          "xyz": "0.17472 0 0",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.9",
+          "upper": "0.65",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "r_wheel_Joint",
+        "type": "revolute",
+        "parent": "rf1_Link",
+        "child": "r_wheel_Link",
+        "origin": {
+          "xyz": "0 -0.208 0.016",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      },
+      {
+        "name": "lf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "lf0_Link",
+        "origin": {
+          "xyz": "0 0.1877 0.08725",
+          "rpy": "-1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "lf1_Joint",
+        "type": "revolute",
+        "parent": "lf0_Link",
+        "child": "lf1_Link",
+        "origin": {
+          "xyz": "0.17472 0 0",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.65",
+          "upper": "0.9",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "l_wheel_Joint",
+        "type": "revolute",
+        "parent": "lf1_Link",
+        "child": "l_wheel_Link",
+        "origin": {
+          "xyz": "0 0.208 0.016",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      }
+    ],
+    "meshes": [
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_Link.STL",
+        "exists": false
+      }
+    ],
+    "mimic_count": 0,
+    "transmission_count": 0
+  },
+  {
+    "path": "upstream/fudan_rl_wheel_leg/jump/resources/robots/infantry_V1_old/urdf/old7.urdf",
+    "sha256": "dc61cffed1499ce0905e48a0bf0588a4db8f066bf2686943de3e56e65c8b221f",
+    "total_mass": 12.32719241,
+    "links": [
+      {
+        "name": "base_link",
+        "mass": 7.89691931,
+        "com": {
+          "xyz": "0.00179494013119796 -0.00408887457381202 0.062447376474095",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.08846480",
+          "ixy": "-0.00261747",
+          "ixz": "-0.00077709",
+          "iyy": "0.15462366",
+          "iyz": "0.00004854",
+          "izz": "0.09458607"
+        },
+        "principal_inertia": [
+          0.08826646834451897,
+          0.09468090296024793,
+          0.154727158695233
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.02822021260953389
+      },
+      {
+        "name": "rf0_Link",
+        "mass": 1.45406108,
+        "com": {
+          "xyz": "0.0517611350421233 -0.00885705313718782 -0.069080215493451",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00280006",
+          "ixy": "-0.00005213",
+          "ixz": "-0.00094382",
+          "iyy": "0.00770044",
+          "iyz": "0.00021148",
+          "izz": "0.00873033"
+        },
+        "principal_inertia": [
+          0.0026533996661286872,
+          0.007661769746619901,
+          0.00891566058725141
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0013995088254971783
+      },
+      {
+        "name": "rf1_Link",
+        "mass": 0.52326467,
+        "com": {
+          "xyz": "0.000295632136163682 -0.0809694063061352 -0.014309829374874",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00568000",
+          "ixy": " 0.00030513",
+          "ixz": "-0.00000227",
+          "iyy": "0.00021069",
+          "iyz": "0.00012305",
+          "izz": "0.00578863"
+        },
+        "principal_inertia": [
+          0.00019101745606258543,
+          0.005696750013757892,
+          0.005791552530179522
+        ],
+        "positive_definite": true,
+        "triangle_margin": 9.621493964095517e-05
+      },
+      {
+        "name": "r_wheel_Link",
+        "mass": 0.25423708,
+        "com": {
+          "xyz": "3.56695168707288E-06 -0.000246574367483543 0.033370137346416",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00022551",
+          "ixy": "-0.00000321",
+          "ixz": "0.00000021",
+          "iyy": " 0.00022742",
+          "iyz": "-0.00000010",
+          "izz": "0.00039835"
+        },
+        "principal_inertia": [
+          0.00022311588437925144,
+          0.00022981379729413367,
+          0.0003983503183266147
+        ],
+        "positive_definite": true,
+        "triangle_margin": 5.457936334677039e-05
+      },
+      {
+        "name": "lf0_Link",
+        "mass": 1.44748738,
+        "com": {
+          "xyz": "0.0519962058608485 0.00889727688439555 -0.0692537580992069",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00279027",
+          "ixy": "0.00005537",
+          "ixz": "-0.00095688",
+          "iyy": "0.00767360",
+          "iyz": "-0.00021371",
+          "izz": "0.00870721"
+        },
+        "principal_inertia": [
+          0.0026392817070382394,
+          0.007634243164514975,
+          0.008897555128446788
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0013759697431064265
+      },
+      {
+        "name": "lf1_Link",
+        "mass": 0.49698581,
+        "inertia": {
+          "ixx": "0.00530328",
+          "ixy": "-0 0.00027178",
+          "ixz": "-0.00000149",
+          "iyy": " 0.00019831",
+          "iyz": "-0.00011383",
+          "izz": "0.00541252"
+        },
+        "parse_error": "could not convert string to float: '-0 0.00027178'"
+      },
+      {
+        "name": "l_wheel_Link",
+        "mass": 0.25423708,
+        "com": {
+          "xyz": "9.34262156931931E-06 0.000246423143387922 0.0333701373189504",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00022518",
+          "ixy": "-0.00000310",
+          "ixz": "-0.00000021",
+          "iyy": "0.00022775",
+          "iyz": "0.00000012",
+          "izz": "0.00039835"
+        },
+        "principal_inertia": [
+          0.00022310915860353382,
+          0.00022982049692549386,
+          0.00039835034447097204
+        ],
+        "positive_definite": true,
+        "triangle_margin": 5.4579311058055636e-05
+      }
+    ],
+    "joints": [
+      {
+        "name": "rf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "rf0_Link",
+        "origin": {
+          "xyz": "0 -0.2224 0.116",
+          "rpy": "1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-1.8",
+          "upper": "0.8",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "rf1_Joint",
+        "type": "revolute",
+        "parent": "rf0_Link",
+        "child": "rf1_Link",
+        "origin": {
+          "xyz": "0.215 0 -0.0289",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-1.6",
+          "upper": "1.4",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "r_wheel_Joint",
+        "type": "revolute",
+        "parent": "rf1_Link",
+        "child": "r_wheel_Link",
+        "origin": {
+          "xyz": "0.0067537 -0.25791 -0.0223",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      },
+      {
+        "name": "lf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "lf0_Link",
+        "origin": {
+          "xyz": "0 0.2224 0.116",
+          "rpy": "-1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.8",
+          "upper": "1.8",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "lf1_Joint",
+        "type": "revolute",
+        "parent": "lf0_Link",
+        "child": "lf1_Link",
+        "origin": {
+          "xyz": "0.215 0 -0.0399",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-1.4",
+          "upper": "1.6",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "l_wheel_Joint",
+        "type": "revolute",
+        "parent": "lf1_Link",
+        "child": "l_wheel_Link",
+        "origin": {
+          "xyz": "0.0067537 0.25791 -0.0113",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      }
+    ],
+    "meshes": [
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lr0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lr0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lr1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lr1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_link.STL",
+        "exists": false
+      }
+    ],
+    "mimic_count": 0,
+    "transmission_count": 0
+  },
+  {
+    "path": "upstream/fudan_rl_wheel_leg/jump/resources/robots/infantry_V4/urdf/infantry_V4.urdf",
+    "sha256": "c4181e221e89fb4932a6e0389142a3385d953f03484bde4c819ef2afb3998fad",
+    "total_mass": 18.3492386,
+    "links": [
+      {
+        "name": "base_link",
+        "mass": 14.528116,
+        "com": {
+          "xyz": "0.00822124 0.00099127 0.0982217",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.28353",
+          "ixy": "-0.00174358",
+          "ixz": "-0.00825907",
+          "iyy": "0.35249",
+          "iyz": "-0.00214156",
+          "izz": "0.3701"
+        },
+        "principal_inertia": [
+          0.28269528626734447,
+          0.35233512171766435,
+          0.3710895920149912
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.2639408159700177
+      },
+      {
+        "name": "rf0_Link",
+        "mass": 1.1132,
+        "com": {
+          "xyz": "0.05527628 -0.01655437 -0.00927161",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00207047",
+          "ixy": "-0.00022911",
+          "ixz": "-0.00015432",
+          "iyy": "0.00467389",
+          "iyz": "0.00011008",
+          "izz": "0.00640479"
+        },
+        "principal_inertia": [
+          0.0020456876651102174,
+          0.00468512858131966,
+          0.00641833375357012
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0003124824928597567
+      },
+      {
+        "name": "rf1_Link",
+        "mass": 0.3068726,
+        "com": {
+          "xyz": "-0.00283459 -0.07106759 0.0068255",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00247367",
+          "ixy": "0.0001249",
+          "ixz": "-3.42E-06",
+          "iyy": "9.262E-05",
+          "iyz": "3.434E-05",
+          "izz": "0.00253997"
+        },
+        "principal_inertia": [
+          8.560203502389639e-05,
+          0.0024801602141938943,
+          0.002540497750782209
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.526449843558154e-05
+      },
+      {
+        "name": "r_wheel_Link",
+        "mass": 0.49069,
+        "com": {
+          "xyz": "4.3469E-06 -0.00019294 0.019568",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00033972",
+          "ixy": "0",
+          "ixz": "3E-08",
+          "iyy": "0.00034147",
+          "iyz": "-1.52E-06",
+          "izz": "0.00058188"
+        },
+        "principal_inertia": [
+          0.00033971999626307577,
+          0.0003414603901556449,
+          0.0005818896135812795
+        ],
+        "positive_definite": true,
+        "triangle_margin": 9.929077283744121e-05
+      },
+      {
+        "name": "lf0_Link",
+        "mass": 1.1128,
+        "com": {
+          "xyz": "0.055403 0.016584 -0.0092702",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00207221",
+          "ixy": "0.00022396",
+          "ixz": "-0.00015529",
+          "iyy": "0.00466506",
+          "iyz": "-0.00011027",
+          "izz": "0.00639795"
+        },
+        "principal_inertia": [
+          0.0020481472965333805,
+          0.004675501083692404,
+          0.006411571619774216
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0003120767604515686
+      },
+      {
+        "name": "lf1_Link",
+        "mass": 0.30687,
+        "com": {
+          "xyz": "-0.0028358 0.071068 0.0068255",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00247367",
+          "ixy": "-0.0001249",
+          "ixz": "-3.42E-06",
+          "iyy": "9.262E-05",
+          "iyz": "-3.434E-05",
+          "izz": "0.00253997"
+        },
+        "principal_inertia": [
+          8.560203502389639e-05,
+          0.0024801602141938943,
+          0.002540497750782209
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.526449843558154e-05
+      },
+      {
+        "name": "l_wheel_Link",
+        "mass": 0.49069,
+        "com": {
+          "xyz": "-4.3477E-06 0.00019294 0.019568",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00033972",
+          "ixy": "0",
+          "ixz": "-3E-08",
+          "iyy": "0.00034147",
+          "iyz": "1.52E-06",
+          "izz": "0.00058188"
+        },
+        "principal_inertia": [
+          0.00033971999626307577,
+          0.0003414603901556449,
+          0.0005818896135812795
+        ],
+        "positive_definite": true,
+        "triangle_margin": 9.929077283744121e-05
+      }
+    ],
+    "joints": [
+      {
+        "name": "rf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "rf0_Link",
+        "origin": {
+          "xyz": "0 -0.1877 0.08725",
+          "rpy": "1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "rf1_Joint",
+        "type": "revolute",
+        "parent": "rf0_Link",
+        "child": "rf1_Link",
+        "origin": {
+          "xyz": "0.17472 0 0",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.9",
+          "upper": "0.65",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "r_wheel_Joint",
+        "type": "revolute",
+        "parent": "rf1_Link",
+        "child": "r_wheel_Link",
+        "origin": {
+          "xyz": "0 -0.208 0.016",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      },
+      {
+        "name": "lf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "lf0_Link",
+        "origin": {
+          "xyz": "0 0.1877 0.08725",
+          "rpy": "-1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "lf1_Joint",
+        "type": "revolute",
+        "parent": "lf0_Link",
+        "child": "lf1_Link",
+        "origin": {
+          "xyz": "0.17472 0 0",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.65",
+          "upper": "0.9",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "l_wheel_Joint",
+        "type": "revolute",
+        "parent": "lf1_Link",
+        "child": "l_wheel_Link",
+        "origin": {
+          "xyz": "0 0.208 0.016",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      }
+    ],
+    "meshes": [
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_Link.STL",
+        "exists": false
+      }
+    ],
+    "mimic_count": 0,
+    "transmission_count": 0
+  },
+  {
+    "path": "upstream/fudan_rl_wheel_leg/jump/resources/robots/infantry_V4/urdf/infantry_V4_increase.urdf",
+    "sha256": "ecc181cc3dc4a7e3683e38ba969dc5bd753f77cc6723c5893122d4f6f8a871cc",
+    "total_mass": 20.698696599999998,
+    "links": [
+      {
+        "name": "base_link",
+        "mass": 16.877574,
+        "com": {
+          "xyz": "-0.00406060 0.0008523 0.097142",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.3595155",
+          "ixy": "-0.00174358",
+          "ixz": "-0.00825907",
+          "iyy": "0.35249",
+          "iyz": "-0.00214156",
+          "izz": "0.45655"
+        },
+        "principal_inertia": [
+          0.3519193762427477,
+          0.35935048164455674,
+          0.45728564211269546
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.253984215774609
+      },
+      {
+        "name": "rf0_Link",
+        "mass": 1.1132,
+        "com": {
+          "xyz": "0.05527628 -0.01655437 -0.00927161",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00207047",
+          "ixy": "-0.00022911",
+          "ixz": "-0.00015432",
+          "iyy": "0.00467389",
+          "iyz": "0.00011008",
+          "izz": "0.00640479"
+        },
+        "principal_inertia": [
+          0.0020456876651102174,
+          0.00468512858131966,
+          0.00641833375357012
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0003124824928597567
+      },
+      {
+        "name": "rf1_Link",
+        "mass": 0.3068726,
+        "com": {
+          "xyz": "-0.00283459 -0.07106759 0.0068255",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00247367",
+          "ixy": "0.0001249",
+          "ixz": "-3.42E-06",
+          "iyy": "9.262E-05",
+          "iyz": "3.434E-05",
+          "izz": "0.00253997"
+        },
+        "principal_inertia": [
+          8.560203502389639e-05,
+          0.0024801602141938943,
+          0.002540497750782209
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.526449843558154e-05
+      },
+      {
+        "name": "r_wheel_Link",
+        "mass": 0.49069,
+        "com": {
+          "xyz": "4.3469E-06 -0.00019294 0.019568",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00033972",
+          "ixy": "0",
+          "ixz": "3E-08",
+          "iyy": "0.00034147",
+          "iyz": "-1.52E-06",
+          "izz": "0.00068188"
+        },
+        "principal_inertia": [
+          0.00033971999735946313,
+          0.0003414632130359474,
+          0.0006818867896045894
+        ],
+        "positive_definite": true,
+        "triangle_margin": -7.035792091788931e-07
+      },
+      {
+        "name": "lf0_Link",
+        "mass": 1.1128,
+        "com": {
+          "xyz": "0.055403 0.016584 -0.0092702",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00207221",
+          "ixy": "0.00022396",
+          "ixz": "-0.00015529",
+          "iyy": "0.00466506",
+          "iyz": "-0.00011027",
+          "izz": "0.00639795"
+        },
+        "principal_inertia": [
+          0.0020481472965333805,
+          0.004675501083692404,
+          0.006411571619774216
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0003120767604515686
+      },
+      {
+        "name": "lf1_Link",
+        "mass": 0.30687,
+        "com": {
+          "xyz": "-0.0028358 0.071068 0.0068255",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00247367",
+          "ixy": "-0.0001249",
+          "ixz": "-3.42E-06",
+          "iyy": "9.262E-05",
+          "iyz": "-3.434E-05",
+          "izz": "0.00253997"
+        },
+        "principal_inertia": [
+          8.560203502389639e-05,
+          0.0024801602141938943,
+          0.002540497750782209
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.526449843558154e-05
+      },
+      {
+        "name": "l_wheel_Link",
+        "mass": 0.49069,
+        "com": {
+          "xyz": "-4.3477E-06 0.00019294 0.019568",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00033972",
+          "ixy": "0",
+          "ixz": "-3E-08",
+          "iyy": "0.00034147",
+          "iyz": "1.52E-06",
+          "izz": "0.00068188"
+        },
+        "principal_inertia": [
+          0.00033971999735946313,
+          0.0003414632130359474,
+          0.0006818867896045894
+        ],
+        "positive_definite": true,
+        "triangle_margin": -7.035792091788931e-07
+      }
+    ],
+    "joints": [
+      {
+        "name": "rf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "rf0_Link",
+        "origin": {
+          "xyz": "0 -0.1877 0.08725",
+          "rpy": "1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "50",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "rf1_Joint",
+        "type": "revolute",
+        "parent": "rf0_Link",
+        "child": "rf1_Link",
+        "origin": {
+          "xyz": "0.17472 0 0",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-1.1",
+          "upper": "0.65",
+          "effort": "50",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "r_wheel_Joint",
+        "type": "revolute",
+        "parent": "rf1_Link",
+        "child": "r_wheel_Link",
+        "origin": {
+          "xyz": "0 -0.208 0.016",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      },
+      {
+        "name": "lf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "lf0_Link",
+        "origin": {
+          "xyz": "0 0.1877 0.08725",
+          "rpy": "-1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "50",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "lf1_Joint",
+        "type": "revolute",
+        "parent": "lf0_Link",
+        "child": "lf1_Link",
+        "origin": {
+          "xyz": "0.17472 0 0",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.65",
+          "upper": "1.1",
+          "effort": "50",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "l_wheel_Joint",
+        "type": "revolute",
+        "parent": "lf1_Link",
+        "child": "l_wheel_Link",
+        "origin": {
+          "xyz": "0 0.208 0.016",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      }
+    ],
+    "meshes": [
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/base_link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/base_link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/rf0_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/rf0_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/rf1_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/rf1_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/r_wheel_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/r_wheel_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/lf0_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/lf0_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/lf1_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/lf1_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/l_wheel_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../../../../../plane/resources/robots/infantry_V4/meshes/l_wheel_Link.STL",
+        "exists": true
+      }
+    ],
+    "mimic_count": 0,
+    "transmission_count": 0
+  },
+  {
+    "path": "upstream/fudan_rl_wheel_leg/plane/resources/robots/hero_2_V1/urdf/hero_2_V1.urdf",
+    "sha256": "b2d27a7277edd744162083f32008420d4a8ec8370285e1e6715e9150a1c923c3",
+    "total_mass": 30.84585465,
+    "links": [
+      {
+        "name": "base_link",
+        "mass": 27.11971455,
+        "com": {
+          "xyz": "0.01140110 -0.00082079 0.15783694",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.78985163",
+          "ixy": "-0.00186110",
+          "ixz": "0.05160522",
+          "iyy": "0.89623583",
+          "iyz": "-0.00098779",
+          "izz": "0.88298111"
+        },
+        "principal_inertia": [
+          0.7668952316095512,
+          0.8959724612796148,
+          0.9062008771108342
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.7566668157783317
+      },
+      {
+        "name": "rf0_Link",
+        "mass": 0.90915231,
+        "com": {
+          "xyz": "0.05579152 -0.01531996 0.02508530",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00258753",
+          "ixy": "-0.00047476",
+          "ixz": "-0.00022160",
+          "iyy": "0.00465231",
+          "iyz": "0.00012889",
+          "izz": "0.00692347"
+        },
+        "principal_inertia": [
+          0.002475551490157092,
+          0.004742569919476065,
+          0.006945188590366846
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0002729328192663102
+      },
+      {
+        "name": "rf1_Link",
+        "mass": 0.38592788,
+        "com": {
+          "xyz": "0.00063178 -0.06725784 0.02130251",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00359139",
+          "ixy": "0.00017886",
+          "ixz": "-0.00000678",
+          "iyy": "0.00013852",
+          "iyz": "0.00014917",
+          "izz": "0.00365441"
+        },
+        "principal_inertia": [
+          0.00012296591915842944,
+          0.0036006160736344684,
+          0.0036607380072071014
+        ],
+        "positive_definite": true,
+        "triangle_margin": 6.28439855857965e-05
+      },
+      {
+        "name": "r_wheel_Link",
+        "mass": 0.56798986,
+        "com": {
+          "xyz": "0.00001566 0.00021572 0.00883986",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00039883",
+          "ixy": "0.00000022",
+          "ixz": "0.00000008",
+          "iyy": "0.00040118",
+          "iyz": "0.00000164",
+          "izz": "0.00060005"
+        },
+        "principal_inertia": [
+          0.0003988095558296851,
+          0.0004011868874166232,
+          0.0006000635567536917
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0001999328864926165
+      },
+      {
+        "name": "lf0_Link",
+        "mass": 0.90915231,
+        "com": {
+          "xyz": "0.05579152 0.01531996 0.02508530",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00258753",
+          "ixy": "0.00047476",
+          "ixz": "-0.00022160",
+          "iyy": "0.00465231",
+          "iyz": "-0.00012889",
+          "izz": "0.00692347"
+        },
+        "principal_inertia": [
+          0.002475551490157092,
+          0.004742569919476065,
+          0.006945188590366846
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0002729328192663102
+      },
+      {
+        "name": "lf1_Link",
+        "mass": 0.38592788,
+        "com": {
+          "xyz": "0.00063178 0.06725784 0.02130251",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00359139",
+          "ixy": "-0.00017886",
+          "ixz": "-0.00000678",
+          "iyy": "0.00013852",
+          "iyz": "-0.00014917",
+          "izz": "0.00365441"
+        },
+        "principal_inertia": [
+          0.00012296591915842944,
+          0.0036006160736344684,
+          0.0036607380072071014
+        ],
+        "positive_definite": true,
+        "triangle_margin": 6.28439855857965e-05
+      },
+      {
+        "name": "l_wheel_Link",
+        "mass": 0.56798986,
+        "com": {
+          "xyz": "-0.00001566 0.00021572 0.00883986",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00039883",
+          "ixy": "-0.00000022",
+          "ixz": "-0.00000008",
+          "iyy": "0.00040118",
+          "iyz": "0.00000164",
+          "izz": "0.00060005"
+        },
+        "principal_inertia": [
+          0.0003988095558296851,
+          0.0004011868874166232,
+          0.0006000635567536917
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0001999328864926165
+      }
+    ],
+    "joints": [
+      {
+        "name": "rf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "rf0_Link",
+        "origin": {
+          "xyz": "0.00796170261298679 -0.171000000000018 0.12425",
+          "rpy": "1.5707963267949 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "rf1_Joint",
+        "type": "revolute",
+        "parent": "rf0_Link",
+        "child": "rf1_Link",
+        "origin": {
+          "xyz": "0.21 0 0.0167",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-1.1397",
+          "upper": "0.55868",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "r_wheel_Joint",
+        "type": "revolute",
+        "parent": "rf1_Link",
+        "child": "r_wheel_Link",
+        "origin": {
+          "xyz": "0.00499999999998946 -0.249947737069665 0.042499999999986",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      },
+      {
+        "name": "lf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "lf0_Link",
+        "origin": {
+          "xyz": "0.0079617 0.171 0.12425",
+          "rpy": "-1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "lf1_Joint",
+        "type": "revolute",
+        "parent": "lf0_Link",
+        "child": "lf1_Link",
+        "origin": {
+          "xyz": "0.21 0 0.0165",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.55868",
+          "upper": "1.1397",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "l_wheel_Joint",
+        "type": "revolute",
+        "parent": "lf1_Link",
+        "child": "l_wheel_Link",
+        "origin": {
+          "xyz": "0.00500001058515642 0.249947730172021 0.0424999995080837",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      }
+    ],
+    "meshes": [
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_Link.STL",
+        "exists": false
+      }
+    ],
+    "mimic_count": 0,
+    "transmission_count": 0
+  },
+  {
+    "path": "upstream/fudan_rl_wheel_leg/plane/resources/robots/hero_V1/urdf/hero_V1.urdf",
+    "sha256": "ffd4c9cfcc37bac17bb5d8d60f1e87ad32efbf501be80970e165e7a27f2ac912",
+    "total_mass": 29.19720375,
+    "links": [
+      {
+        "name": "base_link",
+        "mass": 25.15148655,
+        "com": {
+          "xyz": "0.00036631 0.00001600 0.14484410",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.76051334",
+          "ixy": "-0.00302024",
+          "ixz": "0.00335043",
+          "iyy": "0.80972901",
+          "iyz": "0.00172488",
+          "izz": "1.03143165"
+        },
+        "principal_inertia": [
+          0.7602847981109077,
+          0.809903281782001,
+          1.0314859201070918
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.5387021597858168
+      },
+      {
+        "name": "rf0_Link",
+        "mass": 1.05739847,
+        "com": {
+          "xyz": "0.06513094 -0.01743042 0.03841219",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00314372",
+          "ixy": "-0.00070653",
+          "ixz": "-0.00035513",
+          "iyy": "0.00768884",
+          "iyz": "0.00021918",
+          "izz": "0.01034685"
+        },
+        "principal_inertia": [
+          0.003022571577255296,
+          0.0077680958023547105,
+          0.010388742620389996
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0004019247592200112
+      },
+      {
+        "name": "rf1_Link",
+        "mass": 0.36375013,
+        "com": {
+          "xyz": "-0.00219223 -0.10365900 -0.01083735",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00374071",
+          "ixy": "0.00012014",
+          "ixz": "-0.00000168",
+          "iyy": "0.00009783",
+          "iyz": "0.00002447",
+          "izz": "0.00381366"
+        },
+        "principal_inertia": [
+          9.371063635113153e-05,
+          0.0037446568166248635,
+          0.0038138325470240047
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.4534905951990177e-05
+      },
+      {
+        "name": "r_wheel_Link",
+        "mass": 0.6002372,
+        "com": {
+          "xyz": "0.00002817 -0.00021501 0.03186971",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00025229",
+          "ixy": "-0.00000007",
+          "ixz": "0.00000006",
+          "iyy": "0.00025291",
+          "iyz": "-0.00000049",
+          "izz": "0.00044427"
+        },
+        "principal_inertia": [
+          0.0002522821948799702,
+          0.00025291653156116683,
+          0.0004442712735588629
+        ],
+        "positive_definite": true,
+        "triangle_margin": 6.092745288227406e-05
+      },
+      {
+        "name": "lf0_Link",
+        "mass": 1.06034407,
+        "com": {
+          "xyz": "0.06530592 0.01754582 0.03833646",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00315106",
+          "ixy": "0.00069884",
+          "ixz": "-0.00035008",
+          "iyy": "0.00770276",
+          "iyz": "-0.00021585",
+          "izz": "0.01036359"
+        },
+        "principal_inertia": [
+          0.0030326900945596264,
+          0.0077805845624569995,
+          0.010404135342983366
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.00040913931403326054
+      },
+      {
+        "name": "lf1_Link",
+        "mass": 0.36375013,
+        "com": {
+          "xyz": "-0.00219571 0.10365900 -0.01084205",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00374074",
+          "ixy": "-0.00012010",
+          "ixz": "-0.00000170",
+          "iyy": "0.00009786",
+          "iyz": "-0.00002475",
+          "izz": "0.00381366"
+        },
+        "principal_inertia": [
+          9.373954952502944e-05,
+          0.0037446839000230543,
+          0.003813836550451916
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.4586899096167795e-05
+      },
+      {
+        "name": "l_wheel_Link",
+        "mass": 0.6002372,
+        "com": {
+          "xyz": "-0.00002817 0.00021501 0.03186971",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00025229",
+          "ixy": "-0.00000007",
+          "ixz": "-0.00000006",
+          "iyy": "0.00025291",
+          "iyz": "0.00000049",
+          "izz": "0.00044427"
+        },
+        "principal_inertia": [
+          0.0002522821948799702,
+          0.00025291653156116683,
+          0.0004442712735588629
+        ],
+        "positive_definite": true,
+        "triangle_margin": 6.092745288227406e-05
+      }
+    ],
+    "joints": [
+      {
+        "name": "rf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "rf0_Link",
+        "origin": {
+          "xyz": "0 -0.1972 0.12425",
+          "rpy": "1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "rf1_Joint",
+        "type": "revolute",
+        "parent": "rf0_Link",
+        "child": "rf1_Link",
+        "origin": {
+          "xyz": "0.22496 0 0.0689",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-1.148252115",
+          "upper": "0.3560471674",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "r_wheel_Joint",
+        "type": "revolute",
+        "parent": "rf1_Link",
+        "child": "r_wheel_Link",
+        "origin": {
+          "xyz": "0 -0.26781 -0.0223",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      },
+      {
+        "name": "lf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "lf0_Link",
+        "origin": {
+          "xyz": "0 0.1972 0.12425",
+          "rpy": "-1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "lf1_Joint",
+        "type": "revolute",
+        "parent": "lf0_Link",
+        "child": "lf1_Link",
+        "origin": {
+          "xyz": "0.22496 0 0.069",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.3560471674",
+          "upper": "1.148252115",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "l_wheel_Joint",
+        "type": "revolute",
+        "parent": "lf1_Link",
+        "child": "l_wheel_Link",
+        "origin": {
+          "xyz": "0 0.26781 -0.0223",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      }
+    ],
+    "meshes": [
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_link.STL",
+        "exists": false
+      }
+    ],
+    "mimic_count": 0,
+    "transmission_count": 0
+  },
+  {
+    "path": "upstream/fudan_rl_wheel_leg/plane/resources/robots/hero_V1/urdf/hero_V1_wuyuntai.urdf",
+    "sha256": "664c7e1fbad74f410da0d37aa081437df99286c1119f24c7cc5d434660423c6f",
+    "total_mass": 17.341724199999998,
+    "links": [
+      {
+        "name": "base_link",
+        "mass": 13.296007,
+        "com": {
+          "xyz": "-0.01333116  0.00137755 0.082647",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.295162",
+          "ixy": "-0.00134315",
+          "ixz": "0.00406255",
+          "iyy": "0.3033171",
+          "iyz": "-0.001169",
+          "izz": "0.55574753"
+        },
+        "principal_inertia": [
+          0.2948902806489776,
+          0.30351989274278535,
+          0.5558164566082369
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.04259371678352608
+      },
+      {
+        "name": "rf0_Link",
+        "mass": 1.05739847,
+        "com": {
+          "xyz": "0.06513094 -0.01743042 0.03841219",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00314372",
+          "ixy": "-0.00070653",
+          "ixz": "-0.00035513",
+          "iyy": "0.00768884",
+          "iyz": "0.00021918",
+          "izz": "0.01034685"
+        },
+        "principal_inertia": [
+          0.003022571577255296,
+          0.0077680958023547105,
+          0.010388742620389996
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0004019247592200112
+      },
+      {
+        "name": "rf1_Link",
+        "mass": 0.36375013,
+        "com": {
+          "xyz": "-0.00219223 -0.10365900 -0.01083735",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00374071",
+          "ixy": "0.00012014",
+          "ixz": "-0.00000168",
+          "iyy": "0.00009783",
+          "iyz": "0.00002447",
+          "izz": "0.00381366"
+        },
+        "principal_inertia": [
+          9.371063635113153e-05,
+          0.0037446568166248635,
+          0.0038138325470240047
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.4534905951990177e-05
+      },
+      {
+        "name": "r_wheel_Link",
+        "mass": 0.6002372,
+        "com": {
+          "xyz": "0.00002817 -0.00021501 0.03186971",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00025229",
+          "ixy": "-0.00000007",
+          "ixz": "0.00000006",
+          "iyy": "0.00025291",
+          "iyz": "-0.00000049",
+          "izz": "0.00044427"
+        },
+        "principal_inertia": [
+          0.0002522821948799702,
+          0.00025291653156116683,
+          0.0004442712735588629
+        ],
+        "positive_definite": true,
+        "triangle_margin": 6.092745288227406e-05
+      },
+      {
+        "name": "lf0_Link",
+        "mass": 1.06034407,
+        "com": {
+          "xyz": "0.06530592 0.01754582 0.03833646",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00315106",
+          "ixy": "0.00069884",
+          "ixz": "-0.00035008",
+          "iyy": "0.00770276",
+          "iyz": "-0.00021585",
+          "izz": "0.01036359"
+        },
+        "principal_inertia": [
+          0.0030326900945596264,
+          0.0077805845624569995,
+          0.010404135342983366
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.00040913931403326054
+      },
+      {
+        "name": "lf1_Link",
+        "mass": 0.36375013,
+        "com": {
+          "xyz": "-0.00219571 0.10365900 -0.01084205",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00374074",
+          "ixy": "-0.00012010",
+          "ixz": "-0.00000170",
+          "iyy": "0.00009786",
+          "iyz": "-0.00002475",
+          "izz": "0.00381366"
+        },
+        "principal_inertia": [
+          9.373954952502944e-05,
+          0.0037446839000230543,
+          0.003813836550451916
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.4586899096167795e-05
+      },
+      {
+        "name": "l_wheel_Link",
+        "mass": 0.6002372,
+        "com": {
+          "xyz": "-0.00002817 0.00021501 0.03186971",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00025229",
+          "ixy": "-0.00000007",
+          "ixz": "-0.00000006",
+          "iyy": "0.00025291",
+          "iyz": "0.00000049",
+          "izz": "0.00044427"
+        },
+        "principal_inertia": [
+          0.0002522821948799702,
+          0.00025291653156116683,
+          0.0004442712735588629
+        ],
+        "positive_definite": true,
+        "triangle_margin": 6.092745288227406e-05
+      }
+    ],
+    "joints": [
+      {
+        "name": "rf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "rf0_Link",
+        "origin": {
+          "xyz": "0 -0.1972 0.12425",
+          "rpy": "1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "rf1_Joint",
+        "type": "revolute",
+        "parent": "rf0_Link",
+        "child": "rf1_Link",
+        "origin": {
+          "xyz": "0.22496 0 0.0689",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-1.148252115",
+          "upper": "0.3560471674",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "r_wheel_Joint",
+        "type": "revolute",
+        "parent": "rf1_Link",
+        "child": "r_wheel_Link",
+        "origin": {
+          "xyz": "0 -0.26781 -0.0223",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      },
+      {
+        "name": "lf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "lf0_Link",
+        "origin": {
+          "xyz": "0 0.1972 0.12425",
+          "rpy": "-1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "lf1_Joint",
+        "type": "revolute",
+        "parent": "lf0_Link",
+        "child": "lf1_Link",
+        "origin": {
+          "xyz": "0.22496 0 0.069",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.3560471674",
+          "upper": "1.148252115",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "l_wheel_Joint",
+        "type": "revolute",
+        "parent": "lf1_Link",
+        "child": "l_wheel_Link",
+        "origin": {
+          "xyz": "0 0.26781 -0.0223",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      }
+    ],
+    "meshes": [
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_link.STL",
+        "exists": false
+      }
+    ],
+    "mimic_count": 0,
+    "transmission_count": 0
+  },
+  {
+    "path": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V1/urdf/infantry_V1.urdf",
+    "sha256": "948a86c85f5bbda145fc040b97e8eab23d1db31e7db74e60cc4282ca2b0ea386",
+    "total_mass": 15.54238,
+    "links": [
+      {
+        "name": "base_link",
+        "mass": 11.69,
+        "com": {
+          "xyz": "-0.010069 0.00010673 0.067003",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.24145",
+          "ixy": "-0.00030335",
+          "ixz": "-0.0082381",
+          "iyy": "0.22555",
+          "iyz": "-9.443E-05",
+          "izz": "0.41337"
+        },
+        "principal_inertia": [
+          0.22554387003257678,
+          0.24106224331307957,
+          0.4137638866543437
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.052842226691312666
+      },
+      {
+        "name": "rf0_Link",
+        "mass": 1.1284,
+        "com": {
+          "xyz": "0.056869 -0.016331 -0.0092923",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.0020837",
+          "ixy": "-0.00025846",
+          "ixz": "-0.00015224",
+          "iyy": "0.004896",
+          "iyz": "0.00011055",
+          "izz": "0.0066392"
+        },
+        "principal_inertia": [
+          0.0020557656347478287,
+          0.004910709101779392,
+          0.006652425263472785
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0003140494730544362
+      },
+      {
+        "name": "rf1_Link",
+        "mass": 0.30687,
+        "com": {
+          "xyz": "-0.0027879 -0.071068 0.0068255",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.0024737",
+          "ixy": "0.00012524",
+          "ixz": "-3.47E-06",
+          "iyy": "9.269E-05",
+          "iyz": "3.434E-05",
+          "izz": "0.00254"
+        },
+        "principal_inertia": [
+          8.563632133071833e-05,
+          0.0024802233666210293,
+          0.0025405303120482527
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.532937590349468e-05
+      },
+      {
+        "name": "r_wheel_Link",
+        "mass": 0.49107,
+        "com": {
+          "xyz": "4.344E-06 -0.00019279 0.019561",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00033977",
+          "ixy": "0",
+          "ixz": "3E-08",
+          "iyy": "0.00034151",
+          "iyz": "-1.52E-06",
+          "izz": "0.00058201"
+        },
+        "principal_inertia": [
+          0.000339769996264199,
+          0.0003415003937516687,
+          0.0005820196099841323
+        ],
+        "positive_definite": true,
+        "triangle_margin": 9.925078003173533e-05
+      },
+      {
+        "name": "lf0_Link",
+        "mass": 1.1281,
+        "com": {
+          "xyz": "0.056995 0.01636 -0.0092905",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00208547",
+          "ixy": "0.00025333",
+          "ixz": "-0.0001532",
+          "iyy": "0.00488676",
+          "iyz": "-0.00011073",
+          "izz": "0.00663189"
+        },
+        "principal_inertia": [
+          0.002058287651596734,
+          0.004900643869022004,
+          0.0066451884793812584
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0003137430412374796
+      },
+      {
+        "name": "lf1_Link",
+        "mass": 0.30687,
+        "com": {
+          "xyz": "-0.0027891 0.071068 0.0068255",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00247367",
+          "ixy": "-0.00012525",
+          "ixz": "-3.47E-06",
+          "iyy": "9.269E-05",
+          "iyz": "-3.434E-05",
+          "izz": "0.00254003"
+        },
+        "principal_inertia": [
+          8.563519865460823e-05,
+          0.0024801945492916293,
+          0.0025405602520537623
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.526949589247516e-05
+      },
+      {
+        "name": "l_wheel_Link",
+        "mass": 0.49107,
+        "com": {
+          "xyz": "-4.3438E-06 0.00019279 0.019561",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00033977",
+          "ixy": "0",
+          "ixz": "-3E-08",
+          "iyy": "0.00034151",
+          "iyz": "1.52E-06",
+          "izz": "0.00058201"
+        },
+        "principal_inertia": [
+          0.000339769996264199,
+          0.0003415003937516687,
+          0.0005820196099841323
+        ],
+        "positive_definite": true,
+        "triangle_margin": 9.925078003173533e-05
+      }
+    ],
+    "joints": [
+      {
+        "name": "rf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "rf0_Link",
+        "origin": {
+          "xyz": "0 -0.1877 0.08725",
+          "rpy": "1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "rf1_Joint",
+        "type": "revolute",
+        "parent": "rf0_Link",
+        "child": "rf1_Link",
+        "origin": {
+          "xyz": "0.17472 0 0",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.9",
+          "upper": "0.65",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "r_wheel_Joint",
+        "type": "revolute",
+        "parent": "rf1_Link",
+        "child": "r_wheel_Link",
+        "origin": {
+          "xyz": "0 -0.208 0.016",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      },
+      {
+        "name": "lf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "lf0_Link",
+        "origin": {
+          "xyz": "0 0.1877 0.08725",
+          "rpy": "-1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "lf1_Joint",
+        "type": "revolute",
+        "parent": "lf0_Link",
+        "child": "lf1_Link",
+        "origin": {
+          "xyz": "0.17472 0 0",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.65",
+          "upper": "0.9",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "l_wheel_Joint",
+        "type": "revolute",
+        "parent": "lf1_Link",
+        "child": "l_wheel_Link",
+        "origin": {
+          "xyz": "0 0.208 0.016",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      }
+    ],
+    "meshes": [
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf0_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lf1_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_Link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_Link.STL",
+        "exists": false
+      }
+    ],
+    "mimic_count": 0,
+    "transmission_count": 0
+  },
+  {
+    "path": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V1_old/urdf/old7.urdf",
+    "sha256": "dc61cffed1499ce0905e48a0bf0588a4db8f066bf2686943de3e56e65c8b221f",
+    "total_mass": 12.32719241,
+    "links": [
+      {
+        "name": "base_link",
+        "mass": 7.89691931,
+        "com": {
+          "xyz": "0.00179494013119796 -0.00408887457381202 0.062447376474095",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.08846480",
+          "ixy": "-0.00261747",
+          "ixz": "-0.00077709",
+          "iyy": "0.15462366",
+          "iyz": "0.00004854",
+          "izz": "0.09458607"
+        },
+        "principal_inertia": [
+          0.08826646834451897,
+          0.09468090296024793,
+          0.154727158695233
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.02822021260953389
+      },
+      {
+        "name": "rf0_Link",
+        "mass": 1.45406108,
+        "com": {
+          "xyz": "0.0517611350421233 -0.00885705313718782 -0.069080215493451",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00280006",
+          "ixy": "-0.00005213",
+          "ixz": "-0.00094382",
+          "iyy": "0.00770044",
+          "iyz": "0.00021148",
+          "izz": "0.00873033"
+        },
+        "principal_inertia": [
+          0.0026533996661286872,
+          0.007661769746619901,
+          0.00891566058725141
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0013995088254971783
+      },
+      {
+        "name": "rf1_Link",
+        "mass": 0.52326467,
+        "com": {
+          "xyz": "0.000295632136163682 -0.0809694063061352 -0.014309829374874",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00568000",
+          "ixy": " 0.00030513",
+          "ixz": "-0.00000227",
+          "iyy": "0.00021069",
+          "iyz": "0.00012305",
+          "izz": "0.00578863"
+        },
+        "principal_inertia": [
+          0.00019101745606258543,
+          0.005696750013757892,
+          0.005791552530179522
+        ],
+        "positive_definite": true,
+        "triangle_margin": 9.621493964095517e-05
+      },
+      {
+        "name": "r_wheel_Link",
+        "mass": 0.25423708,
+        "com": {
+          "xyz": "3.56695168707288E-06 -0.000246574367483543 0.033370137346416",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00022551",
+          "ixy": "-0.00000321",
+          "ixz": "0.00000021",
+          "iyy": " 0.00022742",
+          "iyz": "-0.00000010",
+          "izz": "0.00039835"
+        },
+        "principal_inertia": [
+          0.00022311588437925144,
+          0.00022981379729413367,
+          0.0003983503183266147
+        ],
+        "positive_definite": true,
+        "triangle_margin": 5.457936334677039e-05
+      },
+      {
+        "name": "lf0_Link",
+        "mass": 1.44748738,
+        "com": {
+          "xyz": "0.0519962058608485 0.00889727688439555 -0.0692537580992069",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00279027",
+          "ixy": "0.00005537",
+          "ixz": "-0.00095688",
+          "iyy": "0.00767360",
+          "iyz": "-0.00021371",
+          "izz": "0.00870721"
+        },
+        "principal_inertia": [
+          0.0026392817070382394,
+          0.007634243164514975,
+          0.008897555128446788
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0013759697431064265
+      },
+      {
+        "name": "lf1_Link",
+        "mass": 0.49698581,
+        "inertia": {
+          "ixx": "0.00530328",
+          "ixy": "-0 0.00027178",
+          "ixz": "-0.00000149",
+          "iyy": " 0.00019831",
+          "iyz": "-0.00011383",
+          "izz": "0.00541252"
+        },
+        "parse_error": "could not convert string to float: '-0 0.00027178'"
+      },
+      {
+        "name": "l_wheel_Link",
+        "mass": 0.25423708,
+        "com": {
+          "xyz": "9.34262156931931E-06 0.000246423143387922 0.0333701373189504",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00022518",
+          "ixy": "-0.00000310",
+          "ixz": "-0.00000021",
+          "iyy": "0.00022775",
+          "iyz": "0.00000012",
+          "izz": "0.00039835"
+        },
+        "principal_inertia": [
+          0.00022310915860353382,
+          0.00022982049692549386,
+          0.00039835034447097204
+        ],
+        "positive_definite": true,
+        "triangle_margin": 5.4579311058055636e-05
+      }
+    ],
+    "joints": [
+      {
+        "name": "rf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "rf0_Link",
+        "origin": {
+          "xyz": "0 -0.2224 0.116",
+          "rpy": "1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-1.8",
+          "upper": "0.8",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "rf1_Joint",
+        "type": "revolute",
+        "parent": "rf0_Link",
+        "child": "rf1_Link",
+        "origin": {
+          "xyz": "0.215 0 -0.0289",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-1.6",
+          "upper": "1.4",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "r_wheel_Joint",
+        "type": "revolute",
+        "parent": "rf1_Link",
+        "child": "r_wheel_Link",
+        "origin": {
+          "xyz": "0.0067537 -0.25791 -0.0223",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      },
+      {
+        "name": "lf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "lf0_Link",
+        "origin": {
+          "xyz": "0 0.2224 0.116",
+          "rpy": "-1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.8",
+          "upper": "1.8",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "lf1_Joint",
+        "type": "revolute",
+        "parent": "lf0_Link",
+        "child": "lf1_Link",
+        "origin": {
+          "xyz": "0.215 0 -0.0399",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-1.4",
+          "upper": "1.6",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "l_wheel_Joint",
+        "type": "revolute",
+        "parent": "lf1_Link",
+        "child": "l_wheel_Link",
+        "origin": {
+          "xyz": "0.0067537 0.25791 -0.0113",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      }
+    ],
+    "meshes": [
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/rf1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/r_wheel_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lr0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lr0_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lr1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/lr1_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_link.STL",
+        "exists": false
+      },
+      {
+        "reference": "../meshes/l_wheel_link.STL",
+        "exists": false
+      }
+    ],
+    "mimic_count": 0,
+    "transmission_count": 0
+  },
+  {
+    "path": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/urdf/infantry_V4.urdf",
+    "sha256": "c4181e221e89fb4932a6e0389142a3385d953f03484bde4c819ef2afb3998fad",
+    "total_mass": 18.3492386,
+    "links": [
+      {
+        "name": "base_link",
+        "mass": 14.528116,
+        "com": {
+          "xyz": "0.00822124 0.00099127 0.0982217",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.28353",
+          "ixy": "-0.00174358",
+          "ixz": "-0.00825907",
+          "iyy": "0.35249",
+          "iyz": "-0.00214156",
+          "izz": "0.3701"
+        },
+        "principal_inertia": [
+          0.28269528626734447,
+          0.35233512171766435,
+          0.3710895920149912
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.2639408159700177
+      },
+      {
+        "name": "rf0_Link",
+        "mass": 1.1132,
+        "com": {
+          "xyz": "0.05527628 -0.01655437 -0.00927161",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00207047",
+          "ixy": "-0.00022911",
+          "ixz": "-0.00015432",
+          "iyy": "0.00467389",
+          "iyz": "0.00011008",
+          "izz": "0.00640479"
+        },
+        "principal_inertia": [
+          0.0020456876651102174,
+          0.00468512858131966,
+          0.00641833375357012
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0003124824928597567
+      },
+      {
+        "name": "rf1_Link",
+        "mass": 0.3068726,
+        "com": {
+          "xyz": "-0.00283459 -0.07106759 0.0068255",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00247367",
+          "ixy": "0.0001249",
+          "ixz": "-3.42E-06",
+          "iyy": "9.262E-05",
+          "iyz": "3.434E-05",
+          "izz": "0.00253997"
+        },
+        "principal_inertia": [
+          8.560203502389639e-05,
+          0.0024801602141938943,
+          0.002540497750782209
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.526449843558154e-05
+      },
+      {
+        "name": "r_wheel_Link",
+        "mass": 0.49069,
+        "com": {
+          "xyz": "4.3469E-06 -0.00019294 0.019568",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00033972",
+          "ixy": "0",
+          "ixz": "3E-08",
+          "iyy": "0.00034147",
+          "iyz": "-1.52E-06",
+          "izz": "0.00058188"
+        },
+        "principal_inertia": [
+          0.00033971999626307577,
+          0.0003414603901556449,
+          0.0005818896135812795
+        ],
+        "positive_definite": true,
+        "triangle_margin": 9.929077283744121e-05
+      },
+      {
+        "name": "lf0_Link",
+        "mass": 1.1128,
+        "com": {
+          "xyz": "0.055403 0.016584 -0.0092702",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00207221",
+          "ixy": "0.00022396",
+          "ixz": "-0.00015529",
+          "iyy": "0.00466506",
+          "iyz": "-0.00011027",
+          "izz": "0.00639795"
+        },
+        "principal_inertia": [
+          0.0020481472965333805,
+          0.004675501083692404,
+          0.006411571619774216
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0003120767604515686
+      },
+      {
+        "name": "lf1_Link",
+        "mass": 0.30687,
+        "com": {
+          "xyz": "-0.0028358 0.071068 0.0068255",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00247367",
+          "ixy": "-0.0001249",
+          "ixz": "-3.42E-06",
+          "iyy": "9.262E-05",
+          "iyz": "-3.434E-05",
+          "izz": "0.00253997"
+        },
+        "principal_inertia": [
+          8.560203502389639e-05,
+          0.0024801602141938943,
+          0.002540497750782209
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.526449843558154e-05
+      },
+      {
+        "name": "l_wheel_Link",
+        "mass": 0.49069,
+        "com": {
+          "xyz": "-4.3477E-06 0.00019294 0.019568",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00033972",
+          "ixy": "0",
+          "ixz": "-3E-08",
+          "iyy": "0.00034147",
+          "iyz": "1.52E-06",
+          "izz": "0.00058188"
+        },
+        "principal_inertia": [
+          0.00033971999626307577,
+          0.0003414603901556449,
+          0.0005818896135812795
+        ],
+        "positive_definite": true,
+        "triangle_margin": 9.929077283744121e-05
+      }
+    ],
+    "joints": [
+      {
+        "name": "rf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "rf0_Link",
+        "origin": {
+          "xyz": "0 -0.1877 0.08725",
+          "rpy": "1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "rf1_Joint",
+        "type": "revolute",
+        "parent": "rf0_Link",
+        "child": "rf1_Link",
+        "origin": {
+          "xyz": "0.17472 0 0",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.9",
+          "upper": "0.65",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "r_wheel_Joint",
+        "type": "revolute",
+        "parent": "rf1_Link",
+        "child": "r_wheel_Link",
+        "origin": {
+          "xyz": "0 -0.208 0.016",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      },
+      {
+        "name": "lf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "lf0_Link",
+        "origin": {
+          "xyz": "0 0.1877 0.08725",
+          "rpy": "-1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "lf1_Joint",
+        "type": "revolute",
+        "parent": "lf0_Link",
+        "child": "lf1_Link",
+        "origin": {
+          "xyz": "0.17472 0 0",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.65",
+          "upper": "0.9",
+          "effort": "30",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "l_wheel_Joint",
+        "type": "revolute",
+        "parent": "lf1_Link",
+        "child": "l_wheel_Link",
+        "origin": {
+          "xyz": "0 0.208 0.016",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "50",
+          "velocity": "1500"
+        }
+      }
+    ],
+    "meshes": [
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/rf0_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/rf0_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/rf1_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/rf1_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/r_wheel_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/r_wheel_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/lf0_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/lf0_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/lf1_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/lf1_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/l_wheel_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/l_wheel_Link.STL",
+        "exists": true
+      }
+    ],
+    "mimic_count": 0,
+    "transmission_count": 0
+  },
+  {
+    "path": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/urdf/infantry_V4_increase.urdf",
+    "sha256": "0fe2630b17fb123cbd8e9943516e4eec4901487cf85dbdcd74f9a22302209b83",
+    "total_mass": 20.698696599999998,
+    "links": [
+      {
+        "name": "base_link",
+        "mass": 16.877574,
+        "com": {
+          "xyz": "-0.00406060 0.0008523 0.097142",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.3595155",
+          "ixy": "-0.00174358",
+          "ixz": "-0.00825907",
+          "iyy": "0.35249",
+          "iyz": "-0.00214156",
+          "izz": "0.45655"
+        },
+        "principal_inertia": [
+          0.3519193762427477,
+          0.35935048164455674,
+          0.45728564211269546
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.253984215774609
+      },
+      {
+        "name": "rf0_Link",
+        "mass": 1.1132,
+        "com": {
+          "xyz": "0.05527628 -0.01655437 -0.00927161",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00207047",
+          "ixy": "-0.00022911",
+          "ixz": "-0.00015432",
+          "iyy": "0.00467389",
+          "iyz": "0.00011008",
+          "izz": "0.00640479"
+        },
+        "principal_inertia": [
+          0.0020456876651102174,
+          0.00468512858131966,
+          0.00641833375357012
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0003124824928597567
+      },
+      {
+        "name": "rf1_Link",
+        "mass": 0.3068726,
+        "com": {
+          "xyz": "-0.00283459 -0.07106759 0.0068255",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00247367",
+          "ixy": "0.0001249",
+          "ixz": "-3.42E-06",
+          "iyy": "9.262E-05",
+          "iyz": "3.434E-05",
+          "izz": "0.00253997"
+        },
+        "principal_inertia": [
+          8.560203502389639e-05,
+          0.0024801602141938943,
+          0.002540497750782209
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.526449843558154e-05
+      },
+      {
+        "name": "r_wheel_Link",
+        "mass": 0.49069,
+        "com": {
+          "xyz": "4.3469E-06 -0.00019294 0.019568",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00033972",
+          "ixy": "0",
+          "ixz": "3E-08",
+          "iyy": "0.00034147",
+          "iyz": "-1.52E-06",
+          "izz": "0.00068188"
+        },
+        "principal_inertia": [
+          0.00033971999735946313,
+          0.0003414632130359474,
+          0.0006818867896045894
+        ],
+        "positive_definite": true,
+        "triangle_margin": -7.035792091788931e-07
+      },
+      {
+        "name": "lf0_Link",
+        "mass": 1.1128,
+        "com": {
+          "xyz": "0.055403 0.016584 -0.0092702",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00207221",
+          "ixy": "0.00022396",
+          "ixz": "-0.00015529",
+          "iyy": "0.00466506",
+          "iyz": "-0.00011027",
+          "izz": "0.00639795"
+        },
+        "principal_inertia": [
+          0.0020481472965333805,
+          0.004675501083692404,
+          0.006411571619774216
+        ],
+        "positive_definite": true,
+        "triangle_margin": 0.0003120767604515686
+      },
+      {
+        "name": "lf1_Link",
+        "mass": 0.30687,
+        "com": {
+          "xyz": "-0.0028358 0.071068 0.0068255",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00247367",
+          "ixy": "-0.0001249",
+          "ixz": "-3.42E-06",
+          "iyy": "9.262E-05",
+          "iyz": "-3.434E-05",
+          "izz": "0.00253997"
+        },
+        "principal_inertia": [
+          8.560203502389639e-05,
+          0.0024801602141938943,
+          0.002540497750782209
+        ],
+        "positive_definite": true,
+        "triangle_margin": 2.526449843558154e-05
+      },
+      {
+        "name": "l_wheel_Link",
+        "mass": 0.49069,
+        "com": {
+          "xyz": "-4.3477E-06 0.00019294 0.019568",
+          "rpy": "0 0 0"
+        },
+        "inertia": {
+          "ixx": "0.00033972",
+          "ixy": "0",
+          "ixz": "-3E-08",
+          "iyy": "0.00034147",
+          "iyz": "1.52E-06",
+          "izz": "0.00068188"
+        },
+        "principal_inertia": [
+          0.00033971999735946313,
+          0.0003414632130359474,
+          0.0006818867896045894
+        ],
+        "positive_definite": true,
+        "triangle_margin": -7.035792091788931e-07
+      }
+    ],
+    "joints": [
+      {
+        "name": "rf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "rf0_Link",
+        "origin": {
+          "xyz": "0 -0.1877 0.08725",
+          "rpy": "1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "50",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "rf1_Joint",
+        "type": "revolute",
+        "parent": "rf0_Link",
+        "child": "rf1_Link",
+        "origin": {
+          "xyz": "0.17472 0 0",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-1.1",
+          "upper": "0.65",
+          "effort": "50",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "r_wheel_Joint",
+        "type": "revolute",
+        "parent": "rf1_Link",
+        "child": "r_wheel_Link",
+        "origin": {
+          "xyz": "0 -0.208 0.016",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "5",
+          "velocity": "1500"
+        }
+      },
+      {
+        "name": "lf0_Joint",
+        "type": "revolute",
+        "parent": "base_link",
+        "child": "lf0_Link",
+        "origin": {
+          "xyz": "0 0.1877 0.08725",
+          "rpy": "-1.5708 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-100",
+          "upper": "100",
+          "effort": "50",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "lf1_Joint",
+        "type": "revolute",
+        "parent": "lf0_Link",
+        "child": "lf1_Link",
+        "origin": {
+          "xyz": "0.17472 0 0",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "lower": "-0.65",
+          "upper": "1.1",
+          "effort": "50",
+          "velocity": "1000"
+        }
+      },
+      {
+        "name": "l_wheel_Joint",
+        "type": "revolute",
+        "parent": "lf1_Link",
+        "child": "l_wheel_Link",
+        "origin": {
+          "xyz": "0 0.208 0.016",
+          "rpy": "0 0 0"
+        },
+        "axis": {
+          "xyz": "0 0 1"
+        },
+        "limit": {
+          "effort": "5",
+          "velocity": "1500"
+        }
+      }
+    ],
+    "meshes": [
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/base_link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/rf0_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/rf0_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/rf1_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/rf1_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/r_wheel_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/r_wheel_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/lf0_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/lf0_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/lf1_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/lf1_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/l_wheel_Link.STL",
+        "exists": true
+      },
+      {
+        "reference": "../meshes/l_wheel_Link.STL",
+        "exists": true
+      }
+    ],
+    "mimic_count": 0,
+    "transmission_count": 0
+  }
+]

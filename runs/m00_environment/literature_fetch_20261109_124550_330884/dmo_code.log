@@ -1,0 +1,4 @@
+["git", "-c", "core.hooksPath=/dev/null", "clone", "--depth", "1", "--no-recurse-submodules", "https://github.com/machines-in-motion/DMO_code.git", "/home/cofallen/Code/毕业设计/upstream/research_20261109/DMO_code"]
+Cloning into '/home/cofallen/Code/毕业设计/upstream/research_20261109/DMO_code'...
+
+exit_code=0

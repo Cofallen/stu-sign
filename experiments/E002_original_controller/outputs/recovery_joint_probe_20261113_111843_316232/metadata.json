@@ -1,0 +1,33 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "/tmp/e002_1113_full.py",
+    "--extra",
+    "retract",
+    "--count",
+    "4",
+    "--wheel",
+    "3",
+    "--pitch",
+    "1.50"
+  ],
+  "cwd": "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller",
+  "mujoco": "3.11.0",
+  "numpy": "2.5.4",
+  "args": {
+    "pitch": 1.5,
+    "roll": 0.0,
+    "count": 4,
+    "seed": 6,
+    "wheel": 3.0,
+    "mode": "rise",
+    "start_file": null,
+    "extra": "retract"
+  },
+  "hashes": {
+    "assets/robot_no_gas_spring.xml": "263185e1f4a2a61d9e54803610d3e6b978c5ede259223552f278b3d623430088",
+    "LQR_six/vmc.py": "b5867c0d3996a35c672e7390b1b22a3e6b436205912713ceec4f40b684f8141a",
+    "standing_pose.json": "e94e06734096270711e2134e226a1d2b05beb893c886cc7e1ea1ca3a73fa1d70",
+    "gain_schedule.json": "bd71b73c78cc18ac05c94f2a25266abd905a86c56b65301431354e2e4541931c"
+  }
+}

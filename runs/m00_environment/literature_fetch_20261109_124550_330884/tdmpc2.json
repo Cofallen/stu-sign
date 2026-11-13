@@ -1,0 +1,22 @@
+{
+  "id": "tdmpc2",
+  "kind": "paper",
+  "title": "TD-MPC2: Scalable, Robust World Models for Continuous Control",
+  "arxiv": "2310.16828",
+  "url": "https://arxiv.org/abs/2310.16828",
+  "local": "references/papers/research_20261109/tdmpc2.pdf",
+  "purpose": "对照阅读：面向任务的世界模型与规划",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_verified_pdf",
+  "authors": [
+    "Hansen, Nicklas",
+    "Su, Hao",
+    "Wang, Xiaolong"
+  ],
+  "date": "2023/10/25",
+  "version": "v2",
+  "pdf_url": "https://arxiv.org/pdf/2310.16828v2",
+  "sha256": "99832c555b66665ad1e26cd48e75ea9dda4f3750175b993e7ed5b8dfe399b9e0",
+  "bytes": 7858004,
+  "exit_code": 0
+}

@@ -1,0 +1,134 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "controller.py",
+    "--headless",
+    "--reverse-trial",
+    "switch"
+  ],
+  "cwd": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller",
+  "python": "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+  "runtime_paths": {
+    "project": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller",
+    "output": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_nominal_20261112_231340_421321",
+    "modules": {
+      "LQR_six": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/__init__.py",
+      "LQR_six.get_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_sensor.py",
+      "LQR_six.parameters": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/parameters.py",
+      "LQR_six.write_sensor": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/write_sensor.py",
+      "LQR_six.mymath": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mymath.py",
+      "LQR_six.leg_data": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/leg_data.py",
+      "LQR_six.vmc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/vmc.py",
+      "LQR_six.get_state": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/get_state.py",
+      "LQR_six.lqr_model": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr_model.py",
+      "LQR_six.lqr": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr.py",
+      "LQR_six.mympc": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/mympc.py",
+      "LQR_six.lqr_controller": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/lqr_controller.py",
+      "LQR_six.render_stand": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/render_stand.py",
+      "LQR_six.jump": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/jump.py",
+      "LQR_six.teleop": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/teleop.py",
+      "LQR_six.step_trial": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/step_trial.py",
+      "LQR_six.keyboardInput": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/keyboardInput.py",
+      "LQR_six.simulation": "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/LQR_six/simulation.py"
+    }
+  },
+  "args": {
+    "terrain": "flat",
+    "control": "lqr",
+    "variant": "no-gas",
+    "case": "nominal",
+    "duration": 10.0,
+    "headless": true,
+    "viewer": false,
+    "no_drive": false,
+    "no_ui": false,
+    "camera_follow": false,
+    "hud": false,
+    "camera": "iso",
+    "video": null,
+    "video_size": "960x540",
+    "video_fps": 30,
+    "no_hud": false,
+    "follow": false,
+    "hold": false,
+    "drive": false,
+    "step_trial_x": null,
+    "step_up": false,
+    "reverse_trial": "switch"
+  },
+  "versions": {
+    "mujoco": "3.11.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "actuator_ctrlrange_nm": {
+    "act_lf0": [
+      -40.0,
+      40.0
+    ],
+    "act_lw": [
+      -5.0,
+      5.0
+    ],
+    "act_rf0": [
+      -40.0,
+      40.0
+    ],
+    "act_rw": [
+      -5.0,
+      5.0
+    ],
+    "act_lf20": [
+      -40.0,
+      40.0
+    ],
+    "act_rf20": [
+      -40.0,
+      40.0
+    ]
+  },
+  "mass_kg": 21.054624999999998,
+  "physics_dt_s": 0.001,
+  "control_dt_s": 0.002,
+  "feedback": "Author six-state LQR/VMC; IMU + wheel odometry; VMC uses full-model linkage Jacobian/qvel",
+  "file_sha256": {
+    "controller.py": "e663d3491d26e55455722cdd38263801ca6614ff8793ac4d56cf49b627e0ef2b",
+    "standing_pose.json": "e94e06734096270711e2134e226a1d2b05beb893c886cc7e1ea1ca3a73fa1d70",
+    "gain_schedule.json": "bd71b73c78cc18ac05c94f2a25266abd905a86c56b65301431354e2e4541931c",
+    "LQR_six/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "LQR_six/get_sensor.py": "e60aaa16656b57bce3f31bba6c5a319e917816454353ac6c97101d0d39cca657",
+    "LQR_six/get_state.py": "a38da1c5b914e52cc77be4ad3ad35a3269119aab9aba3902dc392a69b85f9bef",
+    "LQR_six/jump.py": "e00ae8c7f2391916c5a4befcb12105b4aaca9ba909867fd65f6dca30faf087ee",
+    "LQR_six/keyboardInput.py": "3150624e3e04b9145bcdfc2b091cc5643215e501559b88113459eee8d19d7e3e",
+    "LQR_six/leg_data.py": "ebdab486d5fc7babdabb0cb41126963090d3b05ba2eea524322aac67217a0ebd",
+    "LQR_six/lqr.py": "ff73450b37837efd04ba92a456299b367f4b35f334ab88715e866d4391bff546",
+    "LQR_six/lqr_controller.py": "db8dc5b19b429cf2e093cd9ba38d007c43bafb6ea0bf1da9e941b8bdba188e0d",
+    "LQR_six/lqr_model.py": "35d894f16a77b2b1a4eb387cc8f44db5355a7e0ad2b5c276265df1b3c7c09c0b",
+    "LQR_six/mymath.py": "b8efbc0daa798017dd6cd8ca2f30b3072a2d427466d9102cc8e31c401ec036eb",
+    "LQR_six/mympc.py": "c6224a5c2c70acc49f6b20363972ce1f210f12fd26932f162fb0b18a3bec2de1",
+    "LQR_six/parameters.py": "28cc3c5c346b0e0315935d7c02cef13fd9a61938bd0d6c20ebd373a690a27798",
+    "LQR_six/render_stand.py": "b642394c9e3dfc80353c35851f27a5d13894d077be2a0ee65849592075531102",
+    "LQR_six/simulation.py": "fc9bd2e1beab6f8e057d330ae8fe12ae6b4321d5d6e2d8f07d3c566db2511f11",
+    "LQR_six/step_trial.py": "a166fee2a087e55e4d16c18f5250f7e01d6acb7f5b14c934b321182dfb79bc51",
+    "LQR_six/teleop.py": "f4cdcd947af4c4f6403a4de8bcb2f2a91474bb4dd378ab9890aa45b883e0fa59",
+    "LQR_six/vmc.py": "7afb2e130f9e969ab3607bf4dd24aa795a72f3d54bb6caa86fe70c79f364b6c9",
+    "LQR_six/vofa.py": "a0a289ae54b17c9b6cd8c10219d1fdb988bc2c491e8352a457dd211faa67a0b8",
+    "LQR_six/write_sensor.py": "51b69cffa60c69858bde259cf098abf76b22a5e37d34c210b265be340e365b66",
+    "assets/robot_gas_spring_damped.xml": "9b77973e72253511f798866e709021349af8386b2b80855ae9b90ce66319009f",
+    "assets/robot_no_gas_spring.xml": "263185e1f4a2a61d9e54803610d3e6b978c5ede259223552f278b3d623430088",
+    "scenes/single_step_10cm.xml": "7e0a07cac1641fdc8e311c8779432a9fa7092eee538937d0cb0c073c8b586ee9",
+    "scenes/training_terrain.xml": "d5f188d61f8d10774b140ece126103f30ede3349891a0bfd75c6b9d25675a2b7"
+  },
+  "thresholds": {
+    "duration_s": 10.0,
+    "max_xy_drift_m": 0.1,
+    "final_tilt_rad": 0.05,
+    "max_closure_m": 0.0001,
+    "min_height_m": 0.12,
+    "fall_tilt_rad": 0.6,
+    "fall_is_terminal": false,
+    "numerical_error_is_terminal": true
+  },
+  "seed": null
+}

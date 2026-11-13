@@ -1,0 +1,14 @@
+{
+  "command": "mjlab-python summarize_held_controls.py",
+  "cwd": "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1",
+  "input_results_sha256": {
+    "lqr_no-gas_nominal_20261109_190823_102893": "45a14d6648952c81eacf19743893331243e7938082b65b065f828e1ef4a3c661",
+    "lqr_no-gas_nominal_20261109_190901_722408": "c377f75f5e3fd196b9c5e7d2fb6a3311c5e56d3689ef56739ee75d5e20db8e0e",
+    "lqr_no-gas_nominal_20261109_190911_797771": "9a9e917193a40fda8ffa820507c23d18b3cf5f3663925751f68ac14ebbb05f8a",
+    "lqr_no-gas_nominal_20261109_190922_046888": "8c46c948ab53f459b6dae6a58110fd2f62782249b3d8590ab942af4569bb6dcb",
+    "lqr_no-gas_nominal_20261109_191115_398914": "4e38193d1cada28befb69d2b0ef7dc4f6e860376cb059c269293eb80eba04bac"
+  },
+  "versions": {
+    "numpy": "2.5.4"
+  }
+}

@@ -1,0 +1,347 @@
+{
+  "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/urdf/infantry_V4.urdf",
+  "source_sha256": "c4181e221e89fb4932a6e0389142a3385d953f03484bde4c819ef2afb3998fad",
+  "upstream_commit": "8204e853dfd2ed06d85a322e1a998c3d20a3be2c",
+  "representation": "upstream six-joint serial simplification; not physical parallel mechanism",
+  "collision": "convex envelope of each upstream collision mesh; no inertia recomputation",
+  "visual": "Exact source STL triangles; user-selected upstream MJCF white-body/dark-gray-wheel palette",
+  "color_source": "upstream/fudan_rl_wheel_leg/mujoco/assert_now/infantry_binglian_yuntai/infantry_V2/meshes/mjmodel.xml",
+  "color_source_sha256": "37d934a964acc66f3ebafcf74741fcb6302c5aa8856a7e4b99e97c864bbff0f0",
+  "color_scope": "Appearance only; no parallel-model mass, joint or collision parameters reused",
+  "project_settings": {
+    "physics_dt": 0.002,
+    "gravity": [
+      0,
+      0,
+      -9.81
+    ],
+    "friction": [
+      1,
+      0.005,
+      0.0001
+    ],
+    "contact_solref": [
+      0.005,
+      1
+    ],
+    "self_collision": false
+  },
+  "action_order": [
+    "lf0_Joint",
+    "lf1_Joint",
+    "l_wheel_Joint",
+    "rf0_Joint",
+    "rf1_Joint",
+    "r_wheel_Joint"
+  ],
+  "meshes": [
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/base_link.STL",
+      "source_sha256": "62a5d23eb71157e3d8e0094f89b2d4e7d30ea0244485a9cfe073a649a790b69a",
+      "derived": "base_link_0_hull.stl",
+      "sha256": "c65a5370f948d4c6ef806650cecc2f7d21fcaca86fdd46c96949be33e0685d66",
+      "source_faces": 1538081,
+      "hull_faces": 536,
+      "bounds_m": [
+        [
+          -0.2778834402561188,
+          -0.2980377972126007,
+          -0.05899974703788757
+        ],
+        [
+          0.27788805961608887,
+          0.2980377972126007,
+          0.40161120891571045
+        ]
+      ]
+    },
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/rf0_Link.STL",
+      "source_sha256": "fea24f3bccf0c47d1f96105a1e1debb7a808816ec9ace28a6cbc5bbabf7c5e4c",
+      "derived": "rf0_Link_0_hull.stl",
+      "sha256": "bd5aecdcb02cfc6bebd307718313c33629e7f808b718b0aca3bead122074c06b",
+      "source_faces": 76616,
+      "hull_faces": 536,
+      "bounds_m": [
+        [
+          -0.04087698832154274,
+          -0.12648046016693115,
+          -0.05018577724695206
+        ],
+        [
+          0.20363211631774902,
+          0.07224377244710922,
+          0.020549999549984932
+        ]
+      ]
+    },
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/rf1_Link.STL",
+      "source_sha256": "af3d14e8cb078e4776d9cb907e9cfb748fc23a0d0e899d81b5e3c3661555b749",
+      "derived": "rf1_Link_0_hull.stl",
+      "sha256": "5a4e8e616d8fb61a2f40534b02d7e4b3478363457a940f56084d19da5212d715",
+      "source_faces": 46178,
+      "hull_faces": 476,
+      "bounds_m": [
+        [
+          -0.03299999609589577,
+          -0.24082639813423157,
+          -0.016200000420212746
+        ],
+        [
+          0.032999999821186066,
+          0.07218143343925476,
+          0.02554999850690365
+        ]
+      ]
+    },
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/r_wheel_Link.STL",
+      "source_sha256": "46fa1cdb60943a9e9b69762f2e5677efb04291faf2037219694915f61262ba06",
+      "derived": "r_wheel_Link_0_hull.stl",
+      "sha256": "9f4b11cc9c612d99058f568e3e7774dd79420651761ae684c482f0128349188b",
+      "source_faces": 48256,
+      "hull_faces": 644,
+      "bounds_m": [
+        [
+          -0.059991255402565,
+          -0.05998384952545166,
+          -0.023099999874830246
+        ],
+        [
+          0.05987915024161339,
+          0.05990135297179222,
+          0.03840000182390213
+        ]
+      ]
+    },
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/lf0_Link.STL",
+      "source_sha256": "c5336ee23e1e2e18ea2e081a4cac463b70db66c9f8ca58f1e5a31916f8de8f75",
+      "derived": "lf0_Link_0_hull.stl",
+      "sha256": "c47dfc9ced9421422eb4ef4f098e25208421e67e96092da00ee7f030086e39ed",
+      "source_faces": 76564,
+      "hull_faces": 548,
+      "bounds_m": [
+        [
+          -0.040989745408296585,
+          -0.07224377244710922,
+          -0.05018577724695206
+        ],
+        [
+          0.20363211631774902,
+          0.12656043469905853,
+          0.020549999549984932
+        ]
+      ]
+    },
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/lf1_Link.STL",
+      "source_sha256": "014bcffd4924ef919835dd5f26e6750d60ff81cad4c50b5956a4763bcc4f6fd8",
+      "derived": "lf1_Link_0_hull.stl",
+      "sha256": "b9a825ee2f1b5b01442a6c9d6919be37765b4a6937cb0bea0f2f1ba5a47c8e28",
+      "source_faces": 46126,
+      "hull_faces": 482,
+      "bounds_m": [
+        [
+          -0.032908231019973755,
+          -0.07218143343925476,
+          -0.016200000420212746
+        ],
+        [
+          0.032999999821186066,
+          0.24082639813423157,
+          0.02554999850690365
+        ]
+      ]
+    },
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/l_wheel_Link.STL",
+      "source_sha256": "2cc0ae53618f02656d66c5c6bdb2a31254b0745ef2a513f0a208300b40e658bc",
+      "derived": "l_wheel_Link_0_hull.stl",
+      "sha256": "60d15cea32354673f1fd477eab05e2c81278fff4d6a7ee354164e0fca9298073",
+      "source_faces": 48256,
+      "hull_faces": 644,
+      "bounds_m": [
+        [
+          -0.05987915024161339,
+          -0.05990135297179222,
+          -0.023099999874830246
+        ],
+        [
+          0.059991255402565,
+          0.05998384952545166,
+          0.03840000182390213
+        ]
+      ]
+    }
+  ],
+  "visual_meshes": [
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/base_link.STL",
+      "source_sha256": "62a5d23eb71157e3d8e0094f89b2d4e7d30ea0244485a9cfe073a649a790b69a",
+      "link": "base_link",
+      "rgba": "1 1 1 1",
+      "original_urdf_rgba": "1 1 1 1",
+      "source_faces": 1538081,
+      "output_faces": 1538081,
+      "triangle_records_sha256": "1c7eac51cc507fd04219a9a747e591d51b8990fc470378bdb7cfe26df270df96",
+      "exact_triangle_preservation": true,
+      "chunks": [
+        {
+          "file": "base_link_0_visual_00.stl",
+          "faces": 190000,
+          "sha256": "08c9b035aefbaad4f1c5690195c3c3a3299e5cfad72b197a17d9c9bfeb7a47c4"
+        },
+        {
+          "file": "base_link_0_visual_01.stl",
+          "faces": 190000,
+          "sha256": "6094d8c2c3f23f20941468babdbe3993949e5df69defcc17efd289003e3a8c9a"
+        },
+        {
+          "file": "base_link_0_visual_02.stl",
+          "faces": 190000,
+          "sha256": "f24df5091dd2b8841e448b30325a10425211df364636057f4a67534c5a44e7ab"
+        },
+        {
+          "file": "base_link_0_visual_03.stl",
+          "faces": 190000,
+          "sha256": "3503dae7aa1148a0cba3c12d99aed18d6b3182efab410de0592e862393e747da"
+        },
+        {
+          "file": "base_link_0_visual_04.stl",
+          "faces": 190000,
+          "sha256": "362c2a0cd861543ae29e5e0eda7c7ded5c58b21fc7aa2fa653c062fae7caa625"
+        },
+        {
+          "file": "base_link_0_visual_05.stl",
+          "faces": 190000,
+          "sha256": "3eba0d1143fe32d63f6210e1480e3acf3ad8ca600501e8a99af6343826b6a0d8"
+        },
+        {
+          "file": "base_link_0_visual_06.stl",
+          "faces": 190000,
+          "sha256": "d938bc45664621e1331072951ad5f7fd07cc8a4aec7ce531e82a0efdeb27dd0c"
+        },
+        {
+          "file": "base_link_0_visual_07.stl",
+          "faces": 190000,
+          "sha256": "49fd218ca245867e31220d437bd86af0f6976e46c8ad62a96f0525887d67a6d9"
+        },
+        {
+          "file": "base_link_0_visual_08.stl",
+          "faces": 18081,
+          "sha256": "53dc01df8f035991552096950ad6e1d086e6af97ef71656acab8d885746fd566"
+        }
+      ]
+    },
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/rf0_Link.STL",
+      "source_sha256": "fea24f3bccf0c47d1f96105a1e1debb7a808816ec9ace28a6cbc5bbabf7c5e4c",
+      "link": "rf0_Link",
+      "rgba": "1 1 1 1",
+      "original_urdf_rgba": "1 1 1 1",
+      "source_faces": 76616,
+      "output_faces": 76616,
+      "triangle_records_sha256": "d843a1d5bb3f159ec96336dcaea100cc8716f83365903f432c5bdfc915e44fdf",
+      "exact_triangle_preservation": true,
+      "chunks": [
+        {
+          "file": "rf0_Link_0_visual_00.stl",
+          "faces": 76616,
+          "sha256": "fea24f3bccf0c47d1f96105a1e1debb7a808816ec9ace28a6cbc5bbabf7c5e4c"
+        }
+      ]
+    },
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/rf1_Link.STL",
+      "source_sha256": "af3d14e8cb078e4776d9cb907e9cfb748fc23a0d0e899d81b5e3c3661555b749",
+      "link": "rf1_Link",
+      "rgba": "1 1 1 1",
+      "original_urdf_rgba": "1 1 1 1",
+      "source_faces": 46178,
+      "output_faces": 46178,
+      "triangle_records_sha256": "9cd19678cdd0bc8892523e3a086b8062d84fc4139779cb02c74b3b5aa72ad5cf",
+      "exact_triangle_preservation": true,
+      "chunks": [
+        {
+          "file": "rf1_Link_0_visual_00.stl",
+          "faces": 46178,
+          "sha256": "af3d14e8cb078e4776d9cb907e9cfb748fc23a0d0e899d81b5e3c3661555b749"
+        }
+      ]
+    },
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/r_wheel_Link.STL",
+      "source_sha256": "46fa1cdb60943a9e9b69762f2e5677efb04291faf2037219694915f61262ba06",
+      "link": "r_wheel_Link",
+      "rgba": "0.18 0.18 0.18 1",
+      "original_urdf_rgba": "1 1 1 1",
+      "source_faces": 48256,
+      "output_faces": 48256,
+      "triangle_records_sha256": "351075e4a356f6672bec1a213c4ad1a1e01c03d099399ab70552e344d60166dc",
+      "exact_triangle_preservation": true,
+      "chunks": [
+        {
+          "file": "r_wheel_Link_0_visual_00.stl",
+          "faces": 48256,
+          "sha256": "46fa1cdb60943a9e9b69762f2e5677efb04291faf2037219694915f61262ba06"
+        }
+      ]
+    },
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/lf0_Link.STL",
+      "source_sha256": "c5336ee23e1e2e18ea2e081a4cac463b70db66c9f8ca58f1e5a31916f8de8f75",
+      "link": "lf0_Link",
+      "rgba": "1 1 1 1",
+      "original_urdf_rgba": "1 1 1 1",
+      "source_faces": 76564,
+      "output_faces": 76564,
+      "triangle_records_sha256": "c92aee1072ac918b14eef460f75bb35b3ec29e9e0a548a4a6bac77d315b5385c",
+      "exact_triangle_preservation": true,
+      "chunks": [
+        {
+          "file": "lf0_Link_0_visual_00.stl",
+          "faces": 76564,
+          "sha256": "c5336ee23e1e2e18ea2e081a4cac463b70db66c9f8ca58f1e5a31916f8de8f75"
+        }
+      ]
+    },
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/lf1_Link.STL",
+      "source_sha256": "014bcffd4924ef919835dd5f26e6750d60ff81cad4c50b5956a4763bcc4f6fd8",
+      "link": "lf1_Link",
+      "rgba": "1 1 1 1",
+      "original_urdf_rgba": "1 1 1 1",
+      "source_faces": 46126,
+      "output_faces": 46126,
+      "triangle_records_sha256": "dc1d8e60a0e165227d086e5248b9191ddcb8a9da83b769bb2084de5be9081980",
+      "exact_triangle_preservation": true,
+      "chunks": [
+        {
+          "file": "lf1_Link_0_visual_00.stl",
+          "faces": 46126,
+          "sha256": "014bcffd4924ef919835dd5f26e6750d60ff81cad4c50b5956a4763bcc4f6fd8"
+        }
+      ]
+    },
+    {
+      "source": "upstream/fudan_rl_wheel_leg/plane/resources/robots/infantry_V4/meshes/l_wheel_Link.STL",
+      "source_sha256": "2cc0ae53618f02656d66c5c6bdb2a31254b0745ef2a513f0a208300b40e658bc",
+      "link": "l_wheel_Link",
+      "rgba": "0.18 0.18 0.18 1",
+      "original_urdf_rgba": "1 1 1 1",
+      "source_faces": 48256,
+      "output_faces": 48256,
+      "triangle_records_sha256": "6bd6aa154b9f2f77d3e646cdcb00ecdf459322f25ac27a53dc4c511b5ff2d2fe",
+      "exact_triangle_preservation": true,
+      "chunks": [
+        {
+          "file": "l_wheel_Link_0_visual_00.stl",
+          "faces": 48256,
+          "sha256": "2cc0ae53618f02656d66c5c6bdb2a31254b0745ef2a513f0a208300b40e658bc"
+        }
+      ]
+    }
+  ]
+}

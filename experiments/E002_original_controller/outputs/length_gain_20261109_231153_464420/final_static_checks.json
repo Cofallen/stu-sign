@@ -1,0 +1,7 @@
+{
+  "source_manifest_hashes_match": true,
+  "local_document_links_resolve": true,
+  "copy_passed": true,
+  "functional_passed": true,
+  "fit_accuracy_2_percent_passed": false
+}

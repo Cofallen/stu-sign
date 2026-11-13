@@ -1,0 +1,24 @@
+{
+  "id": "dmo",
+  "kind": "paper",
+  "title": "First Order Model-Based RL through Decoupled Backpropagation",
+  "arxiv": "2509.00215",
+  "url": "https://arxiv.org/abs/2509.00215",
+  "local": "references/papers/research_20261109/dmo.pdf",
+  "purpose": "进阶：学习模型梯度与前向仿真解耦",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_verified_pdf",
+  "authors": [
+    "Amigo, Joseph",
+    "Khorrambakht, Rooholla",
+    "Chane-Sane, Elliot",
+    "Mansard, Nicolas",
+    "Righetti, Ludovic"
+  ],
+  "date": "2025/08/29",
+  "version": "v2",
+  "pdf_url": "https://arxiv.org/pdf/2509.00215v2",
+  "sha256": "8a59f1a4d4ebfc891f6c956f0926bd2e4e00e08b4099010ffae0d1fd1f2002a7",
+  "bytes": 5117409,
+  "exit_code": 0
+}

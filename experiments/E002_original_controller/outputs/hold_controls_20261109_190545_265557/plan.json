@@ -1,0 +1,11 @@
+{
+  "scope": "E002 only: native press/release input, Teleop parameters and targets, entry wiring, README/interfaces; preserve model and LQR/VMC",
+  "acceptance": {
+    "release": "W/S release requests zero and brakes actual body to <0.05m/s after settling; focus loss also clears",
+    "direction": "W gives negative model X (user-defined robot forward), S positive",
+    "speed": "requested speed \u00b11.2 m/s = three times previous \u00b10.4",
+    "leg": "continuous 0.12m/s target adjustment, release holds, expanded 0.18..0.34 if physical validation passes",
+    "jump": "increase motor-only jump rise beyond previous 0.127m; stable landing; no torque-limit changes",
+    "desktop": "actual press/hold/release events, not only callback injection"
+  }
+}

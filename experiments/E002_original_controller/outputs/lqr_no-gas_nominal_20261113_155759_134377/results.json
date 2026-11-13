@@ -1,0 +1,135 @@
+{
+  "timing": {
+    "sync_calls": 0,
+    "sync_wall_s": 0.0,
+    "sync_max_s": 0.0,
+    "hud_calls": 0,
+    "hud_wall_s": 0.0,
+    "sleep_wall_s": 0.0,
+    "late_steps": 0,
+    "max_lag_s": 0.0,
+    "initial_sync_wall_s": 0.0,
+    "initial_hud_wall_s": 0.0,
+    "initial_hud_calls": 0,
+    "real_time_factor": 0.13046344189245007,
+    "loop_non_ui_non_sleep_s": 76.64982507700188
+  },
+  "viewer_options": null,
+  "case": "nominal",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 9.999999999999897,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 1.2882035993088162e-05,
+  "max_tilt_rad": 0.09999186919458192,
+  "max_xy_drift_m": 0.034632327460143796,
+  "max_external_force_n": 0.0,
+  "max_closure_m": 3.813348728454461e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.24782609485252416,
+  "max_torque_nm": [
+    16.184167781025756,
+    5.0,
+    20.84037678927188,
+    5.0,
+    13.312254201075593,
+    12.53181085233206
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "video": null,
+  "camera": null,
+  "final_base_xy_m": [
+    -0.03217193826254113,
+    0.00503655875230415
+  ],
+  "final_yaw_rad": -0.00038365240278818465,
+  "mode": "recovery",
+  "interactive": false,
+  "teleop": null,
+  "final_odometry_error_m": 0.032183214124404884,
+  "wall_s": 76.64982507700188,
+  "fall_events_s": [],
+  "recovery": {
+    "phase": "idle",
+    "events": [],
+    "preparation_enabled": true,
+    "trial_pitch_rad": 0.1,
+    "trial_roll_rad": 0.02,
+    "expected_upright": true,
+    "final_speed_m_s": 1.294939209540849e-05
+  },
+  "gain_schedule": {
+    "lengths_m": {
+      "left": 0.2779231371204648,
+      "right": 0.2779176919145135
+    },
+    "K_left": [
+      [
+        -62.736661480136256,
+        -1.4656559558379052,
+        -21.938065297258223,
+        -18.06922327738376,
+        34.83412450326646,
+        4.242068034914789
+      ],
+      [
+        11.080207116463773,
+        0.15214888428851978,
+        4.242111902656713,
+        3.1278733038348827,
+        170.54228286244677,
+        7.184615899693946
+      ]
+    ],
+    "K_right": [
+      [
+        -62.73660082208865,
+        -1.465651869531139,
+        -21.93805343118773,
+        -18.069269048930554,
+        34.83462677061127,
+        4.242111587291401
+      ],
+      [
+        11.080368303259865,
+        0.15215253642933038,
+        4.242171657627426,
+        3.1279297878423638,
+        170.5421827652858,
+        7.184601486685391
+      ]
+    ],
+    "masses": {
+      "body_total_kg": 16.877574,
+      "body_per_side_kg": 8.438787,
+      "leg_kg": {
+        "l": 1.597924,
+        "r": 1.5983269999999998
+      },
+      "wheel_kg": {
+        "l": 0.4904,
+        "r": 0.4904
+      },
+      "total_kg": 21.054624999999998,
+      "wheel_radius_m": 0.06
+    },
+    "range_m": [
+      0.18,
+      0.34
+    ]
+  },
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "acceptance": "upright detection control: no fall or recovery event; stable final 5 s",
+  "passed": true
+}

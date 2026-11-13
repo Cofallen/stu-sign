@@ -1,0 +1,32 @@
+{
+  "syntax": true,
+  "source_hashes": true,
+  "new_document_links": true,
+  "historical_missing_E001_links": [
+    [
+      "docs/04_tasks/T003_parallel_standing.md",
+      "../../experiments/E001_parallel_standing/README.md"
+    ],
+    [
+      "docs/04_tasks/T003_parallel_standing.md",
+      "../../experiments/E001_parallel_standing/REPORT.md"
+    ],
+    [
+      "docs/04_tasks/T003_parallel_standing.md",
+      "../../experiments/E001_parallel_standing/outputs/portability_20261109_142701_636332/results.json"
+    ],
+    [
+      "docs/04_tasks/T003_parallel_standing.md",
+      "../../experiments/E001_parallel_standing/outputs/layout_check_20261109_143029_118692/results.json"
+    ],
+    [
+      "docs/01_project/overview.md",
+      "../../experiments/E001_parallel_standing/README.md"
+    ],
+    [
+      "docs/01_project/overview.md",
+      "../../experiments/E001_parallel_standing/REPORT.md"
+    ]
+  ],
+  "functional_passed": true
+}

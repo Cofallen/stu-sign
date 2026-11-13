@@ -1,0 +1,23 @@
+{
+  "id": "pets",
+  "kind": "paper",
+  "title": "Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models",
+  "arxiv": "1805.12114",
+  "url": "https://arxiv.org/abs/1805.12114",
+  "local": "references/papers/research_20261109/pets.pdf",
+  "purpose": "基础：概率动力学与模型集成",
+  "accessed": "2026-11-09T12:45:50.330884+08:00",
+  "status": "downloaded_verified_pdf",
+  "authors": [
+    "Chua, Kurtland",
+    "Calandra, Roberto",
+    "McAllister, Rowan",
+    "Levine, Sergey"
+  ],
+  "date": "2018/05/30",
+  "version": "v2",
+  "pdf_url": "https://arxiv.org/pdf/1805.12114v2",
+  "sha256": "7dbf3c65ece763384258a60f5f4b26d7b849ad80765ed77435c4861f9583219c",
+  "bytes": 4020485,
+  "exit_code": 0
+}

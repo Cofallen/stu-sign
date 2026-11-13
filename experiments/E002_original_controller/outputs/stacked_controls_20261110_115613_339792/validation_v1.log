@@ -1,0 +1,27 @@
+[keys t=1.00] a
+[keys t=12.00] released
+turn_left_0.278 fall 0.07565681458607972 0.3413818505708179
+[keys t=1.00] d
+WARNING: Nan, Inf or huge value in QACC at DOF 17. The simulation is unstable. Time = 11.2810.
+
+[keys t=11.28] released
+turn_right_0.278 numerical_warning 0.6119456357162676 0.2055837953958842
+[keys t=1.00] ashift
+[keys t=2.00] shift
+[keys t=12.00] released
+spin_left_0.278 fall 0.19641644337270658 0.34313378792569116
+[keys t=1.00] dshift
+[keys t=2.00] shift
+[keys t=12.00] released
+spin_right_0.278 fall 0.20485563132280737 0.2107000571837247
+[keys t=1.00] w
+[teleop t=3.00] jump requested
+[keys t=7.00] released
+WARNING: Nan, Inf or huge value in QACC at DOF 13. The simulation is unstable. Time = 7.1240.
+
+move_jump_0.278 numerical_warning 3.1391295336521594 0.3190142381194579
+[teleop t=2.00] jump requested
+jump_0.278 fall 5.986955882129009e-06 0.27792465097635066
+WARNING: Nan, Inf or huge value in QACC at DOF 10. The simulation is unstable. Time = 5.1020.
+
+fall_0.278 numerical_warning 3.0821262262085933 0.3810590556806649

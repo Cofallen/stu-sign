@@ -1,0 +1,325 @@
+{
+  "scenario": "stand",
+  "passes": 10,
+  "accepted": false,
+  "trace_columns": [
+    "drift_m",
+    "abs_roll_rad",
+    "abs_pitch_rad",
+    "speed_abs_error_m_s",
+    "left_length_abs_error_m",
+    "right_length_abs_error_m",
+    "yaw_abs_error_rad_s",
+    "forward_m_s",
+    "yaw_rad_s",
+    "robot/act_lf0",
+    "robot/act_lw",
+    "robot/act_rf0",
+    "robot/act_rw",
+    "robot/act_lf20",
+    "robot/act_rf20",
+    "base_height_m"
+  ],
+  "episodes": [
+    {
+      "seed": 12001,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.0978291854262352,
+      "final_tilt_rad": 0.016520753502845764,
+      "steady_mae": [
+        0.003486800706014037,
+        0.0019389297813177109,
+        0.001678162720054388,
+        0.0011126190656796098
+      ]
+    },
+    {
+      "seed": 12002,
+      "seconds": 30.0,
+      "passed": false,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.12286600470542908,
+      "final_tilt_rad": 0.01653195172548294,
+      "steady_mae": [
+        0.0039012280758470297,
+        0.001978808781132102,
+        0.0017182735027745366,
+        0.0011201337911188602
+      ]
+    },
+    {
+      "seed": 12003,
+      "seconds": 30.0,
+      "passed": false,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.10799011588096619,
+      "final_tilt_rad": 0.016523471102118492,
+      "steady_mae": [
+        0.0036404754500836134,
+        0.0019657830707728863,
+        0.0017052949406206608,
+        0.0011178591521456838
+      ]
+    },
+    {
+      "seed": 12004,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.09459653496742249,
+      "final_tilt_rad": 0.01652110181748867,
+      "steady_mae": [
+        0.0034435484558343887,
+        0.0019285398302599788,
+        0.0016664883587509394,
+        0.0011187749914824963
+      ]
+    },
+    {
+      "seed": 12005,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.09760288894176483,
+      "final_tilt_rad": 0.016522539779543877,
+      "steady_mae": [
+        0.0034842074383050203,
+        0.0019381679594516754,
+        0.0016773490933701396,
+        0.001113224308937788
+      ]
+    },
+    {
+      "seed": 12006,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.061040520668029785,
+      "final_tilt_rad": 0.016507238149642944,
+      "steady_mae": [
+        0.0034956238232553005,
+        0.0018915522377938032,
+        0.0016280527925118804,
+        0.0011173541424795985
+      ]
+    },
+    {
+      "seed": 12007,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.07041508704423904,
+      "final_tilt_rad": 0.01651090756058693,
+      "steady_mae": [
+        0.0033799144439399242,
+        0.0018986243521794677,
+        0.0016349978977814317,
+        0.001116698607802391
+      ]
+    },
+    {
+      "seed": 12008,
+      "seconds": 30.0,
+      "passed": false,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.10802619904279709,
+      "final_tilt_rad": 0.016524117439985275,
+      "steady_mae": [
+        0.0036409501917660236,
+        0.0019657083321362734,
+        0.001705238944850862,
+        0.001117855659686029
+      ]
+    },
+    {
+      "seed": 12009,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.08826121687889099,
+      "final_tilt_rad": 0.016517162322998047,
+      "steady_mae": [
+        0.0033787598367780447,
+        0.0019161021336913109,
+        0.001652222708798945,
+        0.0011156902182847261
+      ]
+    },
+    {
+      "seed": 12010,
+      "seconds": 30.0,
+      "passed": false,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.10411246865987778,
+      "final_tilt_rad": 0.016523929312825203,
+      "steady_mae": [
+        0.0035795101430267096,
+        0.001958635402843356,
+        0.0016982846427708864,
+        0.0011182521702721715
+      ]
+    },
+    {
+      "seed": 12011,
+      "seconds": 30.0,
+      "passed": false,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.11482920497655869,
+      "final_tilt_rad": 0.016528060659766197,
+      "steady_mae": [
+        0.0037572034634649754,
+        0.001972315600141883,
+        0.0017117937095463276,
+        0.0011190827935934067
+      ]
+    },
+    {
+      "seed": 12012,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.06718873977661133,
+      "final_tilt_rad": 0.016508454456925392,
+      "steady_mae": [
+        0.0034142849035561085,
+        0.0018962000031024218,
+        0.0016324756434187293,
+        0.001116316532716155
+      ]
+    },
+    {
+      "seed": 12013,
+      "seconds": 30.0,
+      "passed": false,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.11852294951677322,
+      "final_tilt_rad": 0.016529513522982597,
+      "steady_mae": [
+        0.0038217944093048573,
+        0.0019751833751797676,
+        0.0017147111939266324,
+        0.0011200292501598597
+      ]
+    },
+    {
+      "seed": 12014,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.07409083098173141,
+      "final_tilt_rad": 0.016513284295797348,
+      "steady_mae": [
+        0.0033491230569779873,
+        0.0019013152923434973,
+        0.0016377391293644905,
+        0.0011175484396517277
+      ]
+    },
+    {
+      "seed": 12015,
+      "seconds": 30.0,
+      "passed": false,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.10439188033342361,
+      "final_tilt_rad": 0.016524799168109894,
+      "steady_mae": [
+        0.003584186313673854,
+        0.0019596100319176912,
+        0.0016993059543892741,
+        0.0011178271379321814
+      ]
+    },
+    {
+      "seed": 12016,
+      "seconds": 30.0,
+      "passed": false,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.1196514368057251,
+      "final_tilt_rad": 0.016530342400074005,
+      "steady_mae": [
+        0.0038421903736889362,
+        0.001976022031158209,
+        0.0017154815141111612,
+        0.0011197178391739726
+      ]
+    },
+    {
+      "seed": 12017,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.09134362637996674,
+      "final_tilt_rad": 0.01651911996304989,
+      "steady_mae": [
+        0.003410165663808584,
+        0.0019206609576940536,
+        0.0016576708294451237,
+        0.0011127948528155684
+      ]
+    },
+    {
+      "seed": 12018,
+      "seconds": 30.0,
+      "passed": true,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.07931879907846451,
+      "final_tilt_rad": 0.016512596979737282,
+      "steady_mae": [
+        0.0033272644504904747,
+        0.0019059639889746904,
+        0.0016422682674601674,
+        0.0011199756991118193
+      ]
+    },
+    {
+      "seed": 12019,
+      "seconds": 30.0,
+      "passed": false,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.10475694388151169,
+      "final_tilt_rad": 0.01652076654136181,
+      "steady_mae": [
+        0.0035895933397114277,
+        0.0019604924600571394,
+        0.0017002655658870935,
+        0.0011181889567524195
+      ]
+    },
+    {
+      "seed": 12020,
+      "seconds": 30.0,
+      "passed": false,
+      "terminated": false,
+      "timeout": true,
+      "drift_m": 0.10721635073423386,
+      "final_tilt_rad": 0.016523322090506554,
+      "steady_mae": [
+        0.003627744037657976,
+        0.001965021016076207,
+        0.001704552792944014,
+        0.0011179763823747635
+      ]
+    }
+  ]
+}

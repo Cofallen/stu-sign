@@ -1,0 +1,295 @@
+{
+  "inertial_preservation": {
+    "max_mass_error_kg": 0.0,
+    "max_tensor_error_kg_m2": 1.2853184199477022e-08,
+    "pass_check": true
+  },
+  "freefall": {
+    "duration_s": 0.10000000000000007,
+    "com_displacement_m": [
+      0.0,
+      0.0,
+      -0.05003100000000038
+    ],
+    "discrete_expected_m": [
+      0.0,
+      0.0,
+      -0.05003100000000008
+    ],
+    "contacts": 0,
+    "pass_check": true
+  },
+  "signed_pulses": [
+    {
+      "joint": "lf0_Joint",
+      "axis_world_nominal": [
+        0.0,
+        0.9999999999932537,
+        -3.6732051031940216e-06
+      ],
+      "impulse_torque_nm": 0.1,
+      "duration_s": 0.02,
+      "positive": {
+        "delta_rad": 0.0008934996876855117,
+        "velocity_rad_s": 0.0812227494157063
+      },
+      "negative": {
+        "delta_rad": -0.0008936142400920721,
+        "velocity_rad_s": -0.08124215705280749
+      },
+      "pass_check": true
+    },
+    {
+      "joint": "lf1_Joint",
+      "axis_world_nominal": [
+        -1.3877787807814457e-17,
+        0.9999999999932537,
+        -3.673205103416066e-06
+      ],
+      "impulse_torque_nm": 0.1,
+      "duration_s": 0.02,
+      "positive": {
+        "delta_rad": 0.0013386181492124338,
+        "velocity_rad_s": 0.12167230574659418
+      },
+      "negative": {
+        "delta_rad": -0.0013391346585739927,
+        "velocity_rad_s": -0.12175981354987452
+      },
+      "pass_check": true
+    },
+    {
+      "joint": "l_wheel_Joint",
+      "axis_world_nominal": [
+        0.0,
+        0.9999999999932536,
+        -3.6732051031940216e-06
+      ],
+      "impulse_torque_nm": 0.1,
+      "duration_s": 0.02,
+      "positive": {
+        "delta_rad": 0.038905259983546304,
+        "velocity_rad_s": 3.5368206689515564
+      },
+      "negative": {
+        "delta_rad": -0.0389057707291865,
+        "velocity_rad_s": -3.536907196547308
+      },
+      "pass_check": true
+    },
+    {
+      "joint": "rf0_Joint",
+      "axis_world_nominal": [
+        0.0,
+        -0.9999999999932537,
+        -3.6732051031940216e-06
+      ],
+      "impulse_torque_nm": 0.1,
+      "duration_s": 0.02,
+      "positive": {
+        "delta_rad": 0.0008956868894581527,
+        "velocity_rad_s": 0.08143063903912916
+      },
+      "negative": {
+        "delta_rad": -0.0008955708267418261,
+        "velocity_rad_s": -0.08141097552312071
+      },
+      "pass_check": true
+    },
+    {
+      "joint": "rf1_Joint",
+      "axis_world_nominal": [
+        -1.3877787807814457e-17,
+        -0.9999999999932537,
+        -3.673205103416066e-06
+      ],
+      "impulse_torque_nm": 0.1,
+      "duration_s": 0.02,
+      "positive": {
+        "delta_rad": 0.0013407836482781654,
+        "velocity_rad_s": 0.12190976333841966
+      },
+      "negative": {
+        "delta_rad": -0.0013402660801539734,
+        "velocity_rad_s": -0.12182207615791646
+      },
+      "pass_check": true
+    },
+    {
+      "joint": "r_wheel_Joint",
+      "axis_world_nominal": [
+        0.0,
+        -0.9999999999932536,
+        -3.6732051031940216e-06
+      ],
+      "impulse_torque_nm": 0.1,
+      "duration_s": 0.02,
+      "positive": {
+        "delta_rad": 0.03890708136058149,
+        "velocity_rad_s": 3.5370238682899386
+      },
+      "negative": {
+        "delta_rad": -0.03890663344700359,
+        "velocity_rad_s": -3.5369479850392858
+      },
+      "pass_check": true
+    }
+  ],
+  "torque_clipping": {
+    "applied": [
+      30.0,
+      30.0,
+      50.0,
+      30.0,
+      30.0,
+      50.0
+    ],
+    "limits": [
+      30.0,
+      30.0,
+      50.0,
+      30.0,
+      30.0,
+      50.0
+    ],
+    "pass_check": true
+  },
+  "joint_limits": [
+    {
+      "joint": "lf0_Joint",
+      "edge": 0,
+      "restoring_force_nm": 1.2370740578700137,
+      "pass_check": true
+    },
+    {
+      "joint": "lf0_Joint",
+      "edge": 1,
+      "restoring_force_nm": -1.2399692044313142,
+      "pass_check": true
+    },
+    {
+      "joint": "lf1_Joint",
+      "edge": 0,
+      "restoring_force_nm": 0.3806380934933952,
+      "pass_check": true
+    },
+    {
+      "joint": "lf1_Joint",
+      "edge": 1,
+      "restoring_force_nm": -0.9644295967015961,
+      "pass_check": true
+    },
+    {
+      "joint": "rf0_Joint",
+      "edge": 0,
+      "restoring_force_nm": 1.2355294727211374,
+      "pass_check": true
+    },
+    {
+      "joint": "rf0_Joint",
+      "edge": 1,
+      "restoring_force_nm": -1.2350840209150775,
+      "pass_check": true
+    },
+    {
+      "joint": "rf1_Joint",
+      "edge": 0,
+      "restoring_force_nm": 0.96315166668131,
+      "pass_check": true
+    },
+    {
+      "joint": "rf1_Joint",
+      "edge": 1,
+      "restoring_force_nm": -0.38031679071510516,
+      "pass_check": true
+    }
+  ],
+  "nominal_geometry": {
+    "base_height_at_wheel_contact_m": 0.17911795337443734,
+    "wheel_center_positions_m": {
+      "l_wheel_Link": [
+        0.053791598014254385,
+        0.20369924191899852,
+        0.060986581226821795
+      ],
+      "r_wheel_Link": [
+        0.053791598014254385,
+        -0.20369924191899852,
+        0.060986581226821795
+      ]
+    },
+    "initial_contacts": 0
+  },
+  "passive_contact": {
+    "duration_s": 4.999999999999671,
+    "finite": true,
+    "min_contact_distance_m": -0.00083511030720608,
+    "wheel_contact_step_fraction": 0.9672,
+    "self_contact_count": 0,
+    "final_base_xyz": [
+      -0.010851678925295505,
+      0.00038224356361135723,
+      0.059193597579866114
+    ],
+    "final_base_quat_wxyz": [
+      0.9998373716558592,
+      5.2506835586580656e-05,
+      0.0037075700579087584,
+      -0.01764883587104266
+    ],
+    "max_speed_last_second": 2.266129912487256,
+    "max_base_linear_speed_last_second_m_s": 0.03752548760718945,
+    "max_base_angular_speed_last_second_rad_s": 0.5698741810253013,
+    "min_contact_distance_last_second_m": -8.497915056690508e-05,
+    "mean_support_force_last_second_n": 180.31679429051525,
+    "robot_weight_n": 180.00603066600002,
+    "warning_counts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "note": "Passive final contact may be on body; this is not upright balancing",
+    "final_contact_bodies": [
+      "base_link",
+      "l_wheel_Link",
+      "r_wheel_Link",
+      "world"
+    ],
+    "support_force_gate": true,
+    "static_rest_gate": false,
+    "transient_3mm_gate": true
+  },
+  "symmetric_pose_scan": [
+    {
+      "left_hip_rad": 0.0,
+      "left_knee_rad": 0.0,
+      "base_height_wheel_contact_m": 0.18073400505144277,
+      "other_contacts_after_clearance": 0
+    },
+    {
+      "left_hip_rad": 0.2,
+      "left_knee_rad": 0.4,
+      "base_height_wheel_contact_m": 0.17911795337443734,
+      "other_contacts_after_clearance": 0
+    },
+    {
+      "left_hip_rad": -0.2,
+      "left_knee_rad": -0.4,
+      "base_height_wheel_contact_m": 0.10969494430963064,
+      "other_contacts_after_clearance": 0
+    }
+  ],
+  "static_contact_fixture": {
+    "fixture": "base XY and orientation fixed; all six joint angles fixed; base Z free",
+    "total_mass_kg": 18.3492386,
+    "mean_support_n": 180.0060306661063,
+    "weight_n": 180.00603066600002,
+    "max_vertical_speed_last_second_m_s": 1.746174105223393e-11,
+    "min_contact_distance_last_second_m": -9.107641371679243e-06,
+    "pass_check": true
+  }
+}

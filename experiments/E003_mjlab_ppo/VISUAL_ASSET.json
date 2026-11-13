@@ -1,0 +1,6 @@
+{
+  "file": "assets/robot_no_gas_spring.xml",
+  "source_sha256": "263185e1f4a2a61d9e54803610d3e6b978c5ede259223552f278b3d623430088",
+  "sha256": "18dd109dcef9a5939199b0b12747e9531e432db9bfdcde054bed5df416dc13dd",
+  "changes": "Original wheel STL for visual geoms; checkerboard material for floor."
+}

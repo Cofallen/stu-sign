@@ -1,0 +1,11 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "experiments/E002_original_controller/outputs/length_gain_20261109_231153_464420/compare_jump.py"
+  ],
+  "seed": null,
+  "model": "no-gas",
+  "physics_dt": 0.001,
+  "control_dt": 0.01,
+  "comparison": "identical fitted gains and thrust; only tuck_enabled differs"
+}

@@ -1,0 +1,31 @@
+["curl", "-fLsS", "--retry", "2", "--connect-timeout", "20", "--max-time", "90", "https://arxiv.org/abs/2610.28480", "-o", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/supermimic.html"]
+
+exit_code=0
+["curl", "-fLsS", "--retry", "2", "--connect-timeout", "20", "--max-time", "150", "https://arxiv.org/pdf/2610.28480v1", "-o", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/supermimic.pdf.part"]
+
+exit_code=0
+["pdfinfo", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/supermimic.pdf.part"]
+Title:           SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable World Model
+Author:          Qiayuan Liao; Yiyang Shao; Junfeng Long; Kevin Zakka; Roberto Horowitz; Pieter Abbeel; Koushil Sreenath
+Creator:         arXiv GenPDF (tex2pdf:07e334b)
+Producer:        pikepdf 8.15.1
+Custom Metadata: yes
+Metadata Stream: yes
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           19
+Encrypted:       no
+Page size:       612 x 792 pts (letter)
+Page rot:        0
+File size:       3524904 bytes
+Optimized:       no
+PDF version:     1.7
+
+exit_code=0
+["pdftotext", "-layout", "/home/cofallen/Code/毕业设计/references/papers/research_20261109/supermimic.pdf", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/supermimic.txt"]
+Syntax Warning: Mismatch between font type and embedded font file
+
+exit_code=0

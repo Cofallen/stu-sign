@@ -1,0 +1,38 @@
+/home/cofallen/Code/毕业设计/experiments/E002_original_controller/outputs/lqr_no-gas_pitch-plus_20261109_145805_058336
+{
+  "case": "pitch-plus",
+  "control": "lqr",
+  "variant": "no-gas",
+  "duration_s": 30.00000000001368,
+  "terminated": false,
+  "termination_reason": null,
+  "timeout": true,
+  "final_tilt_rad": 7.32189936533023e-07,
+  "max_xy_drift_m": 0.005068543807104997,
+  "max_closure_m": 2.6237486793346454e-06,
+  "passive_actuator_torque_nm": 0.0,
+  "min_height_m": 0.24901926769459956,
+  "max_torque_nm": [
+    12.808345888233301,
+    2.922153683058013,
+    12.731688311790426,
+    2.9244535550104875,
+    11.322486365120081,
+    11.214763872763331
+  ],
+  "nonwheel_contacts": [],
+  "mpc_solves": 0,
+  "final_odometry_error_m": 2.625940797454083e-05,
+  "wall_s": 21.519280612999864,
+  "warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "passed": true
+}
+

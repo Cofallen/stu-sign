@@ -1,0 +1,47 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller/controller.py",
+    "--viewer",
+    "--duration",
+    "16"
+  ],
+  "window": 85983243,
+  "events": [
+    {
+      "wall": 16495.538815684,
+      "key": "w"
+    },
+    {
+      "wall": 16495.538869113,
+      "key": "w"
+    },
+    {
+      "wall": 16495.538884548,
+      "key": "w"
+    },
+    {
+      "wall": 16501.69486985,
+      "key": "x"
+    },
+    {
+      "wall": 16504.695187266,
+      "key": "q"
+    },
+    {
+      "wall": 16504.695200326,
+      "key": "q"
+    },
+    {
+      "wall": 16507.871403985,
+      "key": "r"
+    },
+    {
+      "wall": 16510.871653724,
+      "key": "j"
+    }
+  ],
+  "exit_code": 0,
+  "scope": "Actual XTest key press/release to actual GLFW window; screenshots are entire desktop, not synthetic"
+}

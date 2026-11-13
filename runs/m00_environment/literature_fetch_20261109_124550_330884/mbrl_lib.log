@@ -1,0 +1,4 @@
+["git", "-c", "core.hooksPath=/dev/null", "clone", "--depth", "1", "--no-recurse-submodules", "https://github.com/facebookresearch/mbrl-lib.git", "/home/cofallen/Code/毕业设计/upstream/research_20261109/mbrl-lib"]
+Cloning into '/home/cofallen/Code/毕业设计/upstream/research_20261109/mbrl-lib'...
+
+exit_code=0

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/cofallen/Code/毕业设计/experiments/E002_original_controller/controller.py", line 269, in main
+    keys = set()
+      ^^^^
+UnboundLocalError: cannot access local variable 'keys' where it is not associated with a value

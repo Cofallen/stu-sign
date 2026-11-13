@@ -1,0 +1,35 @@
+["curl", "-fLsS", "--retry", "2", "--connect-timeout", "20", "--max-time", "90", "https://arxiv.org/abs/1805.12114", "-o", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/pets.html"]
+
+exit_code=0
+["curl", "-fLsS", "--retry", "2", "--connect-timeout", "20", "--max-time", "150", "https://arxiv.org/pdf/1805.12114v2", "-o", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/pets.pdf.part"]
+
+exit_code=0
+["pdfinfo", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/pets.pdf.part"]
+Title:           
+Subject:         
+Keywords:        
+Author:          
+Creator:         LaTeX with hyperref package
+Producer:        pdfTeX-1.40.17
+CreationDate:    Mon Nov  5 10:09:55 2018 CST
+ModDate:         Mon Nov  5 10:09:55 2018 CST
+Custom Metadata: yes
+Metadata Stream: no
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           17
+Encrypted:       no
+Page size:       612 x 792 pts (letter)
+Page rot:        0
+File size:       4020485 bytes
+Optimized:       no
+PDF version:     1.5
+
+exit_code=0
+["pdftotext", "-layout", "/home/cofallen/Code/毕业设计/references/papers/research_20261109/pets.pdf", "/home/cofallen/Code/毕业设计/runs/m00_environment/literature_fetch_20261109_124550_330884/pets.txt"]
+Internal Error: xref num 6989 not found but needed, try to reconstruct<0a>
+
+exit_code=0

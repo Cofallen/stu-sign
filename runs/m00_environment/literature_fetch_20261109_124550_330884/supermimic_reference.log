@@ -1,0 +1,4 @@
+["git", "-c", "core.hooksPath=/dev/null", "clone", "--depth", "1", "--no-recurse-submodules", "https://github.com/YHFone/supermimic-mjlab.git", "/home/cofallen/Code/毕业设计/upstream/research_20261109/supermimic-mjlab"]
+Cloning into '/home/cofallen/Code/毕业设计/upstream/research_20261109/supermimic-mjlab'...
+
+exit_code=0

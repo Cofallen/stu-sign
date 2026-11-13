@@ -1,0 +1,376 @@
+{
+  "pose_0.180": {
+    "kind": "pose",
+    "length": 0.18,
+    "duration": 8.000000000001005,
+    "wall_s": 5.105534542002715,
+    "failed": null,
+    "max_tilt": 0.00014141937994977715,
+    "final_tilt": 2.17925243274637e-05,
+    "actual_length": 0.1804032116188994,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.18,
+      "yaw": 0.00012259437816903302,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [],
+      "current_jump": null
+    },
+    "max_com_z": 0.3205124783351295,
+    "max_base_z": 0.24923829606657252,
+    "max_wheel_clearance": -0.0009179417808476698,
+    "K_changed": true
+  },
+  "pose_0.190": {
+    "kind": "pose",
+    "length": 0.19,
+    "duration": 8.000000000001005,
+    "wall_s": 5.156894735999231,
+    "failed": null,
+    "max_tilt": 0.00014340014786354193,
+    "final_tilt": 2.5011429486037214e-05,
+    "actual_length": 0.1903441612164366,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.19,
+      "yaw": 0.00010765687729833765,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [],
+      "current_jump": null
+    },
+    "max_com_z": 0.3205124783351295,
+    "max_base_z": 0.24923829606657252,
+    "max_wheel_clearance": -0.0009179417808476698,
+    "K_changed": true
+  },
+  "pose_0.220": {
+    "kind": "pose",
+    "length": 0.22,
+    "duration": 8.000000000001005,
+    "wall_s": 5.109503702005895,
+    "failed": null,
+    "max_tilt": 0.0001616378448061736,
+    "final_tilt": 7.150975028714803e-05,
+    "actual_length": 0.2202062175269626,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.22,
+      "yaw": 3.623385040911675e-05,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [],
+      "current_jump": null
+    },
+    "max_com_z": 0.3205124783351295,
+    "max_base_z": 0.24923829606657252,
+    "max_wheel_clearance": -0.0009179417808476698,
+    "K_changed": true
+  },
+  "pose_0.250": {
+    "kind": "pose",
+    "length": 0.25,
+    "duration": 8.000000000001005,
+    "wall_s": 5.137731747003272,
+    "failed": null,
+    "max_tilt": 0.00012014442530145216,
+    "final_tilt": 3.211329832762662e-05,
+    "actual_length": 0.25009567778403774,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.25,
+      "yaw": 4.8840786339019296e-05,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [],
+      "current_jump": null
+    },
+    "max_com_z": 0.3205124783351295,
+    "max_base_z": 0.24923829606657252,
+    "max_wheel_clearance": -0.0009179417808476698,
+    "K_changed": true
+  },
+  "pose_0.278": {
+    "kind": "pose",
+    "length": 0.278,
+    "duration": 8.000000000001005,
+    "wall_s": 5.307484659002512,
+    "failed": null,
+    "max_tilt": 4.612197770709143e-05,
+    "final_tilt": 2.869929277395611e-06,
+    "actual_length": 0.27800174565195185,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.278,
+      "yaw": 3.613659315856195e-05,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [],
+      "current_jump": null
+    },
+    "max_com_z": 0.3205848961070821,
+    "max_base_z": 0.24931772445108355,
+    "max_wheel_clearance": -0.0009587825709657383,
+    "K_changed": true
+  },
+  "pose_0.310": {
+    "kind": "pose",
+    "length": 0.31,
+    "duration": 8.000000000001005,
+    "wall_s": 5.081874091003556,
+    "failed": null,
+    "max_tilt": 0.0001259399782009741,
+    "final_tilt": 3.457110127245491e-05,
+    "actual_length": 0.30988375585543265,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.31,
+      "yaw": 7.133794135930326e-05,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [],
+      "current_jump": null
+    },
+    "max_com_z": 0.3515803016765734,
+    "max_base_z": 0.2832467311280398,
+    "max_wheel_clearance": -0.0009221274910130861,
+    "K_changed": true
+  },
+  "pose_0.330": {
+    "kind": "pose",
+    "length": 0.33,
+    "duration": 8.000000000001005,
+    "wall_s": 5.205684463995567,
+    "failed": null,
+    "max_tilt": 0.00014254045966996109,
+    "final_tilt": 5.1872873947852706e-05,
+    "actual_length": 0.3297863227838546,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.33,
+      "yaw": 8.010645249537283e-05,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [],
+      "current_jump": null
+    },
+    "max_com_z": 0.3699569543410896,
+    "max_base_z": 0.30331889095497955,
+    "max_wheel_clearance": -0.0009192351948377753,
+    "K_changed": true
+  },
+  "pose_0.340": {
+    "kind": "pose",
+    "length": 0.34,
+    "duration": 8.000000000001005,
+    "wall_s": 5.260278861998813,
+    "failed": null,
+    "max_tilt": 0.0001505906810731925,
+    "final_tilt": 5.946807663244993e-05,
+    "actual_length": 0.3397218084887608,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.34,
+      "yaw": 8.277775637088827e-05,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [],
+      "current_jump": null
+    },
+    "max_com_z": 0.37908442099106454,
+    "max_base_z": 0.31326859284546005,
+    "max_wheel_clearance": -0.0009187457684038947,
+    "K_changed": true
+  },
+  "sweep_0.278": {
+    "kind": "sweep",
+    "length": 0.278,
+    "duration": 9.999999999999897,
+    "wall_s": 6.549727268000424,
+    "failed": null,
+    "max_tilt": 0.000403028797657297,
+    "final_tilt": 2.0944859748370764e-05,
+    "actual_length": 0.33971862925747226,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.34,
+      "yaw": -2.0722607390883933e-05,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [
+        {
+          "time": 1.0000000000000007,
+          "pressed": "q"
+        },
+        {
+          "time": 2.2009999999998686,
+          "pressed": ""
+        },
+        {
+          "time": 3.0009999999997805,
+          "pressed": "e"
+        },
+        {
+          "time": 5.000000000000004,
+          "pressed": ""
+        }
+      ],
+      "current_jump": null
+    },
+    "max_com_z": 0.3797737817028724,
+    "max_base_z": 0.3139678707771246,
+    "max_wheel_clearance": -0.0008154014903869744,
+    "K_changed": true
+  },
+  "move_0.278": {
+    "kind": "move",
+    "length": 0.278,
+    "duration": 9.999999999999897,
+    "wall_s": 6.533850717998575,
+    "failed": null,
+    "max_tilt": 0.0007775884113120157,
+    "final_tilt": 0.00014031601810658226,
+    "actual_length": 0.27788688850074084,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.27792320714470026,
+      "yaw": 8.06980086163966e-06,
+      "message": "ready",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [],
+      "key_events": [
+        {
+          "time": 1.0000000000000007,
+          "pressed": "w"
+        },
+        {
+          "time": 3.0009999999997805,
+          "pressed": ""
+        },
+        {
+          "time": 5.000000000000004,
+          "pressed": "s"
+        },
+        {
+          "time": 7.000000000000672,
+          "pressed": ""
+        }
+      ],
+      "current_jump": null
+    },
+    "max_com_z": 0.3209033832587592,
+    "max_base_z": 0.24996925469701461,
+    "max_wheel_clearance": -0.0008873826247459415,
+    "K_changed": true
+  },
+  "jump_0.278": {
+    "kind": "jump",
+    "length": 0.278,
+    "duration": 9.999999999999897,
+    "wall_s": 6.491413099000056,
+    "failed": null,
+    "max_tilt": 0.02732927465433823,
+    "final_tilt": 2.3865996222404503e-05,
+    "actual_length": 0.2779239562249391,
+    "jump": {
+      "speed": -0.0,
+      "dot_target": 0.0,
+      "yaw_rate": 0.0,
+      "l0": 0.27792320714470026,
+      "yaw": 0.020099723498795394,
+      "message": "jump requested",
+      "pressed": "",
+      "jump_phase": "idle",
+      "jumps": [
+        {
+          "start": 2.0009999999998906,
+          "start_height": 0.24924089537931948,
+          "max_height": 0.4663836403064053,
+          "start_com_z": 0.3205148764433429,
+          "max_com_z": 0.5366890336080639,
+          "max_wheel_clearance_m": 0.24215082756038714,
+          "airborne_s": 0.4140000000000003,
+          "max_upward_velocity": 1.905064586370253,
+          "phases": [
+            {
+              "time": 2.0009999999998906,
+              "phase": "crouch"
+            },
+            {
+              "time": 2.4019999999998465,
+              "phase": "thrust"
+            },
+            {
+              "time": 2.5289999999998325,
+              "phase": "flight_tuck"
+            },
+            {
+              "time": 2.6569999999998184,
+              "phase": "flight_extend"
+            },
+            {
+              "time": 2.876999999999794,
+              "phase": "landing"
+            },
+            {
+              "time": 3.6019999999997143,
+              "phase": "idle"
+            }
+          ],
+          "liftoff": 2.5289999999998325
+        }
+      ],
+      "key_events": [
+        {
+          "time": 1.9999999999998905,
+          "key": "j"
+        }
+      ],
+      "current_jump": null
+    },
+    "max_com_z": 0.5366890336080637,
+    "max_base_z": 0.4663759210521349,
+    "max_wheel_clearance": 0.2417513685102654,
+    "K_changed": true
+  }
+}

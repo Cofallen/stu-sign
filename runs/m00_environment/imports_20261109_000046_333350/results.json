@@ -1,0 +1,22 @@
+{
+  "mjlab": {
+    "command": [
+      "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+      "-B",
+      "-c",
+      "import sys,importlib.metadata as m; import mujoco,mjlab; print(sys.version); print('MuJoCo import OK',mujoco.__version__,mujoco.__file__); print('mjlab import OK',m.version('mjlab'),mjlab.__file__); model=mujoco.MjModel.from_xml_string('<mujoco><worldbody><body pos=\"0 0 1\"><freejoint/><geom type=\"sphere\" size=\"0.1\" mass=\"1\"/></body></worldbody></mujoco>'); data=mujoco.MjData(model); mujoco.mj_step(model,data); print('Synthetic CPU step OK',data.time)"
+    ],
+    "returncode": 0,
+    "inventory_returncode": 0
+  },
+  "isaac": {
+    "command": [
+      "/home/cofallen/.local/bin/isaac-python",
+      "-B",
+      "-c",
+      "import sys,os,importlib.metadata as m; import isaacsim; from isaacsim import SimulationApp; print(sys.version); print('Isaac Sim import OK',m.version('isaacsim'),isaacsim.__file__); print('SimulationApp import OK',SimulationApp); print('ISAAC_PATH',os.environ.get('ISAAC_PATH')); print('No SimulationApp instance created')"
+    ],
+    "returncode": 0,
+    "inventory_returncode": 0
+  }
+}

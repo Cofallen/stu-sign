@@ -1,0 +1,25 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "scripts/m02_standing/summarize_standing.py",
+    "runs/m02_standing/lqr_no-gas_20261109_135714_434732",
+    "runs/m02_standing/mpc_no-gas_20261109_135947_125217",
+    "runs/m02_standing/lqr_gas_20261109_140138_434688",
+    "runs/m02_standing/mpc_gas_20261109_140245_737252"
+  ],
+  "cwd": "/home/cofallen/Code/毕业设计",
+  "python": "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+  "source_results_sha256": {
+    "runs/m02_standing/lqr_no-gas_20261109_135714_434732": "10b6287102aba78ff03c6104284f38a7cef045a08049e6d993b8aa33e1734564",
+    "runs/m02_standing/mpc_no-gas_20261109_135947_125217": "e18537e8bb78f3720fdc1608db961d3ad24d74d40e41acc18d8b1371ec21fdb7",
+    "runs/m02_standing/lqr_gas_20261109_140138_434688": "3ce4f6a9af6c696dd5bfd87cefbcae27bb07f2cec812711b1d44164365e2d76d",
+    "runs/m02_standing/mpc_gas_20261109_140245_737252": "86308e1cdf72e5d12e191330b1fa365e8f7f2bc6e152e6064f8b302b6aa027cd"
+  },
+  "versions": {
+    "numpy": "2.5.4",
+    "matplotlib": "3.11.2"
+  },
+  "purpose": "Aggregate explicit cases only; no statistical robustness estimate",
+  "script_sha256": "1cca43da801bab721d0f30145ac4bf6c44e79a142412b9dd18302057e0b02d57"
+}

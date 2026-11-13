@@ -1,0 +1,92 @@
+{
+  "command": [
+    "/home/cofallen/miniconda3/envs/mjlab/bin/python",
+    "-B",
+    "/home/cofallen/Code/\u6bd5\u4e1a\u8bbe\u8ba1/experiments/E002_original_controller/controller.py"
+  ],
+  "window": 69206027,
+  "events": [
+    {
+      "wall": 18323.699317373,
+      "key": "w",
+      "down": true
+    },
+    {
+      "wall": 18328.806480442,
+      "key": "w",
+      "down": false
+    },
+    {
+      "wall": 18332.9678195,
+      "key": "s",
+      "down": true
+    },
+    {
+      "wall": 18335.968039934,
+      "key": "s",
+      "down": false
+    },
+    {
+      "wall": 18339.968216362,
+      "key": "q",
+      "down": true
+    },
+    {
+      "wall": 18340.768418497,
+      "key": "q",
+      "down": false
+    },
+    {
+      "wall": 18342.924945593,
+      "key": "e",
+      "down": true
+    },
+    {
+      "wall": 18343.725146977,
+      "key": "e",
+      "down": false
+    },
+    {
+      "wall": 18345.725382572,
+      "key": "r",
+      "down": true
+    },
+    {
+      "wall": 18345.845612533,
+      "key": "r",
+      "down": false
+    },
+    {
+      "wall": 18348.845833467,
+      "key": "j",
+      "down": true
+    },
+    {
+      "wall": 18348.966151858,
+      "key": "j",
+      "down": false
+    },
+    {
+      "wall": 18354.631468807,
+      "key": "Alt_L",
+      "down": true
+    },
+    {
+      "wall": 18354.631485426,
+      "key": "F4",
+      "down": true
+    },
+    {
+      "wall": 18354.63149611,
+      "key": "F4",
+      "down": false
+    },
+    {
+      "wall": 18354.631504419,
+      "key": "Alt_L",
+      "down": false
+    }
+  ],
+  "exit_code": 0,
+  "scope": "Actual mapped GLFW window; XTest key down and key up, not callback-only"
+}
